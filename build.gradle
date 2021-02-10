@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.6'
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.6'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+}
