@@ -2,7 +2,9 @@ package org.solutions.leetcode;
 
 import org.solutions.leetcode.dataStructures.TreeNode;
 
-public class BinarySearchTree {
+import java.util.Stack;
+
+public class BinarySearchTreeProblems {
 
     /*
      * Q. 669
@@ -25,6 +27,34 @@ public class BinarySearchTree {
 
         root.setLeft(trimBst(root.getLeft(), low, high));
         root.setRight(trimBst(root.getRight(), low, high));
+
+        return root;
+    }
+
+    /*
+    * Q.1038 / 538
+    * Given the root of a Binary Search Tree (BST), convert it to a Greater Tree such that
+    * every key of the original BST is changed to the
+    * original key plus sum of all keys greater than the original key in BST.
+    *
+    * IDEA:: inverse in-order traversal
+    * */
+    public TreeNode convertBST(TreeNode root) {
+        TreeNode copy = root;
+        Stack<TreeNode> stack = new Stack<>();
+        int temp = 0;
+
+        while(copy != null || !stack.empty()) {
+            while(copy != null) {
+                stack.push(copy);
+                copy = copy.getRight();
+            }
+
+            copy = stack.pop();
+            temp += copy.getVal();
+            copy.setVal(temp);
+            copy = copy.getLeft();
+        }
 
         return root;
     }

@@ -2,9 +2,7 @@ package org.solutions.leetcode;
 
 import org.solutions.leetcode.dataStructures.TreeNode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.LinkedList;
 
 public class BinaryTreeProblems {
@@ -38,5 +36,27 @@ public class BinaryTreeProblems {
         }
 
         return result;
+    }
+
+    /*
+    * Q. 94
+    * Binary tree inorder traversal
+    * */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        while(root != null || !stack.empty()) {
+            while(root != null) {
+                stack.push(root);
+                root = root.getLeft();
+            }
+
+            root = stack.pop();
+            list.add(root.getVal());
+            root = root.getRight();
+        }
+
+        return list;
     }
 }

@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BinarySearchTreeTest {
+class BinarySearchTreeProblemsTest {
 
-    static BinarySearchTree bst;
+    static BinarySearchTreeProblems bst;
     static TestUtils testUtils;
 
     @BeforeAll
     static void setup() {
-        bst = new BinarySearchTree();
+        bst = new BinarySearchTreeProblems();
         testUtils = new TestUtils();
     }
 
@@ -42,5 +42,28 @@ class BinarySearchTreeTest {
 
     }
 
+    @Test
+    void testConvertBST() {
+        TreeNode root = new TreeNode(0);
+        root.setRight(new TreeNode(1));
 
+        TreeNode expected = new TreeNode(1);
+        expected.setRight(new TreeNode(1));
+
+        assertTrue(testUtils.compareTrees(bst.convertBST(root), expected));
+
+        root = new TreeNode(3);
+        root.setRight(new TreeNode(4));
+        TreeNode temp = new TreeNode(2);
+        temp.setLeft(new TreeNode(1));
+        root.setLeft(temp);
+
+        expected = new TreeNode(7);
+        expected.setRight(new TreeNode(4));
+        temp = new TreeNode(9);
+        temp.setLeft(new TreeNode(10));
+        expected.setLeft(temp);
+
+        assertTrue(testUtils.compareTrees(bst.convertBST(root), expected));
+    }
 }
