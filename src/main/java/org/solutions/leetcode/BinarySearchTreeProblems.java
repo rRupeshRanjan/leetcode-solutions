@@ -37,7 +37,7 @@ public class BinarySearchTreeProblems {
     * every key of the original BST is changed to the
     * original key plus sum of all keys greater than the original key in BST.
     *
-    * IDEA:: inverse in-order traversal
+    * IDEA:: reverse in-order traversal
     * */
     public TreeNode convertBST(TreeNode root) {
         TreeNode copy = root;

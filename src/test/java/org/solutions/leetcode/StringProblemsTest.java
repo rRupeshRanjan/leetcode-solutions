@@ -16,10 +16,16 @@ class StringProblemsTest {
     }
 
     @Test
-    void shortestToChar() {
+    void testShortestToChar() {
         assertArrayEquals(new int[]{3,2,1,0,1,0,0,1,2,2,1,0}, stringProblems.shortestToChar("loveleetcode", 'e'));
         assertArrayEquals(new int[]{3,2,1,0}, stringProblems.shortestToChar("aaab", 'b'));
         assertArrayEquals(new int[]{0,0,0,1}, stringProblems.shortestToChar("aaab", 'a'));
         assertArrayEquals(new int[]{0}, stringProblems.shortestToChar("a", 'a'));
+    }
+
+    @Test
+    void testIsAnagram() {
+        assertTrue(stringProblems.isAnagram("anagram", "nagamar"));
+        assertFalse(stringProblems.isAnagram("ram", "hello"));
     }
 }

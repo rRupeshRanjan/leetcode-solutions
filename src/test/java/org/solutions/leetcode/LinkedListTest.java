@@ -2,7 +2,7 @@ package org.solutions.leetcode;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.solutions.leetcode.dataStructures.LinkedListNode;
+import org.solutions.leetcode.dataStructures.Node;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,28 +11,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListTest {
 
-    static LinkedList linkedList;
+    static LinkedListProblems linkedListProblems;
 
     @BeforeAll
     static void setup() {
-        linkedList = new LinkedList();
+        linkedListProblems = new LinkedListProblems();
     }
 
     @Test
     void hasCycle() {
-        LinkedListNode head = getLinkedListFromListWithCycle(Arrays.asList(3,2,0,-4), 1);
-        assertTrue(linkedList.hasCycle(head));
+        Node head = getLinkedListFromListWithCycle(Arrays.asList(3,2,0,-4), 1);
+        assertTrue(linkedListProblems.hasCycle(head));
 
         head = getLinkedListFromListWithCycle(Arrays.asList(1, 2), 0);
-        assertTrue(linkedList.hasCycle(head));
+        assertTrue(linkedListProblems.hasCycle(head));
 
         head = getLinkedListFromListWithCycle(Collections.singletonList(1), -1);
-        assertFalse(linkedList.hasCycle(head));
+        assertFalse(linkedListProblems.hasCycle(head));
     }
 
-    private LinkedListNode getLinkedListFromListWithCycle(List<Integer> entries, int pos) {
-        List<LinkedListNode> nodesList = entries.stream()
-                .map(LinkedListNode::new)
+    private Node getLinkedListFromListWithCycle(List<Integer> entries, int pos) {
+        List<Node> nodesList = entries.stream()
+                .map(Node::new)
                 .collect(Collectors.toList());
 
         for(int i=0; i<entries.size()-1; i++) {
@@ -48,7 +48,7 @@ class LinkedListTest {
         return nodesList.get(0);
     }
 
-    private LinkedListNode getLinkedListFromList(List<Integer> entries) {
+    private Node getLinkedListFromList(List<Integer> entries) {
         return getLinkedListFromListWithCycle(entries, -1);
     }
 }

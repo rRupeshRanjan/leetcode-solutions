@@ -7,11 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LinkedListNode {
+public class Node {
     private int val;
-    private LinkedListNode next;
+    private Node next;
 
-    public LinkedListNode(int val) {
+    // specially introduced for a problem
+    private Node random;
+
+    public Node(int val) {
         this.val = val;
     }
 }
