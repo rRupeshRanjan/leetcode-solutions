@@ -1,11 +1,18 @@
 package org.solutions.leetcode;
 
 import org.solutions.leetcode.dataStructures.Pair;
+import org.solutions.leetcode.utils.ArrayUtils;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class GridProblems {
+
+    private ArrayUtils arrayUtils;
+
+    public GridProblems() {
+        this.arrayUtils = new ArrayUtils();
+    }
+
     /*
     * Q.1091
     * In an N by N square grid, each cell is either empty (0) or blocked (1).
@@ -56,5 +63,74 @@ public class GridProblems {
         }
 
         return -1;
+    }
+
+    /*
+    * Q. 785
+    * There is an undirected graph with n nodes, where each node is numbered between 0 and n - 1.
+    * You are given a 2D array graph, where graph[u] is an array of nodes that node u is adjacent to.
+    * More formally, for each v in graph[u], there is an undirected edge between node u and node v.
+    * The graph has the following properties:
+    *   There are no self-edges (graph[u] does not contain u).
+    *   There are no parallel edges (graph[u] does not contain duplicate values).
+    *   If v is in graph[u], then u is in graph[v] (the graph is undirected).
+    *   The graph may not be connected, meaning there may be two nodes u and v such that there is no path between them.
+    *
+    * A graph is bipartite if the nodes can be partitioned into two independent sets A and B such that
+    * every edge in the graph connects a node in set A and a node in set B.
+    *
+    * Return true if and only if it is bipartite.
+    * */
+    public boolean isBipartite(int[][] graph) {
+        Map<Integer, Integer> colorMap = new HashMap<>();
+        for(int node = 0; node<graph.length; node++) {
+            if(!colorMap.containsKey(node) && notBipartiteDfs(node, 0, colorMap, graph))
+                return false;
+        }
+        return true;
+    }
+
+    /*
+    * Helper method to to DFS traversal for bipartite check
+    * */
+    private boolean notBipartiteDfs(int node, int color, Map<Integer, Integer> colorMap, int[][] graph) {
+        if(colorMap.containsKey(node))
+            return colorMap.get(node) != color;
+
+        colorMap.put(node, color);
+        for(int child: graph[node]) {
+            if(notBipartiteDfs(child, color ^ 1, colorMap, graph))
+                return true;
+        }
+        return false;
+    }
+
+    /*
+    * Q. 886
+    * Given a set of N people (numbered 1, 2, ..., N), we would like to split everyone into two groups of any size.
+    * Each person may dislike some other people, and they should not go into the same group.
+    * Formally, if dislikes[i] = [a, b], it means it is not allowed to put the people numbered a and b into the same group.
+    *
+    * Return true if and only if it is possible to split everyone into two groups in this way.
+    * */
+    public boolean possibleBipartition(int N, int[][] dislikes) {
+        List<List<Integer>> graphList = new ArrayList<>();
+        Map<Integer, Integer> colorMap = new HashMap<>();
+
+        for(int i=1; i<=N+1; i++)
+            graphList.add(new ArrayList<>());
+
+        for(int[] arr: dislikes) {
+            graphList.get(arr[0]).add(arr[1]);
+            graphList.get(arr[1]).add(arr[0]);
+        }
+
+        int[][] graph = arrayUtils.convert2DListTo2DArray(graphList);
+        for(int node=0; node<N+1; node++) {
+            if(!colorMap.containsKey(node) && notBipartiteDfs(node, 0, colorMap, graph))
+                return false;
+        }
+
+        return true;
     }
 }
