@@ -14,6 +14,8 @@ public class BinarySearchTreeProblems {
      * Trimming the tree should not change the relative structure of the elements that will remain in the tree
      * (i.e., any node's descendant should remain a descendant). It can be proven that there is a unique answer.
      * Return the root of the trimmed binary search tree. Note that the root may change depending on the given bounds.
+     *
+     * Tags:: binarySearchTree, recursion
      * */
     public TreeNode trimBst(TreeNode root, int low, int high) {
         if (root == null)
@@ -38,6 +40,7 @@ public class BinarySearchTreeProblems {
     * original key plus sum of all keys greater than the original key in BST.
     *
     * IDEA:: reverse in-order traversal
+    * Tags:: binarySearchTree, dfs, traversal
     * */
     public TreeNode convertBST(TreeNode root) {
         TreeNode copy = root;

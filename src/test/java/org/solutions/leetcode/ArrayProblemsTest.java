@@ -44,4 +44,18 @@ class ArrayProblemsTest {
         assertTrue(arrayProblems.canFormArray(new int[]{91,4,64,78}, new int[][]{{78},{4,64},{91}}));
         assertFalse(arrayProblems.canFormArray(new int[]{1,3,5,7}, new int[][]{{2,4,6,8}}));
     }
+
+    @Test
+    void testMaxWaterContainerArea() {
+        assertEquals(49, arrayProblems.maxWaterContainerArea(new int[]{1,8,6,2,5,4,8,3,7}));
+        assertEquals(1, arrayProblems.maxWaterContainerArea(new int[]{1,1}));
+        assertEquals(16, arrayProblems.maxWaterContainerArea(new int[]{4,3,2,1,4}));
+        assertEquals(2, arrayProblems.maxWaterContainerArea(new int[]{1,2,1}));
+    }
+
+    @Test
+    void testNumberOfArithmeticSlices() {
+        assertEquals(3, arrayProblems.numberOfArithmeticSlices(new int[]{1,2,3,4}));
+        assertEquals(2, arrayProblems.numberOfArithmeticSlices(new int[]{1,2,3,8,9,10}));
+    }
 }

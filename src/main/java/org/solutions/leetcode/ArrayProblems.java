@@ -8,7 +8,10 @@ public class ArrayProblems {
     * Q. 594
     * We define a harmonious array as an array where the difference between its maximum value and its minimum value is exactly 1.
     * Given an integer array nums, return the length of its longest harmonious subsequence among all its possible subsequences.
-    * A subsequence of array is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements.
+    * A subsequence of array is a sequence that can be derived from the array by deleting some or no elements
+    * without changing the order of the remaining elements.
+    *
+    * Tags: sorting, hashMap
     * */
     public int findLHS(int[] nums, String way) {
         int maxLen = 0;
@@ -83,6 +86,8 @@ public class ArrayProblems {
     * Your goal is to form arr by concatenating the arrays in pieces in any order.
     * However, you are not allowed to reorder the integers in each array pieces[i].
     * Return true if it is possible to form the array arr from pieces. Otherwise, return false.
+    *
+    * Tags:: HashMap
     * */
     public boolean canFormArray(int[] arr, int[][] pieces) {
         Map<Integer, List<Integer>> map = new HashMap<>();
@@ -104,7 +109,55 @@ public class ArrayProblems {
                 }
             }
         }
-
         return true;
+    }
+
+    /*
+    * Q. 11
+    * Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai).
+    * n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0).
+    * Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.
+    *
+    * Tags:: twoPointerApproach
+    * */
+    public int maxWaterContainerArea(int[] height) {
+        int maxArea = 0, start = 0, end = height.length-1;
+
+        while(start<end){
+            maxArea = Math.max(maxArea, Math.min(height[start], height[end])*(end-start));
+            if(height[start] < height[end]) {
+                int temp = height[start];
+                while(height[start] <= temp && start < end)
+                    start++;
+            } else {
+                int temp = height[end];
+                while(height[end] <= temp && start < end)
+                    end--;
+            }
+        }
+
+        return maxArea;
+    }
+
+    /*
+    * Q. 413
+    * A sequence of numbers is called arithmetic if
+    * it consists of at least three elements and if the difference between any two consecutive elements is the same.
+    *
+    * Write a function that should return the number of arithmetic slices in the array A.
+    *
+    * Tags:: dynamicProgramming
+    * */
+    public int numberOfArithmeticSlices(int[] A) {
+        int sum = 0, dp = 0;
+        for(int i=2; i<A.length; i++) {
+            if(A[i] - A[i-1] == A[i-1] - A[i-2]) {
+                dp = 1 + dp;
+                sum += dp;
+            } else {
+                dp = 0;
+            }
+        }
+        return sum;
     }
 }

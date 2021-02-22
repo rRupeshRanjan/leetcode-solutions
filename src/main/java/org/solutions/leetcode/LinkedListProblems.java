@@ -10,6 +10,8 @@ public class LinkedListProblems {
     /*
     * Q.141
     * Detect if there is a loop in linked list
+    *
+    * Tags:: linkedList
     * */
     public boolean hasCycle(Node head) {
         Node slow = head;
@@ -34,6 +36,8 @@ public class LinkedListProblems {
     * its corresponding original node. Both the next and random pointer of the new nodes should point to new nodes in
     * the copied list such that the pointers in the original list and copied list represent the same list state.
     * None of the pointers in the new list should point to nodes in the original list.
+    *
+    * Tags:: linkedList
     * */
     public Node copyRandomList(Node head) {
         Map<Node, Node> copyMap = new HashMap<>();

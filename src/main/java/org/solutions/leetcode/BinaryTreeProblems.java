@@ -10,6 +10,8 @@ public class BinaryTreeProblems {
     * Q.199
     * Given a binary tree, imagine yourself standing on the right side of it,
     * return the values of the nodes you can see ordered from top to bottom.
+    *
+    * Tags:: bfs, binaryTree
     * */
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();
@@ -41,6 +43,8 @@ public class BinaryTreeProblems {
     /*
     * Q. 94
     * Binary tree inorder traversal
+    *
+    * Tags:: binaryTree, inorder, dfs
     * */
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();

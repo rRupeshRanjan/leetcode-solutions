@@ -24,6 +24,7 @@ public class GridProblems {
     * Return the length of the shortest such clear path from top-left to bottom-right.  If such a path does not exist, return -1.
     *
     * IDEA:: Do a BFS, not DP (as we need results from all directions).
+    * Tags:: bfs, graph
     * */
     public int shortestPathBinaryMatrix(int[][] grid) {
         int n = grid.length - 1;
@@ -80,6 +81,8 @@ public class GridProblems {
     * every edge in the graph connects a node in set A and a node in set B.
     *
     * Return true if and only if it is bipartite.
+    *
+    * Tags:: graph, recursion, bipartition
     * */
     public boolean isBipartite(int[][] graph) {
         Map<Integer, Integer> colorMap = new HashMap<>();
@@ -112,6 +115,8 @@ public class GridProblems {
     * Formally, if dislikes[i] = [a, b], it means it is not allowed to put the people numbered a and b into the same group.
     *
     * Return true if and only if it is possible to split everyone into two groups in this way.
+    *
+    * Tags:: graph, recursion, bipartition
     * */
     public boolean possibleBipartition(int N, int[][] dislikes) {
         List<List<Integer>> graphList = new ArrayList<>();
@@ -132,5 +137,38 @@ public class GridProblems {
         }
 
         return true;
+    }
+
+    /*
+    * Q. 1337
+    * You are given an m x n binary matrix mat of 1's (representing soldiers) and 0's (representing civilians).
+    * The soldiers are positioned in front of the civilians. That is, all the 1's will appear to the left of all the 0's in each row.
+    * A row i is weaker than a row j if one of the following is true:
+    *   The number of soldiers in row i is less than the number of soldiers in row j.
+    *   Both rows have the same number of soldiers and i < j.
+    *
+    * Return the indices of the k weakest rows in the matrix ordered from weakest to strongest.
+    *
+    * Tags:: minHeap,
+    * */
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int[] count = new int[mat.length];
+        PriorityQueue<Integer> pq = new PriorityQueue<>((i,j) ->
+                (count[i] == count[j]) ? (j-i) : (count[j] - count[i])
+        );
+
+        for(int i=0; i<mat.length; i++)
+            count[i] = Arrays.stream(mat[i]).sum();
+
+        for(int i=0; i<count.length; i++) {
+            pq.add(i);
+            if(pq.size() > k) pq.poll();
+        }
+
+        int[] result = new int[k];
+        for(int i=k-1; i>=0; i--)
+            result[i] = pq.poll();
+
+        return result;
     }
 }
