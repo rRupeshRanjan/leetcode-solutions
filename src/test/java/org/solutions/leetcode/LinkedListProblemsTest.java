@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LinkedListTest {
+class LinkedListProblemsTest {
 
     static LinkedListProblems linkedListProblems;
 
@@ -19,7 +19,7 @@ class LinkedListTest {
     }
 
     @Test
-    void hasCycle() {
+    void testHasCycle() {
         Node head = getLinkedListFromListWithCycle(Arrays.asList(3,2,0,-4), 1);
         assertTrue(linkedListProblems.hasCycle(head));
 
@@ -28,6 +28,20 @@ class LinkedListTest {
 
         head = getLinkedListFromListWithCycle(Collections.singletonList(1), -1);
         assertFalse(linkedListProblems.hasCycle(head));
+    }
+
+    @Test
+    void testGetIntersectionNode() {
+
+        // A: 1->2->3 B: 0->2->3
+        Node headA = getLinkedListFromList(Arrays.asList(1,2,3));
+        Node headB = new Node(0);
+        headB.setNext(headA.getNext());
+        assertEquals(headA.getNext(), linkedListProblems.getIntersectionNode(headA, headB));
+
+        // A: 1->2->3 B: 0
+        headB = new Node(0);
+        assertNull(linkedListProblems.getIntersectionNode(headA, headB));
     }
 
     private Node getLinkedListFromListWithCycle(List<Integer> entries, int pos) {

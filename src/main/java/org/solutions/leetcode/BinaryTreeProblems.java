@@ -63,4 +63,33 @@ public class BinaryTreeProblems {
 
         return list;
     }
+
+    /*
+    * Q.637
+    * Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
+    *
+    * Tags:: binaryTree, bfs
+    * */
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> res = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+
+        if(root != null)
+            q.add(root);
+
+        while(!q.isEmpty()) {
+            int size = q.size();
+            double sum = 0;
+            for(int i=0; i<size; i++) {
+                TreeNode temp = q.poll();
+                sum += temp.getVal();
+
+                if(temp.getLeft()!=null) q.add(temp.getLeft());
+                if(temp.getRight()!=null) q.add(temp.getRight());
+            }
+            res.add(sum/size);
+        }
+
+        return res;
+    }
 }

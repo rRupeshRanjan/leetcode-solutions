@@ -3,7 +3,9 @@ package org.solutions.leetcode;
 import org.solutions.leetcode.dataStructures.Node;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class LinkedListProblems {
 
@@ -59,5 +61,34 @@ public class LinkedListProblems {
         }
 
         return copy.getNext();
+    }
+
+    /*
+    * Q.160
+    *
+    * Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect.
+    * If the two linked lists have no intersection at all, return null.
+    *
+    * It is guaranteed that there are no cycles anywhere in the entire linked structure.
+    * Note that the linked lists must retain their original structure after the function returns.
+    *
+    * Tags:: linkedlist
+    * */
+    public Node getIntersectionNode(Node headA, Node headB) {
+        Set<Node> set = new HashSet<>();
+        Node temp = headA;
+        while(temp != null) {
+            set.add(temp);
+            temp = temp.getNext();
+        }
+
+        temp = headB;
+        while(temp != null) {
+            if(set.contains(temp))
+                return temp;
+            temp = temp.getNext();
+        }
+
+        return null;
     }
 }
