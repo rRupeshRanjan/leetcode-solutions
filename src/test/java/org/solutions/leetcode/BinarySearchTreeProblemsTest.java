@@ -1,8 +1,8 @@
 package org.solutions.leetcode;
 
-import org.solutions.leetcode.dataStructures.TreeNode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.solutions.leetcode.dataStructures.TreeNode;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,14 +20,14 @@ class BinarySearchTreeProblemsTest {
     @Test
     void testTrimBst() {
         TreeNode input1 = new TreeNode(3);
-        assertTrue(testUtils.compareTrees(null, bst.trimBst(input1, 2, 2)));
+        assertTrue(testUtils.areTreeEqualByValue(null, bst.trimBst(input1, 2, 2)));
 
         TreeNode input2 = new TreeNode(1);
         input2.setLeft(new TreeNode(0));
         input2.setRight(new TreeNode(2));
         TreeNode expected2 = new TreeNode(1);
         expected2.setRight(new TreeNode(2));
-        assertTrue(testUtils.compareTrees(expected2, bst.trimBst(input2, 1, 2)));
+        assertTrue(testUtils.areTreeEqualByValue(expected2, bst.trimBst(input2, 1, 2)));
 
         TreeNode temp1 = new TreeNode(0);
         TreeNode temp2 = new TreeNode(2);
@@ -38,7 +38,7 @@ class BinarySearchTreeProblemsTest {
         input3.setRight(new TreeNode(4));
         TreeNode expected3 = new TreeNode(3);
         expected3.setLeft(temp2);
-        assertTrue(testUtils.compareTrees(expected3, bst.trimBst(input3, 1, 3)));
+        assertTrue(testUtils.areTreeEqualByValue(expected3, bst.trimBst(input3, 1, 3)));
 
     }
 
@@ -50,7 +50,7 @@ class BinarySearchTreeProblemsTest {
         TreeNode expected = new TreeNode(1);
         expected.setRight(new TreeNode(1));
 
-        assertTrue(testUtils.compareTrees(bst.convertBST(root), expected));
+        assertTrue(testUtils.areTreeEqualByValue(bst.convertBST(root), expected));
 
         root = new TreeNode(3);
         root.setRight(new TreeNode(4));
@@ -64,6 +64,6 @@ class BinarySearchTreeProblemsTest {
         temp.setLeft(new TreeNode(10));
         expected.setLeft(temp);
 
-        assertTrue(testUtils.compareTrees(bst.convertBST(root), expected));
+        assertTrue(testUtils.areTreeEqualByValue(bst.convertBST(root), expected));
     }
 }

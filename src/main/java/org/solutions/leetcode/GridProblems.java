@@ -7,7 +7,7 @@ import java.util.*;
 
 public class GridProblems {
 
-    private ArrayUtils arrayUtils;
+    private final ArrayUtils arrayUtils;
 
     public GridProblems() {
         this.arrayUtils = new ArrayUtils();
@@ -67,23 +67,23 @@ public class GridProblems {
     }
 
     /*
-    * Q. 785
-    * There is an undirected graph with n nodes, where each node is numbered between 0 and n - 1.
-    * You are given a 2D array graph, where graph[u] is an array of nodes that node u is adjacent to.
-    * More formally, for each v in graph[u], there is an undirected edge between node u and node v.
-    * The graph has the following properties:
-    *   There are no self-edges (graph[u] does not contain u).
-    *   There are no parallel edges (graph[u] does not contain duplicate values).
-    *   If v is in graph[u], then u is in graph[v] (the graph is undirected).
-    *   The graph may not be connected, meaning there may be two nodes u and v such that there is no path between them.
-    *
-    * A graph is bipartite if the nodes can be partitioned into two independent sets A and B such that
-    * every edge in the graph connects a node in set A and a node in set B.
-    *
-    * Return true if and only if it is bipartite.
-    *
-    * Tags:: graph, recursion, bipartition
-    * */
+     * Q. 785
+     * There is an undirected graph with n nodes, where each node is numbered between 0 and n - 1.
+     * You are given a 2D array graph, where graph[u] is an array of nodes that node u is adjacent to.
+     * More formally, for each v in graph[u], there is an undirected edge between node u and node v.
+     * The graph has the following properties:
+     *   There are no self-edges (graph[u] does not contain u).
+     *   There are no parallel edges (graph[u] does not contain duplicate values).
+     *   If v is in graph[u], then u is in graph[v] (the graph is undirected).
+     *   The graph may not be connected, meaning there may be two nodes u and v such that there is no path between them.
+     *
+     * A graph is bipartite if the nodes can be partitioned into two independent sets A and B such that
+     * every edge in the graph connects a node in set A and a node in set B.
+     *
+     * Return true if and only if it is bipartite.
+     *
+     * Tags:: graph, recursion, bipartition
+     * */
     public boolean isBipartite(int[][] graph) {
         Map<Integer, Integer> colorMap = new HashMap<>();
         for(int node = 0; node<graph.length; node++) {
@@ -94,8 +94,8 @@ public class GridProblems {
     }
 
     /*
-    * Helper method to to DFS traversal for bipartite check
-    * */
+     * Helper method to to DFS traversal for bipartite check
+     * */
     private boolean notBipartiteDfs(int node, int color, Map<Integer, Integer> colorMap, int[][] graph) {
         if(colorMap.containsKey(node))
             return colorMap.get(node) != color;
@@ -109,15 +109,15 @@ public class GridProblems {
     }
 
     /*
-    * Q. 886
-    * Given a set of N people (numbered 1, 2, ..., N), we would like to split everyone into two groups of any size.
-    * Each person may dislike some other people, and they should not go into the same group.
-    * Formally, if dislikes[i] = [a, b], it means it is not allowed to put the people numbered a and b into the same group.
-    *
-    * Return true if and only if it is possible to split everyone into two groups in this way.
-    *
-    * Tags:: graph, recursion, bipartition
-    * */
+     * Q. 886
+     * Given a set of N people (numbered 1, 2, ..., N), we would like to split everyone into two groups of any size.
+     * Each person may dislike some other people, and they should not go into the same group.
+     * Formally, if dislikes[i] = [a, b], it means it is not allowed to put the people numbered a and b into the same group.
+     *
+     * Return true if and only if it is possible to split everyone into two groups in this way.
+     *
+     * Tags:: graph, recursion, bipartition
+     * */
     public boolean possibleBipartition(int N, int[][] dislikes) {
         List<List<Integer>> graphList = new ArrayList<>();
         Map<Integer, Integer> colorMap = new HashMap<>();
@@ -140,17 +140,17 @@ public class GridProblems {
     }
 
     /*
-    * Q. 1337
-    * You are given an m x n binary matrix mat of 1's (representing soldiers) and 0's (representing civilians).
-    * The soldiers are positioned in front of the civilians. That is, all the 1's will appear to the left of all the 0's in each row.
-    * A row i is weaker than a row j if one of the following is true:
-    *   The number of soldiers in row i is less than the number of soldiers in row j.
-    *   Both rows have the same number of soldiers and i < j.
-    *
-    * Return the indices of the k weakest rows in the matrix ordered from weakest to strongest.
-    *
-    * Tags:: minHeap,
-    * */
+     * Q. 1337
+     * You are given an m x n binary matrix mat of 1's (representing soldiers) and 0's (representing civilians).
+     * The soldiers are positioned in front of the civilians. That is, all the 1's will appear to the left of all the 0's in each row.
+     * A row i is weaker than a row j if one of the following is true:
+     *   The number of soldiers in row i is less than the number of soldiers in row j.
+     *   Both rows have the same number of soldiers and i < j.
+     *
+     * Return the indices of the k weakest rows in the matrix ordered from weakest to strongest.
+     *
+     * Tags:: minHeap,
+     * */
     public int[] kWeakestRows(int[][] mat, int k) {
         int[] count = new int[mat.length];
         PriorityQueue<Integer> pq = new PriorityQueue<>((i,j) ->

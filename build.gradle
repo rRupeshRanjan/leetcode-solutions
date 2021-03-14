@@ -12,6 +12,11 @@ repositories {
 dependencies {
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.6'
     implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.6'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+}
+
+test {
+    useJUnitPlatform()
 }
