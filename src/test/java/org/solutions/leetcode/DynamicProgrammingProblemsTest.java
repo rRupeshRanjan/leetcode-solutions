@@ -29,4 +29,32 @@ class DynamicProgrammingProblemsTest {
         assertEquals(7, dpProblems.numFactoredBinaryTrees(new int[]{2, 4, 5, 10}));
         assertEquals(3, dpProblems.numFactoredBinaryTrees(new int[]{2, 4}));
     }
+
+    @Test
+    void testMaxProfit1() {
+        assertEquals(5, dpProblems.maxProfit1(new int[]{7, 1, 5, 6, 3, 4}));
+        assertEquals(0, dpProblems.maxProfit1(new int[]{7, 6, 4, 3, 1}));
+    }
+
+    @Test
+    void testMaxProfit3() {
+        assertEquals(6, dpProblems.maxProfit3(new int[]{3, 3, 5, 0, 0, 3, 1, 4}));
+        assertEquals(4, dpProblems.maxProfit3(new int[]{1, 2, 3, 4, 5}));
+        assertEquals(0, dpProblems.maxProfit3(new int[]{7, 6, 4, 3, 1}));
+        assertEquals(0, dpProblems.maxProfit3(new int[]{1}));
+    }
+
+    @Test
+    void testMaxProfit4() {
+        assertEquals(2, dpProblems.maxProfit4(2, new int[]{2, 4, 1}));
+        assertEquals(0, dpProblems.maxProfit4(0, new int[]{2, 4, 1}));
+        assertEquals(0, dpProblems.maxProfit4(10, new int[]{2}));
+        assertEquals(7, dpProblems.maxProfit4(2, new int[]{3, 2, 6, 5, 0, 3}));
+    }
+
+    @Test
+    void testMaxProfit6() {
+        assertEquals(3, dpProblems.maxProfit6(new int[]{1, 2, 3, 0, 2}));
+        assertEquals(0, dpProblems.maxProfit6(new int[]{1}));
+    }
 }

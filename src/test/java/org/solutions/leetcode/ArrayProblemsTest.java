@@ -3,7 +3,6 @@ package org.solutions.leetcode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -47,15 +46,28 @@ class ArrayProblemsTest {
 
     @Test
     void testMaxWaterContainerArea() {
-        assertEquals(49, arrayProblems.maxWaterContainerArea(new int[]{1,8,6,2,5,4,8,3,7}));
-        assertEquals(1, arrayProblems.maxWaterContainerArea(new int[]{1,1}));
-        assertEquals(16, arrayProblems.maxWaterContainerArea(new int[]{4,3,2,1,4}));
-        assertEquals(2, arrayProblems.maxWaterContainerArea(new int[]{1,2,1}));
+        assertEquals(49, arrayProblems.maxWaterContainerArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}));
+        assertEquals(1, arrayProblems.maxWaterContainerArea(new int[]{1, 1}));
+        assertEquals(16, arrayProblems.maxWaterContainerArea(new int[]{4, 3, 2, 1, 4}));
+        assertEquals(2, arrayProblems.maxWaterContainerArea(new int[]{1, 2, 1}));
     }
 
     @Test
     void testNumberOfArithmeticSlices() {
-        assertEquals(3, arrayProblems.numberOfArithmeticSlices(new int[]{1,2,3,4}));
-        assertEquals(2, arrayProblems.numberOfArithmeticSlices(new int[]{1,2,3,8,9,10}));
+        assertEquals(3, arrayProblems.numberOfArithmeticSlices(new int[]{1, 2, 3, 4}));
+        assertEquals(2, arrayProblems.numberOfArithmeticSlices(new int[]{1, 2, 3, 8, 9, 10}));
+    }
+
+    @Test
+    void testMaxProfit2() {
+        assertEquals(7, arrayProblems.maxProfit2(new int[]{7, 1, 5, 3, 6, 4}));
+        assertEquals(4, arrayProblems.maxProfit2(new int[]{1, 2, 3, 4, 5}));
+        assertEquals(0, arrayProblems.maxProfit2(new int[]{5, 4, 3, 2, 1}));
+    }
+
+    @Test
+    void testMaxProfit5() {
+        assertEquals(8, arrayProblems.maxProfit5(2, new int[]{1, 3, 2, 8, 4, 9}));
+        assertEquals(6, arrayProblems.maxProfit5(3, new int[]{1, 3, 7, 5, 10, 3}));
     }
 }
