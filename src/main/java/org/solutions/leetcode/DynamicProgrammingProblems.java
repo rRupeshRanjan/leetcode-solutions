@@ -151,4 +151,30 @@ public class DynamicProgrammingProblems {
 
         return sell;
     }
+
+    /*
+     * Q. 376
+     *
+     * Given an integer array nums, return the length of the longest wiggle sequence.
+     * A wiggle sequence is a sequence where the differences between successive numbers strictly alternate
+     * between positive and negative. The first difference (if one exists) may be either positive or negative.
+     * A sequence with fewer than two elements is trivially a wiggle sequence.
+     *
+     * Tags:: dp, greedy, array
+     * */
+    public int wiggleMaxLength(int[] nums) {
+        if (nums.length < 2)
+            return nums.length;
+
+        int up = 1, down = 1;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1])
+                up = down + 1;
+            else if (nums[i] < nums[i - 1])
+                down = up + 1;
+        }
+
+        return Math.max(up, down);
+    }
 }

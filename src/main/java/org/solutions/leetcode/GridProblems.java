@@ -15,6 +15,7 @@ public class GridProblems {
 
     /*
     * Q.1091
+    *
     * In an N by N square grid, each cell is either empty (0) or blocked (1).
     * A clear path from top-left to bottom-right has length k if and only if it is composed of cells C_1, C_2, ..., C_k such that:
         Adjacent cells C_i and C_{i+1} are connected 8-directionally (ie., they are different and share an edge or corner)
@@ -86,8 +87,8 @@ public class GridProblems {
      * */
     public boolean isBipartite(int[][] graph) {
         Map<Integer, Integer> colorMap = new HashMap<>();
-        for(int node = 0; node<graph.length; node++) {
-            if(!colorMap.containsKey(node) && notBipartiteDfs(node, 0, colorMap, graph))
+        for (int node = 0; node < graph.length; node++) {
+            if (!colorMap.containsKey(node) && notBipartiteDfs(node, 0, colorMap, graph))
                 return false;
         }
         return true;
@@ -97,12 +98,12 @@ public class GridProblems {
      * Helper method to to DFS traversal for bipartite check
      * */
     private boolean notBipartiteDfs(int node, int color, Map<Integer, Integer> colorMap, int[][] graph) {
-        if(colorMap.containsKey(node))
+        if (colorMap.containsKey(node))
             return colorMap.get(node) != color;
 
         colorMap.put(node, color);
-        for(int child: graph[node]) {
-            if(notBipartiteDfs(child, color ^ 1, colorMap, graph))
+        for (int child : graph[node]) {
+            if (notBipartiteDfs(child, color ^ 1, colorMap, graph))
                 return true;
         }
         return false;
@@ -122,17 +123,17 @@ public class GridProblems {
         List<List<Integer>> graphList = new ArrayList<>();
         Map<Integer, Integer> colorMap = new HashMap<>();
 
-        for(int i=1; i<=N+1; i++)
+        for (int i = 1; i <= N + 1; i++)
             graphList.add(new ArrayList<>());
 
-        for(int[] arr: dislikes) {
+        for (int[] arr : dislikes) {
             graphList.get(arr[0]).add(arr[1]);
             graphList.get(arr[1]).add(arr[0]);
         }
 
         int[][] graph = arrayUtils.convert2DListTo2DArray(graphList);
-        for(int node=0; node<N+1; node++) {
-            if(!colorMap.containsKey(node) && notBipartiteDfs(node, 0, colorMap, graph))
+        for (int node = 0; node < N + 1; node++) {
+            if (!colorMap.containsKey(node) && notBipartiteDfs(node, 0, colorMap, graph))
                 return false;
         }
 
@@ -153,22 +154,58 @@ public class GridProblems {
      * */
     public int[] kWeakestRows(int[][] mat, int k) {
         int[] count = new int[mat.length];
-        PriorityQueue<Integer> pq = new PriorityQueue<>((i,j) ->
-                (count[i] == count[j]) ? (j-i) : (count[j] - count[i])
+        PriorityQueue<Integer> pq = new PriorityQueue<>((i, j) ->
+                (count[i] == count[j]) ? (j - i) : (count[j] - count[i])
         );
 
-        for(int i=0; i<mat.length; i++)
+        for (int i = 0; i < mat.length; i++)
             count[i] = Arrays.stream(mat[i]).sum();
 
-        for(int i=0; i<count.length; i++) {
+        for (int i = 0; i < count.length; i++) {
             pq.add(i);
-            if(pq.size() > k) pq.poll();
+            if (pq.size() > k) pq.poll();
         }
 
         int[] result = new int[k];
-        for(int i=k-1; i>=0; i--)
+        for (int i = k - 1; i >= 0; i--)
             result[i] = pq.poll();
 
         return result;
+    }
+
+    /*
+     * Q. 841
+     *
+     * There are N rooms and you start in room 0.  Each room has a distinct number in 0, 1, 2, ..., N-1,
+     * and each room may have some keys to access the next room. Formally, each room i has a list of keys rooms[i],
+     * and each key rooms[i][j] is an integer in [0, 1, ..., N-1] where N = rooms.length.
+     * A key rooms[i][j] = v opens the room with number v.
+     * Initially, all the rooms start locked (except for room 0).  You can walk back and forth between rooms freely.
+     *
+     * Return true if and only if you can enter every room.
+     *
+     * tags:: dfs, graph
+     * */
+    public boolean canVisitAllRooms(int[][] rooms) {
+        // alternately, can use a set to maintain set of visited rooms, omitting visitedCount variable
+        // but choosing boolean array for space optimization.
+        boolean[] visited = new boolean[rooms.length];
+        Stack<Integer> stack = new Stack<>();
+        int visitedCount = 1;
+
+        visited[0] = true;
+        stack.push(0);
+
+        while (!stack.isEmpty()) {
+            for (int i : rooms[stack.pop()]) {
+                if (!visited[i]) {
+                    stack.push(i);
+                    visited[i] = true;
+                    visitedCount++;
+                }
+            }
+        }
+
+        return visitedCount == rooms.length;
     }
 }
