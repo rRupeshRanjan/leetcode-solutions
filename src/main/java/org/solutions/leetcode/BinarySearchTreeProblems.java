@@ -47,8 +47,8 @@ public class BinarySearchTreeProblems {
         Stack<TreeNode> stack = new Stack<>();
         int temp = 0;
 
-        while(copy != null || !stack.empty()) {
-            while(copy != null) {
+        while (copy != null || !stack.empty()) {
+            while (copy != null) {
                 stack.push(copy);
                 copy = copy.getRight();
             }

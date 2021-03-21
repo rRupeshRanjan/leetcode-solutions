@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,12 +13,12 @@ public class MathProblems {
      *
      * Tags:: math
      * */
-    public int numberOfSteps (int num) {
-        if(num == 0)
+    public int numberOfSteps(int num) {
+        if (num == 0)
             return 0;
 
         int count = 0;
-        while(num > 1) {
+        while (num > 1) {
             count += (num % 2) + 1;
             num = num >> 1;
         }
@@ -38,11 +39,11 @@ public class MathProblems {
     public int distributeCandies(int[] candyType) {
         Set<Integer> set = new HashSet<>();
 
-        for(int c: candyType) {
+        for (int c : candyType) {
             set.add(c);
 
-            if(set.size() == candyType.length/2)
-                return candyType.length/2;
+            if (set.size() == candyType.length / 2)
+                return candyType.length / 2;
         }
 
         return set.size();
@@ -60,14 +61,14 @@ public class MathProblems {
      * Tags:: math
      * */
     public int[] findErrorNums(int[] nums) {
-        int diff=0, sqDiff=0, sum=0;
-        for(int i=0; i<nums.length; i++) {
-            diff += i+1-nums[i];
-            sqDiff += (i+1)*(i+1) - nums[i]*nums[i];
+        int diff = 0, sqDiff = 0, sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            diff += i + 1 - nums[i];
+            sqDiff += (i + 1) * (i + 1) - nums[i] * nums[i];
         }
 
-        sum = sqDiff/diff;
-        return new int[]{(sum-diff)/2, (sum+diff)/2};
+        sum = sqDiff / diff;
+        return new int[]{(sum - diff) / 2, (sum + diff) / 2};
     }
 
     /*
@@ -79,9 +80,40 @@ public class MathProblems {
      * */
     public int missingNumber(int[] nums) {
         int n = nums.length, sum = 0;
-        for(int num: nums)
+        for (int num : nums)
             sum += num;
 
-        return( n*(n+1)/2 - sum );
+        return (n * (n + 1) / 2 - sum);
+    }
+
+    /*
+     *  Q. 869
+     *
+     * Starting with a positive integer N, we reorder the digits in any order (including the original order)
+     * such that the leading digit is not zero.
+     * Return true if and only if we can do this in a way such that the resulting number is a power of 2.
+     *
+     * tags:: math
+     * */
+    public boolean reorderedPowerOf2(int N) {
+        int[] expectedCount = getCount(N);
+        for (int i = 0; i < 31; i++)
+            if (Arrays.equals(expectedCount, getCount(1 << i)))
+                return true;
+
+        return false;
+    }
+
+    /*
+     * Given a number, return an array, with occurrence of each digit
+     * */
+    private int[] getCount(int num) {
+        int[] count = new int[10];
+        while (num > 0) {
+            count[num % 10]++;
+            num /= 10;
+        }
+
+        return count;
     }
 }

@@ -16,22 +16,22 @@ public class BinaryTreeProblems {
         List<Integer> result = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
 
-        if (root!= null) {
+        if (root != null) {
             q.add(root);
         }
 
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int size = q.size();
-            for(int i=0; i<size; i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
 
-                if(temp.getLeft()!=null)
+                if (temp.getLeft() != null)
                     q.add(temp.getLeft());
 
-                if(temp.getRight()!=null)
+                if (temp.getRight() != null)
                     q.add(temp.getRight());
 
-                if(i==size-1)
+                if (i == size - 1)
                     result.add(temp.getVal());
             }
         }
@@ -49,8 +49,8 @@ public class BinaryTreeProblems {
         List<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
 
-        while(root != null || !stack.empty()) {
-            while(root != null) {
+        while (root != null || !stack.empty()) {
+            while (root != null) {
                 stack.push(root);
                 root = root.getLeft();
             }
@@ -73,13 +73,13 @@ public class BinaryTreeProblems {
         List<Double> res = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
 
-        if(root != null)
+        if (root != null)
             q.add(root);
 
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int size = q.size();
             double sum = 0;
-            for(int i=0; i<size; i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
                 sum += temp.getVal();
 

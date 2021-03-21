@@ -18,13 +18,13 @@ public class ArrayProblems {
 
         switch (way) {
             case "brute-force": {
-                for(int i=0; i<nums.length; i++) {
+                for (int i = 0; i < nums.length; i++) {
                     int currLen = 0;
                     boolean flag = false;
-                    for(int j=0; j<nums.length; j++) {
+                    for (int j = 0; j < nums.length; j++) {
                         if (nums[i] == nums[j])
                             currLen++;
-                        else if(nums[j] == nums[i]+1) {
+                        else if (nums[j] == nums[i] + 1) {
                             currLen++;
                             flag = true;
                         }
@@ -40,17 +40,17 @@ public class ArrayProblems {
                 Arrays.sort(nums);
                 int prevLen = 0;
 
-                for(int i=0; i<nums.length; i++) {
+                for (int i = 0; i < nums.length; i++) {
                     int currLen = 1;
-                    if(i>0 && nums[i]-nums[i-1]==1) {
-                        while(i<nums.length-1 && nums[i]==nums[i+1]) {
+                    if (i > 0 && nums[i] - nums[i - 1] == 1) {
+                        while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
                             currLen++;
                             i++;
                         }
                         maxLen = Math.max(maxLen, currLen + prevLen);
                         prevLen = currLen;
                     } else {
-                        while(i<nums.length-1 && nums[i]==nums[i+1]) {
+                        while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
                             currLen++;
                             i++;
                         }
@@ -62,13 +62,13 @@ public class ArrayProblems {
 
             case "hashmap": {
                 Map<Integer, Integer> map = new HashMap<>();
-                for(int num: nums) {
+                for (int num : nums) {
                     map.put(num, map.getOrDefault(num, 0) + 1);
                 }
 
-                for(int key: map.keySet()) {
-                    if(map.containsKey(key+1)) {
-                        maxLen = Math.max(maxLen, map.get(key) + map.get(key+1));
+                for (int key : map.keySet()) {
+                    if (map.containsKey(key + 1)) {
+                        maxLen = Math.max(maxLen, map.get(key) + map.get(key + 1));
                     }
                 }
                 return maxLen;
@@ -100,8 +100,8 @@ public class ArrayProblems {
             }
         }
 
-        for(int i=0; i<arr.length; i++) {
-            if(!map.containsKey(arr[i])) {
+        for (int i = 0; i < arr.length; i++) {
+            if (!map.containsKey(arr[i])) {
                 return false;
             } else {
                 for (Integer value : map.get(arr[i])) {
@@ -123,17 +123,17 @@ public class ArrayProblems {
      * Tags:: twoPointerApproach
      * */
     public int maxWaterContainerArea(int[] height) {
-        int maxArea = 0, start = 0, end = height.length-1;
+        int maxArea = 0, start = 0, end = height.length - 1;
 
-        while(start<end){
-            maxArea = Math.max(maxArea, Math.min(height[start], height[end])*(end-start));
-            if(height[start] < height[end]) {
+        while (start < end) {
+            maxArea = Math.max(maxArea, Math.min(height[start], height[end]) * (end - start));
+            if (height[start] < height[end]) {
                 int temp = height[start];
-                while(height[start] <= temp && start < end)
+                while (height[start] <= temp && start < end)
                     start++;
             } else {
                 int temp = height[end];
-                while(height[end] <= temp && start < end)
+                while (height[end] <= temp && start < end)
                     end--;
             }
         }

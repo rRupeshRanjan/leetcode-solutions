@@ -1,4 +1,4 @@
-package org.solutions.leetcode.customDataStructures;
+package org.solutions.leetcode.customClassDesign;
 
 import java.util.*;
 

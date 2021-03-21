@@ -14,9 +14,9 @@ public class StringProblems {
     public int[] shortestToChar(String s, char c) {
         int[] result = new int[s.length()];
 
-        for(int i=0; i<s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
-            if(ch == c) {
+            if (ch == c) {
                 result[i] = 0;
             } else {
                 int lastIndex = s.lastIndexOf(c, i);
@@ -39,17 +39,17 @@ public class StringProblems {
      * Tags:: hashmap, string
      * */
     public boolean isAnagram(String s, String t) {
-        if(s.length() != t.length())
+        if (s.length() != t.length())
             return false;
 
         int[] count = new int[26];
-        for(int i=0; i<s.length(); i++){
+        for (int i = 0; i < s.length(); i++) {
             count[s.charAt(i) - 'a']++;
             count[t.charAt(i) - 'a']--;
         }
 
-        for(int c: count) {
-            if(c != 0)
+        for (int c : count) {
+            if (c != 0)
                 return false;
         }
         return true;
@@ -72,9 +72,9 @@ public class StringProblems {
     private void findAllPermutations(String S, List<String> returnList, int start) {
         returnList.add(S);
 
-        for(int i=start; i<S.length(); i++) {
+        for (int i = start; i < S.length(); i++) {
             char[] word = S.toCharArray();
-            if(Character.isLetter(S.charAt(i))) {
+            if (Character.isLetter(S.charAt(i))) {
                 if (Character.isUpperCase(S.charAt(i))) {
                     word[i] = Character.toLowerCase(S.charAt(i));
                     findAllPermutations(String.valueOf(word), returnList, i + 1);
