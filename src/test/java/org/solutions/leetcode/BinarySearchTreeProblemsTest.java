@@ -3,6 +3,7 @@ package org.solutions.leetcode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.dataStructures.TreeNode;
+import org.solutions.leetcode.utils.TestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

@@ -1,6 +1,6 @@
 package org.solutions.leetcode;
 
-import org.solutions.leetcode.dataStructures.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.solutions.leetcode.utils.ArrayUtils;
 
 import java.util.*;
@@ -36,20 +36,17 @@ public class GridProblems {
             return -1;
         }
 
-        Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(0, 0));
+        Queue<Pair<Integer, Integer>> q = new LinkedList<>();
+        q.add(Pair.of(0, 0));
         while (!q.isEmpty()) {
             int size = q.size();
             for (int i = 0; i < size; i++) {
-                Pair poll = q.poll();
-                int x = poll.getX();
-                int y = poll.getY();
+                Pair<Integer, Integer> poll = q.poll();
+                int x = poll.getLeft();
+                int y = poll.getRight();
 
-                if (x == n && y == n)
-                    return level + 1;
-
-                if (x < 0 || y < 0 || x > n || y > n || grid[x][y] == 1)
-                    continue;
+                if (x == n && y == n) return level + 1;
+                if (grid[x][y] == 1) continue;
 
                 grid[x][y] = 1;
                 for (int[] d : dir) {
@@ -58,7 +55,7 @@ public class GridProblems {
                     if (x_new < 0 || y_new < 0 || x_new > n || y_new > n || grid[x_new][y_new] == 1)
                         continue;
 
-                    q.add(new Pair(x_new, y_new));
+                    q.add(Pair.of(x_new, y_new));
                 }
             }
             level++;
@@ -207,5 +204,58 @@ public class GridProblems {
         }
 
         return visitedCount == rooms.length;
+    }
+
+    /*
+     * Q. 417
+     *
+     * You are given an m x n integer matrix heights representing the height of each unit cell in a continent.
+     * The Pacific ocean touches the continent's left and top edges, and the Atlantic ocean touches the continent's
+     * right and bottom edges. Water can only flow in four directions: up, down, left, and right.
+     * Water flows from a cell to an adjacent one with an equal or lower height.
+     * Return a list of grid coordinates where water can flow to both the Pacific and Atlantic oceans.
+     *
+     * tags:: dfs, grid
+     * */
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        int[][] directions = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int rows = heights.length, cols = heights[0].length;
+        Set<String> pacific = new HashSet<>(), atlantic = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i == 0 || j == 0)
+                    dfsPacificAtlantic(pacific, i, j, heights, directions);
+
+                if (i == rows - 1 || j == cols - 1)
+                    dfsPacificAtlantic(atlantic, i, j, heights, directions);
+            }
+        }
+
+        pacific.retainAll(atlantic);
+
+        for (String entry : pacific) {
+            String[] s = entry.split("-");
+            result.add(Arrays.asList(Integer.parseInt(s[0]), Integer.parseInt(s[1])));
+        }
+
+        return result;
+    }
+
+    private void dfsPacificAtlantic(Set<String> visited, int i, int j, int[][] heights, int[][] directions) {
+        visited.add(i + "-" + j);
+        for (int[] dir : directions) {
+            int nextI = i + dir[0];
+            int nextJ = j + dir[1];
+
+            if (nextI < 0 || nextI == heights.length ||
+                    nextJ < 0 || nextJ == heights[0].length ||
+                    visited.contains(nextI + "-" + nextJ))
+                continue;
+
+            if (heights[i][j] <= heights[nextI][nextJ])
+                dfsPacificAtlantic(visited, nextI, nextJ, heights, directions);
+        }
     }
 }

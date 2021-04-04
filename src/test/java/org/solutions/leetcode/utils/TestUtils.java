@@ -1,7 +1,10 @@
-package org.solutions.leetcode;
+package org.solutions.leetcode.utils;
 
 import org.solutions.leetcode.dataStructures.ListNode;
 import org.solutions.leetcode.dataStructures.TreeNode;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestUtils {
     public boolean areTreeEqualByValue(TreeNode node1, TreeNode node2) {
@@ -25,5 +28,27 @@ public class TestUtils {
         }
 
         return a == null && b == null;
+    }
+
+    public ListNode getLinkedListWithCycle(List<Integer> entries, int pos) {
+        List<ListNode> nodesList = entries.stream()
+                .map(ListNode::new)
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < entries.size() - 1; i++) {
+            nodesList.get(i).setNext(nodesList.get(i + 1));
+        }
+
+        // create a loop from last node to node at index = pos.
+        // no cycle if pos = -1
+        if (pos >= 0) {
+            nodesList.get(entries.size() - 1).setNext(nodesList.get(pos));
+        }
+
+        return nodesList.get(0);
+    }
+
+    public ListNode getLinkedList(List<Integer> entries) {
+        return getLinkedListWithCycle(entries, -1);
     }
 }

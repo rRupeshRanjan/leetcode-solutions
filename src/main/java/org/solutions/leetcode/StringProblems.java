@@ -1,8 +1,18 @@
 package org.solutions.leetcode;
 
+import org.solutions.leetcode.exceptions.BadInputException;
+import org.solutions.leetcode.utils.StringUtils;
+
 import java.util.*;
 
 public class StringProblems {
+
+    private final StringUtils stringUtils;
+
+    public StringProblems() {
+        this.stringUtils = new StringUtils();
+    }
+
     /*
      * Q.821
      * Given a string s and a character c that occurs in s, return an array of integers answer where
@@ -136,5 +146,70 @@ public class StringProblems {
         }
 
         return false;
+    }
+
+    /*
+     * Q. 916
+     *
+     * We are given two arrays A and B of words.  Each word is a string of lowercase letters.
+     * Now, say that word b is a subset of word a if every letter in b occurs in a, including multiplicity.
+     * For example, "wrr" is a subset of "warrior", but is not a subset of "world".
+     * Now say a word a from A is universal if for every b in B, b is a subset of a.
+     * Return a list of all universal words in A.  You can return the words in any order.
+     *
+     * tags:: string, superset, count
+     * */
+    public List<String> wordSubsets(String[] A, String[] B) throws BadInputException {
+        int[] bCount = new int[26];
+        List<String> result = new ArrayList<>();
+
+        for (String s : B) {
+            int[] count = stringUtils.getLowercaseCharCount(s);
+            for (int i = 0; i < 26; i++) {
+                bCount[i] = Math.max(bCount[i], count[i]);
+            }
+        }
+
+        for (String s : A) {
+            int[] count = stringUtils.getLowercaseCharCount(s);
+            boolean isCurrentSuperSet = true;
+            for (int i = 0; i < 26; i++) {
+                if (bCount[i] > count[i]) {
+                    isCurrentSuperSet = false;
+                    break;
+                }
+            }
+
+            if (isCurrentSuperSet)
+                result.add(s);
+        }
+
+        return result;
+    }
+
+    /*
+     * Q. 647
+     *
+     * Given a string, your task is to count how many palindromic substrings in this string.
+     * The substrings with different start indexes or end indexes are counted as
+     * different substrings even they consist of same characters.
+     *
+     * tags:: palindrome, strings
+     * */
+    public int countSubstrings(String s) {
+        int count = 0;
+
+        for (int i = 0; i < 2 * s.length() - 1; i++) {
+            int left = i / 2;
+            int right = left + i % 2;
+
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                left--;
+                right++;
+                count++;
+            }
+        }
+
+        return count;
     }
 }

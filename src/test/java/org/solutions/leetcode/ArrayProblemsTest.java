@@ -70,4 +70,17 @@ class ArrayProblemsTest {
         assertEquals(8, arrayProblems.maxProfit5(2, new int[]{1, 3, 2, 8, 4, 9}));
         assertEquals(6, arrayProblems.maxProfit5(3, new int[]{1, 3, 7, 5, 10, 3}));
     }
+
+    @Test
+    void testThreeSumMulti() {
+        assertEquals(20, arrayProblems.threeSumMulti(new int[]{1, 1, 2, 2, 3, 3, 4, 4, 5, 5}, 8));
+        assertEquals(12, arrayProblems.threeSumMulti(new int[]{1, 1, 2, 2, 2, 2}, 5));
+        assertEquals(3, arrayProblems.threeSumMulti(new int[]{1, 0, 1, 0, 2, 1, 2}, 1));
+    }
+
+    @Test
+    void testAdvantageCount() {
+        assertArrayEquals(new int[]{2, 11, 7, 15}, arrayProblems.advantageCount(new int[]{2, 7, 11, 15}, new int[]{1, 10, 4, 11}));
+        assertArrayEquals(new int[]{24, 32, 8, 12}, arrayProblems.advantageCount(new int[]{12, 24, 8, 32}, new int[]{13, 25, 32, 11}));
+    }
 }

@@ -1,11 +1,12 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.dataStructures.TreeNode;
+import org.solutions.leetcode.utils.TestUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,32 +23,69 @@ class BinaryTreeProblemsTest {
 
     @Test
     void testRightSideView() {
-        TreeNode head = new TreeNode(1);
-        TreeNode temp2 = new TreeNode(2);
-        TreeNode temp3 = new TreeNode(3);
-        TreeNode temp4 = new TreeNode(4);
-        TreeNode temp5 = new TreeNode(5);
+        Map<TreeNode, List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, new TreeNode(2, 7, 4), new TreeNode(3, 6, 5)), Arrays.asList(1, 3, 5));
+        scenarios.put(new TreeNode(1, new TreeNode(2, null, 4), new TreeNode(3)), Arrays.asList(1, 3, 4));
+        scenarios.put(new TreeNode(1, new TreeNode(2, null, 4), null), Arrays.asList(1, 2, 4));
+        scenarios.put(new TreeNode(1, new TreeNode(2), null), Arrays.asList(1, 2));
+        scenarios.put(new TreeNode(1), Collections.singletonList(1));
+        scenarios.put(null, Collections.emptyList());
 
-        temp2.setRight(temp4);
-        temp3.setRight(temp5);
-        head.setLeft(temp2);
-        head.setRight(temp3);
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.rightSideView(input)));
+    }
 
-        assertEquals(Arrays.asList(1, 3, 5), binaryTreeProblems.rightSideView(head));
+    @Test
+    void testInorderTraversal() {
+        Map<TreeNode, List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(null, Collections.emptyList());
+        scenarios.put(new TreeNode(1, 2, 3), Arrays.asList(2, 1, 3));
+        scenarios.put(new TreeNode(1, null, 3), Arrays.asList(1, 3));
+        scenarios.put(new TreeNode(1, 2, null), Arrays.asList(2, 1));
 
-        temp3.setRight(null);
-        assertEquals(Arrays.asList(1, 3, 4), binaryTreeProblems.rightSideView(head));
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.inorderTraversal(input)));
+    }
 
-        head.setRight(null);
-        assertEquals(Arrays.asList(1, 2, 4), binaryTreeProblems.rightSideView(head));
+    @Test
+    void testPreorderTraversal() {
+        Map<TreeNode, List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(null, Collections.emptyList());
+        scenarios.put(new TreeNode(1, 2, 3), Arrays.asList(1, 2, 3));
+        scenarios.put(new TreeNode(1, null, 3), Arrays.asList(1, 3));
+        scenarios.put(new TreeNode(1, 2, null), Arrays.asList(1, 2));
 
-        temp2.setRight(null);
-        assertEquals(Arrays.asList(1, 2), binaryTreeProblems.rightSideView(head));
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.preorderTraversal(input)));
+    }
 
-        head.setLeft(null);
-        assertEquals(Collections.singletonList(1), binaryTreeProblems.rightSideView(head));
+    @Test
+    void testPostorderTraversal() {
+        Map<TreeNode, List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(null, Collections.emptyList());
+        scenarios.put(new TreeNode(1, 2, 3), Arrays.asList(2, 3, 1));
+        scenarios.put(new TreeNode(1, null, 3), Arrays.asList(3, 1));
+        scenarios.put(new TreeNode(1, 2, null), Arrays.asList(2, 1));
 
-        head = null;
-        assertEquals(Collections.emptyList(), binaryTreeProblems.rightSideView(head));
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.postorderTraversal(input)));
+    }
+
+    @Test
+    void testFlipMatchVoyage() {
+        Map<Pair<TreeNode, int[]>, List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new TreeNode(1, 2, null), new int[]{2, 1}), Collections.singletonList(-1));
+        scenarios.put(Pair.of(new TreeNode(1, 2, 3), new int[]{1, 3, 2}), Collections.singletonList(1));
+        scenarios.put(Pair.of(new TreeNode(1, 2, 3), new int[]{1, 2, 3}), Collections.emptyList());
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, binaryTreeProblems.flipMatchVoyage(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testAverageOfLevels() {
+        Map<TreeNode, List<Double>> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)), Arrays.asList(3d, 14.5, 11d));
+        scenarios.put(new TreeNode(3, new TreeNode(9, 15, 7), new TreeNode(20)), Arrays.asList(3d, 14.5, 11d));
+        scenarios.put(null, Collections.emptyList());
+        scenarios.put(new TreeNode(1), Collections.singletonList(1d));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.averageOfLevels(input)));
     }
 }

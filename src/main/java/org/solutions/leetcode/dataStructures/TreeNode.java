@@ -15,4 +15,10 @@ public class TreeNode {
     public TreeNode(int val) {
         this.val = val;
     }
+
+    public TreeNode(int val, Integer leftVal, Integer rightVal) {
+        this.val = val;
+        if (leftVal != null) this.setLeft(new TreeNode(leftVal));
+        if (rightVal != null) this.setRight(new TreeNode(rightVal));
+    }
 }

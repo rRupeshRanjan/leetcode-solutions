@@ -17,14 +17,14 @@ public class ArrayProblems {
         int maxLen = 0;
 
         switch (way) {
-            case "brute-force": {
-                for (int i = 0; i < nums.length; i++) {
+            case "brute-force":
+                for (int k : nums) {
                     int currLen = 0;
                     boolean flag = false;
-                    for (int j = 0; j < nums.length; j++) {
-                        if (nums[i] == nums[j])
+                    for (int num : nums) {
+                        if (k == num)
                             currLen++;
-                        else if (nums[j] == nums[i] + 1) {
+                        else if (num == k + 1) {
                             currLen++;
                             flag = true;
                         }
@@ -34,9 +34,7 @@ public class ArrayProblems {
                         maxLen = Math.max(maxLen, currLen);
                 }
                 return maxLen;
-            }
-
-            case "sorting": {
+            case "sorting":
                 Arrays.sort(nums);
                 int prevLen = 0;
 
@@ -58,9 +56,7 @@ public class ArrayProblems {
                     }
                 }
                 return maxLen;
-            }
-
-            case "hashmap": {
+            case "hashmap":
                 Map<Integer, Integer> map = new HashMap<>();
                 for (int num : nums) {
                     map.put(num, map.getOrDefault(num, 0) + 1);
@@ -72,8 +68,6 @@ public class ArrayProblems {
                     }
                 }
                 return maxLen;
-            }
-
             default:
                 return -1;
         }
@@ -214,5 +208,85 @@ public class ArrayProblems {
         }
 
         return cash;
+    }
+
+    /*
+     * Q. 923
+     *
+     * Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and
+     * arr[i] + arr[j] + arr[k] == target. As the answer can be very large, return it modulo 109 + 7.
+     *
+     * tags::math, array, sum
+     * */
+    public int threeSumMulti(int[] arr, int target) {
+        int MOD = 1_000_000_007;
+        long[] count = new long[101];
+
+        for (int a : arr)
+            count[a]++;
+
+        int[] keys = Arrays.stream(arr).distinct().sorted().toArray();
+        long result = 0;
+
+        for (int i = 0; i < keys.length; i++) {
+            int x = keys[i], remTarget = target - x;
+            int j = i, k = keys.length - 1;
+
+            while (j <= k) {
+                int y = keys[j], z = keys[k];
+                if (y + z > remTarget) {
+                    k--;
+                } else if (y + z < remTarget) {
+                    j++;
+                } else {
+                    if (i < j && j < k) {
+                        result += count[x] * count[y] * count[z];
+                    } else if (i == j && j < k) {
+                        result += count[x] * (count[x] - 1) / 2 * count[z];
+                    } else if (i < j && j == k) {
+                        result += count[x] * count[y] * (count[y] - 1) / 2;
+                    } else {
+                        result += count[x] * (count[x] - 1) * (count[x] - 2) / 6;
+                    }
+
+                    result %= MOD;
+                    j++;
+                    k--;
+                }
+            }
+        }
+
+        return (int) result;
+    }
+
+    /*
+     * Q. 870
+     *
+     * Given two arrays A and B of equal size, the advantage of A with respect to B is the number of
+     * indices i for which A[i] > B[i]. Return any permutation of A that maximizes its advantage with respect to B.
+     *
+     * tags:: array, greedy
+     * */
+    public int[] advantageCount(int[] A, int[] B) {
+        int n = A.length;
+        int[] result = new int[n];
+        TreeMap<Integer, Integer> countMap = new TreeMap<>();
+
+        for (int a : A)
+            countMap.put(a, countMap.getOrDefault(a, 0) + 1);
+
+        for (int i = 0; i < n; i++) {
+            Integer curr = countMap.higherKey(B[i]);
+            if (curr == null)
+                curr = countMap.firstKey();
+            result[i] = curr;
+
+            if (countMap.get(curr) == 1)
+                countMap.remove(curr);
+            else
+                countMap.put(curr, countMap.get(curr) - 1);
+        }
+
+        return result;
     }
 }

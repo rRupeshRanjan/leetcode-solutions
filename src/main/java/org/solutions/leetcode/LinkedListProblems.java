@@ -2,10 +2,7 @@ package org.solutions.leetcode;
 
 import org.solutions.leetcode.dataStructures.ListNode;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LinkedListProblems {
 
@@ -21,7 +18,7 @@ public class LinkedListProblems {
 
         while (slow != null && fast != null && fast.getNext() != null) {
             slow = slow.getNext();
-            fast = fast.getNext();
+            fast = fast.getNext().getNext();
             if (slow == fast) {
                 return true;
             }
@@ -115,6 +112,28 @@ public class LinkedListProblems {
         first.setVal(temp);
 
         return head;
+    }
+
+    /*
+     * Q.234
+     * Given the head of a singly linked list, return true if it is a palindrome.
+     *
+     * tags:: linkedList
+     * */
+    public boolean isPalindrome(ListNode head) {
+        Deque<Integer> dq = new LinkedList<>();
+
+        while (head != null) {
+            dq.add(head.getVal());
+            head = head.getNext();
+        }
+
+        while (dq.size() > 1) {
+            if (!dq.pollFirst().equals(dq.pollLast()))
+                return false;
+        }
+
+        return true;
     }
 }
 

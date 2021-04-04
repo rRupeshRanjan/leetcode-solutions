@@ -5,8 +5,10 @@ import org.solutions.leetcode.dataStructures.TreeNode;
 import java.util.*;
 
 public class BinaryTreeProblems {
+
     /*
      * Q.199
+     *
      * Given a binary tree, imagine yourself standing on the right side of it,
      * return the values of the nodes you can see ordered from top to bottom.
      *
@@ -61,6 +63,55 @@ public class BinaryTreeProblems {
         }
 
         return list;
+    }
+
+    /*
+     * Q. 144
+     *
+     * Given the root of a binary tree, return the preorder traversal of its nodes' values.
+     *
+     * tags:: binaryTree, preorder, dfs
+     * */
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                result.add(root.getVal());
+                stack.push(root);
+                root = root.getLeft();
+            }
+
+            root = stack.pop().getRight();
+        }
+
+        return result;
+    }
+
+    /*
+     * Q. 145
+     *
+     * Given the root of a binary tree, return the postorder traversal of its nodes' values.
+     *
+     * tags:: binaryTree, postorder, dfs
+     * */
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                result.add(root.getVal());
+                stack.push(root);
+                root = root.getRight();
+            }
+
+            root = stack.pop().getLeft();
+        }
+
+        Collections.reverse(result);
+        return result;
     }
 
     /*
@@ -134,5 +185,45 @@ public class BinaryTreeProblems {
             level++;
         }
         return root;
+    }
+
+    /*
+     * Q. 971
+     *
+     * You are given the root of a binary tree with n nodes, where each node is uniquely assigned a value from 1 to n.
+     * You are also given a sequence of n values voyage, which is the desired pre-order traversal of the binary tree.
+     * Any node in the binary tree can be flipped by swapping its left and right subtrees.
+     * Flip the smallest number of nodes so that the pre-order traversal of the tree matches voyage.
+     * Return a list of the values of all flipped nodes. You may return the answer in any order.
+     * If it is impossible to flip the nodes in the tree to make the pre-order traversal match voyage, return the list [-1].
+     *
+     * tags:: binaryTree, dfs, preorder
+     * */
+    public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        int currIndex = 0;
+
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                if (root.getVal() != voyage[currIndex++])
+                    return Collections.singletonList(-1);
+
+                if (currIndex < voyage.length && root.getLeft() != null && root.getLeft().getVal() != voyage[currIndex]) {
+                    result.add(root.getVal());
+                    TreeNode temp = root.getLeft();
+                    root.setLeft(root.getRight());
+                    root.setRight(temp);
+                }
+
+                stack.push(root);
+                root = root.getLeft();
+            }
+
+            root = stack.pop().getRight();
+        }
+
+
+        return result;
     }
 }

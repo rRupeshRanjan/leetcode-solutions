@@ -1,9 +1,14 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GridProblemsTest {
 
@@ -16,44 +21,75 @@ class GridProblemsTest {
 
     @Test
     void testShortestPathBinaryMatrix() {
-        assertEquals(2, gridProblems.shortestPathBinaryMatrix(new int[][]{{0, 1}, {1, 0}}));
-        assertEquals(4, gridProblems.shortestPathBinaryMatrix(new int[][]{{0, 0, 0}, {1, 1, 0}, {1, 1, 0}}));
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 1}, {1, 1}}, -1);
+        scenarios.put(new int[][]{{0, 0}, {0, 1}}, -1);
+        scenarios.put(new int[][]{{0, 1}, {1, 0}}, 2);
+        scenarios.put(new int[][]{{0, 0, 0}, {1, 1, 0}, {1, 1, 0}}, 4);
+        scenarios.put(new int[][]{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, -1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.shortestPathBinaryMatrix(input)));
     }
 
     @Test
     void testIsBipartite() {
-        assertTrue(gridProblems.isBipartite(new int[][]{{1, 3}, {0, 2}, {1, 3}, {0, 2}}));
-        assertFalse(gridProblems.isBipartite(new int[][]{{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}}));
-        assertTrue(gridProblems.isBipartite(new int[][]{{1}, {0, 3}, {3}, {1, 2}}));
+        Map<int[][], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 3}, {0, 2}, {1, 3}, {0, 2}}, true);
+        scenarios.put(new int[][]{{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}}, false);
+        scenarios.put(new int[][]{{1}, {0, 3}, {3}, {1, 2}}, true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.isBipartite(input)));
     }
 
     @Test
     void testPossiblePartition() {
-        assertTrue(gridProblems.possibleBipartition(4, new int[][]{{1, 2}, {1, 3}, {2, 4}}));
-        assertFalse(gridProblems.possibleBipartition(3, new int[][]{{1, 2}, {1, 3}, {2, 3}}));
-        assertFalse(gridProblems.possibleBipartition(5, new int[][]{{1, 2}, {2, 3}, {3, 4}, {4, 5}, {1, 5}}));
+        Map<Pair<Integer, int[][]>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(4, new int[][]{{1, 2}, {1, 3}, {2, 4}}), true);
+        scenarios.put(Pair.of(3, new int[][]{{1, 2}, {1, 3}, {2, 3}}), false);
+        scenarios.put(Pair.of(5, new int[][]{{1, 2}, {2, 3}, {3, 4}, {4, 5}, {1, 5}}), false);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, gridProblems.possibleBipartition(input.getLeft(), input.getRight())));
     }
 
     @Test
     void testKWeakestRows() {
-        assertArrayEquals(
-                new int[]{2, 0, 3},
-                gridProblems.kWeakestRows(
+        Map<Pair<int[][], Integer>, int[]> scenarios = new HashMap<>();
+        scenarios.put(
+                Pair.of(
                         new int[][]{{1, 1, 0, 0, 0}, {1, 1, 1, 1, 0}, {1, 0, 0, 0, 0}, {1, 1, 0, 0, 0}, {1, 1, 1, 1, 1}},
                         3
-                ));
-
-        assertArrayEquals(
-                new int[]{0, 2},
-                gridProblems.kWeakestRows(
+                ),
+                new int[]{2, 0, 3});
+        scenarios.put(
+                Pair.of(
                         new int[][]{{1, 0, 0, 0}, {1, 1, 1, 1}, {1, 0, 0, 0}, {1, 0, 0, 0}},
                         2
-                ));
+                ),
+                new int[]{0, 2});
+
+        scenarios.forEach((input, expected) ->
+                assertArrayEquals(expected, gridProblems.kWeakestRows(input.getLeft(), input.getRight())));
+
     }
 
     @Test
     void testCanVisitAllRooms() {
-        assertTrue(gridProblems.canVisitAllRooms(new int[][]{{1}, {2}, {3}, {}}));
-        assertFalse(gridProblems.canVisitAllRooms(new int[][]{{1, 3}, {3, 0, 1}, {2}, {0}}));
+        Map<int[][], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1}, {2}, {3}, {}}, true);
+        scenarios.put(new int[][]{{1, 3}, {3, 0, 1}, {2}, {0}}, false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.canVisitAllRooms(input)));
     }
+
+    @Test
+    void testPacificAtlantic() {
+        gridProblems.pacificAtlantic(new int[][]{{1, 2, 2, 3, 5}, {3, 2, 3, 4, 4}, {2, 4, 5, 3, 1}, {6, 7, 1, 4, 5}, {5, 1, 1, 2, 4}});
+        // should output [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]
+
+        gridProblems.pacificAtlantic(new int[][]{{2, 1}, {1, 2}});
+        // should output [[0,0],[0,1],[1,0],[1,1]]
+    }
+
+
 }
