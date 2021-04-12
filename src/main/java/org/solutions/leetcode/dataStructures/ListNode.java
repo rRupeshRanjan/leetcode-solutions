@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class ListNode {
     private int val;
     private ListNode next;
+    private ListNode prev;
 
     // specially introduced for a problem
     private ListNode random;

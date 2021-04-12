@@ -27,6 +27,7 @@ public class BinaryTreeProblems {
             for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
 
+                assert temp != null;
                 if (temp.getLeft() != null)
                     q.add(temp.getLeft());
 
@@ -132,6 +133,7 @@ public class BinaryTreeProblems {
             double sum = 0;
             for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
+                assert temp != null;
                 sum += temp.getVal();
 
                 if (temp.getLeft() != null) q.add(temp.getLeft());
@@ -171,6 +173,7 @@ public class BinaryTreeProblems {
             int size = q.size();
             for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
+                assert temp != null;
                 if (level != d - 1) {
                     if (temp.getLeft() != null) q.add(temp.getLeft());
                     if (temp.getRight() != null) q.add(temp.getRight());
@@ -225,5 +228,30 @@ public class BinaryTreeProblems {
 
 
         return result;
+    }
+
+    /*
+     * Q.1302
+     *
+     * Given the root of a binary tree, return the sum of values of its deepest leaves.
+     *
+     * tags:: binaryTree, bfs
+     * */
+    public int deepestLeavesSum(TreeNode root) {
+        int sum = 0, i;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+
+        while (!q.isEmpty()) {
+            for (i = q.size() - 1, sum = 0; i >= 0; i--) {
+                TreeNode temp = q.poll();
+                assert temp != null;
+                sum += temp.getVal();
+                if (temp.getLeft() != null) q.add(temp.getLeft());
+                if (temp.getRight() != null) q.add(temp.getRight());
+            }
+        }
+
+        return sum;
     }
 }

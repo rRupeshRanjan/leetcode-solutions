@@ -1,6 +1,7 @@
 package org.solutions.leetcode;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.exceptions.BadInputException;
@@ -105,5 +106,38 @@ class StringProblemsTest {
         scenarios.put("aB9", Arrays.asList("ab9", "Ab9", "aB9", "AB9"));
 
         scenarios.forEach((input, expected) -> assertTrue(expected.containsAll(stringProblems.letterCasePermutation(input))));
+    }
+
+    @Test
+    void testFindMaxForm() {
+        Map<Triple<String[], Integer, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(new String[]{"10", "0", "1"}, 1, 1), 2);
+        scenarios.put(Triple.of(new String[]{"10", "0001", "111001", "1", "0"}, 5, 3), 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                stringProblems.findMaxForm(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testLongestValidParentheses() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("(()))", 4);
+        scenarios.put("())", 2);
+        scenarios.put(")()())", 4);
+        scenarios.put("(((((((", 0);
+        scenarios.put("", 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.longestValidParentheses(input)));
+    }
+
+    @Test
+    void testHalvesAreAlike() {
+        Map<String, Boolean> scenarios = new HashMap<>();
+        scenarios.put("textbank", true);
+        scenarios.put("book", true);
+        scenarios.put("textbook", false);
+        scenarios.put("ABCdef", true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.halvesAreAlike(input)));
     }
 }

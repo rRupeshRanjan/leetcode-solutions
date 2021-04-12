@@ -212,4 +212,82 @@ public class StringProblems {
 
         return count;
     }
+
+    /*
+     * Q. 474
+     *
+     * You are given an array of binary strings strs and two integers m and n.
+     * Return the size of the largest subset of strs such that there are at most m 0's and n 1's in the subset.
+     * A set x is a subset of a set y if all elements of x are also elements of y.
+     *
+     * tags:: string, dp, knapsack
+     * */
+    public int findMaxForm(String[] strs, int m, int n) {
+        int[][] dp = new int[m + 1][n + 1];
+
+        for (String s : strs) {
+            int zero = 0, one = 0;
+            for (char ch : s.toCharArray()) {
+                if (ch == '0') zero++;
+                else one++;
+            }
+
+            for (int i = m; i >= zero; i--) {
+                for (int j = n; j >= one; j--) {
+                    dp[i][j] = Math.max(dp[i][j], 1 + dp[i - zero][j - one]);
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
+
+    /*
+     * Q. 32
+     *
+     * Given a string containing just characters '(' and ')', find the length of the longest valid parentheses substring.
+     *
+     * tags:: string
+     * */
+    public int longestValidParentheses(String s) {
+        int maxCount = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '(')
+                stack.push(i);
+            else {
+                stack.pop();
+                if (stack.isEmpty())
+                    stack.push(i);
+                else
+                    maxCount = Math.max(maxCount, i - stack.peek());
+            }
+        }
+
+        return maxCount;
+    }
+
+    /*
+     * Q. 1704
+     *
+     * You are given a string s of even length. Split this string into two halves of equal lengths, and let a be the
+     * first half and b be the second half. Two strings are alike if they have the same number of vowels
+     * ('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'). Notice that s contains uppercase and lowercase letters.
+     * Return true if a and b are alike. Otherwise, return false.
+     *
+     * tags:: string
+     * */
+    public boolean halvesAreAlike(String s) {
+        Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+        int count = 0, start = 0, end = s.length() - 1;
+        while (start < end) {
+            if (vowels.contains(s.charAt(start++))) count++;
+            if (vowels.contains(s.charAt(end--))) count--;
+        }
+
+        return count == 0;
+    }
 }

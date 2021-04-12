@@ -107,4 +107,24 @@ class DynamicProgrammingProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.maxEnvelopes(input)));
     }
+
+    @Test
+    void testLengthOfLIS() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{10, 9, 2, 5, 3, 7, 101, 18}, 4);
+        scenarios.put(new int[]{0, 1, 0, 3, 2, 3}, 4);
+        scenarios.put(new int[]{7, 7, 7, 7, 7}, 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.lengthOfLIS(input)));
+    }
+
+    @Test
+    void testLongestIncreasingPath() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{7, 8, 9}, {9, 7, 6}, {7, 2, 3}}, 6);
+        scenarios.put(new int[][]{{9, 9, 4}, {6, 6, 8}, {2, 1, 1}}, 4);
+        scenarios.put(new int[][]{{3, 4, 5}, {3, 2, 6}, {2, 2, 1}}, 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.longestIncreasingPath(input)));
+    }
 }

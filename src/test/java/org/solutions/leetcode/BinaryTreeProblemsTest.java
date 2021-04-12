@@ -24,8 +24,10 @@ class BinaryTreeProblemsTest {
     @Test
     void testRightSideView() {
         Map<TreeNode, List<Integer>> scenarios = new HashMap<>();
-        scenarios.put(new TreeNode(1, new TreeNode(2, 7, 4), new TreeNode(3, 6, 5)), Arrays.asList(1, 3, 5));
-        scenarios.put(new TreeNode(1, new TreeNode(2, null, 4), new TreeNode(3)), Arrays.asList(1, 3, 4));
+        scenarios.put(new TreeNode(1, new TreeNode(2, 7, 4), new TreeNode(3, 6, 5)),
+                Arrays.asList(1, 3, 5));
+        scenarios.put(new TreeNode(1, new TreeNode(2, null, 4), new TreeNode(3)),
+                Arrays.asList(1, 3, 4));
         scenarios.put(new TreeNode(1, new TreeNode(2, null, 4), null), Arrays.asList(1, 2, 4));
         scenarios.put(new TreeNode(1, new TreeNode(2), null), Arrays.asList(1, 2));
         scenarios.put(new TreeNode(1), Collections.singletonList(1));
@@ -81,11 +83,22 @@ class BinaryTreeProblemsTest {
     @Test
     void testAverageOfLevels() {
         Map<TreeNode, List<Double>> scenarios = new HashMap<>();
-        scenarios.put(new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)), Arrays.asList(3d, 14.5, 11d));
-        scenarios.put(new TreeNode(3, new TreeNode(9, 15, 7), new TreeNode(20)), Arrays.asList(3d, 14.5, 11d));
+        scenarios.put(new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)),
+                Arrays.asList(3d, 14.5, 11d));
+        scenarios.put(new TreeNode(3, new TreeNode(9, 15, 7), new TreeNode(20)),
+                Arrays.asList(3d, 14.5, 11d));
         scenarios.put(null, Collections.emptyList());
         scenarios.put(new TreeNode(1), Collections.singletonList(1d));
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.averageOfLevels(input)));
+    }
+
+    @Test
+    void testDeepestLeavesSum() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, null), new TreeNode(3, null, 6)), 10);
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, null), null), 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.deepestLeavesSum(input)));
     }
 }

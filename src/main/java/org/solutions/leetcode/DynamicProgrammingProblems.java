@@ -91,7 +91,7 @@ public class DynamicProgrammingProblems {
      *
      * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
      *
-     * tags:: dp
+     * tags:: dp,
      * This is a generalized version of maxProfit3
      * */
     public int maxProfit4(int k, int[] prices) {
@@ -121,7 +121,7 @@ public class DynamicProgrammingProblems {
      *
      * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
      *
-     * tags:: dp
+     * tags:: dp,
      * */
     public int maxProfit3(int[] prices) {
         return maxProfit4(2, prices);
@@ -136,7 +136,7 @@ public class DynamicProgrammingProblems {
      *
      * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
      *
-     * tags:: dp
+     * tags:: dp,
      * Think like state transition problem
      * */
     public int maxProfit6(int[] prices) {
@@ -203,5 +203,62 @@ public class DynamicProgrammingProblems {
             dp[left] = height;
         }
         return ans;
+    }
+
+    /*
+     * Q. 300
+     *
+     * Given an integer array nums, return the length of the longest strictly increasing subsequence.
+     * A subsequence is a sequence that can be derived from an array by deleting some or no elements without
+     * changing the order of the remaining elements.
+     * For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
+     *
+     * tags:: dp, array, LIS
+     * */
+    public int lengthOfLIS(int[] nums) {
+        int[] dp = new int[nums.length];
+        int max = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j])
+                    dp[i] = Math.max(dp[i], 1 + dp[j]);
+            }
+
+            max = Math.max(max, dp[i]);
+        }
+
+        return max;
+    }
+
+    public int longestIncreasingPath(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        int[][] cache = new int[m][n];
+        int maxLen = 1;
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                maxLen = Math.max(longestIncreasingPathDfs(matrix, i, j, m, n, cache), maxLen);
+            }
+        }
+
+        return maxLen;
+    }
+
+    private int longestIncreasingPathDfs(int[][] matrix, int i, int j, int m, int n, int[][] cache) {
+        if (cache[i][j] != 0) return cache[i][j];
+        int max = 1;
+        for (int[] dir : new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}) {
+            int x = i + dir[0];
+            int y = j + dir[1];
+
+            if (x < 0 || x == m || y < 0 || y == n || matrix[x][y] <= matrix[i][j])
+                continue;
+            int len = 1 + longestIncreasingPathDfs(matrix, x, y, m, n, cache);
+            max = Math.max(max, len);
+        }
+        cache[i][j] = max;
+        return max;
     }
 }

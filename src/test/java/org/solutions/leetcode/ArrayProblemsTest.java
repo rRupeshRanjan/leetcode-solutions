@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ArrayProblemsTest {
 
@@ -37,50 +39,85 @@ class ArrayProblemsTest {
 
     @Test
     void testCanFormArray() {
-        assertTrue(arrayProblems.canFormArray(new int[]{85}, new int[][]{{85}}));
-        assertTrue(arrayProblems.canFormArray(new int[]{15, 88}, new int[][]{{88}, {15}}));
-        assertFalse(arrayProblems.canFormArray(new int[]{49, 18, 16}, new int[][]{{16, 18, 49}}));
-        assertTrue(arrayProblems.canFormArray(new int[]{91, 4, 64, 78}, new int[][]{{78}, {4, 64}, {91}}));
-        assertFalse(arrayProblems.canFormArray(new int[]{1, 3, 5, 7}, new int[][]{{2, 4, 6, 8}}));
+        Map<Pair<int[], int[][]>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{85}, new int[][]{{85}}), true);
+        scenarios.put(Pair.of(new int[]{15, 88}, new int[][]{{88}, {15}}), true);
+        scenarios.put(Pair.of(new int[]{49, 18, 16}, new int[][]{{16, 18, 49}}), false);
+        scenarios.put(Pair.of(new int[]{91, 4, 64, 78}, new int[][]{{78}, {4, 64}, {91}}), true);
+        scenarios.put(Pair.of(new int[]{1, 3, 5, 7}, new int[][]{{2, 4, 6, 8}}), false);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.canFormArray(input.getLeft(), input.getRight())));
     }
 
     @Test
     void testMaxWaterContainerArea() {
-        assertEquals(49, arrayProblems.maxWaterContainerArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}));
-        assertEquals(1, arrayProblems.maxWaterContainerArea(new int[]{1, 1}));
-        assertEquals(16, arrayProblems.maxWaterContainerArea(new int[]{4, 3, 2, 1, 4}));
-        assertEquals(2, arrayProblems.maxWaterContainerArea(new int[]{1, 2, 1}));
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}, 49);
+        scenarios.put(new int[]{1, 1}, 1);
+        scenarios.put(new int[]{4, 3, 2, 1, 4}, 16);
+        scenarios.put(new int[]{1, 2, 1}, 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.maxWaterContainerArea(input)));
     }
 
     @Test
     void testNumberOfArithmeticSlices() {
-        assertEquals(3, arrayProblems.numberOfArithmeticSlices(new int[]{1, 2, 3, 4}));
-        assertEquals(2, arrayProblems.numberOfArithmeticSlices(new int[]{1, 2, 3, 8, 9, 10}));
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3, 4}, 3);
+        scenarios.put(new int[]{1, 2, 3, 8, 9, 10}, 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.numberOfArithmeticSlices(input)));
     }
 
     @Test
     void testMaxProfit2() {
-        assertEquals(7, arrayProblems.maxProfit2(new int[]{7, 1, 5, 3, 6, 4}));
-        assertEquals(4, arrayProblems.maxProfit2(new int[]{1, 2, 3, 4, 5}));
-        assertEquals(0, arrayProblems.maxProfit2(new int[]{5, 4, 3, 2, 1}));
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{7, 1, 5, 3, 6, 4}, 7);
+        scenarios.put(new int[]{1, 2, 3, 4, 5}, 4);
+        scenarios.put(new int[]{5, 4, 3, 2, 1}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.maxProfit2(input)));
     }
 
     @Test
     void testMaxProfit5() {
-        assertEquals(8, arrayProblems.maxProfit5(2, new int[]{1, 3, 2, 8, 4, 9}));
-        assertEquals(6, arrayProblems.maxProfit5(3, new int[]{1, 3, 7, 5, 10, 3}));
+        Map<Pair<Integer, int[]>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(2, new int[]{1, 3, 2, 8, 4, 9}), 8);
+        scenarios.put(Pair.of(3, new int[]{1, 3, 7, 5, 10, 3}), 6);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.maxProfit5(input.getLeft(), input.getRight())));
     }
 
     @Test
     void testThreeSumMulti() {
-        assertEquals(20, arrayProblems.threeSumMulti(new int[]{1, 1, 2, 2, 3, 3, 4, 4, 5, 5}, 8));
-        assertEquals(12, arrayProblems.threeSumMulti(new int[]{1, 1, 2, 2, 2, 2}, 5));
-        assertEquals(3, arrayProblems.threeSumMulti(new int[]{1, 0, 1, 0, 2, 1, 2}, 1));
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 1, 2, 2, 3, 3, 4, 4, 5, 5}, 8), 20);
+        scenarios.put(Pair.of(new int[]{1, 1, 2, 2, 2, 2}, 5), 12);
+        scenarios.put(Pair.of(new int[]{1, 0, 1, 0, 2, 1, 2}, 1), 3);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.threeSumMulti(input.getLeft(), input.getRight())));
     }
 
     @Test
     void testAdvantageCount() {
-        assertArrayEquals(new int[]{2, 11, 7, 15}, arrayProblems.advantageCount(new int[]{2, 7, 11, 15}, new int[]{1, 10, 4, 11}));
-        assertArrayEquals(new int[]{24, 32, 8, 12}, arrayProblems.advantageCount(new int[]{12, 24, 8, 32}, new int[]{13, 25, 32, 11}));
+        Map<Pair<int[], int[]>, int[]> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{2, 7, 11, 15}, new int[]{1, 10, 4, 11}), new int[]{2, 11, 7, 15});
+        scenarios.put(Pair.of(new int[]{12, 24, 8, 32}, new int[]{13, 25, 32, 11}), new int[]{24, 32, 8, 12});
+
+        scenarios.forEach((input, expected) -> {
+            assertArrayEquals(expected, arrayProblems.advantageCount(input.getLeft(), input.getRight()));
+        });
+    }
+
+    @Test
+    void testIsIdealPermutation() {
+        Map<int[], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 0, 2}, true);
+        scenarios.put(new int[]{1, 2, 0}, false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.isIdealPermutation(input)));
     }
 }

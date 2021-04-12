@@ -73,4 +73,13 @@ class MathProblemsTest {
 
         scenarios.forEach((input, expectation) -> assertEquals(expectation, mathProblems.reorderedPowerOf2(input)));
     }
+
+    @Test
+    void testMinOperations() {
+        Map<Integer, Integer> scenarios = new HashMap<>();
+        scenarios.put(3, 2);
+        scenarios.put(6, 9);
+        scenarios.put(100, 2500);
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.minOperations(input)));
+    }
 }
