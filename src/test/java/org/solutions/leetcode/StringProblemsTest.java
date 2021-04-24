@@ -140,4 +140,23 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.halvesAreAlike(input)));
     }
+
+    @Test
+    void testRemoveDuplicates() {
+        Map<String, String> scenarios = new HashMap<>();
+        scenarios.put("abbaca", "ca");
+        scenarios.put("aabccbe", "e");
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.removeDuplicates(input)));
+    }
+
+    @Test
+    void testRemoveKDuplicates() {
+        Map<Pair<String, Integer>, String> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("abcd", 2), "abcd");
+        scenarios.put(Pair.of("deeedbbcccbdaa", 3), "aa");
+        scenarios.put(Pair.of("pbbcggttciiippooaais", 2), "ps");
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.removeDuplicates(input.getLeft(), input.getRight())));
+    }
 }

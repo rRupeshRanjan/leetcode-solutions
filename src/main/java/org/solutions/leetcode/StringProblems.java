@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.solutions.leetcode.exceptions.BadInputException;
 import org.solutions.leetcode.utils.StringUtils;
 
@@ -289,5 +290,68 @@ public class StringProblems {
         }
 
         return count == 0;
+    }
+
+    /*
+     * Q. 1047
+     *
+     * Given a string S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters,
+     * and removing them. We repeatedly make duplicate removals on S until we no longer can.
+     * Return the final string after all such duplicate removals have been made.  It is guaranteed the answer is unique.
+     *
+     * tags:: string, stack
+     * */
+    public String removeDuplicates(String s) {
+//        return removeDuplicates(s, 2);
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : s.toCharArray()) {
+            if (!stack.isEmpty() && stack.peek() == ch)
+                stack.pop();
+            else
+                stack.push(ch);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+
+        return sb.reverse().toString();
+    }
+
+    /*
+     * Q. 1209
+     *
+     * You are given a string s and an integer k, a k duplicate removal consists of choosing k adjacent and equal letters
+     * from s and removing them, causing the left and the right side of the deleted substring to concatenate together.
+     * We repeatedly make k duplicate removals on s until we no longer can.
+     * Return the final string after all such duplicate removals have been made.
+     * It is guaranteed that the answer is unique.
+     *
+     * tags:: string, stack
+     * */
+    public String removeDuplicates(String s, int k) {
+        Stack<Pair<Character, Integer>> stack = new Stack<>();
+
+        for (char ch : s.toCharArray()) {
+            if (!stack.isEmpty() && stack.peek().getLeft() == ch) {
+                Pair<Character, Integer> temp = stack.pop();
+                if (temp.getRight() + 1 < k)
+                    stack.push(Pair.of(ch, temp.getRight() + 1));
+            } else {
+                stack.push(Pair.of(ch, 1));
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        while (!stack.isEmpty()) {
+            Pair<Character, Integer> temp = stack.pop();
+            for (int i = 0; i < temp.getRight(); i++)
+                sb.append(temp.getLeft());
+        }
+
+        return sb.reverse().toString();
     }
 }

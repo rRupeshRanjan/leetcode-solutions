@@ -135,5 +135,63 @@ public class LinkedListProblems {
 
         return true;
     }
+
+    /*
+     * Q. 86
+     *
+     * Given the head of a linked list and a value x, partition it such that all nodes less than x come before
+     * nodes greater than or equal to x. You should preserve the original relative order of the nodes in
+     * each of the two partitions.
+     *
+     * tags:: linkedList, twoPointer
+     * */
+    public ListNode partitionList(ListNode head, int x) {
+        ListNode beforeHead = new ListNode(), before = beforeHead;
+        ListNode afterHead = new ListNode(), after = afterHead;
+
+        while (head != null) {
+            if (head.getVal() < x) {
+                before.setNext(head);
+                before = before.getNext();
+            } else {
+                after.setNext(head);
+                after = after.getNext();
+            }
+
+            head = head.getNext();
+        }
+
+        before.setNext(afterHead.getNext());
+        after.setNext(null);
+        return beforeHead.getNext();
+    }
+
+    /*
+     * Q. 19
+     *
+     * Given the head of a linked list, remove the nth node from the end of the list and return its head.
+     *
+     * tags:: linkedList
+     * */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode temp = head;
+        int length = 0;
+
+        while (temp != null) {
+            temp = temp.getNext();
+            length++;
+        }
+
+        if (length == n)
+            return head.getNext();
+
+        temp = head;
+        for (int i = 1; i < length - n; i++) {
+            temp = temp.getNext();
+        }
+
+        temp.setNext((temp.getNext() == null) ? null : temp.getNext().getNext());
+        return head;
+    }
 }
 

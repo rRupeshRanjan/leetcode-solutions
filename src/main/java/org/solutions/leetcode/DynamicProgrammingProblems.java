@@ -232,6 +232,15 @@ public class DynamicProgrammingProblems {
         return max;
     }
 
+    /*
+     * Q. 329
+     *
+     * Given an m x n integers matrix, return the length of the longest increasing path in matrix.
+     * From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or
+     * move outside the boundary (i.e., wrap-around is not allowed).
+     *
+     * tags:: dp
+     * */
     public int longestIncreasingPath(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
         int[][] cache = new int[m][n];
@@ -260,5 +269,27 @@ public class DynamicProgrammingProblems {
         }
         cache[i][j] = max;
         return max;
+    }
+
+    /*
+     * Q. 377
+     *
+     * Given an array of distinct integers nums and a target integer target, return the number of possible combinations
+     * that add up to target. The answer is guaranteed to fit in a 32-bit integer.
+     *
+     * tags:: dp
+     * */
+    public int combinationSum4(int[] nums, int target) {
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
+
+        for (int i = 1; i <= target; i++) {
+            for (int num : nums) {
+                if (i >= num)
+                    dp[i] += dp[i - num];
+            }
+        }
+
+        return dp[target];
     }
 }

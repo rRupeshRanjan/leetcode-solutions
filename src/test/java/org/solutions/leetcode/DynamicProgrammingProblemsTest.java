@@ -127,4 +127,14 @@ class DynamicProgrammingProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.longestIncreasingPath(input)));
     }
+
+    @Test
+    void testCombinationSum4() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 2, 3}, 4), 7);
+        scenarios.put(Pair.of(new int[]{9}, 3), 0);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, dpProblems.combinationSum4(input.getLeft(), input.getRight())));
+    }
 }

@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -81,4 +82,33 @@ class LinkedListProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, linkedListProblems.isPalindrome(input)));
     }
+
+    @Test
+    void testPartitionList() {
+        Map<Pair<ListNode, Integer>, ListNode> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(testUtils.getLinkedList(Arrays.asList(2, 1)), 2),
+                testUtils.getLinkedList(Arrays.asList(1, 2)));
+        scenarios.put(Pair.of(testUtils.getLinkedList(Arrays.asList(1, 4, 3, 2, 5, 2)), 3),
+                testUtils.getLinkedList(Arrays.asList(1, 2, 2, 4, 3, 5)));
+
+        scenarios.forEach((input, expected) ->
+                assertTrue(testUtils.areLinkedListsEqualByValue(
+                        expected, linkedListProblems.partitionList(input.getLeft(), input.getRight()))));
+    }
+
+    @Test
+    void testRemoveNthFromEnd() {
+        Map<Pair<ListNode, Integer>, ListNode> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(testUtils.getLinkedList(Arrays.asList(1, 2, 3, 4, 5)), 2),
+                testUtils.getLinkedList(Arrays.asList(1, 2, 3, 5)));
+        scenarios.put(Pair.of(testUtils.getLinkedList(Collections.singletonList(1)), 1), null);
+        scenarios.put(Pair.of(testUtils.getLinkedList(Arrays.asList(1, 2)), 2),
+                testUtils.getLinkedList(Collections.singletonList(2)));
+
+        scenarios.forEach((input, expected) ->
+                assertTrue(testUtils.areLinkedListsEqualByValue(
+                        expected, linkedListProblems.removeNthFromEnd(input.getLeft(), input.getRight())
+                )));
+    }
+
 }
