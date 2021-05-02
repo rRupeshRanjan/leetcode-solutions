@@ -4,7 +4,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.dataStructures.TreeNode;
-import org.solutions.leetcode.utils.TestUtils;
 
 import java.util.*;
 
@@ -12,13 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BinaryTreeProblemsTest {
 
-    static BinaryTreeProblems binaryTreeProblems;
-    static TestUtils testUtils;
+    private static BinaryTreeProblems binaryTreeProblems;
 
     @BeforeAll
     static void setup() {
         binaryTreeProblems = new BinaryTreeProblems();
-        testUtils = new TestUtils();
     }
 
     @Test

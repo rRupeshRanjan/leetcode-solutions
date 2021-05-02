@@ -105,7 +105,8 @@ class StringProblemsTest {
         scenarios.put("AB9", Arrays.asList("ab9", "Ab9", "aB9", "AB9"));
         scenarios.put("aB9", Arrays.asList("ab9", "Ab9", "aB9", "AB9"));
 
-        scenarios.forEach((input, expected) -> assertTrue(expected.containsAll(stringProblems.letterCasePermutation(input))));
+        scenarios.forEach((input, expected) ->
+                assertTrue(expected.containsAll(stringProblems.letterCasePermutation(input))));
     }
 
     @Test
@@ -157,6 +158,18 @@ class StringProblemsTest {
         scenarios.put(Pair.of("deeedbbcccbdaa", 3), "aa");
         scenarios.put(Pair.of("pbbcggttciiippooaais", 2), "ps");
 
-        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.removeDuplicates(input.getLeft(), input.getRight())));
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, stringProblems.removeDuplicates(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testCountBinarySubstrings() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("00110", 3);
+        scenarios.put("00110011", 6);
+        scenarios.put("10101", 4);
+        scenarios.put("00011100", 5);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.countBinarySubstrings(input)));
     }
 }

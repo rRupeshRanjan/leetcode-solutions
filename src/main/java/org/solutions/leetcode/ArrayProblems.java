@@ -316,4 +316,103 @@ public class ArrayProblems {
 
         return true;
     }
+
+    /*
+     * Q. 84
+     *
+     * Given an array of integers heights representing the histogram's bar height where the width of each bar is 1,
+     * return the area of the largest rectangle in the histogram.
+     *
+     * tags:: array
+     * */
+    public int largestRectangleArea(int[] heights) {
+        Stack<Integer> stack = new Stack<>();
+        int ans = 0;
+        for (int i = 0; i <= heights.length; i++) {
+            int cur = (i == heights.length) ? -1 : heights[i];
+            while (!stack.isEmpty() && heights[stack.peek()] >= cur) {
+                int h = heights[stack.pop()];
+                int w = stack.isEmpty() ? i : i - stack.peek() - 1;
+                ans = Math.max(ans, h * w);
+            }
+            stack.push(i);
+        }
+        return ans;
+    }
+
+    /*
+     * Q. 1642
+     *
+     * You are given an integer array heights representing the heights of buildings, some bricks, and some ladders.
+     * You start your journey from building 0 and move to the next building by possibly using bricks or ladders.
+     * While moving from building i to building i+1 (0-indexed),
+     *   If the current building's height >= next building's height, you dont need ladder or bricks.
+     *   If the current building's height < next building's height, you can use one ladder or (h[i+1] - h[i]) bricks.
+     *
+     * Return the furthest building index (0-indexed) you can reach if you use the given ladders and bricks optimally.
+     *
+     * tags:: array, priorityQueue
+     * */
+    public int furthestBuilding(int[] heights, int bricks, int ladders) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (int i = 0; i < heights.length - 1; i++) {
+            int d = heights[i + 1] - heights[i];
+            if (d > 0)
+                pq.add(d);
+            if (pq.size() > ladders)
+                bricks -= pq.poll();
+            if (bricks < 0)
+                return i;
+        }
+
+        return heights.length - 1;
+    }
+
+    /*
+     * Q. 34
+     *
+     * Given an array of integers nums sorted in ascending order, find the starting and ending position of a
+     * given target value. If target is not found in the array, return [-1, -1].
+     *
+     * return:: array, binarySearch
+     * */
+    public int[] searchRange(int[] nums, int target) {
+        int[] ans = new int[2];
+
+        ans[0] = getFirstPosition(nums, target);
+        ans[1] = getLastPosition(nums, target);
+
+        return ans;
+    }
+
+    private int getFirstPosition(int[] nums, int target) {
+        int index = -1, start = 0, end = nums.length - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] >= target) end = mid - 1;
+            else start = mid + 1;
+
+            if (nums[mid] == target)
+                index = mid;
+        }
+
+        return index;
+    }
+
+    private int getLastPosition(int[] nums, int target) {
+        int index = -1, start = 0, end = nums.length - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] <= target) start = mid + 1;
+            else end = mid - 1;
+
+            if (nums[mid] == target)
+                index = mid;
+        }
+
+        return index;
+    }
 }

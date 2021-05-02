@@ -1,13 +1,15 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MathProblemsTest {
 
@@ -81,5 +83,39 @@ class MathProblemsTest {
         scenarios.put(6, 9);
         scenarios.put(100, 2500);
         scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.minOperations(input)));
+    }
+
+    @Test
+    void testIsPowerOfThree() {
+        Map<Integer, Boolean> scenarios = new HashMap<>();
+        scenarios.put(243, true);
+        scenarios.put(0, false);
+        scenarios.put(3, true);
+        scenarios.put(123987, false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.isPowerOfThree(input)));
+    }
+
+    @Test
+    void testPowerfulIntegers() {
+        Map<Triple<Integer, Integer, Integer>, List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(2, 3, 10), Arrays.asList(2, 3, 4, 5, 7, 9, 10));
+        scenarios.put(Triple.of(3, 5, 15), Arrays.asList(2, 4, 6, 8, 10, 14));
+        scenarios.put(Triple.of(1, 1, 15), Arrays.asList(2));
+
+
+        scenarios.forEach((input, expected) ->
+                assertTrue(containsInAnyOrder(expected, mathProblems.powerfulIntegers(input.getLeft(), input.getMiddle(), input.getRight()))));
+    }
+
+    private boolean containsInAnyOrder(List<Integer> expected, List<Integer> input) {
+        if (expected.size() != input.size())
+            return false;
+
+        for (int i : input) {
+            if (!expected.contains(i)) return false;
+        }
+
+        return true;
     }
 }

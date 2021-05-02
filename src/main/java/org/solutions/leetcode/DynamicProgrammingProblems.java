@@ -2,6 +2,7 @@ package org.solutions.leetcode;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DynamicProgrammingProblems {
@@ -291,5 +292,115 @@ public class DynamicProgrammingProblems {
         }
 
         return dp[target];
+    }
+
+    /*
+     * Q. 120
+     *
+     * Given a triangle array, return the minimum path sum from top to bottom. For each step,
+     * you may move to an adjacent number of the row below. More formally, if you are on index i on the current row,
+     * you may move to either index i or index i + 1 on the next row.
+     *
+     * tags:: dp
+     * */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        for (int i = triangle.size() - 2; i >= 0; i--) {
+            for (int j = 0; j < triangle.get(i).size(); j++) {
+                int temp = triangle.get(i).get(j) + Math.min(triangle.get(i + 1).get(j), triangle.get(i + 1).get(j + 1));
+                triangle.get(i).set(j, temp);
+            }
+        }
+
+        return triangle.get(0).get(0);
+    }
+
+    /*
+     *  Q. 1074
+     *
+     * Given a matrix and a target, return the number of non-empty submatrices that sum to target.
+     * A submatrix x1, y1, x2, y2 is the set of all cells matrix[x][y] with x1 <= x <= x2 and y1 <= y <= y2.
+     * Two submatrices (x1, y1, x2, y2) and (x1', y1', x2', y2') are different
+     * if they have some coordinate that is different: for example, if x1 != x1'.
+     *
+     * tags:: array, dynamicProgramming, dp
+     * */
+    public int numSubmatrixSumTarget(int[][] matrix, int target) {
+        int m = matrix.length, n = matrix[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                matrix[i][j] += matrix[i][j - 1];
+            }
+        }
+
+        Map<Integer, Integer> counter = new HashMap<>();
+        int sum = 0, ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                counter.clear();
+                counter.put(0, 1);
+                sum = 0;
+
+                for (int k = 0; k < m; k++) {
+                    sum += matrix[k][j] - (i > 0 ? matrix[k][i - 1] : 0);
+                    ans += counter.getOrDefault(sum - target, 0);
+                    counter.put(sum, counter.getOrDefault(sum, 0) + 1);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    /*
+     * Q. 62
+     *
+     * A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+     * The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right
+     * corner of the grid. How many possible unique paths are there?
+     *
+     * tags:: dp, dynamicProgramming
+     * */
+    public int uniquePaths(int m, int n) {
+        int[] dp = new int[n], prev = new int[n];
+        for (int i = 0; i < m; i++) {
+            dp[0] = 1;
+            for (int j = 1; j < n; j++) {
+                dp[j] = prev[j] + dp[j - 1];
+            }
+            prev = dp;
+        }
+
+        return dp[n - 1];
+    }
+
+    /*
+     * Q. 63
+     *
+     * A robot is located at the top-left corner of a m x n grid. The robot can only move either down or right at any
+     * point in time. The robot is trying to reach the bottom-right corner of the grid. Now consider if some obstacles
+     * are added to the grids. How many unique paths would there be?
+     * An obstacle and space is marked as 1 and 0 respectively in the grid.
+     *
+     * tags:: dp, dynamicProgramming
+     * */
+    public int uniquePathsWithObstacles(int[][] A) {
+        int m = A.length, n = A[0].length;
+        int[][] dp = new int[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (A[i][j] == 1)
+                    A[i][j] = 0;
+                else {
+                    if (i == 0 && j == 0) A[i][j] = 1;
+
+                    if (i > 0) A[i][j] = A[i - 1][j];
+                    if (j > 0) A[i][j] += A[i][j - 1];
+                }
+            }
+        }
+
+        return A[m - 1][n - 1];
     }
 }

@@ -1,6 +1,7 @@
 package org.solutions.leetcode;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -119,5 +120,36 @@ class ArrayProblemsTest {
         scenarios.put(new int[]{1, 2, 0}, false);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.isIdealPermutation(input)));
+    }
+
+    @Test
+    void testLargestRectangleArea() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{2, 1, 5, 6, 2, 3}, 10);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.largestRectangleArea(input)));
+    }
+
+    @Test
+    void testFurthestBuilding() {
+        Map<Triple<int[], Integer, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(new int[]{4, 2, 7, 6, 9, 14, 12}, 5, 1), 4);
+        scenarios.put(Triple.of(new int[]{4, 12, 2, 7, 3, 18, 20, 3, 19}, 10, 2), 7);
+        scenarios.put(Triple.of(new int[]{14, 3, 19, 3}, 17, 0), 3);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected,
+                        arrayProblems.furthestBuilding(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testSearchRange() {
+        Map<Pair<int[], Integer>, int[]> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{5, 7, 7, 8, 8, 10}, 8), new int[]{3, 4});
+        scenarios.put(Pair.of(new int[]{5, 7, 7, 8, 8, 10}, 6), new int[]{-1, -1});
+        scenarios.put(Pair.of(new int[]{}, 0), new int[]{-1, -1});
+
+        scenarios.forEach((input, expected) ->
+                assertArrayEquals(expected, arrayProblems.searchRange(input.getLeft(), input.getRight())));
     }
 }

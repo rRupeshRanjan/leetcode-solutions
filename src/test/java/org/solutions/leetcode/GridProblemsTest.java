@@ -91,5 +91,15 @@ class GridProblemsTest {
         // should output [[0,0],[0,1],[1,0],[1,1]]
     }
 
+    @Test
+    void testRotate() {
+        Map<int[][], int[][]> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, new int[][]{{7, 4, 1}, {8, 5, 2}, {9, 6, 3}});
+        scenarios.put(new int[][]{{1, 2}, {3, 4}}, new int[][]{{3, 1}, {4, 2}});
 
+        scenarios.forEach((input, expected) -> {
+            gridProblems.rotate(input);
+            assertArrayEquals(expected, input);
+        });
+    }
 }

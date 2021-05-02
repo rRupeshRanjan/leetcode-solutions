@@ -258,4 +258,32 @@ public class GridProblems {
                 dfsPacificAtlantic(visited, nextI, nextJ, heights, directions);
         }
     }
+
+    /*
+     * Q. 48
+     *
+     * You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
+     * You have to rotate the image in-place, which means you have to modify the input 2D matrix directly.
+     * DO NOT allocate another 2D matrix and do the rotation.
+     *
+     * tags:: grid, logic, transpose
+     * */
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < (n - i); j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n - j - 1][n - i - 1];
+                matrix[n - j - 1][n - i - 1] = temp;
+            }
+        }
+
+        for (int i = 0; i < n / 2; i++) {
+            for (int j = 0; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n - i - 1][j];
+                matrix[n - i - 1][j] = temp;
+            }
+        }
+    }
 }

@@ -4,14 +4,16 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DynamicProgrammingProblemsTest {
 
-    static DynamicProgrammingProblems dpProblems;
+    static private DynamicProgrammingProblems dpProblems;
 
     @BeforeAll
     static void setUp() {
@@ -136,5 +138,49 @@ class DynamicProgrammingProblemsTest {
 
         scenarios.forEach((input, expected) ->
                 assertEquals(expected, dpProblems.combinationSum4(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testMinimumTotal() {
+        Map<List<List<Integer>>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Arrays.asList(
+                Arrays.asList(2), Arrays.asList(3, 4), Arrays.asList(6, 5, 7), Arrays.asList(4, 1, 8, 3)
+        ), 11);
+        scenarios.put(Arrays.asList(Arrays.asList(-10)), -10);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.minimumTotal(input)));
+    }
+
+    @Test
+    void testNumSubmatrixSumTarget() {
+        Map<Pair<int[][], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[][]{{0, 1, 0}, {1, 1, 1}, {0, 1, 0}}, 0), 4);
+        scenarios.put(Pair.of(new int[][]{{1, -1}, {-1, 1}}, 0), 5);
+        scenarios.put(Pair.of(new int[][]{{904}}, 0), 0);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, dpProblems.numSubmatrixSumTarget(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testUniquePaths() {
+        Map<Pair<Integer, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(7, 3), 28);
+        scenarios.put(Pair.of(3, 7), 28);
+        scenarios.put(Pair.of(3, 2), 3);
+        scenarios.put(Pair.of(3, 3), 6);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, dpProblems.uniquePaths(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testUniquePathsWithObstacles() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}, 2);
+        scenarios.put(new int[][]{{0, 1}, {0, 0}}, 1);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, dpProblems.uniquePathsWithObstacles(input)));
     }
 }

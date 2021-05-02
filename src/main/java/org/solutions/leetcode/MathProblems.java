@@ -1,8 +1,6 @@
 package org.solutions.leetcode;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class MathProblems {
 
@@ -130,5 +128,52 @@ public class MathProblems {
      * */
     public int minOperations(int n) {
         return (n * n) >> 2;
+    }
+
+    /*
+     * Q. 326
+     *
+     * Given an integer n, return true if it is a power of three. Otherwise, return false.
+     * An integer n is a power of three, if there exists an integer x such that n == 3^x.
+     *
+     * tags:: math
+     * */
+    public boolean isPowerOfThree(int n) {
+        if (n <= 0)
+            return false;
+
+        // check decimal part is zero, by taking mod 1
+        return (Math.log10(n) / Math.log10(3)) % 1 == 0;
+    }
+
+    /*
+     * Q. 970
+     *
+     * Given three integers x, y, and bound, return a list of all the powerful integers that have a value less than or
+     * equal to bound. An integer is powerful if it can be represented as xi + yj for some integers i >= 0 and j >= 0.
+     * You may return the answer in any order. In your answer, each value should occur at most once.
+     *
+     * tags:: math, array
+     * */
+    public List<Integer> powerfulIntegers(int x, int y, int bound) {
+        Set<Integer> ans = new HashSet<>();
+
+        int a = (x == 1) ? bound : (int) (Math.log10(bound) / Math.log10(x));
+        int b = (y == 1) ? bound : (int) (Math.log10(bound) / Math.log10(y));
+
+        for (int i = 0; i <= a; i++) {
+            for (int j = 0; j <= b; j++) {
+                int sum = (int) (Math.pow(x, i) + Math.pow(y, j));
+
+                if (sum <= bound)
+                    ans.add(sum);
+
+                if (y == 1) break;
+            }
+
+            if (x == 1) break;
+        }
+
+        return new ArrayList<Integer>(ans);
     }
 }

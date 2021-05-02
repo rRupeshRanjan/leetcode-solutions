@@ -26,8 +26,6 @@ public class BinaryTreeProblems {
             int size = q.size();
             for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
-
-                assert temp != null;
                 if (temp.getLeft() != null)
                     q.add(temp.getLeft());
 
@@ -133,7 +131,6 @@ public class BinaryTreeProblems {
             double sum = 0;
             for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
-                assert temp != null;
                 sum += temp.getVal();
 
                 if (temp.getLeft() != null) q.add(temp.getLeft());
@@ -245,7 +242,6 @@ public class BinaryTreeProblems {
         while (!q.isEmpty()) {
             for (i = q.size() - 1, sum = 0; i >= 0; i--) {
                 TreeNode temp = q.poll();
-                assert temp != null;
                 sum += temp.getVal();
                 if (temp.getLeft() != null) q.add(temp.getLeft());
                 if (temp.getRight() != null) q.add(temp.getRight());
