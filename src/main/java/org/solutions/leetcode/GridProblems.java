@@ -286,4 +286,124 @@ public class GridProblems {
             }
         }
     }
+
+    /*
+     * Q. 207 Course schedule I
+     *
+     * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an
+     * array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to
+     * take course ai.
+     * For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+     * Return true if you can finish all courses. Otherwise, return false.
+     *
+     * tags:: topologicalSort, graph
+     * */
+    public boolean courseScheduleI(int numCourses, int[][] prerequisites) {
+        List<Integer>[] adjList = new ArrayList[numCourses];
+        int[] indegree = new int[numCourses];
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < numCourses; i++)
+            adjList[i] = new ArrayList<>();
+
+        for (int[] course : prerequisites) {
+            adjList[course[1]].add(course[0]);
+            indegree[course[0]]++;
+        }
+
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0)
+                q.add(i);
+        }
+
+        int i = 0;
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            i++;
+
+            for (int ch : adjList[node]) {
+                indegree[ch]--;
+                if (indegree[ch] == 0)
+                    q.add(ch);
+            }
+        }
+
+        return i == numCourses;
+    }
+
+    /*
+     * Q. 210 Course schedule II
+     *
+     * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an
+     * array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to
+     * take course ai.
+     * For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+     * Return the ordering of courses you should take to finish all courses. If there are many valid answers,
+     * return any of them. If it is impossible to finish all courses, return an empty array.
+     *
+     * tags:: graph, topologicalSort
+     * */
+    public int[] courseScheduleII(int numCourses, int[][] prerequisites) {
+        List<Integer>[] adjList = new ArrayList[numCourses];
+        int[] indegree = new int[numCourses];
+        Queue<Integer> q = new LinkedList<>();
+        int[] answer = new int[numCourses];
+
+        for (int i = 0; i < numCourses; i++) {
+            adjList[i] = new ArrayList<>();
+        }
+
+        for (int[] c : prerequisites) {
+            adjList[c[1]].add(c[0]);
+            indegree[c[0]]++;
+        }
+
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0)
+                q.add(i);
+        }
+
+        int i = 0;
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            answer[i++] = node;
+
+            for (int ch : adjList[node]) {
+                indegree[ch]--;
+
+                if (indegree[ch] == 0)
+                    q.add(ch);
+            }
+        }
+
+        return (i == numCourses) ? answer : new int[0];
+    }
+
+    /*
+     * Q. 630 Course schedule III
+     *
+     * There are n different online courses numbered from 1 to n. You are given an array courses where
+     * courses[i] = [durationi, lastDayi] indicate that the ith course should be taken continuously for durationi days
+     * and must be finished before or on lastDayi.
+     * You will start on the 1st day and you cannot take two or more courses simultaneously.
+     *
+     * Return the maximum number of courses that you can take.
+     *
+     * tags:: greedy, priorityQueue
+     * */
+    public int courseScheduleIII(int[][] courses) {
+        Arrays.sort(courses, Comparator.comparingInt(a -> a[1]));
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> (b - a));
+
+        int time = 0;
+        for (int[] c : courses) {
+            time += c[0];
+            pq.add(c[0]);
+            if (time > c[1]) {
+                time -= pq.poll();
+            }
+        }
+
+        return pq.size();
+    }
 }

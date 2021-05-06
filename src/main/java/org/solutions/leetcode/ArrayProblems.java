@@ -415,4 +415,90 @@ public class ArrayProblems {
 
         return index;
     }
+
+    /*
+     * Q. 1480
+     *
+     * Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+     * Return the running sum of nums.
+     *
+     * tags:: array
+     * */
+    public int[] runningSum(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            nums[i] += nums[i - 1];
+        }
+
+        return nums;
+    }
+
+    /*
+     * Q. 665
+     *
+     * Given an array nums with n integers, your task is to check if it could become non-decreasing by modifying at most
+     * one element. We define an array is non-decreasing if nums[i] <= nums[i + 1] holds for every i (0-based)
+     * such that (0 <= i <= n - 2).
+     *
+     * tags:: array
+     * */
+    public boolean checkPossibility(int[] nums) {
+        int err = 0;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] > nums[i]) {
+                err++;
+                if (err > 1 || (i > 1 && i < nums.length - 1 && nums[i - 2] > nums[i] && nums[i + 1] < nums[i - 1]))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    /*
+     * Q. 55 Jump Game
+     *
+     * Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
+     * Each element in the array represents your maximum jump length at that position.
+     * Determine if you are able to reach the last index.
+     *
+     * tags:: array, greedy
+     * */
+    public boolean jumpGame(int[] nums) {
+        if (nums == null || nums.length <= 1)
+            return true;
+
+        int lastIndex = nums.length - 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] + i >= lastIndex)
+                lastIndex = i;
+        }
+
+        return lastIndex == 0;
+    }
+
+    /*
+     * Q. 45 Jump Game II
+     *
+     * Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
+     * Each element in the array represents your maximum jump length at that position. Your goal is to reach the last
+     * index in the minimum number of jumps. You can assume that you can always reach the last index.
+     *
+     * tags:: array, greedy
+     * */
+    public int jumpGameII(int[] nums) {
+        if (nums == null || nums.length <= 1)
+            return 0;
+
+        int reachable = 0, count = 0, curr = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            reachable = Math.max(reachable, nums[i] + i);
+            if (curr == i) {
+                curr = reachable;
+                count++;
+            }
+        }
+
+        return count;
+    }
 }

@@ -4,11 +4,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GridProblemsTest {
 
@@ -101,5 +99,46 @@ class GridProblemsTest {
             gridProblems.rotate(input);
             assertArrayEquals(expected, input);
         });
+    }
+
+    @Test
+    void testCourseScheduleI() {
+        Map<Pair<Integer, int[][]>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(2, new int[][]{{1, 0}}), true);
+        scenarios.put(Pair.of(2, new int[][]{{1, 0}, {0, 1}}), false);
+        scenarios.put(Pair.of(3, new int[][]{{1, 0}, {0, 1}}), false);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, gridProblems.courseScheduleI(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testCourseScheduleII() {
+        Map<Pair<Integer, int[][]>, List<int[]>> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(2, new int[][]{{1, 0}}), Collections.singletonList(new int[]{0, 1}));
+        scenarios.put(Pair.of(4, new int[][]{{1, 0}, {2, 0}, {3, 1}, {3, 2}}),
+                Arrays.asList(new int[]{0, 1, 2, 3}, new int[]{0, 2, 1, 3}));
+
+        scenarios.forEach((input, expected) ->
+                assertTrue(listContainsArray(expected, gridProblems.courseScheduleII(input.getLeft(), input.getRight()))));
+    }
+
+    @Test
+    void tesCourseScheduleIII() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{100, 200}, {200, 1300}, {1000, 1250}, {2000, 3200}}, 3);
+        scenarios.put(new int[][]{{1, 2}}, 1);
+        scenarios.put(new int[][]{{3, 2}, {4, 3}}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.courseScheduleIII(input)));
+    }
+
+    private boolean listContainsArray(List<int[]> list, int[] array) {
+        for (int[] l : list) {
+            if (Arrays.equals(array, l))
+                return true;
+        }
+
+        return false;
     }
 }

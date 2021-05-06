@@ -152,4 +152,45 @@ class ArrayProblemsTest {
         scenarios.forEach((input, expected) ->
                 assertArrayEquals(expected, arrayProblems.searchRange(input.getLeft(), input.getRight())));
     }
+
+    @Test
+    void testRunningSum() {
+        Map<int[], int[]> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 1, 1, 1, 1}, new int[]{1, 2, 3, 4, 5});
+        scenarios.put(new int[]{1, 2, 3, 4, 5}, new int[]{1, 3, 6, 10, 15});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, arrayProblems.runningSum(input)));
+    }
+
+    @Test
+    void testCheckPossibility() {
+        Map<int[], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[]{3, 4, 2, 3}, false);
+        scenarios.put(new int[]{4, 2, 3}, true);
+        scenarios.put(new int[]{-1, 4, 2, 3}, true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.checkPossibility(input)));
+    }
+
+    @Test
+    void testJumpGame() {
+        Map<int[], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[]{2, 3, 1, 1, 4}, true);
+        scenarios.put(new int[]{2, 1, 1, 0, 4}, false);
+        scenarios.put(new int[]{}, true);
+        scenarios.put(null, true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.jumpGame(input)));
+    }
+
+    @Test
+    void testJumpGameII() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{2, 3, 1, 1, 4}, 2);
+        scenarios.put(new int[]{2, 3, 0, 1, 4}, 2);
+        scenarios.put(new int[]{}, 0);
+        scenarios.put(null, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.jumpGameII(input)));
+    }
 }
