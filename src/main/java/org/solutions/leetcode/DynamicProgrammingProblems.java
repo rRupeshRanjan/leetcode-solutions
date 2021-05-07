@@ -403,4 +403,58 @@ public class DynamicProgrammingProblems {
 
         return A[m - 1][n - 1];
     }
+
+    /*
+     * Q. 583. Delete Operation for Two Strings
+     *
+     * Given two strings word1 and word2, return the minimum number of steps required to make word1 and word2 the same.
+     * In one step, you can delete exactly one character in either string.
+     *
+     * tags:: string, dp
+     * */
+    public int minDistance(String word1, String word2) {
+        int m = word1.length(), n = word2.length();
+        int[] prev = new int[n + 1];
+
+        for (int i = 0; i <= m; i++) {
+            int[] curr = new int[n + 1];
+            for (int j = 0; j <= n; j++) {
+                if (i == 0 || j == 0)
+                    curr[j] = i + j;
+                else if (word1.charAt(i - 1) == word2.charAt(j - 1))
+                    curr[j] = prev[j - 1];
+                else
+                    curr[j] = Math.min(prev[j], curr[j - 1]) + 1;
+            }
+            prev = curr;
+        }
+
+        return prev[n];
+    }
+
+    /*
+     * Q. 1653. Minimum Deletions to Make String Balanced
+     *
+     * You are given a string s consisting only of characters 'a' and 'b'. You can delete any number of characters in s
+     * to make s balanced. s is balanced if there is no pair of indices (i,j) such that i < j and s[i] = 'b' & s[j]= 'a'.
+     * Return the minimum number of deletions needed to make s balanced.
+     *
+     * tags:: dp, string
+     * */
+    public int minimumDeletions(String s) {
+        int l = s.length(), bCount = 0;
+        int curr = 0, prev = 0;
+
+        for (int i = 0; i < l; i++) {
+            if (s.charAt(i) == 'a') {
+                curr = Math.min(prev + 1, bCount);
+            } else {
+                curr = prev;
+                bCount++;
+            }
+            prev = curr;
+        }
+
+        return curr;
+    }
 }

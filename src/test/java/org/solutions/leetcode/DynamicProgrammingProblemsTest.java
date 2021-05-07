@@ -183,4 +183,24 @@ class DynamicProgrammingProblemsTest {
         scenarios.forEach((input, expected) ->
                 assertEquals(expected, dpProblems.uniquePathsWithObstacles(input)));
     }
+
+    @Test
+    void testMinDistance() {
+        Map<Pair<String, String>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("sea", "eat"), 2);
+        scenarios.put(Pair.of("leetcode", "etco"), 4);
+        scenarios.put(Pair.of("aaaaa", "bbbaa"), 6);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, dpProblems.minDistance(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testMinimumDeletions() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("aaababbbab", 2);
+        scenarios.put("bbaaaaabb", 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.minimumDeletions(input)));
+    }
 }
