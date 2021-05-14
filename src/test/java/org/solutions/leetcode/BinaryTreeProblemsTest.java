@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.dataStructures.TreeNode;
+import org.solutions.leetcode.utils.TreeUtils;
 
 import java.util.*;
 
@@ -12,10 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BinaryTreeProblemsTest {
 
     private static BinaryTreeProblems binaryTreeProblems;
+    private static TreeUtils treeUtils;
 
     @BeforeAll
     static void setup() {
         binaryTreeProblems = new BinaryTreeProblems();
+        treeUtils = new TreeUtils();
     }
 
     @Test
@@ -97,5 +100,15 @@ class BinaryTreeProblemsTest {
         scenarios.put(new TreeNode(1, new TreeNode(2, 4, null), null), 4);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.deepestLeavesSum(input)));
+    }
+
+    @Test
+    void testFlatten() {
+        TreeNode input = new TreeNode(1, new TreeNode(2, 3, 4), new TreeNode(5, null, 6));
+        TreeNode expected = new TreeNode(1, null, new TreeNode(2, null, new TreeNode(3, null,
+                new TreeNode(4, null, new TreeNode(5, null, new TreeNode(6))))));
+
+        binaryTreeProblems.flatten(input);
+        assertEquals(expected, input);
     }
 }

@@ -501,4 +501,67 @@ public class ArrayProblems {
 
         return count;
     }
+
+    /*
+     * 1354. Construct Target Array With Multiple Sums
+     *
+     * You are given an array target of n integers. From a starting array arr consisting of n 1's,
+     * you may perform the following procedure :
+     *   let x be the sum of all elements currently in your array.
+     *   choose index i, such that 0 <= i < n and set the value of arr at index i to x.
+     *   You may repeat this procedure as many times as needed.
+     *
+     * Return true if it is possible to construct the target array from arr, otherwise, return false.
+     *
+     * tags:: array, greedy, priorityQueue
+     * */
+    public boolean isPossibleToConstructTargetArray(int[] target) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> (b - a));
+        int sum = 0;
+
+        for (int t : target) {
+            pq.add(t);
+            sum += t;
+        }
+
+        while (!pq.isEmpty() && pq.peek() != 1) {
+            int num = pq.poll();
+            sum -= num;
+            if (num < sum || sum <= 0)
+                return false;
+
+            num %= sum;
+            sum += num;
+
+            pq.add(num > 0 ? num : sum);
+        }
+
+        return true;
+    }
+
+    /*
+     * Q. 1423 Maximum Points You Can Obtain from Cards
+     *
+     * There are several cards arranged in a row, and each card has an associated number of points. The points are given
+     * in the integer array cardPoints. In one step, you can take one card from the beginning or from the end of the row.
+     * You have to take exactly k cards. Your score is the sum of the points of the cards you have taken.
+     * Given the integer array cardPoints and the integer k, return the maximum score you can obtain.
+     *
+     * tags:: array, sliding-window
+     * hint:: either pick from last or start, but overall always k elements. find max of those.
+     * */
+    public int maxScore(int[] cardPoints, int k) {
+        int maxScore = 0, currScore = 0;
+        for (int i = 0; i < k; i++) {
+            currScore += cardPoints[i];
+        }
+
+        maxScore = currScore;
+        for (int i = 0; i < k; i++) {
+            currScore = currScore - cardPoints[k - i - 1] + cardPoints[cardPoints.length - i - 1];
+            maxScore = Math.max(maxScore, currScore);
+        }
+
+        return maxScore;
+    }
 }

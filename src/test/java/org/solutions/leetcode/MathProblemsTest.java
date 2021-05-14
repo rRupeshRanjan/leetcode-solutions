@@ -108,6 +108,28 @@ class MathProblemsTest {
                 assertTrue(containsInAnyOrder(expected, mathProblems.powerfulIntegers(input.getLeft(), input.getMiddle(), input.getRight()))));
     }
 
+    @Test
+    void testBulbSwitcher() {
+        Map<Integer, Integer> scenarios = new HashMap<>();
+        scenarios.put(11, 3);
+        scenarios.put(16, 4);
+        scenarios.put(10000000, 3162);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.bulbSwitcher(input)));
+    }
+
+    @Test
+    void testCountPrimes() {
+        Map<Integer, Integer> scenarios = new HashMap<>();
+        scenarios.put(1, 0);
+        scenarios.put(2, 0);
+        scenarios.put(3, 1);
+        scenarios.put(10, 4);
+        scenarios.put(123456, 11601);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.countPrimes(input)));
+    }
+
     private boolean containsInAnyOrder(List<Integer> expected, List<Integer> input) {
         if (expected.size() != input.size())
             return false;

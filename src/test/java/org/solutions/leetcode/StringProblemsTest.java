@@ -172,4 +172,14 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.countBinarySubstrings(input)));
     }
+
+    @Test
+    void testBulbSwitcherIV() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("101", 3);
+        scenarios.put("10111", 3);
+        scenarios.put("0100", 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.bulbSwitcherIV(input)));
+    }
 }

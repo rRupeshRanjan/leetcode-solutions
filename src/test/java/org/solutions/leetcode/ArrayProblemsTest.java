@@ -193,4 +193,24 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.jumpGameII(input)));
     }
+
+    @Test
+    void testIsPossibleToConstructTargetArray() {
+        Map<int[], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 1, 1, 2}, false);
+        scenarios.put(new int[]{3, 5, 9}, true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.isPossibleToConstructTargetArray(input)));
+    }
+
+    @Test
+    void testMaxScore() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4, 5, 6, 1}, 3), 12);
+        scenarios.put(Pair.of(new int[]{9, 7, 7, 9, 7, 7, 9}, 7), 55);
+        scenarios.put(Pair.of(new int[]{1, 79, 80, 1, 1, 1, 200, 1}, 3), 202);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.maxScore(input.getLeft(), input.getRight())));
+    }
 }

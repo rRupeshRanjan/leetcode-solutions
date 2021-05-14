@@ -21,4 +21,25 @@ public class TreeNode {
         if (leftVal != null) this.setLeft(new TreeNode(leftVal));
         if (rightVal != null) this.setRight(new TreeNode(rightVal));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        TreeNode treeNode = (TreeNode) o;
+        return val == treeNode.val && areNodesEqual(left, treeNode.left) && areNodesEqual(right, treeNode.right);
+    }
+
+    private boolean areNodesEqual(TreeNode a, TreeNode b) {
+        boolean isEqual = false;
+        if (a == null && b == null) {
+            isEqual = true;
+        } else if (a != null && b != null) {
+            isEqual = a.equals(b);
+        }
+        return isEqual;
+    }
 }

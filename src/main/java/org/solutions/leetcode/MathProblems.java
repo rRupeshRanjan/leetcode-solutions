@@ -176,4 +176,43 @@ public class MathProblems {
 
         return new ArrayList<Integer>(ans);
     }
+
+    /*
+     * 319. Bulb Switcher
+     *
+     * There are n bulbs that are initially off. You first turn on all the bulbs, then you turn off every second bulb.
+     * On the third round, you toggle every third bulb (turning on if it's off or turning off if it's on).
+     * For the ith round, you toggle every i bulb. For the nth round, you only toggle the last bulb.Return the number of
+     * bulbs that are on after n rounds.
+     *
+     * tags:: math
+     * */
+    public int bulbSwitcher(int n) {
+        return (int) Math.sqrt(n);
+    }
+
+    /*
+     * Q. 204 count primes
+     *
+     * Count the number of prime numbers less than a non-negative number, n.
+     * */
+    public int countPrimes(int n) {
+        if (n <= 2) return 0;
+
+        boolean[] primes = new boolean[n];
+        Arrays.fill(primes, true);
+        int count = n - 2;
+        for (int i = 2; i <= (int) Math.sqrt(n); i++) {
+            if (primes[i]) {
+                for (int j = i * i; j < n; j += i) {
+                    if (primes[j]) {
+                        primes[j] = false;
+                        count--;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
 }
