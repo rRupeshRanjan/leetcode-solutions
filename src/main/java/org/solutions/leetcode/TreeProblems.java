@@ -6,7 +6,7 @@ import java.util.*;
 
 public class TreeProblems {
 
-    /*
+    /**
      * Q. 429
      * Given an n-ary tree, return the level order traversal of its nodes' values.
      *
@@ -35,7 +35,7 @@ public class TreeProblems {
         return result;
     }
 
-    /*
+    /**
      * Q. 589
      *
      * Given the root of an n-ary tree, return the preorder traversal of its nodes' values.

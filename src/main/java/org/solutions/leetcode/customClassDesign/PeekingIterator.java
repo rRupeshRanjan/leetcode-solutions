@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/*
+/**
  * Q.284
  * Given an Iterator class interface with methods: next() and hasNext(),
  * design and implement a PeekingIterator that support the peek() operation --

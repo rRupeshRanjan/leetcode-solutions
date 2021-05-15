@@ -21,7 +21,7 @@ class DynamicProgrammingProblemsTest {
     }
 
     @Test
-    void coinChange() {
+    void testCoinChange() {
         Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
         scenarios.put(Pair.of(new int[]{1, 2, 5}, 11), 3);
         scenarios.put(Pair.of(new int[]{2}, 3), -1);
@@ -202,5 +202,35 @@ class DynamicProgrammingProblemsTest {
         scenarios.put("bbaaaaabb", 2);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.minimumDeletions(input)));
+    }
+
+    @Test
+    void testMaxSubArray() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}, 6);
+        scenarios.put(new int[]{5, 4, -1, 7, 8}, 23);
+        scenarios.put(new int[]{1}, 1);
+        scenarios.put(new int[]{-1}, -1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.maxSubArray(input)));
+    }
+
+    @Test
+    void testMaxAbsoluteSum() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, -3, 2, 3, -4}, 5);
+        scenarios.put(new int[]{2, -5, 1, -4, 3, -2}, 8);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.maxAbsoluteSum(input)));
+    }
+
+    @Test
+    void testMaxSumMinProduct() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3, 2}, 14);
+        scenarios.put(new int[]{2, 3, 3, 1, 2}, 18);
+        scenarios.put(new int[]{3, 1, 5, 6, 4, 2}, 60);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.maxSumMinProduct(input)));
     }
 }

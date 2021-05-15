@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class HashTableProblems {
 
-    /*
+    /**
      * Q. 554
      *
      * There is a rectangular brick wall in front of you with n rows of bricks. The ith row has some number of bricks
@@ -36,7 +36,7 @@ public class HashTableProblems {
         return wall.size() - ans;
     }
 
-    /*
+    /**
      * Q. 560
      *
      * Given an array of integers nums and an integer k,
@@ -58,7 +58,7 @@ public class HashTableProblems {
         return ans;
     }
 
-    /*
+    /**
      * Q. 974
      *
      * Given an array A of integers, return number of (contiguous, non-empty) subarrays that have a sum divisible by K.

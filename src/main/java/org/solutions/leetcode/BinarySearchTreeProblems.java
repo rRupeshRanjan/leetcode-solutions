@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class BinarySearchTreeProblems {
 
-    /*
+    /**
      * Q. 669
      * Trim a Binary Search Tree
      * Given the root of a binary search tree and the lowest and highest boundaries as low and high,
@@ -34,7 +34,7 @@ public class BinarySearchTreeProblems {
         return root;
     }
 
-    /*
+    /**
      * Q.1038 / 538
      * Given the root of a Binary Search Tree (BST), convert it to a Greater Tree such that
      * every key of the original BST is changed to the
@@ -63,7 +63,7 @@ public class BinarySearchTreeProblems {
         return root;
     }
 
-    /*
+    /**
      * 109. Convert Sorted List to Binary Search Tree
      *
      * Given the head of a singly linked list where elements are sorted in ascending order, convert it to a height
@@ -93,7 +93,7 @@ public class BinarySearchTreeProblems {
         return root;
     }
 
-    /*
+    /**
      * 108. Convert Sorted Array to Binary Search Tree
      *
      * Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced

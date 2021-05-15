@@ -1,13 +1,10 @@
 package org.solutions.leetcode;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DynamicProgrammingProblems {
 
-    /*
+    /**
      * You are given coins of different denominations and a total amount of money amount.
      * Write a function to compute the fewest number of coins that you need to make up that amount.
      * If that amount of money cannot be made up by any combination of the coins, return -1.
@@ -29,7 +26,7 @@ public class DynamicProgrammingProblems {
         return dp[amount] == amount + 1 ? -1 : dp[amount];
     }
 
-    /*
+    /**
      * Q.823
      *
      * Given an array of unique integers, arr, where each integer arr[i] is strictly greater than 1.
@@ -60,7 +57,7 @@ public class DynamicProgrammingProblems {
         return (int) count;
     }
 
-    /*
+    /**
      * Q. 121
      *
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
@@ -84,7 +81,7 @@ public class DynamicProgrammingProblems {
         return maxProfit;
     }
 
-    /*
+    /**
      * Q. 188
      *
      * You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and integer k.
@@ -114,7 +111,7 @@ public class DynamicProgrammingProblems {
         return dp[n - 1];
     }
 
-    /*
+    /**
      * Q.123
      *
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
@@ -128,7 +125,7 @@ public class DynamicProgrammingProblems {
         return maxProfit4(2, prices);
     }
 
-    /*
+    /**
      * Q. 309
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * Find the maximum profit you can achieve. You may complete as many transactions as you like
@@ -153,7 +150,7 @@ public class DynamicProgrammingProblems {
         return sell;
     }
 
-    /*
+    /**
      * Q. 376
      *
      * Given an integer array nums, return the length of the longest wiggle sequence.
@@ -179,7 +176,7 @@ public class DynamicProgrammingProblems {
         return Math.max(up, down);
     }
 
-    /*
+    /**
      * Q. 354
      *
      * You are given a 2D array of integers envelopes where envelopes[i] = [wi, hi] represents the width and the
@@ -206,7 +203,7 @@ public class DynamicProgrammingProblems {
         return ans;
     }
 
-    /*
+    /**
      * Q. 300
      *
      * Given an integer array nums, return the length of the longest strictly increasing subsequence.
@@ -233,7 +230,7 @@ public class DynamicProgrammingProblems {
         return max;
     }
 
-    /*
+    /**
      * Q. 329
      *
      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.
@@ -272,7 +269,7 @@ public class DynamicProgrammingProblems {
         return max;
     }
 
-    /*
+    /**
      * Q. 377
      *
      * Given an array of distinct integers nums and a target integer target, return the number of possible combinations
@@ -294,7 +291,7 @@ public class DynamicProgrammingProblems {
         return dp[target];
     }
 
-    /*
+    /**
      * Q. 120
      *
      * Given a triangle array, return the minimum path sum from top to bottom. For each step,
@@ -314,7 +311,7 @@ public class DynamicProgrammingProblems {
         return triangle.get(0).get(0);
     }
 
-    /*
+    /**
      *  Q. 1074
      *
      * Given a matrix and a target, return the number of non-empty submatrices that sum to target.
@@ -352,7 +349,7 @@ public class DynamicProgrammingProblems {
         return ans;
     }
 
-    /*
+    /**
      * Q. 62
      *
      * A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
@@ -374,7 +371,7 @@ public class DynamicProgrammingProblems {
         return dp[n - 1];
     }
 
-    /*
+    /**
      * Q. 63
      *
      * A robot is located at the top-left corner of a m x n grid. The robot can only move either down or right at any
@@ -404,7 +401,7 @@ public class DynamicProgrammingProblems {
         return A[m - 1][n - 1];
     }
 
-    /*
+    /**
      * Q. 583. Delete Operation for Two Strings
      *
      * Given two strings word1 and word2, return the minimum number of steps required to make word1 and word2 the same.
@@ -432,7 +429,7 @@ public class DynamicProgrammingProblems {
         return prev[n];
     }
 
-    /*
+    /**
      * Q. 1653. Minimum Deletions to Make String Balanced
      *
      * You are given a string s consisting only of characters 'a' and 'b'. You can delete any number of characters in s
@@ -456,5 +453,78 @@ public class DynamicProgrammingProblems {
         }
 
         return curr;
+    }
+
+    /**
+     * Q. 53 Maximum Subarray
+     * <p>
+     * Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest
+     * sum and return its sum.
+     * <p>
+     * tags:: array, dp
+     */
+    public int maxSubArray(int[] nums) {
+        int maxSum = nums[0], currSum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            currSum = Math.max(nums[i], currSum + nums[i]);
+            maxSum = Math.max(maxSum, currSum);
+        }
+
+        return maxSum;
+    }
+
+    /**
+     * Q. 1749 Maximum Absolute Sum of Any Subarray
+     * <p>
+     * You are given an integer array nums. The absolute sum of a subarray [numsl, numsl+1, ..., numsr-1, numsr] is
+     * abs(numsl + numsl+1 + ... + numsr-1 + numsr). Return max absolute sum of any (possibly empty) subarray of nums.
+     * <p>
+     * tags:: array, dp
+     */
+    public int maxAbsoluteSum(int[] nums) {
+        int max = Math.abs(nums[0]), maxSum = nums[0], minSum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            maxSum = Math.max(nums[i], maxSum + nums[i]);
+            minSum = Math.min(nums[i], minSum + nums[i]);
+
+            max = Math.max(max, Math.max(Math.abs(maxSum), Math.abs(minSum)));
+        }
+
+        return max;
+    }
+
+    /**
+     * Q. 1856 Maximum Subarray Min-Product
+     * <p>
+     * The min-product of an array is equal to the minimum value in the array multiplied by the array's sum.
+     * For example, the array [3,2,5] (minimum value is 2) has a min-product of 2 * (3+2+5) = 2 * 10 = 20.
+     * Given an array of integers nums, return the maximum min-product of any non-empty subarray of nums.
+     * Since the answer may be large, return it modulo 109 + 7.
+     * <p>
+     * Note that the min-product should be maximized before performing the modulo operation.
+     * A subarray is a contiguous part of an array.
+     * <p>
+     * tags:: dp, maximumSubArray
+     *
+     * @see org.solutions.leetcode.ArrayProblems#largestRectangleArea(int[])
+     */
+    public int maxSumMinProduct(int[] nums) {
+        long[] dp = new long[nums.length + 1];
+        long maxSum = 0;
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < nums.length; i++)
+            dp[i + 1] = dp[i] + nums[i];
+
+        for (int i = 0; i <= nums.length; i++) {
+            while (!stack.isEmpty() && (i == nums.length || nums[stack.peek()] > nums[i])) {
+                int j = stack.pop();
+                maxSum = Math.max(maxSum, (dp[i] - dp[stack.isEmpty() ? 0 : stack.peek() + 1]) * nums[j]);
+            }
+            stack.push(i);
+        }
+        return (int) (maxSum % 1000000007);
     }
 }

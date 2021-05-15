@@ -13,7 +13,7 @@ public class GridProblems {
         this.arrayUtils = new ArrayUtils();
     }
 
-    /*
+    /**
     * Q.1091
     *
     * In an N by N square grid, each cell is either empty (0) or blocked (1).
@@ -64,7 +64,7 @@ public class GridProblems {
         return -1;
     }
 
-    /*
+    /**
      * Q. 785
      * There is an undirected graph with n nodes, where each node is numbered between 0 and n - 1.
      * You are given a 2D array graph, where graph[u] is an array of nodes that node u is adjacent to.
@@ -91,7 +91,7 @@ public class GridProblems {
         return true;
     }
 
-    /*
+    /**
      * Helper method to to DFS traversal for bipartite check
      * */
     private boolean notBipartiteDfs(int node, int color, Map<Integer, Integer> colorMap, int[][] graph) {
@@ -106,7 +106,7 @@ public class GridProblems {
         return false;
     }
 
-    /*
+    /**
      * Q. 886
      * Given a set of N people (numbered 1, 2, ..., N), we would like to split everyone into two groups of any size.
      * Each person may dislike some other people, and they should not go into the same group.
@@ -137,7 +137,7 @@ public class GridProblems {
         return true;
     }
 
-    /*
+    /**
      * Q. 1337
      * You are given an m x n binary matrix mat of 1's (representing soldiers) and 0's (representing civilians).
      * The soldiers are positioned in front of the civilians. That is, all the 1's will appear to the left of all the 0's in each row.
@@ -170,7 +170,7 @@ public class GridProblems {
         return result;
     }
 
-    /*
+    /**
      * Q. 841
      *
      * There are N rooms and you start in room 0.  Each room has a distinct number in 0, 1, 2, ..., N-1,
@@ -206,7 +206,7 @@ public class GridProblems {
         return visitedCount == rooms.length;
     }
 
-    /*
+    /**
      * Q. 417
      *
      * You are given an m x n integer matrix heights representing the height of each unit cell in a continent.
@@ -259,7 +259,7 @@ public class GridProblems {
         }
     }
 
-    /*
+    /**
      * Q. 48
      *
      * You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
@@ -287,7 +287,7 @@ public class GridProblems {
         }
     }
 
-    /*
+    /**
      * Q. 207 Course schedule I
      *
      * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an
@@ -331,7 +331,7 @@ public class GridProblems {
         return i == numCourses;
     }
 
-    /*
+    /**
      * Q. 210 Course schedule II
      *
      * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an
@@ -379,7 +379,7 @@ public class GridProblems {
         return (i == numCourses) ? answer : new int[0];
     }
 
-    /*
+    /**
      * Q. 630 Course schedule III
      *
      * There are n different online courses numbered from 1 to n. You are given an array courses where

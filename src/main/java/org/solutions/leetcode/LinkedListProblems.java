@@ -6,7 +6,7 @@ import java.util.*;
 
 public class LinkedListProblems {
 
-    /*
+    /**
      * Q.141
      * Detect if there is a loop in linked list
      *
@@ -27,7 +27,7 @@ public class LinkedListProblems {
         return false;
     }
 
-    /*
+    /**
      * Q.138
      * A linked list of length n is given such that each node contains an additional random pointer,
      * which could point to any node in the list, or null. Construct a deep copy of the list.
@@ -60,7 +60,7 @@ public class LinkedListProblems {
         return copy.getNext();
     }
 
-    /*
+    /**
      * Q.160
      *
      * Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect.
@@ -89,7 +89,7 @@ public class LinkedListProblems {
         return null;
     }
 
-    /*
+    /**
      * Q. 1721
      * You are given the head of a linked list, and an integer k.
      * Return the head of the linked list after swapping the values of the kth node from the beginning
@@ -114,7 +114,7 @@ public class LinkedListProblems {
         return head;
     }
 
-    /*
+    /**
      * Q.234
      * Given the head of a singly linked list, return true if it is a palindrome.
      *
@@ -136,7 +136,7 @@ public class LinkedListProblems {
         return true;
     }
 
-    /*
+    /**
      * Q. 86
      *
      * Given the head of a linked list and a value x, partition it such that all nodes less than x come before
@@ -166,7 +166,7 @@ public class LinkedListProblems {
         return beforeHead.getNext();
     }
 
-    /*
+    /**
      * Q. 19
      *
      * Given the head of a linked list, remove the nth node from the end of the list and return its head.

@@ -14,7 +14,7 @@ public class StringProblems {
         this.stringUtils = new StringUtils();
     }
 
-    /*
+    /**
      * Q.821
      * Given a string s and a character c that occurs in s, return an array of integers answer where
      *   answer.length == s.length
@@ -43,7 +43,7 @@ public class StringProblems {
         return result;
     }
 
-    /*
+    /**
      * Q.242
      * Given two strings s and t , write a function to determine if t is an anagram of s.
      *
@@ -66,7 +66,7 @@ public class StringProblems {
         return true;
     }
 
-    /*
+    /**
      * Q. 784
      * Given a string S, we can transform every letter individually to be lowercase or uppercase to create another string.
      * Return a list of all possible strings we could create. You can return the output in any order.
@@ -97,7 +97,7 @@ public class StringProblems {
         }
     }
 
-    /*
+    /**
      * Q. 820
      *
      * A valid encoding of an array of words is any reference string s and array of indices indices such that:
@@ -124,7 +124,7 @@ public class StringProblems {
         return length;
     }
 
-    /*
+    /**
      * Q. 1461
      * Given a binary string s and an integer k.
      * Return True if every binary code of length k is a substring of s. Otherwise, return False.
@@ -149,7 +149,7 @@ public class StringProblems {
         return false;
     }
 
-    /*
+    /**
      * Q. 916
      *
      * We are given two arrays A and B of words.  Each word is a string of lowercase letters.
@@ -188,7 +188,7 @@ public class StringProblems {
         return result;
     }
 
-    /*
+    /**
      * Q. 647
      *
      * Given a string, your task is to count how many palindromic substrings in this string.
@@ -214,7 +214,7 @@ public class StringProblems {
         return count;
     }
 
-    /*
+    /**
      * Q. 474
      *
      * You are given an array of binary strings strs and two integers m and n.
@@ -243,7 +243,7 @@ public class StringProblems {
         return dp[m][n];
     }
 
-    /*
+    /**
      * Q. 32
      *
      * Given a string containing just characters '(' and ')', find the length of the longest valid parentheses substring.
@@ -271,7 +271,7 @@ public class StringProblems {
         return maxCount;
     }
 
-    /*
+    /**
      * Q. 1704
      *
      * You are given a string s of even length. Split this string into two halves of equal lengths, and let a be the
@@ -292,7 +292,7 @@ public class StringProblems {
         return count == 0;
     }
 
-    /*
+    /**
      * Q. 1047
      *
      * Given a string S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters,
@@ -320,7 +320,7 @@ public class StringProblems {
         return sb.reverse().toString();
     }
 
-    /*
+    /**
      * Q. 1209
      *
      * You are given a string s and an integer k, a k duplicate removal consists of choosing k adjacent and equal letters
@@ -355,7 +355,7 @@ public class StringProblems {
         return sb.reverse().toString();
     }
 
-    /*
+    /**
      * Q. 696
      *
      * Give a binary string s, return the number of non-empty substrings that have the same number of 0's and 1's,
@@ -380,7 +380,7 @@ public class StringProblems {
         return result + Math.min(prev, curr);
     }
 
-    /*
+    /**
      * Q. 1529 Bulb Switcher IV
      *
      * There is a room with n bulbs, numbered from 0 to n - 1, arranged in a row from left to right. Initially,
@@ -407,5 +407,59 @@ public class StringProblems {
         }
 
         return count;
+    }
+
+    /**
+     * Q. 1233 Remove Sub-Folders from the Filesystem
+     * <p>
+     * Given a list of folders, remove all sub-folders in those folders and return in any order the folders after
+     * removing. If a folder[i] is located within another folder[j], it is called a sub-folder of it. The format of a
+     * path is one or more concatenated strings of the form: / followed by one or more lowercase English letters.
+     * For example, /leetcode and /leetcode/problems are valid paths while an empty string and / are not.
+     * <p>
+     * tags:: string, sorting
+     */
+    public List<String> removeSubfolders(String[] folder) {
+        List<String> list = new ArrayList<>();
+        Arrays.sort(folder);
+
+        for (String f : folder) {
+            if (list.isEmpty() || !f.startsWith(list.get(list.size() - 1) + "/"))
+                list.add(f);
+        }
+
+        return list;
+    }
+
+    /**
+     * Q. 1647. Minimum Deletions to Make Character Frequencies Unique
+     * <p>
+     * A string s is called good if there are no two different characters in s that have the same frequency.
+     * Given a string s, return the minimum number of characters you need to delete to make s good.
+     * The frequency of a character in a string is the number of times it appears in the string.
+     * For example, in the string "aab", the frequency of 'a' is 2, while the frequency of 'b' is 1.
+     * <p>
+     * tags:: string, greedy
+     */
+    public int minDeletions(String s) {
+        int[] count = new int[26];
+        int deletionCount = 0, prevGoodFreq;
+        for (char ch : s.toCharArray())
+            count[ch - 'a']++;
+
+        Arrays.sort(count);
+        prevGoodFreq = count[25];
+        for (int i = 25; i >= 0; i--) {
+            if (count[i] == 0)
+                break;
+
+            if (count[i] > prevGoodFreq)
+                deletionCount += count[i] - prevGoodFreq;
+            else
+                prevGoodFreq = count[i];
+
+            prevGoodFreq = Math.max(prevGoodFreq - 1, 0);
+        }
+        return deletionCount;
     }
 }

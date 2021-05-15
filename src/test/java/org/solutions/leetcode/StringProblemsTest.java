@@ -6,10 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.exceptions.BadInputException;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -181,5 +178,25 @@ class StringProblemsTest {
         scenarios.put("0100", 2);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.bulbSwitcherIV(input)));
+    }
+
+    @Test
+    void testRemoveSubfolders() {
+        Map<String[], List<String>> scenarios = new HashMap<>();
+        scenarios.put(new String[]{"/a", "/a/b", "/c/d", "/c/d/e", "/c/f"}, Arrays.asList("/a", "/c/d", "/c/f"));
+        scenarios.put(new String[]{"/a", "/a/b/c", "/a/b/d"}, Collections.singletonList("/a"));
+
+        scenarios.forEach((input, expected) -> assertTrue(expected.containsAll(stringProblems.removeSubfolders(input))));
+    }
+
+    @Test
+    void testMinDeletions() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("aaabbc", 0);
+        scenarios.put("aaabbbccc", 3);
+        scenarios.put("aaabbbcc", 2);
+        scenarios.put("qwertyuiopasdfghjklzxcvbnm", 25);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minDeletions(input)));
     }
 }

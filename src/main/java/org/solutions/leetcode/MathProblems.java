@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MathProblems {
 
-    /*
+    /**
      * Q.1342
      * Given a non-negative integer num, return the number of steps to reduce it to zero.
      * If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
@@ -23,7 +23,7 @@ public class MathProblems {
         return ++count;
     }
 
-    /*
+    /**
      * Q.575
      * Alice has n candies, where the ith candy is of type candyType[i]. Alice noticed that she started to gain weight,
      * so she visited a doctor.The doctor advised Alice to only eat n / 2 of the candies she has (n is always even).
@@ -47,7 +47,7 @@ public class MathProblems {
         return set.size();
     }
 
-    /*
+    /**
      * Q.645
      * You have a set of integers s, which originally contains all the numbers from 1 to n.
      * Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set,
@@ -69,7 +69,7 @@ public class MathProblems {
         return new int[]{(sum - diff) / 2, (sum + diff) / 2};
     }
 
-    /*
+    /**
      * Q.268
      * Given an array nums containing n distinct numbers in the range [0, n],
      * return the only number in the range that is missing from the array.
@@ -84,7 +84,7 @@ public class MathProblems {
         return (n * (n + 1) / 2 - sum);
     }
 
-    /*
+    /**
      *  Q. 869
      *
      * Starting with a positive integer N, we reorder the digits in any order (including the original order)
@@ -102,7 +102,7 @@ public class MathProblems {
         return false;
     }
 
-    /*
+    /**
      * Given a number, return an array, with occurrence of each digit
      * */
     private int[] getCount(int num) {
@@ -115,7 +115,7 @@ public class MathProblems {
         return count;
     }
 
-    /*
+    /**
      * Q. 1551
      *
      * You have an array arr of length n where arr[i] = (2 * i) + 1 for all valid values of i (i.e. 0 <= i < n).
@@ -130,7 +130,7 @@ public class MathProblems {
         return (n * n) >> 2;
     }
 
-    /*
+    /**
      * Q. 326
      *
      * Given an integer n, return true if it is a power of three. Otherwise, return false.
@@ -146,7 +146,7 @@ public class MathProblems {
         return (Math.log10(n) / Math.log10(3)) % 1 == 0;
     }
 
-    /*
+    /**
      * Q. 970
      *
      * Given three integers x, y, and bound, return a list of all the powerful integers that have a value less than or
@@ -177,7 +177,7 @@ public class MathProblems {
         return new ArrayList<Integer>(ans);
     }
 
-    /*
+    /**
      * 319. Bulb Switcher
      *
      * There are n bulbs that are initially off. You first turn on all the bulbs, then you turn off every second bulb.
@@ -191,7 +191,7 @@ public class MathProblems {
         return (int) Math.sqrt(n);
     }
 
-    /*
+    /**
      * Q. 204 count primes
      *
      * Count the number of prime numbers less than a non-negative number, n.

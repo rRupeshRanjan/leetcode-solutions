@@ -3,7 +3,7 @@ package org.solutions.leetcode;
 import java.util.*;
 
 public class ArrayProblems {
-    /*
+    /**
      * Q. 594
      *
      * We define a harmonious array as an array where the difference between its maximum value and its minimum value is exactly 1.
@@ -73,7 +73,7 @@ public class ArrayProblems {
         }
     }
 
-    /*
+    /**
      * Q.1640
      *
      * You are given an array of distinct integers arr and an array of integer arrays pieces,
@@ -107,7 +107,7 @@ public class ArrayProblems {
         return true;
     }
 
-    /*
+    /**
      * Q. 11
      *
      * Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai).
@@ -135,7 +135,7 @@ public class ArrayProblems {
         return maxArea;
     }
 
-    /*
+    /**
      * Q. 413
      *
      * A sequence of numbers is called arithmetic if
@@ -157,7 +157,7 @@ public class ArrayProblems {
         return sum;
     }
 
-    /*
+    /**
      * Q. 122
      *
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
@@ -177,7 +177,7 @@ public class ArrayProblems {
             profit += Math.max(0, prices[i] - prices[i - 1]);
         }
 
-        /*
+        /**
         Alternate approach with state machine
         int buy = -prices[0], sell = 0;
         for(int i=1; i<prices.length; i++) {
@@ -189,7 +189,7 @@ public class ArrayProblems {
         return profit;
     }
 
-    /*
+    /**
      * Q. 714
      *
      * You are given an array prices where prices[i] is the price of a given stock on the ith day,
@@ -210,7 +210,7 @@ public class ArrayProblems {
         return cash;
     }
 
-    /*
+    /**
      * Q. 923
      *
      * Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and
@@ -259,7 +259,7 @@ public class ArrayProblems {
         return (int) result;
     }
 
-    /*
+    /**
      * Q. 870
      *
      * Given two arrays A and B of equal size, the advantage of A with respect to B is the number of
@@ -290,7 +290,7 @@ public class ArrayProblems {
         return result;
     }
 
-    /*
+    /**
      * Q. 775
      *
      * You are given an integer array nums of length n which represents a permutation of all the integers in
@@ -317,7 +317,7 @@ public class ArrayProblems {
         return true;
     }
 
-    /*
+    /**
      * Q. 84
      *
      * Given an array of integers heights representing the histogram's bar height where the width of each bar is 1,
@@ -340,7 +340,7 @@ public class ArrayProblems {
         return ans;
     }
 
-    /*
+    /**
      * Q. 1642
      *
      * You are given an integer array heights representing the heights of buildings, some bricks, and some ladders.
@@ -369,7 +369,7 @@ public class ArrayProblems {
         return heights.length - 1;
     }
 
-    /*
+    /**
      * Q. 34
      *
      * Given an array of integers nums sorted in ascending order, find the starting and ending position of a
@@ -416,7 +416,7 @@ public class ArrayProblems {
         return index;
     }
 
-    /*
+    /**
      * Q. 1480
      *
      * Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
@@ -432,7 +432,7 @@ public class ArrayProblems {
         return nums;
     }
 
-    /*
+    /**
      * Q. 665
      *
      * Given an array nums with n integers, your task is to check if it could become non-decreasing by modifying at most
@@ -455,7 +455,7 @@ public class ArrayProblems {
         return true;
     }
 
-    /*
+    /**
      * Q. 55 Jump Game
      *
      * Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
@@ -477,7 +477,7 @@ public class ArrayProblems {
         return lastIndex == 0;
     }
 
-    /*
+    /**
      * Q. 45 Jump Game II
      *
      * Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
@@ -502,7 +502,7 @@ public class ArrayProblems {
         return count;
     }
 
-    /*
+    /**
      * 1354. Construct Target Array With Multiple Sums
      *
      * You are given an array target of n integers. From a starting array arr consisting of n 1's,
@@ -539,7 +539,7 @@ public class ArrayProblems {
         return true;
     }
 
-    /*
+    /**
      * Q. 1423 Maximum Points You Can Obtain from Cards
      *
      * There are several cards arranged in a row, and each card has an associated number of points. The points are given

@@ -6,7 +6,7 @@ import java.util.*;
 
 public class BinaryTreeProblems {
 
-    /*
+    /**
      * Q.199
      *
      * Given a binary tree, imagine yourself standing on the right side of it,
@@ -40,7 +40,7 @@ public class BinaryTreeProblems {
         return result;
     }
 
-    /*
+    /**
      * Q. 94
      * Binary tree inorder traversal
      *
@@ -64,7 +64,7 @@ public class BinaryTreeProblems {
         return list;
     }
 
-    /*
+    /**
      * Q. 144
      *
      * Given the root of a binary tree, return the preorder traversal of its nodes' values.
@@ -88,7 +88,7 @@ public class BinaryTreeProblems {
         return result;
     }
 
-    /*
+    /**
      * Q. 145
      *
      * Given the root of a binary tree, return the postorder traversal of its nodes' values.
@@ -113,7 +113,7 @@ public class BinaryTreeProblems {
         return result;
     }
 
-    /*
+    /**
      * Q.637
      * Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
      *
@@ -142,7 +142,7 @@ public class BinaryTreeProblems {
         return res;
     }
 
-    /*
+    /**
      * Q.623
      *
      * Given the root of a binary tree, then value v and depth d, you need to add a row of nodes with value v
@@ -187,7 +187,7 @@ public class BinaryTreeProblems {
         return root;
     }
 
-    /*
+    /**
      * Q. 971
      *
      * You are given the root of a binary tree with n nodes, where each node is uniquely assigned a value from 1 to n.
@@ -227,7 +227,7 @@ public class BinaryTreeProblems {
         return result;
     }
 
-    /*
+    /**
      * Q.1302
      *
      * Given the root of a binary tree, return the sum of values of its deepest leaves.
@@ -251,7 +251,7 @@ public class BinaryTreeProblems {
         return sum;
     }
 
-    /*
+    /**
      * Q. 114 Flatten Binary Tree to Linked List
      *
      * Given the root of a binary tree, flatten the tree into a "linked list":
