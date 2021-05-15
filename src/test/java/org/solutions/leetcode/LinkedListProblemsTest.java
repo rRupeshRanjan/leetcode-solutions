@@ -22,6 +22,9 @@ class LinkedListProblemsTest {
         testUtils = new TestUtils();
     }
 
+    /**
+     * don't add scenarios hashmap here, as it errors with stackoverflow, when there is a cycle with linkedlist
+     */
     @Test
     void testHasCycle() {
         assertTrue(linkedListProblems.hasCycle(testUtils.getLinkedListWithCycle(Arrays.asList(3, 2, 0, -4), 1)));
@@ -107,8 +110,7 @@ class LinkedListProblemsTest {
 
         scenarios.forEach((input, expected) ->
                 assertTrue(testUtils.areLinkedListsEqualByValue(
-                        expected, linkedListProblems.removeNthFromEnd(input.getLeft(), input.getRight())
-                )));
+                        expected, linkedListProblems.removeNthFromEnd(input.getLeft(), input.getRight()))));
     }
 
 }

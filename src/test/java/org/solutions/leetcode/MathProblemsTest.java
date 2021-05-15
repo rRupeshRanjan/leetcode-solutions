@@ -79,6 +79,7 @@ class MathProblemsTest {
         scenarios.put(3, 2);
         scenarios.put(6, 9);
         scenarios.put(100, 2500);
+
         scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.minOperations(input)));
     }
 
@@ -100,9 +101,9 @@ class MathProblemsTest {
         scenarios.put(Triple.of(3, 5, 15), Arrays.asList(2, 4, 6, 8, 10, 14));
         scenarios.put(Triple.of(1, 1, 15), Collections.singletonList(2));
 
-
         scenarios.forEach((input, expected) ->
-                assertTrue(containsInAnyOrder(expected, mathProblems.powerfulIntegers(input.getLeft(), input.getMiddle(), input.getRight()))));
+                assertTrue(containsInAnyOrder(expected,
+                        mathProblems.powerfulIntegers(input.getLeft(), input.getMiddle(), input.getRight()))));
     }
 
     @Test
