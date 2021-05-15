@@ -8,18 +8,18 @@ public class HashTableProblems {
 
     /**
      * Q. 554
-     *
+     * <p>
      * There is a rectangular brick wall in front of you with n rows of bricks. The ith row has some number of bricks
      * each of the same height (i.e., one unit) but they can be of different widths. The total width of each row is the
      * same. Draw a vertical line from the top to the bottom and cross the least bricks. If your line goes through the
      * edge of a brick, then the brick is not considered as crossed. You cannot draw a line just along one of the two
      * vertical edges of the wall, in which case the line will obviously cross no bricks.
-     *
+     * <p>
      * Given the 2D array wall that contains the information about the wall,
      * return the minimum number of crossed bricks after drawing such a vertical line.
-     *
+     * <p>
      * tags:: hashMap, hashTable
-     * */
+     */
     public int leastBricks(List<List<Integer>> wall) {
         int ans = 0;
         Map<Integer, Integer> count = new HashMap<>();
@@ -38,12 +38,12 @@ public class HashTableProblems {
 
     /**
      * Q. 560
-     *
+     * <p>
      * Given an array of integers nums and an integer k,
      * return the total number of continuous subarrays whose sum equals to k.
-     *
+     * <p>
      * tags:: array, hashTable, hashMap
-     * */
+     */
     public int subarraySum(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, 1);
@@ -60,11 +60,11 @@ public class HashTableProblems {
 
     /**
      * Q. 974
-     *
+     * <p>
      * Given an array A of integers, return number of (contiguous, non-empty) subarrays that have a sum divisible by K.
-     *
+     * <p>
      * tags:: array, hashTable
-     * */
+     */
     public int subarraysDivByK(int[] nums, int K) {
         // hashmap can be used in place of array as well
         int[] counter = new int[K];

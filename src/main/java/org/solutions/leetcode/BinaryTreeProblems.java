@@ -8,12 +8,12 @@ public class BinaryTreeProblems {
 
     /**
      * Q.199
-     *
+     * <p>
      * Given a binary tree, imagine yourself standing on the right side of it,
      * return the values of the nodes you can see ordered from top to bottom.
-     *
+     * <p>
      * Tags:: bfs, binaryTree
-     * */
+     */
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
@@ -43,9 +43,9 @@ public class BinaryTreeProblems {
     /**
      * Q. 94
      * Binary tree inorder traversal
-     *
+     * <p>
      * Tags:: binaryTree, inorder, dfs
-     * */
+     */
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -66,11 +66,11 @@ public class BinaryTreeProblems {
 
     /**
      * Q. 144
-     *
+     * <p>
      * Given the root of a binary tree, return the preorder traversal of its nodes' values.
-     *
+     * <p>
      * tags:: binaryTree, preorder, dfs
-     * */
+     */
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -90,11 +90,11 @@ public class BinaryTreeProblems {
 
     /**
      * Q. 145
-     *
+     * <p>
      * Given the root of a binary tree, return the postorder traversal of its nodes' values.
-     *
+     * <p>
      * tags:: binaryTree, postorder, dfs
-     * */
+     */
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -116,9 +116,9 @@ public class BinaryTreeProblems {
     /**
      * Q.637
      * Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
-     *
+     * <p>
      * Tags:: binaryTree, bfs
-     * */
+     */
     public List<Double> averageOfLevels(TreeNode root) {
         List<Double> res = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
@@ -144,7 +144,7 @@ public class BinaryTreeProblems {
 
     /**
      * Q.623
-     *
+     * <p>
      * Given the root of a binary tree, then value v and depth d, you need to add a row of nodes with value v
      * at the given depth d. The root node is at depth 1.The adding rule is: given a positive integer depth d,
      * for each NOT null tree nodes N in depth d-1, create two tree nodes with value v as N's left subtree root and
@@ -152,9 +152,9 @@ public class BinaryTreeProblems {
      * its original right subtree should be the right subtree of the new right subtree root. If depth d is 1 that means
      * there is no depth d-1 at all, then create a tree node with value v as the new root of the whole original tree,
      * and the original tree is the new root's left subtree.
-     *
+     * <p>
      * tags: binaryTree, bfs
-     * */
+     */
     public TreeNode addOneRow(TreeNode root, int v, int d) {
         if (d == 1) {
             TreeNode temp = new TreeNode(v);
@@ -189,16 +189,16 @@ public class BinaryTreeProblems {
 
     /**
      * Q. 971
-     *
+     * <p>
      * You are given the root of a binary tree with n nodes, where each node is uniquely assigned a value from 1 to n.
      * You are also given a sequence of n values voyage, which is the desired pre-order traversal of the binary tree.
      * Any node in the binary tree can be flipped by swapping its left and right subtrees.
      * Flip the smallest number of nodes so that the pre-order traversal of the tree matches voyage.
      * Return a list of the values of all flipped nodes. You may return the answer in any order.
      * If it is impossible to flip the nodes in the tree to make the pre-order traversal match voyage, return the list [-1].
-     *
+     * <p>
      * tags:: binaryTree, dfs, preorder
-     * */
+     */
     public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
         List<Integer> result = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -229,11 +229,11 @@ public class BinaryTreeProblems {
 
     /**
      * Q.1302
-     *
+     * <p>
      * Given the root of a binary tree, return the sum of values of its deepest leaves.
-     *
+     * <p>
      * tags:: binaryTree, bfs
-     * */
+     */
     public int deepestLeavesSum(TreeNode root) {
         int sum = 0, i;
         Queue<TreeNode> q = new LinkedList<>();
@@ -253,14 +253,14 @@ public class BinaryTreeProblems {
 
     /**
      * Q. 114 Flatten Binary Tree to Linked List
-     *
+     * <p>
      * Given the root of a binary tree, flatten the tree into a "linked list":
-     *   The "linked list" should use the same TreeNode class where the right child pointer points to the
-     *       next node in the list and the left child pointer is always null.
-     *   The "linked list" should be in the same order as a pre-order traversal of the binary tree.
-     *
+     * The "linked list" should use the same TreeNode class where the right child pointer points to the
+     * next node in the list and the left child pointer is always null.
+     * The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+     * <p>
      * tags:: binaryTree, preorder
-     * */
+     */
     public void flatten(TreeNode root) {
         if (root == null)
             return;

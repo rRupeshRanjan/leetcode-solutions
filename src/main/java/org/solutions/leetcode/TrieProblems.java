@@ -1,36 +1,25 @@
 package org.solutions.leetcode;
 
+import org.solutions.leetcode.dataStructures.TrieNode;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class TrieProblems {
 
-    class TrieNode {
-        TrieNode[] children = new TrieNode[26];
-        boolean leaf = true;
-
-        public TrieNode get(char ch) {
-            if (children[ch - 'a'] == null) {
-                children[ch - 'a'] = new TrieNode();
-                leaf = false;
-            }
-
-            return children[ch - 'a'];
-        }
-    }
-
     /**
      * Q. 820
-     *
+     * <p>
      * A valid encoding of an array of words is any reference string s and array of indices indices such that:
      * words.length == indices.length. The reference string s ends with the '#' character.
      * For each index indices[i], the substring of s starting from indices[i] and up to (but not including)
      * the next '#' character is equal to words[i]. Given an array of words, return the length of the shortest reference
      * string s possible of any valid encoding of words.
+     * <p>
+     * tags:: string, TrieNode
      *
-     * Tags: string, TrieNode
-     * Also see: StringProblems.minimumLengthEncoding()
-     * */
+     * @see org.solutions.leetcode.StringProblems#minimumLengthEncoding(String[])
+     */
     public int minimumLengthEncoding(String[] words) {
         Map<TrieNode, Integer> nodes = new HashMap<>();
         TrieNode trie = new TrieNode();
@@ -45,7 +34,7 @@ public class TrieProblems {
 
         int count = 0;
         for (TrieNode node : nodes.keySet()) {
-            if (node.leaf) {
+            if (node.isLeaf()) {
                 count += words[nodes.get(node)].length() + 1;
             }
         }

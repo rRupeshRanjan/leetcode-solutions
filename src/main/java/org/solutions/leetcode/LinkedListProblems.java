@@ -9,9 +9,9 @@ public class LinkedListProblems {
     /**
      * Q.141
      * Detect if there is a loop in linked list
-     *
+     * <p>
      * Tags:: linkedList
-     * */
+     */
     public boolean hasCycle(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
@@ -35,9 +35,9 @@ public class LinkedListProblems {
      * its corresponding original node. Both the next and random pointer of the new nodes should point to new nodes in
      * the copied list such that the pointers in the original list and copied list represent the same list state.
      * None of the pointers in the new list should point to nodes in the original list.
-     *
+     * <p>
      * Tags:: linkedList
-     * */
+     */
     public ListNode copyRandomList(ListNode head) {
         Map<ListNode, ListNode> copyMap = new HashMap<>();
         ListNode head1 = head;
@@ -62,15 +62,15 @@ public class LinkedListProblems {
 
     /**
      * Q.160
-     *
+     * <p>
      * Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect.
      * If the two linked lists have no intersection at all, return null.
-     *
+     * <p>
      * It is guaranteed that there are no cycles anywhere in the entire linked structure.
      * Note that the linked lists must retain their original structure after the function returns.
-     *
+     * <p>
      * Tags:: linkedlist
-     * */
+     */
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         Set<ListNode> set = new HashSet<>();
         ListNode temp = headA;
@@ -94,12 +94,11 @@ public class LinkedListProblems {
      * You are given the head of a linked list, and an integer k.
      * Return the head of the linked list after swapping the values of the kth node from the beginning
      * and the kth node from the end (the list is 1-indexed).
-     *
+     * <p>
      * tags:: linkedList, twoPointer
-     * */
+     */
     public ListNode swapNodes(ListNode head, int k) {
         ListNode fast = head, slow = head, first = fast;
-        int firstVal = 0, lastVal = 0;
 
         for (int i = 0; fast != null; i++) {
             if (i == k - 1) first = fast;
@@ -117,9 +116,9 @@ public class LinkedListProblems {
     /**
      * Q.234
      * Given the head of a singly linked list, return true if it is a palindrome.
-     *
+     * <p>
      * tags:: linkedList
-     * */
+     */
     public boolean isPalindrome(ListNode head) {
         Deque<Integer> dq = new LinkedList<>();
 
@@ -138,13 +137,13 @@ public class LinkedListProblems {
 
     /**
      * Q. 86
-     *
+     * <p>
      * Given the head of a linked list and a value x, partition it such that all nodes less than x come before
      * nodes greater than or equal to x. You should preserve the original relative order of the nodes in
      * each of the two partitions.
-     *
+     * <p>
      * tags:: linkedList, twoPointer
-     * */
+     */
     public ListNode partitionList(ListNode head, int x) {
         ListNode beforeHead = new ListNode(), before = beforeHead;
         ListNode afterHead = new ListNode(), after = afterHead;
@@ -168,11 +167,11 @@ public class LinkedListProblems {
 
     /**
      * Q. 19
-     *
+     * <p>
      * Given the head of a linked list, remove the nth node from the end of the list and return its head.
-     *
+     * <p>
      * tags:: linkedList
-     * */
+     */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode temp = head;
         int length = 0;

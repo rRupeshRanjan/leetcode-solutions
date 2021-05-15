@@ -5,14 +5,14 @@ import java.util.*;
 public class ArrayProblems {
     /**
      * Q. 594
-     *
-     * We define a harmonious array as an array where the difference between its maximum value and its minimum value is exactly 1.
-     * Given an integer array nums, return the length of its longest harmonious subsequence among all its possible subsequences.
-     * A subsequence of array is a sequence that can be derived from the array by deleting some or no elements
-     * without changing the order of the remaining elements.
-     *
-     * Tags: sorting, hashMap
-     * */
+     * <p>
+     * We define a harmonious array as an array where the difference between its maximum value and its minimum value is
+     * exactly 1. Given an integer array nums, return the length of its longest harmonious subsequence among all its
+     * possible subsequences. A subsequence of array is a sequence that can be derived from the array by deleting some
+     * or no elements without changing the order of the remaining elements.
+     * <p>
+     * tags:: sorting, hashMap
+     */
     public int findLHS(int[] nums, String way) {
         int maxLen = 0;
 
@@ -177,7 +177,7 @@ public class ArrayProblems {
             profit += Math.max(0, prices[i] - prices[i - 1]);
         }
 
-        /**
+        /*
         Alternate approach with state machine
         int buy = -prices[0], sell = 0;
         for(int i=1; i<prices.length; i++) {
@@ -346,7 +346,7 @@ public class ArrayProblems {
      * You are given an integer array heights representing the heights of buildings, some bricks, and some ladders.
      * You start your journey from building 0 and move to the next building by possibly using bricks or ladders.
      * While moving from building i to building i+1 (0-indexed),
-     *   If the current building's height >= next building's height, you dont need ladder or bricks.
+     *   If the current building's height >= next building's height, you don't need ladder or bricks.
      *   If the current building's height < next building's height, you can use one ladder or (h[i+1] - h[i]) bricks.
      *
      * Return the furthest building index (0-indexed) you can reach if you use the given ladders and bricks optimally.
@@ -551,7 +551,7 @@ public class ArrayProblems {
      * hint:: either pick from last or start, but overall always k elements. find max of those.
      * */
     public int maxScore(int[] cardPoints, int k) {
-        int maxScore = 0, currScore = 0;
+        int maxScore, currScore = 0;
         for (int i = 0; i < k; i++) {
             currScore += cardPoints[i];
         }

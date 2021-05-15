@@ -9,9 +9,9 @@ public class DynamicProgrammingProblems {
      * Write a function to compute the fewest number of coins that you need to make up that amount.
      * If that amount of money cannot be made up by any combination of the coins, return -1.
      * You may assume that you have an infinite number of each kind of coin.
-     *
+     * <p>
      * Tags: dp, coinChange, array
-     * */
+     */
     public int coinChange(int[] coins, int amount) {
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);
@@ -28,16 +28,16 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q.823
-     *
+     * <p>
      * Given an array of unique integers, arr, where each integer arr[i] is strictly greater than 1.
      * We make a binary tree using these integers, and each number may be used for any number of times.
      * Each non-leaf node's value should be equal to the product of the values of its children.
      * Return the number of binary trees we can make.
-     *
+     * <p>
      * The answer may be too large so return the answer modulo 109 + 7.
-     *
+     * <p>
      * Tags:: dp, array
-     * */
+     */
     public int numFactoredBinaryTrees(int[] arr) {
         Arrays.sort(arr);
         Map<Integer, Long> dp = new HashMap<>();
@@ -59,15 +59,15 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 121
-     *
+     * <p>
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in
      * the future to sell that stock.
-     *
+     * <p>
      * Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
-     *
+     * <p>
      * tags:: dp, array
-     * */
+     */
     public int maxProfit1(int[] prices) {
         int maxProfit = 0, buy = prices[0];
 
@@ -83,15 +83,15 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 188
-     *
+     * <p>
      * You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and integer k.
      * Find the maximum profit you can achieve. You may complete at most k transactions.
-     *
+     * <p>
      * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
-     *
+     * <p>
      * tags:: dp,
      * This is a generalized version of maxProfit3
-     * */
+     */
     public int maxProfit4(int k, int[] prices) {
         if (k == 0 || prices == null || prices.length == 0)
             return 0;
@@ -113,14 +113,14 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q.123
-     *
+     * <p>
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * Find the maximum profit you can achieve. You may complete at most two transactions.
-     *
+     * <p>
      * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
-     *
+     * <p>
      * tags:: dp,
-     * */
+     */
     public int maxProfit3(int[] prices) {
         return maxProfit4(2, prices);
     }
@@ -130,13 +130,13 @@ public class DynamicProgrammingProblems {
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * Find the maximum profit you can achieve. You may complete as many transactions as you like
      * (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
-     *   After you sell your stock, you cannot buy stock on the next day (i.e., cooldown one day).
-     *
+     * After you sell your stock, you cannot buy stock on the next day (i.e., cooldown one day).
+     * <p>
      * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
-     *
+     * <p>
      * tags:: dp,
      * Think like state transition problem
-     * */
+     */
     public int maxProfit6(int[] prices) {
         int buy = -prices[0], sell = 0, cooldown = 0;
         for (int i = 1; i < prices.length; i++) {
@@ -152,14 +152,14 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 376
-     *
+     * <p>
      * Given an integer array nums, return the length of the longest wiggle sequence.
      * A wiggle sequence is a sequence where the differences between successive numbers strictly alternate
      * between positive and negative. The first difference (if one exists) may be either positive or negative.
      * A sequence with fewer than two elements is trivially a wiggle sequence.
-     *
+     * <p>
      * Tags:: dp, greedy, array
-     * */
+     */
     public int wiggleMaxLength(int[] nums) {
         if (nums.length < 2)
             return nums.length;
@@ -178,16 +178,16 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 354
-     *
+     * <p>
      * You are given a 2D array of integers envelopes where envelopes[i] = [wi, hi] represents the width and the
      * height of an envelope. One envelope can fit into another if and only if both the width and height of one envelope
      * are greater than the other envelope's width and height.
      * Return the maximum number of envelopes you can Russian doll (i.e., put one inside the other).
-     *
+     * <p>
      * Note: You cannot rotate an envelope.
-     *
+     * <p>
      * tags:: dp, array, grid
-     * */
+     */
     public int maxEnvelopes(int[][] envelopes) {
         Arrays.sort(envelopes, (a, b) -> (a[0] == b[0]) ? (b[1] - a[1]) : (a[0] - b[0]));
         int[] dp = new int[envelopes.length];
@@ -205,14 +205,14 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 300
-     *
+     * <p>
      * Given an integer array nums, return the length of the longest strictly increasing subsequence.
      * A subsequence is a sequence that can be derived from an array by deleting some or no elements without
      * changing the order of the remaining elements.
      * For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
-     *
+     * <p>
      * tags:: dp, array, LIS
-     * */
+     */
     public int lengthOfLIS(int[] nums) {
         int[] dp = new int[nums.length];
         int max = 0;
@@ -232,13 +232,13 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 329
-     *
+     * <p>
      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.
      * From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or
      * move outside the boundary (i.e., wrap-around is not allowed).
-     *
+     * <p>
      * tags:: dp
-     * */
+     */
     public int longestIncreasingPath(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
         int[][] cache = new int[m][n];
@@ -271,12 +271,12 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 377
-     *
+     * <p>
      * Given an array of distinct integers nums and a target integer target, return the number of possible combinations
      * that add up to target. The answer is guaranteed to fit in a 32-bit integer.
-     *
+     * <p>
      * tags:: dp
-     * */
+     */
     public int combinationSum4(int[] nums, int target) {
         int[] dp = new int[target + 1];
         dp[0] = 1;
@@ -293,13 +293,13 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 120
-     *
+     * <p>
      * Given a triangle array, return the minimum path sum from top to bottom. For each step,
      * you may move to an adjacent number of the row below. More formally, if you are on index i on the current row,
      * you may move to either index i or index i + 1 on the next row.
-     *
+     * <p>
      * tags:: dp
-     * */
+     */
     public int minimumTotal(List<List<Integer>> triangle) {
         for (int i = triangle.size() - 2; i >= 0; i--) {
             for (int j = 0; j < triangle.get(i).size(); j++) {
@@ -312,15 +312,15 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     *  Q. 1074
-     *
+     * Q. 1074
+     * <p>
      * Given a matrix and a target, return the number of non-empty submatrices that sum to target.
      * A submatrix x1, y1, x2, y2 is the set of all cells matrix[x][y] with x1 <= x <= x2 and y1 <= y <= y2.
      * Two submatrices (x1, y1, x2, y2) and (x1', y1', x2', y2') are different
      * if they have some coordinate that is different: for example, if x1 != x1'.
-     *
+     * <p>
      * tags:: array, dynamicProgramming, dp
-     * */
+     */
     public int numSubmatrixSumTarget(int[][] matrix, int target) {
         int m = matrix.length, n = matrix[0].length;
         for (int i = 0; i < m; i++) {
@@ -330,7 +330,7 @@ public class DynamicProgrammingProblems {
         }
 
         Map<Integer, Integer> counter = new HashMap<>();
-        int sum = 0, ans = 0;
+        int sum, ans = 0;
 
         for (int i = 0; i < n; i++) {
             for (int j = i; j < n; j++) {
@@ -351,13 +351,13 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 62
-     *
+     * <p>
      * A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
      * The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right
      * corner of the grid. How many possible unique paths are there?
-     *
+     * <p>
      * tags:: dp, dynamicProgramming
-     * */
+     */
     public int uniquePaths(int m, int n) {
         int[] dp = new int[n], prev = new int[n];
         for (int i = 0; i < m; i++) {
@@ -373,18 +373,16 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 63
-     *
+     * <p>
      * A robot is located at the top-left corner of a m x n grid. The robot can only move either down or right at any
      * point in time. The robot is trying to reach the bottom-right corner of the grid. Now consider if some obstacles
      * are added to the grids. How many unique paths would there be?
      * An obstacle and space is marked as 1 and 0 respectively in the grid.
-     *
+     * <p>
      * tags:: dp, dynamicProgramming
-     * */
+     */
     public int uniquePathsWithObstacles(int[][] A) {
         int m = A.length, n = A[0].length;
-        int[][] dp = new int[m][n];
-
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (A[i][j] == 1)
@@ -403,12 +401,12 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 583. Delete Operation for Two Strings
-     *
+     * <p>
      * Given two strings word1 and word2, return the minimum number of steps required to make word1 and word2 the same.
      * In one step, you can delete exactly one character in either string.
-     *
+     * <p>
      * tags:: string, dp
-     * */
+     */
     public int minDistance(String word1, String word2) {
         int m = word1.length(), n = word2.length();
         int[] prev = new int[n + 1];
@@ -431,13 +429,13 @@ public class DynamicProgrammingProblems {
 
     /**
      * Q. 1653. Minimum Deletions to Make String Balanced
-     *
+     * <p>
      * You are given a string s consisting only of characters 'a' and 'b'. You can delete any number of characters in s
      * to make s balanced. s is balanced if there is no pair of indices (i,j) such that i < j and s[i] = 'b' & s[j]= 'a'.
      * Return the minimum number of deletions needed to make s balanced.
-     *
+     * <p>
      * tags:: dp, string
-     * */
+     */
     public int minimumDeletions(String s) {
         int l = s.length(), bCount = 0;
         int curr = 0, prev = 0;

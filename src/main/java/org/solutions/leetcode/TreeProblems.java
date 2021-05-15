@@ -8,10 +8,11 @@ public class TreeProblems {
 
     /**
      * Q. 429
+     * <p>
      * Given an n-ary tree, return the level order traversal of its nodes' values.
-     *
+     * <p>
      * tags:: tree, bfs
-     * */
+     */
     public List<List<Integer>> naryLevelOrder(NaryTreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         Queue<NaryTreeNode> q = new LinkedList<>();
@@ -37,9 +38,9 @@ public class TreeProblems {
 
     /**
      * Q. 589
-     *
+     * <p>
      * Given the root of an n-ary tree, return the preorder traversal of its nodes' values.
-     * */
+     */
     public List<Integer> naryPreorder(NaryTreeNode root) {
         List<Integer> result = new ArrayList<>();
         Stack<NaryTreeNode> stack = new Stack<>();

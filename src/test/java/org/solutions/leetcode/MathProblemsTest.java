@@ -4,10 +4,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,7 +44,7 @@ class MathProblemsTest {
         scenarios.put(new int[]{1, 2, 2, 4}, new int[]{2, 3});
         scenarios.put(new int[]{1, 1}, new int[]{1, 2});
 
-        scenarios.forEach((inptut, expected) -> assertArrayEquals(expected, mathProblems.findErrorNums(inptut)));
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, mathProblems.findErrorNums(input)));
     }
 
     @Test
@@ -101,7 +98,7 @@ class MathProblemsTest {
         Map<Triple<Integer, Integer, Integer>, List<Integer>> scenarios = new HashMap<>();
         scenarios.put(Triple.of(2, 3, 10), Arrays.asList(2, 3, 4, 5, 7, 9, 10));
         scenarios.put(Triple.of(3, 5, 15), Arrays.asList(2, 4, 6, 8, 10, 14));
-        scenarios.put(Triple.of(1, 1, 15), Arrays.asList(2));
+        scenarios.put(Triple.of(1, 1, 15), Collections.singletonList(2));
 
 
         scenarios.forEach((input, expected) ->
@@ -128,6 +125,16 @@ class MathProblemsTest {
         scenarios.put(123456, 11601);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.countPrimes(input)));
+    }
+
+    @Test
+    void testNumberOf1Bits() {
+        Map<Integer, Integer> scenarios = new HashMap<>();
+        scenarios.put(00000000000000000000000000001011, 3);
+        scenarios.put(00000000000000000000000010000000, 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.numberOf1Bits(input))
+        );
     }
 
     private boolean containsInAnyOrder(List<Integer> expected, List<Integer> input) {
