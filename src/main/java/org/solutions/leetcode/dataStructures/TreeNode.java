@@ -42,4 +42,9 @@ public class TreeNode {
         }
         return isEqual;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

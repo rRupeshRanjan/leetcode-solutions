@@ -6,9 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TrieProblems {
-
     /**
-     * Q. 820
+     * Q. 820 Short Encoding of Words
      * <p>
      * A valid encoding of an array of words is any reference string s and array of indices indices such that:
      * words.length == indices.length. The reference string s ends with the '#' character.
@@ -41,5 +40,4 @@ public class TrieProblems {
 
         return count;
     }
-
 }

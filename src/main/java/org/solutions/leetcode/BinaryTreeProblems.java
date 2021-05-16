@@ -6,8 +6,10 @@ import java.util.*;
 
 public class BinaryTreeProblems {
 
+    private int cameraCoverCount;
+
     /**
-     * Q.199
+     * Q.199 Binary Tree Right Side View
      * <p>
      * Given a binary tree, imagine yourself standing on the right side of it,
      * return the values of the nodes you can see ordered from top to bottom.
@@ -41,7 +43,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 94
+     * Q. 94 Binary Tree Inorder Traversal
      * Binary tree inorder traversal
      * <p>
      * Tags:: binaryTree, inorder, dfs
@@ -65,7 +67,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 144
+     * Q. 144 Binary Tree Preorder Traversal
      * <p>
      * Given the root of a binary tree, return the preorder traversal of its nodes' values.
      * <p>
@@ -89,7 +91,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 145
+     * Q. 145 Binary Tree Postorder Traversal
      * <p>
      * Given the root of a binary tree, return the postorder traversal of its nodes' values.
      * <p>
@@ -114,7 +116,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q.637
+     * Q.637 Average of Levels in Binary Tree
      * Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
      * <p>
      * Tags:: binaryTree, bfs
@@ -143,7 +145,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q.623
+     * Q.623 Add One Row to Tree
      * <p>
      * Given the root of a binary tree, then value v and depth d, you need to add a row of nodes with value v
      * at the given depth d. The root node is at depth 1.The adding rule is: given a positive integer depth d,
@@ -188,7 +190,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 971
+     * Q. 971 Flip Binary Tree To Match Preorder Traversal
      * <p>
      * You are given the root of a binary tree with n nodes, where each node is uniquely assigned a value from 1 to n.
      * You are also given a sequence of n values voyage, which is the desired pre-order traversal of the binary tree.
@@ -228,30 +230,6 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q.1302
-     * <p>
-     * Given the root of a binary tree, return the sum of values of its deepest leaves.
-     * <p>
-     * tags:: binaryTree, bfs
-     */
-    public int deepestLeavesSum(TreeNode root) {
-        int sum = 0, i;
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-
-        while (!q.isEmpty()) {
-            for (i = q.size() - 1, sum = 0; i >= 0; i--) {
-                TreeNode temp = q.poll();
-                sum += temp.getVal();
-                if (temp.getLeft() != null) q.add(temp.getLeft());
-                if (temp.getRight() != null) q.add(temp.getRight());
-            }
-        }
-
-        return sum;
-    }
-
-    /**
      * Q. 114 Flatten Binary Tree to Linked List
      * <p>
      * Given the root of a binary tree, flatten the tree into a "linked list":
@@ -277,5 +255,64 @@ public class BinaryTreeProblems {
         while (curr.getRight() != null)
             curr = curr.getRight();
         curr.setRight(right);
+    }
+
+    /**
+     * Q.1302 Deepest Leaves Sum
+     * <p>
+     * Given the root of a binary tree, return the sum of values of its deepest leaves.
+     * <p>
+     * tags:: binaryTree, bfs
+     */
+    public int deepestLeavesSum(TreeNode root) {
+        int sum = 0, i;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+
+        while (!q.isEmpty()) {
+            for (i = q.size() - 1, sum = 0; i >= 0; i--) {
+                TreeNode temp = q.poll();
+                sum += temp.getVal();
+                if (temp.getLeft() != null) q.add(temp.getLeft());
+                if (temp.getRight() != null) q.add(temp.getRight());
+            }
+        }
+
+        return sum;
+    }
+
+    public int minCameraCover(TreeNode root) {
+        cameraCoverCount = 0;
+        if (cameraCoverDfs(root) == CameraType.LEAF)
+            cameraCoverCount++;
+
+        return cameraCoverCount;
+    }
+
+    private CameraType cameraCoverDfs(TreeNode node) {
+        if (node == null)
+            return CameraType.COVERED;
+
+        CameraType left = cameraCoverDfs(node.getLeft());
+        CameraType right = cameraCoverDfs(node.getRight());
+
+        if (left == CameraType.LEAF || right == CameraType.LEAF) {
+            cameraCoverCount++;
+            return CameraType.PARENT;
+        }
+
+        return (left == CameraType.PARENT || right == CameraType.PARENT) ? CameraType.COVERED : CameraType.LEAF;
+    }
+
+    /**
+     * Q. 968 Binary Tree Cameras
+     * <p>
+     * Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent,
+     * itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of tree.
+     * <p>
+     * tags:: dfs, binaryTree
+     */
+    private enum CameraType {
+        LEAF, PARENT, COVERED
     }
 }

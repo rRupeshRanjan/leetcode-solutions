@@ -14,7 +14,7 @@ public class GridProblems {
     }
 
     /**
-     * Q.1091
+     * Q.1091 Shortest Path in Binary Matrix
      * <p>
      * In an N by N square grid, each cell is either empty (0) or blocked (1).
      * A clear path from top-left to bottom-right has length k if and only if it is composed of cells C_1, C_2, ..., C_k such that:
@@ -50,12 +50,12 @@ public class GridProblems {
 
                 grid[x][y] = 1;
                 for (int[] d : dir) {
-                    int x_new = x + d[0];
-                    int y_new = y + d[1];
-                    if (x_new < 0 || y_new < 0 || x_new > n || y_new > n || grid[x_new][y_new] == 1)
+                    int xNew = x + d[0];
+                    int yNew = y + d[1];
+                    if (xNew < 0 || yNew < 0 || xNew > n || yNew > n || grid[xNew][yNew] == 1)
                         continue;
 
-                    q.add(Pair.of(x_new, y_new));
+                    q.add(Pair.of(xNew, yNew));
                 }
             }
             level++;
@@ -65,7 +65,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 785
+     * Q. 785 Is Graph Bipartite?
      * There is an undirected graph with n nodes, where each node is numbered between 0 and n - 1.
      * You are given a 2D array graph, where graph[u] is an array of nodes that node u is adjacent to.
      * More formally, for each v in graph[u], there is an undirected edge between node u and node v.
@@ -107,15 +107,15 @@ public class GridProblems {
     }
 
     /**
-     * Q. 886
+     * Q. 886 Possible Bipartition
      * Given a set of N people (numbered 1, 2, ..., N), we would like to split everyone into two groups of any size.
      * Each person may dislike some other people, and they should not go into the same group.
      * Formally, if dislikes[i] = [a, b], it means it is not allowed to put the people numbered a and b into the same group.
-     *
+     * <p>
      * Return true if and only if it is possible to split everyone into two groups in this way.
-     *
+     * <p>
      * Tags:: graph, recursion, bipartition
-     * */
+     */
     public boolean possibleBipartition(int N, int[][] dislikes) {
         List<List<Integer>> graphList = new ArrayList<>();
         Map<Integer, Integer> colorMap = new HashMap<>();
@@ -138,7 +138,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 1337
+     * Q. 1337 The K Weakest Rows in a Matrix
      * You are given an m x n binary matrix mat of 1's (representing soldiers) and 0's (representing civilians).
      * The soldiers are positioned in front of the civilians. That is, all the 1's will appear to the left of all the 0's in each row.
      * A row i is weaker than a row j if one of the following is true:
@@ -171,7 +171,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 841
+     * Q. 841 Keys and Rooms
      *
      * There are N rooms and you start in room 0.  Each room has a distinct number in 0, 1, 2, ..., N-1,
      * and each room may have some keys to access the next room. Formally, each room i has a list of keys rooms[i],
@@ -207,7 +207,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 417
+     * Q. 417 Pacific Atlantic Water Flow
      *
      * You are given an m x n integer matrix heights representing the height of each unit cell in a continent.
      * The Pacific ocean touches the continent's left and top edges, and the Atlantic ocean touches the continent's
@@ -260,7 +260,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 48
+     * Q. 48 Rotate Image
      *
      * You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
      * You have to rotate the image in-place, which means you have to modify the input 2D matrix directly.

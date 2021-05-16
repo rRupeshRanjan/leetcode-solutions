@@ -2,6 +2,8 @@ package org.solutions.leetcode.dataStructures;
 
 import lombok.Data;
 
+import java.util.Arrays;
+
 @Data
 public class TrieNode {
     private TrieNode[] children = new TrieNode[26];
@@ -9,10 +11,26 @@ public class TrieNode {
 
     public TrieNode get(char ch) {
         if (children[ch - 'a'] == null) {
-            children[ch - 'a'] = new TrieNode();
-            leaf = false;
+            this.children[ch - 'a'] = new TrieNode();
+            this.leaf = false;
         }
 
-        return children[ch - 'a'];
+        return this.children[ch - 'a'];
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        TrieNode trieNode = (TrieNode) o;
+        return leaf == trieNode.leaf && Arrays.equals(children, trieNode.children);
     }
 }

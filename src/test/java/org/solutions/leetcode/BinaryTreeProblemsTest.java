@@ -111,4 +111,13 @@ class BinaryTreeProblemsTest {
         binaryTreeProblems.flatten(input);
         assertEquals(expected, input);
     }
+
+    @Test
+    void testMinCameraCover() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(0, new TreeNode(0, 0, 0), null), 1);
+        scenarios.put(new TreeNode(0, new TreeNode(0, new TreeNode(0, null, new TreeNode(0)), null), null), 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.minCameraCover(input)));
+    }
 }
