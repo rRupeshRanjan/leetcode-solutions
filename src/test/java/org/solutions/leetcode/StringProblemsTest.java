@@ -199,4 +199,45 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minDeletions(input)));
     }
+
+    @Test
+    void testLongestStrChain() {
+        Map<String[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new String[]{"xbc", "pcxbcf", "xb", "cxbc", "pcxbc"}, 5);
+        scenarios.put(new String[]{"a", "b", "ba", "bca", "bda", "bdca"}, 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.longestStrChain(input)));
+    }
+
+    @Test
+    void testFindDuplicate() {
+        Map<String[], List<List<String>>> scenarios = new HashMap<>();
+        scenarios.put(
+                new String[]{
+                        "root/a 1.txt(abcd) 2.txt(efgh)",
+                        "root/c 3.txt(abcd)", "root/c/d 4.txt(efgh)",
+                        "root 4.txt(efgh)"
+                },
+                Arrays.asList(
+                        Arrays.asList("root/a/2.txt", "root/c/d/4.txt", "root/4.txt"),
+                        Arrays.asList("root/a/1.txt", "root/c/3.txt"))
+        );
+
+        scenarios.put(
+                new String[]{
+                        "root/a 1.txt(abcd) 2.txt(efgh)",
+                        "root/c 3.txt(abcd)",
+                        "root/c/d 4.txt(efgh)"
+                },
+                Arrays.asList(
+                        Arrays.asList("root/a/2.txt", "root/c/d/4.txt"),
+                        Arrays.asList("root/a/1.txt", "root/c/3.txt"))
+        );
+
+        scenarios.forEach((input, expected) -> assertEquals(
+                stringProblems.findDuplicate(input).stream()
+                        .filter(i -> !expected.contains(i))
+                        .count(),
+                0));
+    }
 }

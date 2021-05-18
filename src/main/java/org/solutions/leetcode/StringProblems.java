@@ -5,6 +5,7 @@ import org.solutions.leetcode.exceptions.BadInputException;
 import org.solutions.leetcode.utils.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StringProblems {
 
@@ -17,11 +18,11 @@ public class StringProblems {
     /**
      * Q.821
      * Given a string s and a character c that occurs in s, return an array of integers answer where
-     *   answer.length == s.length
-     *   answer[i] is the shortest distance from s[i] to the character c in s.
-     *
+     * answer.length == s.length
+     * answer[i] is the shortest distance from s[i] to the character c in s.
+     * <p>
      * Tags:: string
-     * */
+     */
     public int[] shortestToChar(String s, char c) {
         int[] result = new int[s.length()];
 
@@ -46,9 +47,9 @@ public class StringProblems {
     /**
      * Q.242
      * Given two strings s and t , write a function to determine if t is an anagram of s.
-     *
+     * <p>
      * Tags:: hashmap, string
-     * */
+     */
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length())
             return false;
@@ -70,9 +71,9 @@ public class StringProblems {
      * Q. 784
      * Given a string S, we can transform every letter individually to be lowercase or uppercase to create another string.
      * Return a list of all possible strings we could create. You can return the output in any order.
-     *
+     * <p>
      * Tags:: recursion, string
-     * */
+     */
     public List<String> letterCasePermutation(String S) {
         List<String> returnList = new ArrayList<>();
 
@@ -129,9 +130,9 @@ public class StringProblems {
      * Q. 1461
      * Given a binary string s and an integer k.
      * Return True if every binary code of length k is a substring of s. Otherwise, return False.
-     *
+     * <p>
      * tags: string, hashing, maths
-     * */
+     */
     public boolean hasAllCodes(String s, int k) {
         int need = 1 << k, allOne = need - 1, hashVal = 0;
         boolean[] got = new boolean[need];
@@ -152,15 +153,15 @@ public class StringProblems {
 
     /**
      * Q. 916
-     *
+     * <p>
      * We are given two arrays A and B of words.  Each word is a string of lowercase letters.
      * Now, say that word b is a subset of word a if every letter in b occurs in a, including multiplicity.
      * For example, "wrr" is a subset of "warrior", but is not a subset of "world".
      * Now say a word a from A is universal if for every b in B, b is a subset of a.
      * Return a list of all universal words in A.  You can return the words in any order.
-     *
+     * <p>
      * tags:: string, superset, count
-     * */
+     */
     public List<String> wordSubsets(String[] A, String[] B) throws BadInputException {
         int[] bCount = new int[26];
         List<String> result = new ArrayList<>();
@@ -191,13 +192,13 @@ public class StringProblems {
 
     /**
      * Q. 647
-     *
+     * <p>
      * Given a string, your task is to count how many palindromic substrings in this string.
      * The substrings with different start indexes or end indexes are counted as
      * different substrings even they consist of same characters.
-     *
+     * <p>
      * tags:: palindrome, strings
-     * */
+     */
     public int countSubstrings(String s) {
         int count = 0;
 
@@ -217,13 +218,13 @@ public class StringProblems {
 
     /**
      * Q. 474
-     *
+     * <p>
      * You are given an array of binary strings strs and two integers m and n.
      * Return the size of the largest subset of strs such that there are at most m 0's and n 1's in the subset.
      * A set x is a subset of a set y if all elements of x are also elements of y.
-     *
+     * <p>
      * tags:: string, dp, knapsack
-     * */
+     */
     public int findMaxForm(String[] strs, int m, int n) {
         int[][] dp = new int[m + 1][n + 1];
 
@@ -246,11 +247,11 @@ public class StringProblems {
 
     /**
      * Q. 32
-     *
+     * <p>
      * Given a string containing just characters '(' and ')', find the length of the longest valid parentheses substring.
-     *
+     * <p>
      * tags:: string
-     * */
+     */
     public int longestValidParentheses(String s) {
         int maxCount = 0;
         Stack<Integer> stack = new Stack<>();
@@ -274,14 +275,14 @@ public class StringProblems {
 
     /**
      * Q. 1704
-     *
+     * <p>
      * You are given a string s of even length. Split this string into two halves of equal lengths, and let a be the
      * first half and b be the second half. Two strings are alike if they have the same number of vowels
      * ('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'). Notice that s contains uppercase and lowercase letters.
      * Return true if a and b are alike. Otherwise, return false.
-     *
+     * <p>
      * tags:: string
-     * */
+     */
     public boolean halvesAreAlike(String s) {
         Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
         int count = 0, start = 0, end = s.length() - 1;
@@ -295,13 +296,13 @@ public class StringProblems {
 
     /**
      * Q. 1047
-     *
+     * <p>
      * Given a string S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters,
      * and removing them. We repeatedly make duplicate removals on S until we no longer can.
      * Return the final string after all such duplicate removals have been made.  It is guaranteed the answer is unique.
-     *
+     * <p>
      * tags:: string, stack
-     * */
+     */
     public String removeDuplicates(String s) {
 //        return removeDuplicates(s, 2);
         Stack<Character> stack = new Stack<>();
@@ -323,15 +324,15 @@ public class StringProblems {
 
     /**
      * Q. 1209
-     *
+     * <p>
      * You are given a string s and an integer k, a k duplicate removal consists of choosing k adjacent and equal letters
      * from s and removing them, causing the left and the right side of the deleted substring to concatenate together.
      * We repeatedly make k duplicate removals on s until we no longer can.
      * Return the final string after all such duplicate removals have been made.
      * It is guaranteed that the answer is unique.
-     *
+     * <p>
      * tags:: string, stack
-     * */
+     */
     public String removeDuplicates(String s, int k) {
         Stack<Pair<Character, Integer>> stack = new Stack<>();
 
@@ -358,14 +359,13 @@ public class StringProblems {
 
     /**
      * Q. 696
-     *
+     * <p>
      * Give a binary string s, return the number of non-empty substrings that have the same number of 0's and 1's,
      * and all the 0's and all the 1's in these substrings are grouped consecutively.
      * Substrings that occur multiple times are counted the number of times they occur.
-     *
+     * <p>
      * tags:: string
-     *
-     * */
+     */
     public int countBinarySubstrings(String s) {
         int result = 0, prev = 0, curr = 1;
         for (int i = 1; i < s.length(); i++) {
@@ -383,19 +383,19 @@ public class StringProblems {
 
     /**
      * Q. 1529 Bulb Switcher IV
-     *
+     * <p>
      * There is a room with n bulbs, numbered from 0 to n - 1, arranged in a row from left to right. Initially,
      * all the bulbs are turned off. Your task is to obtain the configuration represented by target where target[i] is
      * '1' if the ith bulb is turned on and is '0' if it is turned off. You have a switch to flip the state of the bulb,
      * a flip operation is defined as follows:
-     *   Choose any bulb (index i) of your current configuration.
-     *   Flip each bulb from index i to index n - 1.
-     *   When any bulb is flipped it means that if it is '0' it changes to '1' and if it is '1' it changes to '0'.
-     *
+     * Choose any bulb (index i) of your current configuration.
+     * Flip each bulb from index i to index n - 1.
+     * When any bulb is flipped it means that if it is '0' it changes to '1' and if it is '1' it changes to '0'.
+     * <p>
      * Return the minimum number of flips required to form target.
-     *
+     * <p>
      * tags:: string
-     * */
+     */
     public int bulbSwitcherIV(String target) {
         int count = 0;
         char prev = '0';
@@ -462,5 +462,67 @@ public class StringProblems {
             prevGoodFreq = Math.max(prevGoodFreq - 1, 0);
         }
         return deletionCount;
+    }
+
+    /**
+     * 1048. Longest String Chain
+     * <p>
+     * Given a list of words, each word consists of English lowercase letters. Let's say word1 is a predecessor of word2
+     * if and only if we can add exactly one letter anywhere in word1 to make it equal to word2.
+     * For example, "abc" is a predecessor of "abac".
+     * A word chain is a sequence of words [word_1, word_2, ..., word_k] with k >= 1, where word_1 is a predecessor of
+     * word_2, word_2 is a predecessor of word_3, and so on. Return the longest possible length of a word chain with
+     * words chosen from the given list of words.
+     * <p>
+     * tags::string, dp
+     */
+    public int longestStrChain(String[] words) {
+        Map<String, Integer> map = new HashMap<>();
+        int max = 0;
+
+        Arrays.sort(words, Comparator.comparing(String::length));
+        for (String word : words) {
+            int curr = 0;
+            for (int i = 0; i < word.length(); i++) {
+                String key = word.substring(0, i) + word.substring(i + 1);
+                curr = Math.max(curr, map.getOrDefault(key, 0) + 1);
+            }
+            map.put(word, curr);
+            max = Math.max(max, curr);
+        }
+
+        return max;
+    }
+
+    /**
+     * 609. Find Duplicate File in System
+     * Given a list paths of directory info, including the directory path, and all the files with contents in this
+     * directory, return all the duplicate files in the file system in terms of their paths. You may return the answer
+     * in any order. A group of duplicate files consists of at least two files that have the same content.
+     * A single directory info string in the input list has the following format:
+     * "root/d1/d2/.../dm f1.txt(f1_content) f2.txt(f2_content) ... fn.txt(fn_content)"
+     * It means there are n files (f1.txt, f2.txt ... fn.txt) with content (f1_content, f2_content ... fn_content)
+     * respectively in the directory "root/d1/d2/.../dm".
+     * Note that n >= 1 and m >= 0. If m = 0, it means the directory is just the root directory.
+     * <p>
+     * The output is a list of groups of duplicate file paths. For each group, it contains all the file paths of the
+     * files that have the same content. A file path is a string that has the following format:
+     * "directory_path/file_name.txt"
+     * <p>
+     * tags::string, hashmap
+     */
+    public List<List<String>> findDuplicate(String[] paths) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String path : paths) {
+            String[] str = path.split(" ");
+            for (int i = 1; i < str.length; i++) {
+                String[] temp = str[i].split("\\(");
+                String filename = str[0] + "/" + temp[0];
+                String content = temp[1];
+                map.computeIfAbsent(content, s -> new ArrayList<>()).add(filename);
+            }
+        }
+
+        return map.values().stream().filter(v -> v.size() > 1).collect(Collectors.toList());
     }
 }
