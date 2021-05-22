@@ -406,4 +406,63 @@ public class GridProblems {
 
         return pq.size();
     }
+
+    /**
+     * Q. 51. N-Queens
+     * <p>
+     * The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack
+     * each other. Given an integer n, return all distinct solutions to the n-queens puzzle.
+     * <p>
+     * Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both
+     * indicate a queen and an empty space, respectively.
+     * <p>
+     * tags:: backtracking, string, grid
+     */
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> result = new ArrayList<>();
+        char[][] state = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                state[i][j] = '.';
+            }
+        }
+        backtrackNQueens(state, n, 0, new HashSet<>(), new HashSet<>(), new HashSet<>(), result);
+        return result;
+    }
+
+    private void backtrackNQueens(char[][] state, int n, int row, Set<Integer> diagonals, Set<Integer> antiDiagonals,
+                                  Set<Integer> cols, List<List<String>> result) {
+        if (row == n) {
+            result.add(createBoardNqueens(state));
+            return;
+        }
+
+        for (int col = 0; col < n; col++) {
+            int currDiagonal = row - col;
+            int currAntiDiagonal = row + col;
+
+            if (diagonals.contains(currDiagonal) || antiDiagonals.contains(currAntiDiagonal) || cols.contains(col))
+                continue;
+
+            diagonals.add(currDiagonal);
+            antiDiagonals.add(currAntiDiagonal);
+            cols.add(col);
+            state[row][col] = 'Q';
+
+            backtrackNQueens(state, n, row + 1, diagonals, antiDiagonals, cols, result);
+
+            diagonals.remove(currDiagonal);
+            antiDiagonals.remove(currAntiDiagonal);
+            cols.remove(col);
+            state[row][col] = '.';
+        }
+    }
+
+    private List<String> createBoardNqueens(char[][] state) {
+        List<String> board = new ArrayList<>();
+        for (char[] chars : state) {
+            board.add(new String(chars));
+        }
+        return board;
+    }
 }

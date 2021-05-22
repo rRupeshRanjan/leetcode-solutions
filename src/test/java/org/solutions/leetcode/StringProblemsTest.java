@@ -240,4 +240,15 @@ class StringProblemsTest {
                         .count(),
                 0));
     }
+
+    @Test
+    void testFindAndReplacePattern() {
+        Map<Pair<String[], String>, List<String>> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new String[]{"abc", "deq", "mee", "aqq", "dkd", "ccc"}, "abb"), Arrays.asList("mee", "aqq"));
+        scenarios.put(Pair.of(new String[]{"a", "b", "c"}, "a"), Arrays.asList("a", "b", "c"));
+
+        scenarios.forEach((input, expected) -> {
+            assertTrue(expected.containsAll(stringProblems.findAndReplacePattern(input.getLeft(), input.getRight())));
+        });
+    }
 }

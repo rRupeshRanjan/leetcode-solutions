@@ -213,4 +213,23 @@ class ArrayProblemsTest {
         scenarios.forEach((input, expected) ->
                 assertEquals(expected, arrayProblems.maxScore(input.getLeft(), input.getRight())));
     }
+
+    @Test
+    void testMinMoves() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3}, 3);
+        scenarios.put(new int[]{1, 1, 1, 9}, 8);
+        scenarios.put(new int[]{1, 1, 1}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.minMoves(input)));
+    }
+
+    @Test
+    void testMinMoves2() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3}, 2);
+        scenarios.put(new int[]{1, 10, 2, 9}, 16);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.minMoves2(input)));
+    }
 }

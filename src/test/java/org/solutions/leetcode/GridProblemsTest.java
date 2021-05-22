@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -133,6 +134,20 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.courseScheduleIII(input)));
     }
 
+    @Test
+    void testSolveNQueens() {
+        Map<Integer, List<List<String>>> scenarios = new HashMap<>();
+        scenarios.put(1, Collections.singletonList(Collections.singletonList("Q")));
+        scenarios.put(2, Collections.emptyList());
+        scenarios.put(3, Collections.emptyList());
+        scenarios.put(4, Arrays.asList(
+                Arrays.asList(".Q..", "...Q", "Q...", "..Q."),
+                Arrays.asList("..Q.", "Q...", "...Q", ".Q..")));
+
+        scenarios.forEach((input, expected) ->
+                assertTrue(areNestedListsEqual(expected, gridProblems.solveNQueens(input))));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))
@@ -140,5 +155,14 @@ class GridProblemsTest {
         }
 
         return false;
+    }
+
+    private <T> boolean areNestedListsEqual(List<List<T>> a, List<List<T>> b) {
+        return a.stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList())
+                .equals(b.stream()
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.toList()));
     }
 }

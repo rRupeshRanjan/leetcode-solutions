@@ -16,7 +16,8 @@ public class StringProblems {
     }
 
     /**
-     * Q.821
+     * Q.821 Shortest Distance to a Character
+     * <p>
      * Given a string s and a character c that occurs in s, return an array of integers answer where
      * answer.length == s.length
      * answer[i] is the shortest distance from s[i] to the character c in s.
@@ -45,7 +46,8 @@ public class StringProblems {
     }
 
     /**
-     * Q.242
+     * Q.242 Valid Anagram
+     *
      * Given two strings s and t , write a function to determine if t is an anagram of s.
      * <p>
      * Tags:: hashmap, string
@@ -68,7 +70,8 @@ public class StringProblems {
     }
 
     /**
-     * Q. 784
+     * Q. 784 Letter Case Permutation
+     *
      * Given a string S, we can transform every letter individually to be lowercase or uppercase to create another string.
      * Return a list of all possible strings we could create. You can return the output in any order.
      * <p>
@@ -99,7 +102,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 820
+     * Q. 820 Short Encoding of Words
      * <p>
      * A valid encoding of an array of words is any reference string s and array of indices indices such that:
      * words.length == indices.length. The reference string s ends with the '#' character.
@@ -127,7 +130,8 @@ public class StringProblems {
     }
 
     /**
-     * Q. 1461
+     * Q. 1461 Check If a String Contains All Binary Codes of Size K
+     *
      * Given a binary string s and an integer k.
      * Return True if every binary code of length k is a substring of s. Otherwise, return False.
      * <p>
@@ -152,7 +156,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 916
+     * Q. 916 Word Subsets
      * <p>
      * We are given two arrays A and B of words.  Each word is a string of lowercase letters.
      * Now, say that word b is a subset of word a if every letter in b occurs in a, including multiplicity.
@@ -191,7 +195,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 647
+     * Q. 647 Palindromic Substrings
      * <p>
      * Given a string, your task is to count how many palindromic substrings in this string.
      * The substrings with different start indexes or end indexes are counted as
@@ -217,7 +221,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 474
+     * Q. 474 Ones and Zeroes
      * <p>
      * You are given an array of binary strings strs and two integers m and n.
      * Return the size of the largest subset of strs such that there are at most m 0's and n 1's in the subset.
@@ -246,7 +250,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 32
+     * Q. 32 Longest Valid Parentheses
      * <p>
      * Given a string containing just characters '(' and ')', find the length of the longest valid parentheses substring.
      * <p>
@@ -274,7 +278,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 1704
+     * Q. 1704 Determine if String Halves Are Alike
      * <p>
      * You are given a string s of even length. Split this string into two halves of equal lengths, and let a be the
      * first half and b be the second half. Two strings are alike if they have the same number of vowels
@@ -295,7 +299,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 1047
+     * Q. 1047 Remove All Adjacent Duplicates In String
      * <p>
      * Given a string S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters,
      * and removing them. We repeatedly make duplicate removals on S until we no longer can.
@@ -323,7 +327,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 1209
+     * Q. 1209 Remove All Adjacent Duplicates in String II
      * <p>
      * You are given a string s and an integer k, a k duplicate removal consists of choosing k adjacent and equal letters
      * from s and removing them, causing the left and the right side of the deleted substring to concatenate together.
@@ -358,7 +362,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 696
+     * Q. 696 Count Binary Substrings
      * <p>
      * Give a binary string s, return the number of non-empty substrings that have the same number of 0's and 1's,
      * and all the 0's and all the 1's in these substrings are grouped consecutively.
@@ -524,5 +528,40 @@ public class StringProblems {
         }
 
         return map.values().stream().filter(v -> v.size() > 1).collect(Collectors.toList());
+    }
+
+    /**
+     * Q. 890. Find and Replace Pattern
+     * Given a list of strings words and a string pattern, return a list of words[i] that match pattern. You may return
+     * the answer in any order. A word matches the pattern if there exists a permutation of letters p so that after
+     * replacing every letter x in the pattern with p(x), we get the desired word.
+     * Recall that a permutation of letters is a bijection from letters to letters: every letter maps to another letter,
+     * and no two letters map to the same letter.
+     * <p>
+     * tags:: string, pattern-finding
+     */
+    public List<String> findAndReplacePattern(String[] words, String pattern) {
+        List<String> result = new ArrayList<>();
+        int[] p = normalizePattern(pattern);
+
+        for (String word : words) {
+            if (Arrays.equals(normalizePattern(word), p))
+                result.add(word);
+        }
+
+        return result;
+    }
+
+    private int[] normalizePattern(String w) {
+        int n = w.length();
+        int[] p = new int[n];
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            map.putIfAbsent(w.charAt(i), map.size());
+            p[i] = map.get(w.charAt(i));
+        }
+
+        return p;
     }
 }

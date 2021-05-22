@@ -3,8 +3,9 @@ package org.solutions.leetcode;
 import java.util.*;
 
 public class ArrayProblems {
+
     /**
-     * Q. 594
+     * Q. 594 Longest Harmonious Subsequence
      * <p>
      * We define a harmonious array as an array where the difference between its maximum value and its minimum value is
      * exactly 1. Given an integer array nums, return the length of its longest harmonious subsequence among all its
@@ -74,16 +75,16 @@ public class ArrayProblems {
     }
 
     /**
-     * Q.1640
-     *
+     * Q.1640 Check Array Formation Through Concatenation
+     * <p>
      * You are given an array of distinct integers arr and an array of integer arrays pieces,
      * where the integers in pieces are distinct.
      * Your goal is to form arr by concatenating the arrays in pieces in any order.
      * However, you are not allowed to reorder the integers in each array pieces[i].
      * Return true if it is possible to form the array arr from pieces. Otherwise, return false.
-     *
+     * <p>
      * Tags:: HashMap
-     * */
+     */
     public boolean canFormArray(int[] arr, int[][] pieces) {
         Map<Integer, List<Integer>> map = new HashMap<>();
 
@@ -108,7 +109,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 11
+     * Q. 11 Container With Most Water
      *
      * Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai).
      * n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0).
@@ -136,7 +137,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 413
+     * Q. 413 Arithmetic Slices
      *
      * A sequence of numbers is called arithmetic if
      * it consists of at least three elements and if the difference between any two consecutive elements is the same.
@@ -158,7 +159,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 122
+     * Q. 122 Best Time to Buy and Sell Stock II
      *
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * Find the maximum profit you can achieve. You may complete as many transactions as you like
@@ -190,7 +191,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 714
+     * Q. 714 Best Time to Buy and Sell Stock with Transaction Fee
      *
      * You are given an array prices where prices[i] is the price of a given stock on the ith day,
      * and an integer fee representing a transaction fee. Find the maximum profit you can achieve.
@@ -211,7 +212,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 923
+     * Q. 923 3Sum With Multiplicity
      *
      * Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and
      * arr[i] + arr[j] + arr[k] == target. As the answer can be very large, return it modulo 109 + 7.
@@ -260,7 +261,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 870
+     * Q. 870 Advantage Shuffle
      *
      * Given two arrays A and B of equal size, the advantage of A with respect to B is the number of
      * indices i for which A[i] > B[i]. Return any permutation of A that maximizes its advantage with respect to B.
@@ -291,7 +292,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 775
+     * Q. 775 Global and Local Inversions
      *
      * You are given an integer array nums of length n which represents a permutation of all the integers in
      * the range [0, n - 1].
@@ -318,7 +319,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 84
+     * Q. 84 Largest Rectangle in Histogram
      *
      * Given an array of integers heights representing the histogram's bar height where the width of each bar is 1,
      * return the area of the largest rectangle in the histogram.
@@ -341,7 +342,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 1642
+     * Q. 1642 Furthest Building You Can Reach
      *
      * You are given an integer array heights representing the heights of buildings, some bricks, and some ladders.
      * You start your journey from building 0 and move to the next building by possibly using bricks or ladders.
@@ -370,7 +371,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 34
+     * Q. 34 Find First and Last Position of Element in Sorted Array
      *
      * Given an array of integers nums sorted in ascending order, find the starting and ending position of a
      * given target value. If target is not found in the array, return [-1, -1].
@@ -417,7 +418,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 1480
+     * Q. 1480 Running Sum of 1d Array
      *
      * Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
      * Return the running sum of nums.
@@ -433,7 +434,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 665
+     * Q. 665 Non-decreasing Array
      *
      * Given an array nums with n integers, your task is to check if it could become non-decreasing by modifying at most
      * one element. We define an array is non-decreasing if nums[i] <= nums[i + 1] holds for every i (0-based)
@@ -563,5 +564,45 @@ public class ArrayProblems {
         }
 
         return maxScore;
+    }
+
+    /**
+     * Q. 453 Minimum Moves to Equal Array Elements
+     * <p>
+     * Given an integer array nums of size n, return minimum number of moves required to make all array elements equal.
+     * In one move, you can increment n - 1 elements of the array by 1.
+     * <p>
+     * tags:: array
+     */
+    public int minMoves(int[] nums) {
+        int count = 0;
+        int min = Integer.MAX_VALUE;
+
+        for (int num : nums)
+            min = Math.min(min, num);
+
+        for (int num : nums)
+            count += (num - min);
+
+        return count;
+    }
+
+    /**
+     * Q. 462 Minimum Moves to Equal Array Elements II
+     * <p>
+     * Given an integer array nums of size n, return minimum number of moves required to make all array elements equal.
+     * In one move, you can increment or decrement an element of the array by 1.
+     * <p>
+     * tags:: array, sorting
+     */
+    public int minMoves2(int[] nums) {
+        Arrays.sort(nums);
+        int count = 0, mid = nums.length / 2;
+
+        for (int num : nums) {
+            count += Math.abs(num - nums[mid]);
+        }
+
+        return count;
     }
 }
