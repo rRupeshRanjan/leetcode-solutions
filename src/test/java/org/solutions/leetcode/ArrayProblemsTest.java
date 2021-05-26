@@ -232,4 +232,13 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.minMoves2(input)));
     }
+
+    @Test
+    void testSubsetXORSum() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 3}, 6);
+        scenarios.put(new int[]{1, 5, 6}, 28);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.subsetXORSum(input)));
+    }
 }
