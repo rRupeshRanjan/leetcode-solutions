@@ -5,9 +5,10 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,19 +24,21 @@ class ArrayProblemsTest {
 
     @Test
     void findLHS() {
-        Map<int[], Integer> tests = new HashMap<>();
-        tests.put(new int[]{-3, -1, -1, -1, -3, -2}, 4);
-        tests.put(new int[]{1, 2, 2, 3, 4, 5, 1, 1, 1, 1}, 7);
-        tests.put(new int[]{2, 2, 2, 2, 2, 2, 2, 3, 1, 0, 0, 0, 3, 1, -1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 0, 1, 2, 2, 3, 2}, 20);
-        tests.put(new int[]{1, 3, 2, 2, 5, 2, 3, 7}, 5);
-        tests.put(new int[]{1, 2, 3, 4}, 2);
-        tests.put(new int[]{1, 1, 1, 1}, 0);
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{-3, -1, -1, -1, -3, -2}, 4);
+        scenarios.put(new int[]{1, 2, 2, 3, 4, 5, 1, 1, 1, 1}, 7);
+        scenarios.put(new int[]{2, 2, 2, 2, 2, 2, 2, 3, 1, 0, 0, 0, 3, 1, -1, 0, 1, 1, 0, 0, 1, 1, 2, 2,
+                2, 0, 1, 2, 2, 3, 2}, 20);
+        scenarios.put(new int[]{1, 3, 2, 2, 5, 2, 3, 7}, 5);
+        scenarios.put(new int[]{1, 2, 3, 4}, 2);
+        scenarios.put(new int[]{1, 1, 1, 1}, 0);
 
-        String[] ways = new String[]{"brute-force", "sorting", "hashmap"};
+        List<String> ways = Arrays.asList("brute-force", "sorting", "hashmap");
 
-        tests.forEach((input, length) ->
-                assertEquals(length, arrayProblems.findLHS(input, ways[new Random().nextInt(ways.length)]))
-        );
+        scenarios.forEach((input, length) -> {
+            ways.forEach(way -> assertEquals(length, arrayProblems.findLHS(input, way)));
+            assertEquals(-1, arrayProblems.findLHS(input, "garbage"));
+        });
     }
 
     @Test
@@ -44,6 +47,7 @@ class ArrayProblemsTest {
         scenarios.put(Pair.of(new int[]{85}, new int[][]{{85}}), true);
         scenarios.put(Pair.of(new int[]{15, 88}, new int[][]{{88}, {15}}), true);
         scenarios.put(Pair.of(new int[]{49, 18, 16}, new int[][]{{16, 18, 49}}), false);
+        scenarios.put(Pair.of(new int[]{49, 18, 16}, new int[][]{{49, 18, 17}}), false);
         scenarios.put(Pair.of(new int[]{91, 4, 64, 78}, new int[][]{{78}, {4, 64}, {91}}), true);
         scenarios.put(Pair.of(new int[]{1, 3, 5, 7}, new int[][]{{2, 4, 6, 8}}), false);
 
@@ -77,6 +81,8 @@ class ArrayProblemsTest {
         scenarios.put(new int[]{7, 1, 5, 3, 6, 4}, 7);
         scenarios.put(new int[]{1, 2, 3, 4, 5}, 4);
         scenarios.put(new int[]{5, 4, 3, 2, 1}, 0);
+        scenarios.put(new int[]{5}, 0);
+        scenarios.put(null, 0);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.maxProfit2(input)));
     }
@@ -103,10 +109,11 @@ class ArrayProblemsTest {
     }
 
     @Test
-    void testAdvantageCount() {
+    void Count() {
         Map<Pair<int[], int[]>, int[]> scenarios = new HashMap<>();
         scenarios.put(Pair.of(new int[]{2, 7, 11, 15}, new int[]{1, 10, 4, 11}), new int[]{2, 11, 7, 15});
         scenarios.put(Pair.of(new int[]{12, 24, 8, 32}, new int[]{13, 25, 32, 11}), new int[]{24, 32, 8, 12});
+        scenarios.put(Pair.of(new int[]{3, 3, 4, 4}, new int[]{2, 2, 3, 3}), new int[]{3, 3, 4, 4});
 
         scenarios.forEach((input, expected) -> {
             assertArrayEquals(expected, arrayProblems.advantageCount(input.getLeft(), input.getRight()));
@@ -231,5 +238,37 @@ class ArrayProblemsTest {
         scenarios.put(new int[]{1, 10, 2, 9}, 16);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.minMoves2(input)));
+    }
+
+    @Test
+    void testSubsetXORSum() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 3}, 6);
+        scenarios.put(new int[]{1, 5, 6}, 28);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.subsetXORSum(input)));
+    }
+
+    @Test
+    void testMaximumUniqueSubarray() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{5, 2, 1, 2, 5, 2, 1, 2, 5}, 8);
+        scenarios.put(new int[]{4, 2, 4, 5, 6}, 17);
+        scenarios.put(new int[]{1, 1, 1}, 1);
+        scenarios.put(new int[]{1, 1, 1, 2, 2, 2}, 3);
+        scenarios.put(new int[]{1, 2, 3}, 6);
+        scenarios.put(new int[]{1, 2, 2}, 3);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.maximumUniqueSubarray(input)));
+    }
+
+    @Test
+    void testMaxProduct() {
+        Map<String[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new String[]{"abcw", "baz", "foo", "bar", "xtfn", "abcdef"}, 16);
+        scenarios.put(new String[]{"a", "ab", "abc", "d", "cd", "bcd", "abcd"}, 4);
+        scenarios.put(new String[]{"a", "aa", "aaa", "aaaa"}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.maxProduct(input)));
     }
 }

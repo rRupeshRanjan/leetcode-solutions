@@ -148,6 +148,22 @@ class GridProblemsTest {
                 assertTrue(areNestedListsEqual(expected, gridProblems.solveNQueens(input))));
     }
 
+    @Test
+    void testTotalNQueens() {
+        Map<Integer, Integer> scenarios = new HashMap<>();
+        scenarios.put(1, 1);
+        scenarios.put(2, 0);
+        scenarios.put(3, 0);
+        scenarios.put(4, 2);
+        scenarios.put(5, 10);
+        scenarios.put(6, 4);
+        scenarios.put(7, 40);
+        scenarios.put(8, 92);
+        scenarios.put(9, 352);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.totalNQueens(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

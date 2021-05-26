@@ -234,6 +234,16 @@ class StringProblemsTest {
                         Arrays.asList("root/a/1.txt", "root/c/3.txt"))
         );
 
+        scenarios.put(
+                new String[]{
+                        "root/a 1.txt(abcd)",
+                        "root/c 3.txt(efgh)"
+                },
+                Arrays.asList(
+                        Collections.singletonList("root/a/1.txt"),
+                        Collections.singletonList("root/c/3.txt"))
+        );
+
         scenarios.forEach((input, expected) -> assertEquals(
                 stringProblems.findDuplicate(input).stream()
                         .filter(i -> !expected.contains(i))
@@ -250,5 +260,25 @@ class StringProblemsTest {
         scenarios.forEach((input, expected) -> {
             assertTrue(expected.containsAll(stringProblems.findAndReplacePattern(input.getLeft(), input.getRight())));
         });
+    }
+
+    @Test
+    void testEvalRPN() {
+        Map<String[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new String[]{"2", "1", "+", "3", "*"}, 9);
+        scenarios.put(new String[]{"4", "13", "5", "/", "+"}, 6);
+        scenarios.put(new String[]{"4", "13", "5", "-", "+"}, 12);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.evalRPN(input)));
+    }
+
+    @Test
+    void testMinPartitions() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("32", 3);
+        scenarios.put("12345678", 8);
+        scenarios.put("27346209830709182346", 9);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minPartitions(input)));
     }
 }

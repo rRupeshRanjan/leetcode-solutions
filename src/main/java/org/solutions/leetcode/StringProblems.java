@@ -564,4 +564,78 @@ public class StringProblems {
 
         return p;
     }
+
+    /**
+     * Q. 150. Evaluate Reverse Polish Notation
+     * Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+     * Valid operators are +, -, *, and /. Each operand may be an integer or another expression.
+     * <p>
+     * Note that division between two integers should truncate toward zero.
+     * <p>
+     * It is guaranteed that the given RPN expression is always valid. That means the expression would always evaluate
+     * to a result, and there will not be any division by zero operation.
+     * <p>
+     * tags:: string, stack
+     */
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(Integer.parseInt(tokens[0]));
+        int a = 0, b = 0;
+
+        for (int i = 1; i < tokens.length; i++) {
+            switch (tokens[i]) {
+                case "+": {
+                    a = stack.pop();
+                    b = stack.pop();
+                    stack.push(b + a);
+                    break;
+                }
+                case "-": {
+                    a = stack.pop();
+                    b = stack.pop();
+                    stack.push(b - a);
+                    break;
+                }
+                case "*": {
+                    a = stack.pop();
+                    b = stack.pop();
+                    stack.push(b * a);
+                    break;
+                }
+                case "/": {
+                    a = stack.pop();
+                    b = stack.pop();
+                    stack.push(b / a);
+                    break;
+                }
+                default:
+                    stack.push(Integer.parseInt(tokens[i]));
+                    break;
+            }
+        }
+
+        return stack.pop();
+    }
+
+    /**
+     * Q. 1689 Partitioning Into Minimum Number Of Deci-Binary Numbers
+     * <p>
+     * A decimal number is called deci-binary if each of its digits is either 0 or 1 without any leading zeros.
+     * For example, 101 and 1100 are deci-binary, while 112 and 3001 are not.
+     * <p>
+     * Given a string n that represents a positive decimal integer, return the minimum number of positive deci-binary
+     * numbers needed so that they sum up to n.
+     * <p>
+     * tags:: string, greedy
+     */
+    public int minPartitions(String n) {
+        int count = 0;
+        for (int i = 0; i < n.length(); i++) {
+            count = Math.max(count, n.charAt(i) - '0');
+            if (count == 9)
+                break;
+        }
+
+        return count;
+    }
 }

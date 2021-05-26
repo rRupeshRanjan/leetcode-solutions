@@ -605,4 +605,92 @@ public class ArrayProblems {
 
         return count;
     }
+
+    /**
+     * Q. 1863. Sum of All Subset XOR Totals
+     * <p>
+     * The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty.
+     * For example, the XOR total of the array [2,5,6] is 2 XOR 5 XOR 6 = 1.
+     * Given an array nums, return the sum of all XOR totals for every subset of nums.
+     * <p>
+     * Note: Subsets with the same elements should be counted multiple times.
+     * An array a is a subset of an array b if a can be obtained from b by deleting some (possibly zero) elements of b.
+     * <p>
+     * tags:: array, backtracking
+     */
+    int subsetXORSum;
+    public int subsetXORSum(int[] nums) {
+        subsetXORSum = 0;
+        backtrackSubsetXORSum(nums, 0, 0);
+        return subsetXORSum;
+    }
+
+    private void backtrackSubsetXORSum(int[] nums, int index, int curr) {
+        subsetXORSum += curr;
+
+        for (int i = index; i < nums.length; i++) {
+            curr ^= nums[i];
+            backtrackSubsetXORSum(nums, i + 1, curr);
+            curr ^= nums[i];
+        }
+    }
+
+    /**
+     * Q. 1695 Maximum Erasure Value
+     * <p>
+     * You are given an array of positive integers nums and want to erase a subarray containing unique elements.
+     * The score you get by erasing the subarray is equal to the sum of its elements.
+     * Return the maximum score you can get by erasing exactly one subarray.
+     * <p>
+     * An array b is called to be a subarray of a if it forms a contiguous subsequence of a, that is,
+     * if it is equal to a[l],a[l+1],...,a[r] for some (l,r).
+     * <p>
+     * tags:: array, twoPointer
+     */
+    public int maximumUniqueSubarray(int[] nums) {
+        int n = nums.length, start = 0, end = 0, maxSum = 0, sum = 0;
+        Set<Integer> set = new HashSet<>();
+
+        while (end < n) {
+            if (set.add(nums[end])) {
+                sum += nums[end++];
+                maxSum = Math.max(maxSum, sum);
+            } else {
+                sum -= nums[start];
+                set.remove(nums[start++]);
+            }
+        }
+        return maxSum;
+    }
+
+    /**
+     * Q. 318 Maximum Product of Word Lengths
+     * <p>
+     * Given a string array words, return the maximum value of length(word[i]) * length(word[j]) where the two words \
+     * do not share common letters. If no such two words exist, return 0.
+     * <p>
+     * tags:: array, bitManipulation
+     */
+    public int maxProduct(String[] words) {
+        int max = 0, n = words.length;
+        int[] bits = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            int num = 0;
+            for (char ch : words[i].toCharArray()) {
+                num |= 1 << (ch - 'a');
+            }
+            bits[i] = num;
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if ((bits[i] & bits[j]) == 0) {
+                    max = Math.max(max, words[i].length() * words[j].length());
+                }
+            }
+        }
+
+        return max;
+    }
 }
