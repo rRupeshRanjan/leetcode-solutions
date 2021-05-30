@@ -4,6 +4,8 @@ import java.util.*;
 
 public class ArrayProblems {
 
+    int subsetXORSum;
+
     /**
      * Q. 594 Longest Harmonious Subsequence
      * <p>
@@ -110,13 +112,13 @@ public class ArrayProblems {
 
     /**
      * Q. 11 Container With Most Water
-     *
+     * <p>
      * Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai).
      * n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0).
      * Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.
-     *
+     * <p>
      * Tags:: twoPointerApproach
-     * */
+     */
     public int maxWaterContainerArea(int[] height) {
         int maxArea = 0, start = 0, end = height.length - 1;
 
@@ -138,13 +140,13 @@ public class ArrayProblems {
 
     /**
      * Q. 413 Arithmetic Slices
-     *
+     * <p>
      * A sequence of numbers is called arithmetic if
      * it consists of at least three elements and if the difference between any two consecutive elements is the same.
      * Write a function that should return the number of arithmetic slices in the array A.
-     *
+     * <p>
      * Tags:: dynamicProgramming
-     * */
+     */
     public int numberOfArithmeticSlices(int[] A) {
         int sum = 0, dp = 0;
         for (int i = 2; i < A.length; i++) {
@@ -160,15 +162,15 @@ public class ArrayProblems {
 
     /**
      * Q. 122 Best Time to Buy and Sell Stock II
-     *
+     * <p>
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * Find the maximum profit you can achieve. You may complete as many transactions as you like
      * (i.e., buy one and sell one share of the stock multiple times).
-     *
+     * <p>
      * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
-     *
+     * <p>
      * tags:: array, greedy
-     * */
+     */
     public int maxProfit2(int[] prices) {
         if (prices == null || prices.length < 2)
             return 0;
@@ -192,15 +194,15 @@ public class ArrayProblems {
 
     /**
      * Q. 714 Best Time to Buy and Sell Stock with Transaction Fee
-     *
+     * <p>
      * You are given an array prices where prices[i] is the price of a given stock on the ith day,
      * and an integer fee representing a transaction fee. Find the maximum profit you can achieve.
      * You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction.
-     *
+     * <p>
      * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
-     *
+     * <p>
      * tags:: dp, array, greedy
-     * */
+     */
     public int maxProfit5(int fee, int[] prices) {
         int cash = 0, hold = -prices[0];
         for (int i = 1; i < prices.length; i++) {
@@ -213,12 +215,12 @@ public class ArrayProblems {
 
     /**
      * Q. 923 3Sum With Multiplicity
-     *
+     * <p>
      * Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and
      * arr[i] + arr[j] + arr[k] == target. As the answer can be very large, return it modulo 109 + 7.
-     *
+     * <p>
      * tags::math, array, sum
-     * */
+     */
     public int threeSumMulti(int[] arr, int target) {
         int MOD = 1_000_000_007;
         long[] count = new long[101];
@@ -262,12 +264,12 @@ public class ArrayProblems {
 
     /**
      * Q. 870 Advantage Shuffle
-     *
+     * <p>
      * Given two arrays A and B of equal size, the advantage of A with respect to B is the number of
      * indices i for which A[i] > B[i]. Return any permutation of A that maximizes its advantage with respect to B.
-     *
+     * <p>
      * tags:: array, greedy
-     * */
+     */
     public int[] advantageCount(int[] A, int[] B) {
         int n = A.length;
         int[] result = new int[n];
@@ -293,20 +295,20 @@ public class ArrayProblems {
 
     /**
      * Q. 775 Global and Local Inversions
-     *
+     * <p>
      * You are given an integer array nums of length n which represents a permutation of all the integers in
      * the range [0, n - 1].
      * The number of global inversions is the number of the different pairs (i, j) where:
-     *   0 <= i < j < n
-     *   nums[i] > nums[j]
+     * 0 <= i < j < n
+     * nums[i] > nums[j]
      * The number of local inversions is the number of indices i where:
-     *   0 <= i < n - 1
-     *   nums[i] > nums[i + 1]
-     *
+     * 0 <= i < n - 1
+     * nums[i] > nums[i + 1]
+     * <p>
      * Return true if the number of global inversions is equal to the number of local inversions.
-     *
+     * <p>
      * tags:: array,
-     * */
+     */
     public boolean isIdealPermutation(int[] nums) {
         int cmax = -1;
         for (int i = 0; i < nums.length - 2; i++) {
@@ -320,12 +322,12 @@ public class ArrayProblems {
 
     /**
      * Q. 84 Largest Rectangle in Histogram
-     *
+     * <p>
      * Given an array of integers heights representing the histogram's bar height where the width of each bar is 1,
      * return the area of the largest rectangle in the histogram.
-     *
+     * <p>
      * tags:: array
-     * */
+     */
     public int largestRectangleArea(int[] heights) {
         Stack<Integer> stack = new Stack<>();
         int ans = 0;
@@ -343,17 +345,17 @@ public class ArrayProblems {
 
     /**
      * Q. 1642 Furthest Building You Can Reach
-     *
+     * <p>
      * You are given an integer array heights representing the heights of buildings, some bricks, and some ladders.
      * You start your journey from building 0 and move to the next building by possibly using bricks or ladders.
      * While moving from building i to building i+1 (0-indexed),
-     *   If the current building's height >= next building's height, you don't need ladder or bricks.
-     *   If the current building's height < next building's height, you can use one ladder or (h[i+1] - h[i]) bricks.
-     *
+     * If the current building's height >= next building's height, you don't need ladder or bricks.
+     * If the current building's height < next building's height, you can use one ladder or (h[i+1] - h[i]) bricks.
+     * <p>
      * Return the furthest building index (0-indexed) you can reach if you use the given ladders and bricks optimally.
-     *
+     * <p>
      * tags:: array, priorityQueue
-     * */
+     */
     public int furthestBuilding(int[] heights, int bricks, int ladders) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
@@ -372,12 +374,12 @@ public class ArrayProblems {
 
     /**
      * Q. 34 Find First and Last Position of Element in Sorted Array
-     *
+     * <p>
      * Given an array of integers nums sorted in ascending order, find the starting and ending position of a
      * given target value. If target is not found in the array, return [-1, -1].
-     *
+     * <p>
      * return:: array, binarySearch
-     * */
+     */
     public int[] searchRange(int[] nums, int target) {
         int[] ans = new int[2];
 
@@ -419,12 +421,12 @@ public class ArrayProblems {
 
     /**
      * Q. 1480 Running Sum of 1d Array
-     *
+     * <p>
      * Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
      * Return the running sum of nums.
-     *
+     * <p>
      * tags:: array
-     * */
+     */
     public int[] runningSum(int[] nums) {
         for (int i = 1; i < nums.length; i++) {
             nums[i] += nums[i - 1];
@@ -435,13 +437,13 @@ public class ArrayProblems {
 
     /**
      * Q. 665 Non-decreasing Array
-     *
+     * <p>
      * Given an array nums with n integers, your task is to check if it could become non-decreasing by modifying at most
      * one element. We define an array is non-decreasing if nums[i] <= nums[i + 1] holds for every i (0-based)
      * such that (0 <= i <= n - 2).
-     *
+     * <p>
      * tags:: array
-     * */
+     */
     public boolean checkPossibility(int[] nums) {
         int err = 0;
 
@@ -458,13 +460,13 @@ public class ArrayProblems {
 
     /**
      * Q. 55 Jump Game
-     *
+     * <p>
      * Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
      * Each element in the array represents your maximum jump length at that position.
      * Determine if you are able to reach the last index.
-     *
+     * <p>
      * tags:: array, greedy
-     * */
+     */
     public boolean jumpGame(int[] nums) {
         if (nums == null || nums.length <= 1)
             return true;
@@ -480,13 +482,13 @@ public class ArrayProblems {
 
     /**
      * Q. 45 Jump Game II
-     *
+     * <p>
      * Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
      * Each element in the array represents your maximum jump length at that position. Your goal is to reach the last
      * index in the minimum number of jumps. You can assume that you can always reach the last index.
-     *
+     * <p>
      * tags:: array, greedy
-     * */
+     */
     public int jumpGameII(int[] nums) {
         if (nums == null || nums.length <= 1)
             return 0;
@@ -505,17 +507,17 @@ public class ArrayProblems {
 
     /**
      * 1354. Construct Target Array With Multiple Sums
-     *
+     * <p>
      * You are given an array target of n integers. From a starting array arr consisting of n 1's,
      * you may perform the following procedure :
-     *   let x be the sum of all elements currently in your array.
-     *   choose index i, such that 0 <= i < n and set the value of arr at index i to x.
-     *   You may repeat this procedure as many times as needed.
-     *
+     * let x be the sum of all elements currently in your array.
+     * choose index i, such that 0 <= i < n and set the value of arr at index i to x.
+     * You may repeat this procedure as many times as needed.
+     * <p>
      * Return true if it is possible to construct the target array from arr, otherwise, return false.
-     *
+     * <p>
      * tags:: array, greedy, priorityQueue
-     * */
+     */
     public boolean isPossibleToConstructTargetArray(int[] target) {
         PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> (b - a));
         int sum = 0;
@@ -542,15 +544,15 @@ public class ArrayProblems {
 
     /**
      * Q. 1423 Maximum Points You Can Obtain from Cards
-     *
+     * <p>
      * There are several cards arranged in a row, and each card has an associated number of points. The points are given
      * in the integer array cardPoints. In one step, you can take one card from the beginning or from the end of the row.
      * You have to take exactly k cards. Your score is the sum of the points of the cards you have taken.
      * Given the integer array cardPoints and the integer k, return the maximum score you can obtain.
-     *
+     * <p>
      * tags:: array, sliding-window
      * hint:: either pick from last or start, but overall always k elements. find max of those.
-     * */
+     */
     public int maxScore(int[] cardPoints, int k) {
         int maxScore, currScore = 0;
         for (int i = 0; i < k; i++) {
@@ -618,7 +620,6 @@ public class ArrayProblems {
      * <p>
      * tags:: array, backtracking
      */
-    int subsetXORSum;
     public int subsetXORSum(int[] nums) {
         subsetXORSum = 0;
         backtrackSubsetXORSum(nums, 0, 0);
