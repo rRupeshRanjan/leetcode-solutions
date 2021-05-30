@@ -281,4 +281,14 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minPartitions(input)));
     }
+
+    @Test
+    void testLengthOfLongestSubstring() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("abcabcbb", 3);
+        scenarios.put("bbbbb", 1);
+        scenarios.put(" ", 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.lengthOfLongestSubstring(input)));
+    }
 }

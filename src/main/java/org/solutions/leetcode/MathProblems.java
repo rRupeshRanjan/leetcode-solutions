@@ -4,6 +4,8 @@ import java.util.*;
 
 public class MathProblems {
 
+    int countArrangement = 0;
+
     /**
      * Q.1342
      * Given a non-negative integer num, return the number of steps to reduce it to zero.
@@ -230,5 +232,35 @@ public class MathProblems {
         }
 
         return count;
+    }
+
+    /**
+     * Q. 526 Beautiful Arrangement
+     * Suppose you have n integers labeled 1 through n. A permutation of those n integers perm (1-indexed) is considered
+     * a beautiful arrangement if for every i (1 <= i <= n), either of the following is true:
+     * perm[i] is divisible by i.
+     * i is divisible by perm[i].
+     * Given an integer n, return the number of the beautiful arrangements that you can construct.
+     * <p>
+     * tags::backtracking
+     */
+    public int countArrangement(int n) {
+        backtrackCountArrangement(new boolean[n + 1], n, 1);
+        return countArrangement;
+    }
+
+    private void backtrackCountArrangement(boolean[] used, int n, int pos) {
+        if (pos > n) {
+            countArrangement++;
+            return;
+        }
+
+        for (int i = 1; i <= n; i++) {
+            if (!used[i] && (i % pos == 0 || pos % i == 0)) {
+                used[i] = true;
+                backtrackCountArrangement(used, n, pos + 1);
+                used[i] = false;
+            }
+        }
     }
 }

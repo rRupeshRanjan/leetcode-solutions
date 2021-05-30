@@ -138,6 +138,15 @@ class MathProblemsTest {
         );
     }
 
+    @Test
+    void testCountArrangement() {
+        Map<Integer, Integer> scenarios = new HashMap<>();
+        scenarios.put(2, 2);
+        scenarios.put(3, 5);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.countArrangement(input)));
+    }
+
     private boolean containsInAnyOrder(List<Integer> expected, List<Integer> input) {
         if (expected.size() != input.size())
             return false;
