@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TrieProblems {
+
     /**
      * Q. 820 Short Encoding of Words
      * <p>

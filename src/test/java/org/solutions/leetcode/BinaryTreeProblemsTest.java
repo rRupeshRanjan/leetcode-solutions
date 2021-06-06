@@ -120,4 +120,15 @@ class BinaryTreeProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.minCameraCover(input)));
     }
+
+    @Test
+    void testMaxLevelSum() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, new TreeNode(7, 7, -8), new TreeNode(0)), 2);
+        scenarios.put(new TreeNode(1, new TreeNode(7, 7, 8), new TreeNode(0)), 3);
+        scenarios.put(new TreeNode(989, null,
+                new TreeNode(10250, new TreeNode(98693), new TreeNode(-89388, null, -32127))), 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.maxLevelSum(input)));
+    }
 }

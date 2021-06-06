@@ -4,7 +4,8 @@ import java.util.*;
 
 public class ArrayProblems {
 
-    int subsetXORSum;
+    private final static int MOD = (int) 1e9 + 7;
+    private int subsetXORSum;
 
     /**
      * Q. 594 Longest Harmonious Subsequence
@@ -693,5 +694,207 @@ public class ArrayProblems {
         }
 
         return max;
+    }
+
+    /**
+     * Q. 164 Maximum Gap
+     * Given an integer array nums, return the maximum difference between two successive elements in its sorted form.
+     * If the array contains less than two elements, return 0.
+     * <p>
+     * You must write an algorithm that runs in linear time and uses linear extra space.
+     * <p>
+     * tags::array, bucketSort
+     */
+    // TODO: Implement this
+    public int maximumGap(int[] nums) {
+        return -1;
+    }
+
+    /**
+     * Q. 1465 Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts
+     * <p>
+     * Given a rectangular cake with height h and width w, and two arrays of integers horizontalCuts and verticalCuts
+     * where horizontalCuts[i] is the distance from the top of the rectangular cake to the ith horizontal cut and
+     * similarly, verticalCuts[j] is the distance from the left of the rectangular cake to the jth vertical cut.
+     * <p>
+     * Return the maximum area of a piece of cake after you cut at each horizontal and vertical position provided in
+     * the arrays horizontalCuts and verticalCuts. Since the answer can be a huge number, return this modulo 10^9 + 7.
+     * <p>
+     * tags:: array
+     */
+    public int maxArea(int h, int w, int[] horizontalCuts, int[] verticalCuts) {
+        long hcutsMax = getMaxDiff(horizontalCuts, h);
+        long vcutsMax = getMaxDiff(verticalCuts, w);
+
+        return ((int) ((hcutsMax * vcutsMax) % 1000000007));
+    }
+
+    private int getMaxDiff(int[] arr, int n) {
+        Arrays.sort(arr);
+        int l = arr.length, maxDiff = Math.max(arr[0], n - arr[l - 1]);
+        for (int i = 1; i < arr.length; i++) {
+            maxDiff = Math.max(maxDiff, arr[i] - arr[i - 1]);
+        }
+
+        return maxDiff;
+    }
+
+    /**
+     * Q. 849 Maximize Distance to Closest Person
+     * <p>
+     * You are given an array representing a row of seats where seats[i] = 1 represents a person sitting in the ith seat,
+     * and seats[i] = 0 represents that the ith seat is empty (0-indexed).
+     * There is at least one empty seat, and at least one person sitting.
+     * Alex wants to sit in the seat such that the distance between him and the closest person to him is maximized.
+     * <p>
+     * Return that maximum distance to the closest person.
+     * <p>
+     * tags:: array
+     */
+    public int maxDistToClosest(int[] seats) {
+        int prevSeat = -1, maxDis = 0;
+        for (int i = 0; i < seats.length; i++) {
+            if (seats[i] == 1) {
+                maxDis = (prevSeat < 0) ? i : Math.max(maxDis, (i - prevSeat) / 2);
+                prevSeat = i;
+            }
+        }
+
+        return Math.max(maxDis, seats.length - 1 - prevSeat);
+    }
+
+    /**
+     * Q. 1589 Maximum Sum Obtained of Any Permutation
+     * <p>
+     * We have an array of integers, nums, and an array of requests where requests[i] = [starti, endi]. The ith request
+     * asks for the sum of nums[starti] + nums[starti + 1] + ... + nums[endi - 1] + nums[endi]. Both starti and endi
+     * are 0-indexed.
+     * <p>
+     * Return the maximum total sum of all requests among all permutations of nums.
+     * Since the answer may be too large, return it modulo 109 + 7.
+     * <p>
+     * tags:: sweepLine, array, greedy
+     */
+    public int maxSumRangeQuery(int[] nums, int[][] requests) {
+        long sum = 0;
+        int n = nums.length;
+        int[] count = new int[n];
+        for (int[] r : requests) {
+            count[r[0]]++;
+            if (r[1] + 1 < n) {
+                count[r[1] + 1]--;
+            }
+        }
+
+        for (int i = 1; i < n; i++)
+            count[i] += count[i - 1];
+
+        Arrays.sort(count);
+        Arrays.sort(nums);
+        int i = n - 1;
+        while (i >= 0 && count[i] > 0) {
+            sum += (long) nums[i] * count[i--];
+        }
+
+        return (int) (sum % MOD);
+    }
+
+    /**
+     * Q. 1094 Car Pooling
+     * You are driving a vehicle that has capacity empty seats initially available for passengers. The vehicle only
+     * drives east (ie. it cannot turn around and drive west.)
+     * <p>
+     * Given a list of trips, trip[i] = [num_passengers, start_location, end_location] contains information about the
+     * i-th trip: the number of passengers that must be picked up, and the locations to pick them up and drop them off.
+     * The locations are given as the number of kilometers due east from your vehicle's initial location.
+     * <p>
+     * Return true if and only if it is possible to pick up and drop off all passengers for all the given trips.
+     * <p>
+     * trips.length <= 1000
+     * tags:: sweepLine, greedy, array
+     */
+    public boolean carPooling(int[][] trips, int capacity) {
+        int[] count = new int[1001];
+        for (int[] trip : trips) {
+            count[trip[1]] += trip[0];
+            count[trip[2]] -= trip[0];
+        }
+
+        for (int i = 1; i < 1001; i++) {
+            count[i] += count[i - 1];
+            if (count[i] > capacity)
+                return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Q. 1383 Maximum Performance of a Team
+     * You are given two integers n and k and two integer arrays speed and efficiency both of length n. There are n
+     * engineers numbered from 1 to n. speed[i] and efficiency[i] represent the speed and efficiency of the ith engineer
+     * respectively.
+     * Choose at most k different engineers out of the n engineers to form a team with the maximum performance.
+     * <p>
+     * The performance of a team is the sum of their engineers' speeds multiplied by the minimum efficiency among their
+     * engineers. Return the maximum performance of this team.
+     * <p>
+     * Since the answer can be a huge number, return it modulo 109 + 7.
+     * <p>
+     * tags:: array, greedy, priorityQueue, sorting
+     */
+    public int maxPerformance(int n, int k, int[] speed, int[] efficiency) {
+        int[][] candidates = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            candidates[i] = new int[]{efficiency[i], speed[i]};
+        }
+
+        Arrays.sort(candidates, (a, b) -> (b[0] - a[0]));
+        PriorityQueue<Integer> speedHeap = new PriorityQueue<>(Comparator.comparingInt((i -> i)));
+
+        long maxPerf = 0, speedSum = 0;
+        for (int[] candidate : candidates) {
+            int currSpeed = candidate[1];
+            speedSum += currSpeed;
+            speedHeap.add(currSpeed);
+
+            if (speedHeap.size() > k)
+                speedSum -= speedHeap.remove();
+
+            maxPerf = Math.max(maxPerf, candidate[0] * speedSum);
+        }
+
+        return (int) (maxPerf % MOD);
+    }
+
+    /**
+     * Q. 128 Longest Consecutive Sequence
+     * <p>
+     * Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+     * You must write an algorithm that runs in O(n) time.
+     * <p>
+     * tags:: array, unionFind
+     */
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums)
+            set.add(num);
+
+        int currStreak = 0, maxStreak = 0;
+        for (int num : set) {
+            if (!set.contains(num - 1)) {
+                currStreak = 1;
+                int currNum = num;
+
+                while (set.contains(currNum + 1)) {
+                    currNum++;
+                    currStreak++;
+                }
+
+                maxStreak = Math.max(maxStreak, currStreak);
+            }
+        }
+
+        return maxStreak;
     }
 }

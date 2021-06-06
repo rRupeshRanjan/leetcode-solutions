@@ -225,7 +225,6 @@ public class BinaryTreeProblems {
             root = stack.pop().getRight();
         }
 
-
         return result;
     }
 
@@ -281,6 +280,14 @@ public class BinaryTreeProblems {
         return sum;
     }
 
+    /**
+     * Q. 968 Binary Tree Cameras
+     * <p>
+     * Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent,
+     * itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of tree.
+     * <p>
+     * tags:: dfs, binaryTree
+     */
     public int minCameraCover(TreeNode root) {
         cameraCoverCount = 0;
         if (cameraCoverDfs(root) == CameraType.LEAF)
@@ -305,13 +312,38 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 968 Binary Tree Cameras
+     * Q. 1161 Maximum Level Sum of a Binary Tree
      * <p>
-     * Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent,
-     * itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of tree.
+     * Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.
+     * Return the smallest level x such that the sum of all the values of nodes at level x is maximal.
      * <p>
-     * tags:: dfs, binaryTree
+     * tags::bfs, binaryTree
      */
+    public int maxLevelSum(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        int maxSumLevel = 1, maxSum = Integer.MIN_VALUE, currLevel = 0;
+
+        q.offer(root);
+        while (!q.isEmpty()) {
+            int sum = 0;
+            currLevel++;
+            for (int i = q.size(); i > 0; i--) {
+                TreeNode poll = q.poll();
+                sum += poll.getVal();
+
+                if (poll.getLeft() != null) q.offer(poll.getLeft());
+                if (poll.getRight() != null) q.offer(poll.getRight());
+            }
+
+            if (sum > maxSum) {
+                maxSum = sum;
+                maxSumLevel = currLevel;
+            }
+        }
+
+        return maxSumLevel;
+    }
+
     private enum CameraType {
         LEAF, PARENT, COVERED
     }

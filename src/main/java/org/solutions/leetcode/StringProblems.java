@@ -47,7 +47,7 @@ public class StringProblems {
 
     /**
      * Q.242 Valid Anagram
-     *
+     * <p>
      * Given two strings s and t , write a function to determine if t is an anagram of s.
      * <p>
      * Tags:: hashmap, string
@@ -71,7 +71,7 @@ public class StringProblems {
 
     /**
      * Q. 784 Letter Case Permutation
-     *
+     * <p>
      * Given a string S, we can transform every letter individually to be lowercase or uppercase to create another string.
      * Return a list of all possible strings we could create. You can return the output in any order.
      * <p>
@@ -131,7 +131,7 @@ public class StringProblems {
 
     /**
      * Q. 1461 Check If a String Contains All Binary Codes of Size K
-     *
+     * <p>
      * Given a binary string s and an integer k.
      * Return True if every binary code of length k is a substring of s. Otherwise, return False.
      * <p>
@@ -660,5 +660,58 @@ public class StringProblems {
         }
 
         return maxCount;
+    }
+
+    /**
+     * Q. 752 Open the Lock
+     * You have a lock in front of you with 4 circular wheels. Each wheel has 10 slots: '0', '1', '2', '3', '4', '5',
+     * '6', '7', '8', '9'. The wheels can rotate freely and wrap around: for example we can turn '9' to be '0',
+     * or '0' to be '9'. Each move consists of turning one wheel one slot.
+     * <p>
+     * The lock initially starts at '0000', a string representing the state of the 4 wheels.
+     * <p>
+     * You are given a list of deadends dead ends, meaning if the lock displays any of these codes, the wheels of the
+     * lock will stop turning and you will be unable to open it.
+     * <p>
+     * Given a target representing the value of the wheels that will unlock the lock, return the minimum total number
+     * of turns required to open the lock, or -1 if it is impossible.
+     * <p>
+     * tags:: bfs, string
+     */
+    public int openLock(String[] deadends, String target) {
+        Queue<String> q = new LinkedList<>();
+        Set<String> visited = new HashSet<>(Arrays.asList(deadends));
+        int level = 0;
+
+        if (visited.contains("0000"))
+            return -1;
+        q.offer(target);
+        while (!q.isEmpty()) {
+            for (int i = q.size(); i > 0; i--) {
+                String currState = q.poll();
+                if (!visited.add(currState)) continue;
+                if (currState.equals("0000")) return level;
+
+                for (String state : getNetLockStates(currState)) {
+                    if (!visited.contains(state)) {
+                        q.offer(state);
+                    }
+                }
+            }
+            level++;
+        }
+
+        return -1;
+    }
+
+    private List<String> getNetLockStates(String state) {
+        List<String> states = new ArrayList<>();
+        int n = state.length();
+        for (int i = 0; i < 4; i++) {
+            states.add(state.substring(0, i) + (((state.charAt(i) - '0') + 1) % 10) + state.substring(i + 1, n));
+            states.add(state.substring(0, i) + (((state.charAt(i) - '0') + 9) % 10) + state.substring(i + 1, n));
+        }
+
+        return states;
     }
 }

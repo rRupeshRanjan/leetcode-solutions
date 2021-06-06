@@ -13,5 +13,4 @@ class ShuffleArrayTest {
         System.out.println(Arrays.toString(shuffleArray.reset()));
         System.out.println(Arrays.toString(shuffleArray.shuffle()));
     }
-
 }

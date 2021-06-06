@@ -271,4 +271,72 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.maxProduct(input)));
     }
+
+    @Test
+    void testMaxArea() {
+        Map<Pair<Pair<Integer, Integer>, Pair<int[], int[]>>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(Pair.of(5, 4), Pair.of(new int[]{3, 1}, new int[]{1})), 6);
+        scenarios.put(Pair.of(Pair.of(5, 4), Pair.of(new int[]{3}, new int[]{3})), 9);
+        scenarios.put(Pair.of(Pair.of(5, 4), Pair.of(new int[]{1, 2, 4}, new int[]{1, 3})), 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.maxArea(input.getLeft().getLeft(), input.getLeft().getRight(),
+                        input.getRight().getLeft(), input.getRight().getRight())));
+    }
+
+    @Test
+    void testMaxDistToClosest() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 0, 0, 0, 1, 0, 1}, 2);
+        scenarios.put(new int[]{1, 0, 0, 0}, 3);
+        scenarios.put(new int[]{0, 1}, 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.maxDistToClosest(input)));
+    }
+
+    @Test
+    void testMaxSumRangeQuery() {
+        Map<Pair<int[], int[][]>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4, 5}, new int[][]{{1, 3}, {0, 1}}), 19);
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4, 5, 6}, new int[][]{{0, 1}}), 11);
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4, 5, 10}, new int[][]{{0, 2}, {1, 3}, {1, 1}}), 47);
+        scenarios.put(Pair.of(new int[]{1, 4, 5}, new int[][]{{0, 2}, {0, 1}, {1, 2}}), 25);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.maxSumRangeQuery(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testMaxPerformance() {
+        Map<Pair<Pair<Integer, Integer>, Pair<int[], int[]>>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(Pair.of(6, 2), Pair.of(new int[]{2, 10, 3, 1, 5, 8}, new int[]{5, 4, 3, 9, 7, 2})), 60);
+        scenarios.put(Pair.of(Pair.of(6, 3), Pair.of(new int[]{2, 10, 3, 1, 5, 8}, new int[]{5, 4, 3, 9, 7, 2})), 68);
+        scenarios.put(Pair.of(Pair.of(6, 4), Pair.of(new int[]{2, 10, 3, 1, 5, 8}, new int[]{5, 4, 3, 9, 7, 2})), 72);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.maxPerformance(
+                input.getLeft().getLeft(), input.getLeft().getRight(),
+                input.getRight().getLeft(), input.getRight().getRight()
+        )));
+    }
+
+    @Test
+    void testCarPooling() {
+        Map<Pair<int[][], Integer>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[][]{{2, 1, 5}, {3, 3, 7}}, 4), false);
+        scenarios.put(Pair.of(new int[][]{{2, 1, 5}, {3, 3, 7}}, 5), true);
+        scenarios.put(Pair.of(new int[][]{{2, 1, 5}, {3, 5, 7}}, 3), true);
+        scenarios.put(Pair.of(new int[][]{{3, 2, 7}, {3, 7, 9}, {8, 3, 9}}, 11), true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.carPooling(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testLongestConsecutive() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{100, 4, 200, 1, 3, 2}, 4);
+        scenarios.put(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}, 9);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.longestConsecutive(input)));
+    }
 }

@@ -8,6 +8,7 @@ import java.util.*;
 public class GridProblems {
 
     private final ArrayUtils arrayUtils;
+
     /**
      * Q. 52 N-Queens II
      * <p>
@@ -177,7 +178,7 @@ public class GridProblems {
 
         int[] result = new int[k];
         for (int i = k - 1; i >= 0; i--)
-            result[i] = pq.poll();
+            result[i] = pq.remove();
 
         return result;
     }
@@ -412,7 +413,7 @@ public class GridProblems {
             time += c[0];
             pq.add(c[0]);
             if (time > c[1]) {
-                time -= pq.poll();
+                time -= pq.remove();
             }
         }
 
