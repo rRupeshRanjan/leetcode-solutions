@@ -202,6 +202,27 @@ class ArrayProblemsTest {
     }
 
     @Test
+    void testJumpGameIII() {
+        Map<Pair<int[], Integer>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{4, 2, 3, 0, 3, 1, 2}, 5), true);
+        scenarios.put(Pair.of(new int[]{4, 2, 3, 0, 3, 1, 2}, 0), true);
+        scenarios.put(Pair.of(new int[]{3, 0, 2, 1, 2}, 2), false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.jumpGameIII(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testJumpGameIV() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{100, -23, -23, 404, 100, 23, 23, 23, 3, 404}, 3);
+        scenarios.put(new int[]{7, 6, 9, 6, 9, 6, 9, 7}, 1);
+        scenarios.put(new int[]{7}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.jumpGameIV(input)));
+    }
+
+    @Test
     void testIsPossibleToConstructTargetArray() {
         Map<int[], Boolean> scenarios = new HashMap<>();
         scenarios.put(new int[]{1, 1, 1, 2}, false);
@@ -338,5 +359,62 @@ class ArrayProblemsTest {
         scenarios.put(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}, 9);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.longestConsecutive(input)));
+    }
+
+    @Test
+    void testRotatedBinarySearch() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{4, 5, 6, 7, 0, 1, 2}, 0), 4);
+        scenarios.put(Pair.of(new int[]{4, 5, 6, 7, 0, 1, 2}, 1), 5);
+        scenarios.put(Pair.of(new int[]{4, 5, 6, 7, 0, 1, 2}, 2), 6);
+        scenarios.put(Pair.of(new int[]{4, 5, 6, 7, 0, 1, 2}, 3), -1);
+        scenarios.put(Pair.of(new int[]{4, 5, 6, 7, 0, 1, 2}, 4), 0);
+        scenarios.put(Pair.of(new int[]{4, 5, 6, 7, 0, 1, 2}, 5), 1);
+        scenarios.put(Pair.of(new int[]{4, 5, 6, 7, 0, 1, 2}, 6), 2);
+        scenarios.put(Pair.of(new int[]{4, 5, 6, 7, 0, 1, 2}, 7), 3);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.rotatedBinarySearch(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testCanCompleteCircuit() {
+        Map<Pair<int[], int[]>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4, 5}, new int[]{3, 4, 5, 1, 2}), 3);
+        scenarios.put(Pair.of(new int[]{2, 3, 4}, new int[]{3, 4, 5}), -1);
+        scenarios.put(Pair.of(new int[]{2, 3, 4}, new int[]{3, 4, 3}), -1);
+        scenarios.put(Pair.of(new int[]{3, 3, 4}, new int[]{3, 4, 3}), 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.canCompleteCircuit(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testFind132pattern() {
+        Map<int[], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3, 4}, false);
+        scenarios.put(new int[]{3, 1, 4, 2}, true);
+        scenarios.put(new int[]{-1, 3, 2, 0}, true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.find132pattern(input)));
+    }
+
+    @Test
+    void testMakesquare() {
+        Map<int[], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 1, 2, 2, 2}, true);
+        scenarios.put(new int[]{3, 3, 3, 3, 4}, false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.makesquare(input)));
+    }
+
+    @Test
+    void testCanPartitionKSubsets() {
+        Map<Pair<int[], Integer>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{4, 3, 2, 3, 5, 2, 1}, 4), true);
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4}, 3), false);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.canPartitionKSubsets(input.getLeft(), input.getRight())));
     }
 }

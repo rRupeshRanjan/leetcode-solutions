@@ -312,6 +312,15 @@ public class BinaryTreeProblems {
     }
 
     /**
+     * Q. 105 Construct Binary Tree from Preorder and Inorder Traversal
+     * Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and
+     * inorder is the inorder traversal of the same tree, construct and return the binary tree.
+     * <p>
+     * tags:: inorder, preorder, tree, dfs, array
+     */
+    private int buildTreePreOrderInorderRootIndex;
+
+    /**
      * Q. 1161 Maximum Level Sum of a Binary Tree
      * <p>
      * Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.
@@ -344,7 +353,34 @@ public class BinaryTreeProblems {
         return maxSumLevel;
     }
 
+    public TreeNode buildTreeFromPreorderInorder(int[] preorder, int[] inorder) {
+        buildTreePreOrderInorderRootIndex = 0;
+        return recurseBuildTreePreorderInorder(0, preorder.length - 1, preorder, inorder);
+    }
+
+    private TreeNode recurseBuildTreePreorderInorder(int start, int end, int[] preorder, int[] inorder) {
+        if (start > end)
+            return null;
+
+        TreeNode root = new TreeNode(preorder[buildTreePreOrderInorderRootIndex++]);
+        if (start == end)
+            return root;
+
+        int pos = start;
+        for (int i = start; i <= end; i++) {
+            if (inorder[i] == root.getVal()) {
+                pos = i;
+                break;
+            }
+        }
+
+        root.setLeft(recurseBuildTreePreorderInorder(start, pos - 1, preorder, inorder));
+        root.setRight(recurseBuildTreePreorderInorder(pos + 1, end, preorder, inorder));
+        return root;
+    }
+
     private enum CameraType {
         LEAF, PARENT, COVERED
     }
+
 }

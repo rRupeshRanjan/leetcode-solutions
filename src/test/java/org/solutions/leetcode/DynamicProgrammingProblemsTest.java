@@ -233,4 +233,18 @@ class DynamicProgrammingProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.maxSumMinProduct(input)));
     }
+
+    @Test
+    void testMinCostClimbingStairs() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{10, 15, 20}, 15);
+        scenarios.put(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}, 6);
+        scenarios.put(new int[]{100, 1}, 1);
+        scenarios.put(new int[]{1, 1}, 1);
+        scenarios.put(new int[]{1}, 0);
+        scenarios.put(new int[]{}, 0);
+        scenarios.put(null, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.minCostClimbingStairs(input)));
+    }
 }

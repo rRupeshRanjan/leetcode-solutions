@@ -525,4 +525,29 @@ public class DynamicProgrammingProblems {
         }
         return (int) (maxSum % 1000000007);
     }
+
+    /**
+     * Q. 746 Min Cost Climbing Stairs
+     * You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost,
+     * you can either climb one or two steps. You can either start from the step with index 0, or the step with index 1.
+     * <p>
+     * Return the minimum cost to reach the top of the floor.
+     * <p>
+     * tags:: dp, dynamicProgramming
+     */
+    public int minCostClimbingStairs(int[] cost) {
+        if (cost == null || cost.length < 2)
+            return 0;
+
+        int len = cost.length;
+        int oneStepBack = cost[1], twoStepBack = cost[0];
+
+        for (int i = 2; i < len; i++) {
+            int temp = oneStepBack;
+            oneStepBack = cost[i] + Math.min(oneStepBack, twoStepBack);
+            twoStepBack = temp;
+        }
+
+        return Math.min(oneStepBack, twoStepBack);
+    }
 }

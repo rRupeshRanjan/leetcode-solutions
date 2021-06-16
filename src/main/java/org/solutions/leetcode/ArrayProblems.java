@@ -507,6 +507,99 @@ public class ArrayProblems {
     }
 
     /**
+     * Q. 1306 Jump Game III
+     * <p>
+     * Given an array of non-negative integers arr, you are initially positioned at start index of the array.
+     * When you are at index i, you can jump to i+arr[i] or i-arr[i], check if you can reach to any index with value 0.
+     * <p>
+     * Notice that you can not jump outside of the array at any time.
+     * <p>
+     * tags::bfs, dfs
+     */
+    public boolean jumpGameIII(int[] arr, int start) {
+        if (start < 0 || start >= arr.length || arr[start] < 0)
+            return false;
+        return (arr[start] = -arr[start]) == 0 ||
+                jumpGameIII(arr, start + arr[start]) ||
+                jumpGameIII(arr, start - arr[start]);
+
+        /*
+        // bfs approach
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(start);
+
+        while(!q.isEmpty()) {
+            for(int i=q.size(); i>0; i--) {
+                int poll = q.poll();
+
+                if(arr[poll] == 0)
+                    return true;
+
+                int left = poll - arr[poll];
+                int right = poll + arr[poll];
+
+                arr[poll] = -arr[poll];
+                if(left>=0 && arr[left] >= 0) q.offer(left);
+                if(right<arr.length && arr[right] >= 0) q.offer(right);
+            }
+        }
+
+        return false;
+        */
+    }
+
+    /**
+     * Q. 1345 Jump Game IV
+     * <p>
+     * Given an array of integers arr, you are initially positioned at the first index of the array.
+     * <p>
+     * In one step you can jump from index i to index:
+     * i + 1 where: i + 1 < arr.length.
+     * i - 1 where: i - 1 >= 0.
+     * j where: arr[i] == arr[j] and i != j.
+     * Return the minimum number of steps to reach the last index of the array.
+     * Notice that you can not jump outside of the array at any time.
+     * <p>
+     * tags:: bfs
+     */
+    public int jumpGameIV(int[] arr) {
+        Queue<Integer> q = new LinkedList<>();
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        boolean[] visited = new boolean[arr.length];
+        int step = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            map.computeIfAbsent(arr[i], v -> new ArrayList<>()).add(i);
+        }
+
+        q.add(0);
+        visited[0] = true;
+
+        while ((!q.isEmpty())) {
+            for (int i = q.size(); i > 0; i--) {
+                int node = q.poll();
+
+                if (node == arr.length - 1)
+                    return step;
+
+                List<Integer> indices = map.getOrDefault(arr[node], new ArrayList<>());
+                indices.add(node + 1);
+                indices.add(node - 1);
+                for (int index : indices) {
+                    if (index >= 0 && index < arr.length && !visited[index]) {
+                        visited[index] = true;
+                        q.offer(index);
+                    }
+                }
+                map.remove(arr[node]);
+            }
+            step++;
+        }
+
+        return -1;
+    }
+
+    /**
      * 1354. Construct Target Array With Multiple Sums
      * <p>
      * You are given an array target of n integers. From a starting array arr consisting of n 1's,
@@ -896,5 +989,166 @@ public class ArrayProblems {
         }
 
         return maxStreak;
+    }
+
+    /**
+     * Q. 33 Search in Rotated Sorted Array
+     * There is an integer array nums sorted in ascending order (with distinct values).
+     * Prior to being passed to your function, nums is rotated at an unknown pivot index k (0 <= k < nums.length)
+     * such that resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed).
+     * For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].
+     * <p>
+     * Given the array nums after the rotation and an integer target,
+     * return the index of target if it is in nums, or -1 if it is not in nums.
+     * <p>
+     * You must write an algorithm with O(log n) runtime complexity.
+     * <p>
+     * tags:: binarySearch
+     */
+    public int rotatedBinarySearch(int[] nums, int target) {
+        int start = 0, end = nums.length - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] == target)
+                return mid;
+
+            if (nums[mid] < nums[start]) {
+                if (target > nums[mid] && target <= nums[end])
+                    start = mid + 1;
+                else
+                    end = mid - 1;
+            } else {
+                if (target >= nums[start] && target < nums[mid])
+                    end = mid - 1;
+                else
+                    start = mid + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Q. 134 Gas Station
+     * <p>
+     * There are n gas stations along a circular route, where the amount of gas at the ith station is gas[i].
+     * You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from the ith station to its
+     * next (i + 1)th station. You begin the journey with an empty tank at one of the gas stations.
+     * <p>
+     * Given two integer arrays gas and cost, return the starting gas station's index if you can travel around the
+     * circuit once in the clockwise direction, otherwise return -1.
+     * If there exists a solution, it is guaranteed to be unique
+     * <p>
+     * tags:: array, greedy
+     */
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int accumulate = 0, total = 0, start = 0;
+
+        for (int i = 0; i < gas.length; i++) {
+            total += gas[i] - cost[i];
+            if (accumulate + gas[i] < cost[i]) {
+                start = i + 1;
+                accumulate = 0;
+            } else {
+                accumulate += gas[i] - cost[i];
+            }
+        }
+
+        return (total >= 0) ? start : -1;
+    }
+
+    /**
+     * Q. 456 132 Pattern
+     * Given an array of n integers nums, a 132 pattern is a subsequence of three integers nums[i], nums[j] and nums[k]
+     * such that i < j < k and nums[i] < nums[k] < nums[j].
+     * <p>
+     * Return true if there is a 132 pattern in nums, otherwise, return false.
+     * <p>
+     * tags:: array,
+     * <p>
+     * TODO:: Improve to O(n)
+     */
+    public boolean find132pattern(int[] nums) {
+        if (nums.length <= 2)
+            return false;
+
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            min = Math.min(min, nums[i]);
+            if (nums[i] == min)
+                continue;
+
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] < nums[i] && nums[j] > min)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Q. 473 Matchsticks to Square
+     * You are given an integer array matchsticks where matchsticks[i] is the length of the ith matchstick. You want to
+     * use all the matchsticks to make one square. You should not break any stick, but you can link them up, and each
+     * matchstick must be used exactly one time.
+     * <p>
+     * Return true if you can make this square and false otherwise.
+     * <p>
+     * tags:: subsetSum, array dfs
+     */
+    public boolean makesquare(int[] nums) {
+        if (nums == null || nums.length < 4)
+            return false;
+
+        int sum = Arrays.stream(nums).sum();
+        if (sum % 4 != 0)
+            return false;
+
+        Arrays.sort(nums);
+        boolean[] visited = new boolean[nums.length];
+        return dfsSubSetSum(nums, visited, nums.length - 1, 0, sum / 4, 4);
+    }
+
+    /**
+     * Q. 698 Partition to K Equal Sum Subsets
+     * Given an integer array nums and an integer k, return true if it is possible to divide this array into
+     * k non-empty subsets whose sums are all equal.
+     * <p>
+     * tags:: subsetSum, array, dfs
+     */
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        if (nums == null || nums.length < k)
+            return false;
+
+        int sum = Arrays.stream(nums).sum();
+        if (sum % k != 0)
+            return false;
+
+        Arrays.sort(nums);
+        boolean[] visited = new boolean[nums.length];
+        return dfsSubSetSum(nums, visited, nums.length - 1, 0, sum / k, k);
+    }
+
+    /**
+     * helper dfs method fo k subsets with equal sum
+     */
+    private boolean dfsSubSetSum(int[] nums, boolean[] visited, int index, int sum, int target, int round) {
+        if (round == 0)
+            return true;
+
+        if (sum == target && dfsSubSetSum(nums, visited, nums.length - 1, 0, target, round - 1))
+            return true;
+
+        for (int i = index; i >= 0; i--) {
+            if (!visited[i] && sum + nums[i] <= target) {
+                visited[i] = true;
+                if (dfsSubSetSum(nums, visited, i - 1, sum + nums[i], target, round))
+                    return true;
+                visited[i] = false;
+            }
+        }
+        return false;
     }
 }

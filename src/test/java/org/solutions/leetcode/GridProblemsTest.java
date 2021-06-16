@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -144,8 +143,7 @@ class GridProblemsTest {
                 Arrays.asList(".Q..", "...Q", "Q...", "..Q."),
                 Arrays.asList("..Q.", "Q...", "...Q", ".Q..")));
 
-        scenarios.forEach((input, expected) ->
-                assertTrue(areNestedListsEqual(expected, gridProblems.solveNQueens(input))));
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.solveNQueens(input)));
     }
 
     @Test
@@ -164,6 +162,48 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.totalNQueens(input)));
     }
 
+    @Test
+    void testAllPathsSourceTarget() {
+        Map<int[][], List<List<Integer>>> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1}, {}}, Collections.singletonList(Arrays.asList(0, 1)));
+        scenarios.put(new int[][]{{1, 2}, {3}, {3}, {}}, Arrays.asList(Arrays.asList(0, 1, 3), Arrays.asList(0, 2, 3)));
+        scenarios.put(new int[][]{{1, 3}, {2}, {3}, {}}, Arrays.asList(Arrays.asList(0, 1, 2, 3), Arrays.asList(0, 3)));
+
+        scenarios.put(new int[][]{{4, 3, 1}, {3, 2, 4}, {3}, {4}, {}}, Arrays.asList(
+                Arrays.asList(0, 4),
+                Arrays.asList(0, 3, 4),
+                Arrays.asList(0, 1, 3, 4),
+                Arrays.asList(0, 1, 2, 3, 4),
+                Arrays.asList(0, 1, 4)));
+
+        scenarios.put(new int[][]{{1, 2, 3}, {2}, {3}, {}}, Arrays.asList(
+                Arrays.asList(0, 1, 2, 3),
+                Arrays.asList(0, 2, 3),
+                Arrays.asList(0, 3)));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.allPathsSourceTarget(input)));
+    }
+
+    @Test
+    void testMaxDistance() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 0, 1}, {0, 0, 0}, {1, 0, 1}}, 2);
+        scenarios.put(new int[][]{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}}, 4);
+        scenarios.put(new int[][]{{1, 1}, {1, 1}}, -1);
+        scenarios.put(new int[][]{{0, 0}, {0, 0}}, -1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.maxDistance(input)));
+    }
+
+    @Test
+    void testUpdate01Matrix() {
+        Map<int[][], int[][]> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}, new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}});
+        scenarios.put(new int[][]{{0, 0, 0}, {0, 1, 0}, {1, 1, 1}}, new int[][]{{0, 0, 0}, {0, 1, 0}, {1, 2, 1}});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, gridProblems.update01Matrix(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))
@@ -171,14 +211,5 @@ class GridProblemsTest {
         }
 
         return false;
-    }
-
-    private <T> boolean areNestedListsEqual(List<List<T>> a, List<List<T>> b) {
-        return a.stream()
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList())
-                .equals(b.stream()
-                        .flatMap(Collection::stream)
-                        .collect(Collectors.toList()));
     }
 }

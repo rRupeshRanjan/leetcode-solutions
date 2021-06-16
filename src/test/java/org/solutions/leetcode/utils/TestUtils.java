@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestUtils {
-    public boolean areTreeEqualByValue(TreeNode node1, TreeNode node2) {
+    public boolean areTreesEqualByValue(TreeNode node1, TreeNode node2) {
         if (node1 == null && node2 == null)
             return true;
         if (node1 == null || node2 == null)
             return false;
         return (node1.getVal() == node2.getVal() &&
-                areTreeEqualByValue(node1.getLeft(), node2.getLeft()) &&
-                areTreeEqualByValue(node1.getRight(), node2.getRight())
+                areTreesEqualByValue(node1.getLeft(), node2.getLeft()) &&
+                areTreesEqualByValue(node1.getRight(), node2.getRight())
         );
     }
 

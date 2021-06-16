@@ -516,4 +516,124 @@ public class GridProblems {
             antiDiagonals[antiDiag] = false;
         }
     }
+
+    /**
+     * Q. 797 All Paths From Source to Target
+     * Given a directed acyclic graph (DAG) of n nodes labeled from 0 to n - 1, find all possible paths from node 0 to
+     * node n - 1, and return them in any order.
+     * <p>
+     * The graph is given as follows:
+     * graph[i] is a list of all nodes you can visit from node i
+     * (i.e., there is a directed edge from node i to node graph[i][j]).
+     * <p>
+     * tags:: dfs, backtracking, graph
+     */
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfsAllPathsSourceTarget(graph, 0, new ArrayList<>(Collections.singletonList(0)), result);
+        return result;
+    }
+
+    private void dfsAllPathsSourceTarget(int[][] graph, int index, List<Integer> holder, List<List<Integer>> result) {
+        if (index == graph.length - 1) {
+            result.add(new ArrayList<>(holder));
+            return;
+        }
+
+        for (int num : graph[index]) {
+            holder.add(num);
+            dfsAllPathsSourceTarget(graph, num, holder, result);
+            holder.remove(holder.size() - 1);
+        }
+    }
+
+    /**
+     * Q. 1162 As Far from Land as Possible
+     * <p>
+     * Given an n x n grid containing only values 0 and 1, where 0 represents water and 1 represents land, find a water
+     * cell such that its distance to the nearest land cell is maximized, and return the distance.
+     * If no land or water exists in the grid, return -1.
+     * <p>
+     * The distance used in this problem is the Manhattan distance:
+     * the distance between two cells (x0, y0) and (x1, y1) is |x0 - x1| + |y0 - y1|.
+     * <p>
+     * tags:: bfs
+     */
+    public int maxDistance(int[][] grid) {
+        Queue<int[]> q = new LinkedList<>();
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+        int n = grid.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    q.add(new int[]{i, j});
+                }
+            }
+        }
+        if (q.isEmpty() || q.size() == n * n)
+            return -1;
+
+        int count = -1;
+        while (!q.isEmpty()) {
+            count++;
+            for (int i = q.size(); i > 0; i--) {
+                int[] poll = q.poll();
+                for (int[] dir : dirs) {
+                    int nextI = poll[0] + dir[0];
+                    int nextJ = poll[1] + dir[1];
+
+                    if (nextI < 0 || nextJ < 0 || nextI == n || nextJ == n || grid[nextI][nextJ] == 1)
+                        continue;
+                    grid[nextI][nextJ] = 1;
+                    q.add(new int[]{nextI, nextJ});
+                }
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * Q. 542 01 Matrix
+     * <p>
+     * Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell.
+     * The distance between two adjacent cells is 1.
+     * <p>
+     * tags:: bfs
+     */
+    public int[][] update01Matrix(int[][] mat) {
+        Queue<int[]> q = new LinkedList<>();
+        int m = mat.length, n = mat[0].length;
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+        int[][] dist = new int[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 0) {
+                    q.offer(new int[]{i, j});
+                } else {
+                    dist[i][j] = Integer.MAX_VALUE;
+                }
+            }
+        }
+
+        while (!q.isEmpty()) {
+            for (int i = q.size(); i > 0; i--) {
+                int[] poll = q.poll();
+                for (int[] dir : dirs) {
+                    int nextI = poll[0] + dir[0];
+                    int nextJ = poll[1] + dir[1];
+
+                    if (nextI < 0 || nextJ < 0 || nextI == m || nextJ == n || dist[nextI][nextJ] <= dist[poll[0]][poll[1]] + 1)
+                        continue;
+
+                    dist[nextI][nextJ] = dist[poll[0]][poll[1]] + 1;
+                    q.offer(new int[]{nextI, nextJ});
+                }
+            }
+        }
+
+        return dist;
+    }
 }

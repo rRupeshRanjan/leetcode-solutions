@@ -4,21 +4,22 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.dataStructures.TreeNode;
-import org.solutions.leetcode.utils.TreeUtils;
+import org.solutions.leetcode.utils.TestUtils;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BinaryTreeProblemsTest {
 
     private static BinaryTreeProblems binaryTreeProblems;
-    private static TreeUtils treeUtils;
+    private static TestUtils testUtils;
 
     @BeforeAll
     static void setup() {
         binaryTreeProblems = new BinaryTreeProblems();
-        treeUtils = new TreeUtils();
+        testUtils = new TestUtils();
     }
 
     @Test
@@ -130,5 +131,16 @@ class BinaryTreeProblemsTest {
                 new TreeNode(10250, new TreeNode(98693), new TreeNode(-89388, null, -32127))), 2);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.maxLevelSum(input)));
+    }
+
+    @Test
+    void testBuildTreeFromPreorderInorder() {
+        Map<Pair<int[], int[]>, TreeNode> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{3, 9, 20, 15, 7}, new int[]{9, 3, 15, 20, 7}),
+                new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)));
+        scenarios.put(Pair.of(new int[]{-1}, new int[]{-1}), new TreeNode(-1));
+
+        scenarios.forEach((input, expected) -> assertTrue(testUtils.areTreesEqualByValue(expected,
+                binaryTreeProblems.buildTreeFromPreorderInorder(input.getLeft(), input.getRight()))));
     }
 }
