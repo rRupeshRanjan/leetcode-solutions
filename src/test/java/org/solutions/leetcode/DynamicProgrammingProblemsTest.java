@@ -247,4 +247,13 @@ class DynamicProgrammingProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.minCostClimbingStairs(input)));
     }
+
+    @Test
+    void testLongestLine() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 1}}, 3);
+        scenarios.put(new int[][]{{1, 1, 1, 1}, {0, 1, 1, 0}, {0, 0, 0, 1}}, 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.longestLine(input)));
+    }
 }

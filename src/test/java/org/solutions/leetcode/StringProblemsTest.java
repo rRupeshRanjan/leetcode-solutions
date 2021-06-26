@@ -304,4 +304,49 @@ class StringProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected,
                 stringProblems.openLock(input.getLeft(), input.getRight())));
     }
+
+    @Test
+    void testGenerateParenthesis() {
+        Map<Integer, List<String>> scenarios = new HashMap<>();
+        scenarios.put(3, Arrays.asList("((()))", "(()())", "(())()", "()(())", "()()()"));
+        scenarios.put(1, Arrays.asList("()"));
+
+        scenarios.forEach((input, expected) ->
+                assertTrue(expected.containsAll(stringProblems.generateParenthesis(input)))
+        );
+    }
+
+    @Test
+    void testNumMatchingSubseq() {
+        Map<Pair<String, String[]>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("abcde", new String[]{"a", "bb", "acd", "ace"}), 3);
+        scenarios.put(Pair.of("dsahjpjauf", new String[]{"ahjpjau", "ja", "ahbwzgqnuk", "tnmlanowax"}), 2);
+        scenarios.put(Pair.of("btovxbkumc", new String[]{"btovxbku", "to", "zueoxxxjme", "yjkclbkbtl"}), 2);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, stringProblems.numMatchingSubseq(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testGetHint() {
+        Map<Pair<String, String>, String> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("1807", "7810"), "1A3B");
+        scenarios.put(Pair.of("1123", "0111"), "1A1B");
+        scenarios.put(Pair.of("1", "0"), "0A0B");
+        scenarios.put(Pair.of("1", "1"), "1A0B");
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, stringProblems.getHint(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testDecodeString() {
+        Map<String, String> scenarios = new HashMap<>();
+        scenarios.put("3[a]2[bc]", "aaabcbc");
+        scenarios.put("3[a2[c]]", "accaccacc");
+        scenarios.put("2[abc]3[cd]ef", "abcabccdcdcdef");
+        scenarios.put("abc3[cd]xyz", "abccdcdcdxyz");
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.decodeString(input)));
+    }
 }

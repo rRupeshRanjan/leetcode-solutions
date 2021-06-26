@@ -5,10 +5,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -395,17 +392,21 @@ class ArrayProblemsTest {
         scenarios.put(new int[]{1, 2, 3, 4}, false);
         scenarios.put(new int[]{3, 1, 4, 2}, true);
         scenarios.put(new int[]{-1, 3, 2, 0}, true);
+        scenarios.put(new int[]{-1, 3}, false);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.find132pattern(input)));
     }
 
     @Test
-    void testMakesquare() {
+    void testMakeSquare() {
         Map<int[], Boolean> scenarios = new HashMap<>();
         scenarios.put(new int[]{1, 1, 2, 2, 2}, true);
         scenarios.put(new int[]{3, 3, 3, 3, 4}, false);
+        scenarios.put(new int[]{3, 3, 3}, false);
+        scenarios.put(new int[]{3, 3, 3, 3, 3}, false);
+        scenarios.put(null, false);
 
-        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.makesquare(input)));
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.makeSquare(input)));
     }
 
     @Test
@@ -413,8 +414,95 @@ class ArrayProblemsTest {
         Map<Pair<int[], Integer>, Boolean> scenarios = new HashMap<>();
         scenarios.put(Pair.of(new int[]{4, 3, 2, 3, 5, 2, 1}, 4), true);
         scenarios.put(Pair.of(new int[]{1, 2, 3, 4}, 3), false);
+        scenarios.put(Pair.of(new int[]{1, 2}, 3), false);
+        scenarios.put(Pair.of(null, 3), false);
 
         scenarios.forEach((input, expected) ->
                 assertEquals(expected, arrayProblems.canPartitionKSubsets(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testNumSubarrayBoundedMax() {
+        Map<Triple<int[], Integer, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(new int[]{2, 1, 4, 3}, 2, 3), 3);
+        scenarios.put(Triple.of(new int[]{73, 55, 36, 5, 55, 14, 9, 7, 72, 52}, 32, 69), 22);
+        scenarios.put(Triple.of(new int[]{73, 55, 36, 5, 55, 14, 9}, 32, 69), 17);
+        scenarios.put(Triple.of(new int[]{73, 55, 36, 5, 55, 14, 9, 14}, 32, 69), 21);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.numSubarrayBoundedMax(input.getLeft(), input.getMiddle(), input.getRight()))
+        );
+    }
+
+    @Test
+    void testBagOfTokensScore() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{100}, 50), 0);
+        scenarios.put(Pair.of(new int[]{100, 200}, 150), 1);
+        scenarios.put(Pair.of(new int[]{100, 400, 300, 200}, 200), 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.bagOfTokensScore(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testThreeSum() {
+        Map<int[], List<List<Integer>>> scenarios = new HashMap<>();
+        scenarios.put(new int[]{-1, 0, 1, 2, -1, -4}, Arrays.asList(Arrays.asList(-1, -1, 2), Arrays.asList(-1, 0, 1)));
+        scenarios.put(new int[]{-1, 0, 1, 1, 2, 2, -1}, Arrays.asList(Arrays.asList(-1, -1, 2), Arrays.asList(-1, 0, 1)));
+        scenarios.put(new int[]{-1, 0, 1, 1, 2, -1}, Arrays.asList(Arrays.asList(-1, -1, 2), Arrays.asList(-1, 0, 1)));
+        scenarios.put(new int[]{}, Collections.emptyList());
+        scenarios.put(new int[]{0}, Collections.emptyList());
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.threeSum(input)));
+    }
+
+    @Test
+    void testThreeSumClosest() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{-1, 0, 1, 2, -1, -4}, 0), 0);
+        scenarios.put(Pair.of(new int[]{-1, 0, 1, 2, 1, -4}, 0), 0);
+        scenarios.put(Pair.of(new int[]{-1, 2, 1, -4}, 1), 2);
+        scenarios.put(Pair.of(new int[]{0, 2, 1, -3}, 1), 0);
+        scenarios.put(Pair.of(new int[]{0, 2, 1}, 3), 3);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.threeSumClosest(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testInsertMergeInterval() {
+        Map<Pair<int[][], int[]>, int[][]> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[][]{{1, 3}, {6, 9}}, new int[]{2, 5}), new int[][]{{1, 5}, {6, 9}});
+        scenarios.put(Pair.of(new int[][]{{1, 2}, {3, 5}, {6, 7}, {8, 10}, {12, 16}}, new int[]{4, 8}),
+                new int[][]{{1, 2}, {3, 10}, {12, 16}});
+        scenarios.put(Pair.of(new int[][]{}, new int[]{5, 7}), new int[][]{{5, 7}});
+        scenarios.put(Pair.of(new int[][]{{1, 5}}, new int[]{2, 3}), new int[][]{{1, 5}});
+        scenarios.put(Pair.of(new int[][]{{1, 5}}, new int[]{2, 7}), new int[][]{{1, 7}});
+
+        scenarios.forEach((input, expected) ->
+                assertArrayEquals(expected, arrayProblems.insertMergeInterval(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testMergeInterval() {
+        Map<int[][], int[][]> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}}, new int[][]{{1, 6}, {8, 10}, {15, 18}});
+        scenarios.put(new int[][]{{1, 4}, {4, 5}}, new int[][]{{1, 5}});
+        scenarios.put(new int[][]{{1, 3}, {4, 5}}, new int[][]{{1, 3}, {4, 5}});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, arrayProblems.mergeInterval(input)));
+    }
+
+    @Test
+    void testCountSmaller() {
+        Map<int[], List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(new int[]{5, 2, 6, 1}, Arrays.asList(2, 1, 1, 0));
+        scenarios.put(new int[]{5, 6, 7, 8}, Arrays.asList(0, 0, 0, 0));
+        scenarios.put(new int[]{-1, -2}, Arrays.asList(1, 0));
+        scenarios.put(new int[]{-1, -1}, Arrays.asList(0, 0));
+        scenarios.put(new int[]{-1}, Collections.singletonList(0));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.countSmaller(input)));
     }
 }

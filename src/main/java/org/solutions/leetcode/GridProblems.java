@@ -636,4 +636,199 @@ public class GridProblems {
 
         return dist;
     }
+
+    /**
+     * Q. 130. Surrounded Regions
+     * <p>
+     * Given an m x n matrix board containing 'X' and 'O', capture all regions surrounded by 'X'.
+     * A region is captured by flipping all 'O's into 'X's in that surrounded region.
+     * <p>
+     * tags:: dfs, bfs
+     */
+    public void coverSurroundedRegions(char[][] board) {
+        int rows = board.length, cols = board[0].length;
+        List<int[]> borders = new ArrayList<>();
+
+        for (int i = 0; i < rows; i++) {
+            borders.add(new int[]{i, 0});
+            borders.add(new int[]{i, cols - 1});
+        }
+
+        for (int i = 0; i < cols; i++) {
+            borders.add(new int[]{0, i});
+            borders.add(new int[]{rows - 1, i});
+        }
+
+        for (int[] border : borders) {
+            dfsCoverSurroundedRegions(board, border[0], border[1]);
+        }
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (board[i][j] == 'O')
+                    board[i][j] = 'X';
+                else if (board[i][j] == 'E')
+                    board[i][j] = 'O';
+            }
+        }
+    }
+
+    private void dfsCoverSurroundedRegions(char[][] board, int i, int j) {
+        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || board[i][j] != 'O')
+            return;
+
+        board[i][j] = 'E';
+        dfsCoverSurroundedRegions(board, i, j + 1);
+        dfsCoverSurroundedRegions(board, i, j - 1);
+        dfsCoverSurroundedRegions(board, i + 1, j);
+        dfsCoverSurroundedRegions(board, i - 1, j);
+    }
+
+    /**
+     * Q. 684. Redundant Connection
+     * In this problem, a tree is an undirected graph that is connected and has no cycles.
+     * <p>
+     * You are given a graph that started as a tree with n nodes labeled from 1 to n, with one additional edge added.
+     * The added edge has two different vertices chosen from 1 to n, and was not an edge that already existed.
+     * The graph is represented as an array edges of length n where edges[i] = [ai, bi] indicates
+     * that there is an edge between nodes ai and bi in the graph.
+     * <p>
+     * Return an edge that can be removed so that the resulting graph is a tree of n nodes.
+     * If there are multiple answers, return the answer that occurs last in the input.
+     * <p>
+     * tags:: graph, union-find
+     */
+    public int[] findRedundantConnection(int[][] edges) {
+        int MAX_EDGE_VAL = 1000;
+        int[] parent = new int[MAX_EDGE_VAL + 1];
+        for (int i = 0; i < MAX_EDGE_VAL; i++)
+            parent[i] = i;
+
+        for (int[] edge : edges) {
+            int xParent = find(parent, edge[0]);
+            int yParent = find(parent, edge[1]);
+
+            if (xParent == yParent)
+                return edge;
+            else
+                parent[xParent] = yParent;
+        }
+
+        return new int[]{};
+    }
+
+    private int find(int[] parent, int x) {
+        if (parent[x] != x)
+            parent[x] = find(parent, parent[x]);
+        return parent[x];
+    }
+
+    /**
+     * Q. 695. Max Area of Island
+     * <p>
+     * You are given an m x n binary matrix grid. An island is a group of 1's (representing land) connected
+     * 4-directionally (horizontal or vertical) You may assume all four edges of the grid are surrounded by water.
+     * <p>
+     * The area of an island is the number of cells with a value 1 in the island.
+     * Return the maximum area of an island in grid. If there is no island, return 0.
+     * <p>
+     * tags:: bfs
+     */
+    public int maxAreaOfIsland(int[][] grid) {
+        int maxArea = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1)
+                    maxArea = Math.max(maxArea, bfsMaxAreaOfIsland(grid, i, j));
+            }
+        }
+
+        return maxArea;
+    }
+
+    private int bfsMaxAreaOfIsland(int[][] grid, int i, int j) {
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] != 1)
+            return 0;
+
+        grid[i][j] = 0;
+        return 1 + bfsMaxAreaOfIsland(grid, i - 1, j) +
+                bfsMaxAreaOfIsland(grid, i + 1, j) +
+                bfsMaxAreaOfIsland(grid, i, j - 1) +
+                bfsMaxAreaOfIsland(grid, i, j + 1);
+    }
+
+    /**
+     * Q. 200. Number of Islands
+     * <p>
+     * Given an m x n 2D binary grid grid which represents a map of '1' (land) and '0' (water), return number of islands.
+     * <p>
+     * An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
+     * You may assume all four edges of the grid are all surrounded by water.
+     * <p>
+     * tags:: bfs
+     */
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1') {
+                    count++;
+                    bfsNumIslands(grid, i, j);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private void bfsNumIslands(char[][] grid, int i, int j) {
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] != '1')
+            return;
+
+        grid[i][j] = '0';
+        bfsNumIslands(grid, i - 1, j);
+        bfsNumIslands(grid, i + 1, j);
+        bfsNumIslands(grid, i, j - 1);
+        bfsNumIslands(grid, i, j + 1);
+    }
+
+    /**
+     * Q. 1319. Number of Operations to Make Network Connected
+     * <p>
+     * There are n computers numbered from 0 to n-1 connected by ethernet cables connections forming a network
+     * where connections[i] = [a, b] represents a connection between computers a and b. Any computer can reach any other
+     * computer directly or indirectly through the network.
+     * <p>
+     * Given an initial computer network connections. You can extract certain cables between two directly connected
+     * computers, and place them between any pair of disconnected computers to make them directly connected.
+     * Return the minimum number of times you need to do this in order to make all the computers connected.
+     * If it's not possible, return -1.
+     * <p>
+     * tags:: union-find
+     */
+    public int makeConnected(int n, int[][] connections) {
+        int[] parent = new int[n];
+        int cycles = 0, unlinked = -1;
+
+        for (int i = 0; i < n; i++)
+            parent[i] = i;
+
+        for (int[] conn : connections) {
+            int xParent = find(parent, conn[0]);
+            int yParent = find(parent, conn[1]);
+
+            if (xParent == yParent)
+                cycles++;
+            else
+                parent[xParent] = yParent;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (parent[i] == i)
+                unlinked++;
+        }
+
+        return (cycles >= unlinked) ? unlinked : -1;
+    }
 }

@@ -204,6 +204,81 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertArrayEquals(expected, gridProblems.update01Matrix(input)));
     }
 
+    @Test
+    void testCoverSurroundedRegions() {
+        Map<char[][], char[][]> scenarios = new HashMap<>();
+        scenarios.put(
+                new char[][]{{'X', 'X', 'X', 'X'}, {'X', 'O', 'O', 'X'}, {'X', 'X', 'O', 'X'}, {'X', 'O', 'X', 'X'}},
+                new char[][]{{'X', 'X', 'X', 'X'}, {'X', 'X', 'X', 'X'}, {'X', 'X', 'X', 'X'}, {'X', 'O', 'X', 'X'}});
+        scenarios.put(new char[][]{{'X', 'X'}}, new char[][]{{'X', 'X'}});
+        scenarios.put(new char[][]{{'O', 'O'}}, new char[][]{{'O', 'O'}});
+
+        scenarios.forEach((input, expected) -> {
+            gridProblems.coverSurroundedRegions(input);
+            assertArrayEquals(expected, input);
+        });
+    }
+
+    @Test
+    void testFindRedundantConnection() {
+        Map<int[][], int[]> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 2}, {1, 3}, {2, 3}}, new int[]{2, 3});
+        scenarios.put(new int[][]{{1, 2}, {2, 3}, {3, 4}, {1, 4}, {1, 5}}, new int[]{1, 4});
+        scenarios.put(new int[][]{}, new int[]{});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, gridProblems.findRedundantConnection(input)));
+    }
+
+    @Test
+    void testMaxAreaOfIsland() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{
+                {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}}, 6);
+        scenarios.put(new int[][]{{0, 0, 0, 0, 0, 0, 0, 0}}, 0);
+        scenarios.put(new int[][]{{0, 1, 1, 1, 1, 1, 1, 0}}, 6);
+        scenarios.put(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, 8);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.maxAreaOfIsland(input)));
+    }
+
+    @Test
+    void testNumIslands() {
+        Map<char[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new char[][]{
+                {'1', '1', '1', '1', '0'},
+                {'1', '1', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '0'}}, 1);
+        scenarios.put(new char[][]{
+                {'1', '0', '1', '1', '0'},
+                {'1', '0', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '1'}}, 3);
+        scenarios.put(new char[][]{{'1'}}, 1);
+        scenarios.put(new char[][]{{'0'}}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.numIslands(input)));
+    }
+
+    @Test
+    void testMakeConnected() {
+        Map<Pair<Integer, int[][]>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(4, new int[][]{{0, 1}, {0, 2}, {1, 2}}), 1);
+        scenarios.put(Pair.of(6, new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}}), 2);
+        scenarios.put(Pair.of(6, new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 2}}), -1);
+        scenarios.put(Pair.of(5, new int[][]{{0, 1}, {0, 2}, {3, 4}, {2, 3}}), 0);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, gridProblems.makeConnected(input.getLeft(), input.getRight())));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

@@ -714,4 +714,149 @@ public class StringProblems {
 
         return states;
     }
+
+    /**
+     * Q. 22 Generate Parentheses
+     * <p>
+     * Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+     * <p>
+     * tags:: backtracking, string, recursion
+     */
+    public List<String> generateParenthesis(int n) {
+        List<String> answer = new ArrayList<>();
+        backtrackGenerateParenthesis(new StringBuilder(), answer, 0, 0, n);
+        return answer;
+    }
+
+    private void backtrackGenerateParenthesis(StringBuilder sb, List<String> ans, int open, int close, int max) {
+        if (sb.length() == 2 * max) {
+            ans.add(sb.toString());
+            return;
+        }
+
+        if (open < max) {
+            sb.append('(');
+            backtrackGenerateParenthesis(sb, ans, open + 1, close, max);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+        if (close < open) {
+            sb.append(')');
+            backtrackGenerateParenthesis(sb, ans, open, close + 1, max);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+    }
+
+    /**
+     *
+     */
+    public int numMatchingSubseq(String s, String[] words) {
+        List<String>[] str = new ArrayList[26];
+        for (int i = 0; i < 26; i++) {
+            str[i] = new ArrayList<>();
+        }
+
+        for (String word : words) {
+            str[word.charAt(0) - 'a'].add(word);
+        }
+
+        int count = 0;
+        for (char ch : s.toCharArray()) {
+            List<String> starting = str[ch - 'a'];
+            str[ch - 'a'] = new ArrayList<>();
+            for (String st : starting) {
+                if (st.length() == 1)
+                    count++;
+                else {
+                    String rem = st.substring(1);
+                    str[rem.charAt(0) - 'a'].add(rem);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * Q. 299. Bulls and Cows
+     * <p>
+     * You are playing the Bulls and Cows game with your friend.
+     * <p>
+     * You write down a secret number and ask your friend to guess what the number is.
+     * When your friend makes a guess, you provide a hint with the following info:
+     * <p>
+     * The number of "bulls", which are digits in guess that are in correct position.
+     * The number of "cows", which are digits in guess that are in your secret number but are located in wrong position.
+     * Specifically, the non-bull digits in the guess that could be rearranged such that they become bulls.
+     * <p>
+     * Given the secret number secret and your friend's guess guess, return the hint for your friend's guess.
+     * <p>
+     * The hint should be formatted as "xAyB", where x is the number of bulls and y is the number of cows.
+     * Note that both secret and guess may contain duplicate digits.
+     * <p>
+     * tags:: string
+     */
+    public String getHint(String secret, String guess) {
+        int bulls = 0, cows = 0;
+        int[] arr = new int[10];
+
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret.charAt(i) == guess.charAt(i)) {
+                bulls++;
+            } else {
+                if (arr[secret.charAt(i) - '0']++ < 0) cows++;
+                if (arr[guess.charAt(i) - '0']-- > 0) cows++;
+            }
+        }
+
+        return bulls + "A" + cows + "B";
+    }
+
+    /**
+     * Q. 394. Decode String
+     * <p>
+     * Given an encoded string, return its decoded string.
+     * The encoding rule is:
+     * k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times.
+     * Note that k is guaranteed to be a positive integer.
+     * <p>
+     * You may assume that the input string is always valid, No extra white spaces, square brackets are well-formed, etc.
+     * <p>
+     * Furthermore, you may assume that the original data does not contain any digits and that digits are
+     * only for those repeat numbers, k. For example, there won't be input like 3a or 2[4].
+     * <p>
+     * tags:: string, stack
+     */
+    public String decodeString(String s) {
+        Stack<Integer> countStack = new Stack<>();
+        Stack<StringBuilder> stringStack = new Stack<>();
+        StringBuilder res = new StringBuilder();
+        int i = 0;
+
+        while (i < s.length()) {
+            if (Character.isDigit(s.charAt(i))) {
+                int num = 0;
+                while (Character.isDigit(s.charAt(i))) {
+                    num = num * 10 + (s.charAt(i) - '0');
+                    i++;
+                }
+                countStack.push(num);
+            } else if (s.charAt(i) == '[') {
+                stringStack.push(res);
+                res = new StringBuilder();
+                i++;
+            } else if (s.charAt(i) == ']') {
+                StringBuilder temp = new StringBuilder(stringStack.pop());
+                int count = countStack.pop();
+                temp.append(String.valueOf(res).repeat(Math.max(0, count)));
+                res = temp;
+                i++;
+            } else {
+                res.append(s.charAt(i++));
+            }
+        }
+
+        return res.toString();
+    }
 }

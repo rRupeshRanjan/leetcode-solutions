@@ -1067,22 +1067,23 @@ public class ArrayProblems {
      * <p>
      * tags:: array,
      * <p>
-     * TODO:: Improve to O(n)
      */
     public boolean find132pattern(int[] nums) {
         if (nums.length <= 2)
             return false;
 
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            min = Math.min(min, nums[i]);
-            if (nums[i] == min)
-                continue;
+        Stack<Integer> stack = new Stack<>();
+        int[] min = new int[nums.length];
+        min[0] = nums[0];
+        for (int i = 1; i < nums.length; i++)
+            min[i] = Math.min(min[i - 1], nums[i]);
 
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[j] < nums[i] && nums[j] > min)
-                    return true;
-            }
+        for (int i = nums.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && stack.peek() <= min[i])
+                stack.pop();
+            if (!stack.isEmpty() && stack.peek() < nums[i])
+                return true;
+            stack.push(nums[i]);
         }
 
         return false;
@@ -1098,7 +1099,7 @@ public class ArrayProblems {
      * <p>
      * tags:: subsetSum, array dfs
      */
-    public boolean makesquare(int[] nums) {
+    public boolean makeSquare(int[] nums) {
         if (nums == null || nums.length < 4)
             return false;
 
@@ -1150,5 +1151,236 @@ public class ArrayProblems {
             }
         }
         return false;
+    }
+
+    /**
+     * Q. 795 Number of Subarrays with Bounded Maximum
+     * <p>
+     * We are given an array nums of positive integers, and two positive integers left and right (left <= right).
+     * <p>
+     * Return the number of (contiguous, non-empty) subarrays such that the value of the maximum array element
+     * in that subarray is at least left and at most right.
+     * <p>
+     * tags:: array, twoPointer
+     */
+    public int numSubarrayBoundedMax(int[] nums, int left, int right) {
+        int start = -1, end = -1, count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > right) {
+                start = i;
+                end = i;
+            } else if (nums[i] < left) {
+                count += end - start;
+            } else {
+                end = i;
+                count += end - start;
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * Q. 948. Bag of Tokens
+     * <p>
+     * You have an initial power of power, an initial score of 0, and a bag of tokens
+     * where tokens[i] is the value of the ith token (0-indexed).
+     * Your goal is to maximize your total score by potentially playing each token in one of two ways:
+     * If your current power is >= tokens[i], you may play ith token face up, losing tokens[i] power & gaining 1 score.
+     * If your current score is >= 1, you may play ith token face down, gaining tokens[i] power & losing 1 score.
+     * <p>
+     * Each token may be played at most once and in any order. You do not have to play all the tokens.
+     * Return the largest possible score you can achieve after playing any number of tokens.
+     * <p>
+     * tags:: array, sorting, twoPointer, greedy
+     */
+    public int bagOfTokensScore(int[] tokens, int power) {
+        int maxScore = 0, score = 0;
+        int up = 0, down = tokens.length - 1;
+
+        Arrays.sort(tokens);
+        while (down >= up) {
+            if (tokens[up] <= power) {
+                power -= tokens[up++];
+                maxScore = Math.max(maxScore, ++score);
+            } else if (score >= 1) {
+                score--;
+                power += tokens[down--];
+            } else {
+                break;
+            }
+
+        }
+
+        return maxScore;
+    }
+
+    /**
+     * Q. 15 3Sum
+     * Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]]
+     * such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+     * <p>
+     * Notice that the solution set must not contain duplicate triplets.
+     * <p>
+     * tags:: array, twoPointer, threeSum
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        int n = nums.length;
+        List<List<Integer>> answer = new ArrayList<>();
+        if (n < 3)
+            return answer;
+
+        Arrays.sort(nums);
+        for (int i = 0; i < n - 2; i++) {
+            if (i == 0 || nums[i] != nums[i - 1]) {
+                int start = i + 1, end = n - 1, target = -nums[i];
+                while (start < end) {
+                    if (nums[start] + nums[end] == target) {
+                        answer.add(Arrays.asList(nums[i], nums[start], nums[end]));
+                        while (start < end && nums[start] == nums[++start] && nums[end] == nums[--end]) {
+                        }
+                    } else if (nums[start] + nums[end] > target)
+                        end--;
+                    else
+                        start++;
+                }
+            }
+        }
+
+        return answer;
+    }
+
+    /**
+     * Q. 16. 3Sum Closest
+     * <p>
+     * Given an array nums of n integers and an integer target, find three integers in nums such that the sum is
+     * closest to target.
+     * <p>
+     * Return the sum of the three integers. You may assume that each input would have exactly one sol.
+     * <p>
+     * tags:: array, twoPointer, threeSum
+     */
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int answer = nums[0] + nums[1] + nums[nums.length - 1], n = nums.length;
+
+        for (int i = 0; i < n - 2; i++) {
+            if (i == 0 || nums[i] != nums[i - 1]) {
+                int start = i + 1, end = n - 1;
+                while (start < end) {
+                    int currSum = nums[i] + nums[start] + nums[end];
+
+                    if (currSum > target)
+                        end--;
+                    else if (currSum < target)
+                        start++;
+                    else
+                        return target;
+
+                    if (Math.abs(target - currSum) < Math.abs(target - answer))
+                        answer = currSum;
+                }
+            }
+        }
+
+        return answer;
+    }
+
+    /**
+     * Q. 57 Insert Interval
+     * <p>
+     * Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
+     * You may assume that the intervals were initially sorted according to their start times.
+     * <p>
+     * tags:: array
+     */
+    public int[][] insertMergeInterval(int[][] intervals, int[] newInterval) {
+        List<int[]> ans = new ArrayList<>();
+
+        for (int[] interval : intervals) {
+            if (newInterval[1] < interval[0]) {
+                ans.add(newInterval);
+                newInterval = interval;
+            } else if (interval[1] >= newInterval[0]) {
+                newInterval[0] = Math.min(newInterval[0], interval[0]);
+                newInterval[1] = Math.max(newInterval[1], interval[1]);
+            } else {
+                ans.add(interval);
+            }
+        }
+
+        ans.add(newInterval);
+        return ans.toArray(new int[ans.size()][2]);
+    }
+
+    /**
+     * Q. 56. Merge Intervals
+     * <p>
+     * Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals,
+     * and return an array of the non-overlapping intervals that cover all the intervals in the input.
+     * <p>
+     * tags:: array
+     */
+    public int[][] mergeInterval(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        List<int[]> ans = new ArrayList<>();
+        int[] newInterval = intervals[0];
+
+        for (int[] interval : intervals) {
+            if (newInterval[1] < interval[0]) {
+                ans.add(newInterval);
+                newInterval = interval;
+            } else if (newInterval[0] <= interval[1]) {
+                newInterval[0] = Math.min(newInterval[0], interval[0]);
+                newInterval[1] = Math.max(newInterval[1], interval[1]);
+            } else {
+                ans.add(interval);
+            }
+        }
+
+        ans.add(newInterval);
+        return ans.toArray(new int[ans.size()][2]);
+    }
+
+    /**
+     * Q. 315. Count of Smaller Numbers After Self
+     * <p>
+     * You are given an integer array nums and you have to return a new counts array.
+     * The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+     * <p>
+     * tags:: segment-tree
+     */
+    public List<Integer> countSmaller(int[] nums) {
+        List<Integer> sum = new ArrayList<>();
+        int max = 20_001, offset = 10_000;
+        int[] arr = new int[2 * max];
+
+        for (int j = nums.length - 1; j >= 0; j--) {
+            int index = nums[j] + max + offset;
+            sum.add(getSegmentTreeSum(arr, max, index));
+
+            arr[index] += 1;
+            for (index /= 2; index > 1; index /= 2) {
+                arr[index] = arr[index * 2] + arr[index * 2 + 1];
+            }
+        }
+
+        Collections.reverse(sum);
+        return sum;
+    }
+
+    private int getSegmentTreeSum(int[] arr, int l, int r) {
+        int sum = 0;
+        while (l < r) {
+            if (l % 2 == 1)
+                sum += arr[l++];
+            if (r % 2 == 1)
+                sum += arr[--r];
+
+            l >>= 1;
+            r >>= 1;
+        }
+
+        return sum;
     }
 }
