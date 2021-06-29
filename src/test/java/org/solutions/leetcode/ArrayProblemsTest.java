@@ -505,4 +505,91 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.countSmaller(input)));
     }
+
+    @Test
+    void testMinEatingSpeed() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{3, 6, 7, 11}, 8), 4);
+        scenarios.put(Pair.of(new int[]{30, 11, 23, 4, 20}, 5), 30);
+        scenarios.put(Pair.of(new int[]{30, 11, 23, 4, 20}, 6), 23);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.minEatingSpeed(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testShipWithinDays() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5), 15);
+        scenarios.put(Pair.of(new int[]{3, 2, 2, 4, 1, 4}, 3), 6);
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 1, 1}, 4), 3);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.shipWithinDays(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testMinDaysBouquets() {
+        Map<Triple<int[], Integer, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(new int[]{1, 10, 3, 10, 2}, 3, 1), 3);
+        scenarios.put(Triple.of(new int[]{1, 10, 3, 10, 2}, 3, 2), -1);
+        scenarios.put(Triple.of(new int[]{7, 7, 7, 7, 12, 7, 7}, 2, 3), 12);
+        scenarios.put(Triple.of(new int[]{1000000000, 1000000000}, 1, 1), 1000000000);
+        scenarios.put(Triple.of(new int[]{1, 10, 2, 9, 3, 8, 4, 7, 5, 6}, 4, 2), 9);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected,
+                        arrayProblems.minDaysBouquets(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testSplitArray() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{7, 2, 5, 10, 8}, 2), 18);
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4, 5}, 2), 9);
+        scenarios.put(Pair.of(new int[]{1, 4, 4}, 3), 4);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.splitArray(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testFindKthNumber() {
+        Map<Triple<Integer, Integer, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(3, 3, 5), 3);
+        scenarios.put(Triple.of(2, 3, 6), 6);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.findKthNumber(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testSmallestDistancePair() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 3, 1}, 1), 0);
+        scenarios.put(Pair.of(new int[]{1, 1, 1}, 2), 0);
+        scenarios.put(Pair.of(new int[]{1, 6, 1}, 3), 5);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.smallestDistancePair(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testFindMaxConsecutiveOnes() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 0, 1, 1, 0}, 4);
+        scenarios.put(new int[]{1, 0, 1, 1, 0, 1}, 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.findMaxConsecutiveOnes(input)));
+    }
+
+    @Test
+    void testLongestOnes() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0}, 2), 6);
+        scenarios.put(Pair.of(new int[]{0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1}, 3), 10);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.longestOnes(input.getLeft(), input.getRight())));
+    }
 }

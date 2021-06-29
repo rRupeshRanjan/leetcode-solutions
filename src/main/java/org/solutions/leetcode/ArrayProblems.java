@@ -1383,4 +1383,290 @@ public class ArrayProblems {
 
         return sum;
     }
+
+    /**
+     * Q. 875. Koko Eating Bananas
+     * <p>
+     * Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas.
+     * The guards have gone and will come back in h hours. Koko can decide her bananas-per-hour eating speed of k.
+     * Each hour, she chooses some pile of bananas and eats k bananas from that pile. If pile has less than k bananas,
+     * she eats all of them instead and will not eat any more bananas during this hour.
+     * <p>
+     * Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.
+     * <p>
+     * Return the minimum integer k such that she can eat all the bananas within h hours.
+     * <p>
+     * tags:: binarySearch, binary-search, array
+     */
+    public int minEatingSpeed(int[] piles, int h) {
+        int start = 1, end = piles[0];
+
+        for (int pile : piles)
+            end = Math.max(end, pile);
+
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+
+            int hours = 0;
+            for (int pile : piles)
+                hours += (pile - 1) / mid + 1;
+
+            if (hours > h)
+                start = mid + 1;
+            else
+                end = mid;
+        }
+
+        return start;
+    }
+
+    /**
+     * Q. 1011. Capacity To Ship Packages Within D Days
+     * <p>
+     * A conveyor belt has packages that must be shipped from one port to another within days days.
+     * <p>
+     * The ith package on the conveyor belt has a weight of weights[i]. Each day, we load the ship with packages on the
+     * conveyor belt (in the order given by weights). We may not load more weight than the maximum weight capacity of
+     * the ship. Return the least weight capacity of the ship that will result in all the packages on the conveyor belt
+     * being shipped within days days.
+     * <p>
+     * ytags:: binarySearch, binary-search, array
+     */
+    public int shipWithinDays(int[] weights, int days) {
+        int start = 0, end = 0;
+        for (int weight : weights) {
+            start = Math.max(start, weight);
+            end += weight;
+        }
+
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+
+            if (feasibleShipWithinDays(weights, mid, days))
+                end = mid;
+            else
+                start = mid + 1;
+        }
+
+        return start;
+    }
+
+    private boolean feasibleShipWithinDays(int[] weights, int capacity, int days) {
+        int currDays = 1, currWeight = 0;
+        for (int weight : weights) {
+            currWeight += weight;
+            if (currWeight > capacity) {
+                currWeight = weight;
+                currDays++;
+                if (currDays > days)
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Q. 1482. Minimum Number of Days to Make m Bouquets
+     * <p>
+     * Given an integer array bloomDay, an integer m and an integer k. We need to make m bouquets.
+     * To make a bouquet, you need to use k adjacent flowers from the garden. The garden consists of n flowers,
+     * the ith flower will bloom in the bloomDay[i] and then can be used in exactly one bouquet.
+     * <p>
+     * Return the minimum number of days you need to wait to be able to make m bouquets from the garden.
+     * If it is impossible to make m bouquets return -1.
+     * <p>
+     * tags:: binarySearch, binary-search, array
+     */
+    public int minDaysBouquets(int[] bloomDay, int m, int k) {
+        if (bloomDay.length < m * k)
+            return -1;
+
+        int start = 1, end = 1_000_000_000;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+
+            if (feasibleMinDaysBouquets(bloomDay, m, k, mid))
+                end = mid;
+            else
+                start = mid + 1;
+        }
+        return start;
+    }
+
+    private boolean feasibleMinDaysBouquets(int[] bloomDay, int m, int k, int days) {
+        int currFlowers = 0, currBouquets = 0;
+        for (int bd : bloomDay) {
+            if (bd <= days)
+                currFlowers++;
+            else {
+                currFlowers = 0;
+            }
+            if (currFlowers == k) {
+                currBouquets++;
+                currFlowers = 0;
+            }
+        }
+
+        return currBouquets >= m;
+    }
+
+    /**
+     * Q. 410. Split Array Largest Sum
+     * Given an array nums which consists of non-negative integers and an integer m,
+     * you can split the array into m non-empty continuous subarrays.
+     * <p>
+     * Write an algorithm to minimize the largest sum among these m subarrays.
+     * <p>
+     * tags:: binarySearch, binary-search, array
+     */
+    public int splitArray(int[] nums, int m) {
+        int start = 0, end = 0;
+        for (int num : nums) {
+            start = Math.max(start, num);
+            end += num;
+        }
+
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (feasibleSplitArray(nums, m, mid))
+                end = mid;
+            else
+                start = mid + 1;
+        }
+
+        return start;
+    }
+
+    private boolean feasibleSplitArray(int[] nums, int m, int sum) {
+        int currSum = 0, currPartitions = 1;
+        for (int num : nums) {
+            currSum += num;
+            if (currSum > sum) {
+                currSum = num;
+                currPartitions++;
+                if (currPartitions > m)
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Q. 668. Kth Smallest Number in Multiplication Table
+     * <p>
+     * Nearly everyone has used the Multiplication Table.
+     * The multiplication table of size m x n is an integer matrix mat where mat[i][j] == i * j (1-indexed).
+     * Given three integers m, n, and k, return the kth smallest element in the m x n multiplication table.
+     * <p>
+     * tags:; binarySearch, binary-search, array
+     */
+    public int findKthNumber(int m, int n, int k) {
+        int start = 1, end = m * n;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (feasibleFindKthNumber(mid, m, n, k))
+                end = mid;
+            else
+                start = mid + 1;
+        }
+
+        return start;
+    }
+
+    private boolean feasibleFindKthNumber(int num, int m, int n, int k) {
+        int count = 0;
+        for (int i = 1; i <= m; i++) {
+            count += Math.min(num / i, n);
+            if (count >= k)
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Q. 719. Find K-th Smallest Pair Distance
+     * <p>
+     * The distance of a pair of integers a and b is defined as the absolute difference between a and b.
+     * Given an integer array nums and an integer k, return the kth smallest distance among all the pairs
+     * nums[i] and nums[j] where 0 <= i < j < nums.length.
+     * <p>
+     * tags:: binarySearch, binary-search, array
+     */
+    public int smallestDistancePair(int[] nums, int k) {
+        Arrays.sort(nums);
+        int start = 0, end = nums[nums.length - 1] - nums[0];
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (feasibleSmallestDistancePair(nums, k, mid))
+                end = mid;
+            else
+                start = mid + 1;
+        }
+        return start;
+    }
+
+    private boolean feasibleSmallestDistancePair(int[] nums, int k, int dist) {
+        int count = 0, i = 0, j = 0, n = nums.length;
+        while (i < n || j < n) {
+            while (j < n && nums[j] - nums[i] <= dist)
+                j++;
+            count += j - i - 1;
+            if (count >= k)
+                return true;
+            i++;
+        }
+        return false;
+    }
+
+    /**
+     * Q. 487. Max Consecutive Ones II
+     * <p>
+     * Given a binary array nums, return maximum number of consecutive 1's in the array if you can flip at most one 0.
+     * <p>
+     * tags:: slidingWindow
+     */
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int maxLen = 0, i = 0, j = 0, zero = 0, n = nums.length;
+        while (i < n && j < n) {
+            if (nums[j] == 1 || zero < 1) {
+                if (nums[j] == 0) zero++;
+                j++;
+            } else {
+                maxLen = Math.max(maxLen, j - i);
+                while (i < n && zero >= 1) {
+                    if (nums[i] == 0) zero--;
+                    i++;
+                }
+            }
+        }
+        return Math.max(maxLen, j - i);
+    }
+
+    /**
+     * Q. 1004 Max Consecutive Ones III
+     * <p>
+     * Given a binary array nums and an integer k, return the maximum number of consecutive 1's
+     * in the array if you can flip at most k 0's.
+     * <p>
+     * tags:: slidingWindow, array
+     */
+    public int longestOnes(int[] nums, int k) {
+        int maxLen = 0, i = 0, j = 0, zero = 0;
+        while (i < nums.length && j < nums.length) {
+            if (nums[j] == 1 || zero < k) {
+                if (nums[j] == 0) zero++;
+                j++;
+            } else {
+                maxLen = Math.max(maxLen, j - i);
+                while (i < nums.length && zero >= k) {
+                    if (nums[i] == 0) zero--;
+                    i++;
+                }
+            }
+        }
+
+        return Math.max(maxLen, j - i);
+    }
 }
