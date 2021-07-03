@@ -309,7 +309,7 @@ class StringProblemsTest {
     void testGenerateParenthesis() {
         Map<Integer, List<String>> scenarios = new HashMap<>();
         scenarios.put(3, Arrays.asList("((()))", "(()())", "(())()", "()(())", "()()()"));
-        scenarios.put(1, Arrays.asList("()"));
+        scenarios.put(1, Collections.singletonList("()"));
 
         scenarios.forEach((input, expected) ->
                 assertTrue(expected.containsAll(stringProblems.generateParenthesis(input)))
@@ -348,5 +348,16 @@ class StringProblemsTest {
         scenarios.put("abc3[cd]xyz", "abccdcdcdxyz");
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.decodeString(input)));
+    }
+
+    @Test
+    void testSentenceScreenFitting() {
+        Map<Triple<String[], Integer, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(new String[]{"hello", "world"}, 2, 8), 1);
+        scenarios.put(Triple.of(new String[]{"a", "bcd", "e"}, 3, 6), 2);
+        scenarios.put(Triple.of(new String[]{"i", "had", "apple", "pie"}, 4, 5), 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                stringProblems.sentenceScreenFitting(input.getLeft(), input.getMiddle(), input.getRight())));
     }
 }

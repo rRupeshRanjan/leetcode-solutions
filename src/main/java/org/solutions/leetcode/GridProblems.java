@@ -233,7 +233,7 @@ public class GridProblems {
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         int[][] directions = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         int rows = heights.length, cols = heights[0].length;
-        Set<String> pacific = new HashSet<>(), atlantic = new HashSet<>();
+        boolean[][] pacific = new boolean[rows][cols], atlantic = new boolean[rows][cols];
         List<List<Integer>> result = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
@@ -246,25 +246,25 @@ public class GridProblems {
             }
         }
 
-        pacific.retainAll(atlantic);
-
-        for (String entry : pacific) {
-            String[] s = entry.split("-");
-            result.add(Arrays.asList(Integer.parseInt(s[0]), Integer.parseInt(s[1])));
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (pacific[i][j] && atlantic[i][j])
+                    result.add(Arrays.asList(i, j));
+            }
         }
 
         return result;
     }
 
-    private void dfsPacificAtlantic(Set<String> visited, int i, int j, int[][] heights, int[][] directions) {
-        visited.add(i + "-" + j);
+    private void dfsPacificAtlantic(boolean[][] visited, int i, int j, int[][] heights, int[][] directions) {
+        visited[i][j] = true;
         for (int[] dir : directions) {
             int nextI = i + dir[0];
             int nextJ = j + dir[1];
 
             if (nextI < 0 || nextI == heights.length ||
                     nextJ < 0 || nextJ == heights[0].length ||
-                    visited.contains(nextI + "-" + nextJ))
+                    visited[nextI][nextJ])
                 continue;
 
             if (heights[i][j] <= heights[nextI][nextJ])

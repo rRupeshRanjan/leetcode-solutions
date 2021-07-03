@@ -859,4 +859,30 @@ public class StringProblems {
 
         return res.toString();
     }
+
+    /**
+     * Q. 418. Sentence Screen Fitting
+     * <p>
+     * Given a rows x cols screen and a sentence represented as a list of strings, return the number of times the given
+     * sentence can be fitted on the screen. The order of words in the sentence must remain unchanged, and a word
+     * cannot be split into two lines. A single space must separate two consecutive words in a line.
+     * <p>
+     * tags:: string
+     */
+    public int sentenceScreenFitting(String[] sentence, int rows, int cols) {
+        String completeString = String.join(" ", sentence) + " ";
+        int start = 0, len = completeString.length();
+        while (rows > 0) {
+            start += cols;
+            if (completeString.charAt(start % len) == ' ')
+                start++;
+            else {
+                while (start < 0 && completeString.charAt((start - 1) % len) != ' ')
+                    start--;
+            }
+            rows--;
+        }
+
+        return start / completeString.length();
+    }
 }

@@ -7,6 +7,14 @@ import java.util.*;
 public class BinaryTreeProblems {
 
     private int cameraCoverCount;
+    /**
+     * Q. 105 Construct Binary Tree from Preorder and Inorder Traversal
+     * Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and
+     * inorder is the inorder traversal of the same tree, construct and return the binary tree.
+     * <p>
+     * tags:: inorder, preorder, tree, dfs, array
+     */
+    private int buildTreePreOrderInorderRootIndex;
 
     /**
      * Q.199 Binary Tree Right Side View
@@ -312,15 +320,6 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 105 Construct Binary Tree from Preorder and Inorder Traversal
-     * Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and
-     * inorder is the inorder traversal of the same tree, construct and return the binary tree.
-     * <p>
-     * tags:: inorder, preorder, tree, dfs, array
-     */
-    private int buildTreePreOrderInorderRootIndex;
-
-    /**
      * Q. 1161 Maximum Level Sum of a Binary Tree
      * <p>
      * Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.
@@ -377,6 +376,74 @@ public class BinaryTreeProblems {
         root.setLeft(recurseBuildTreePreorderInorder(start, pos - 1, preorder, inorder));
         root.setRight(recurseBuildTreePreorderInorder(pos + 1, end, preorder, inorder));
         return root;
+    }
+
+    /**
+     * Q. 366. Find Leaves of Binary Tree
+     * <p>
+     * Given the root of a binary tree, collect a tree's nodes as if you were doing this:
+     * Collect all the leaf nodes.
+     * Remove all the leaf nodes.
+     * Repeat until the tree is empty.
+     * <p>
+     * tags:: binaryTree, dfs
+     */
+    public List<List<Integer>> findLeaves(TreeNode root) {
+        List<List<Integer>> answer = new ArrayList<>();
+        dfsFindLeaves(root, answer);
+        return answer;
+    }
+
+    private int dfsFindLeaves(TreeNode root, List<List<Integer>> answer) {
+        if (root == null)
+            return -1;
+
+        int height = Math.max(dfsFindLeaves(root.getLeft(), answer), dfsFindLeaves(root.getRight(), answer)) + 1;
+
+        if (answer.size() == height)
+            answer.add(new ArrayList<>());
+
+        answer.get(height).add(root.getVal());
+        return height;
+    }
+
+    /**
+     * Q. 652. Find Duplicate Subtrees
+     * <p>
+     * Given the root of a binary tree, return all duplicate subtrees.
+     * For each kind of duplicate subtrees, you only need to return the root node of any one of them.
+     * Two trees are duplicate if they have the same structure with the same node values.
+     * <p>
+     * tags:: dfs, postorder, binaryTree
+     */
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        Map<String, List<TreeNode>> map = new HashMap<>();
+        List<TreeNode> ans = new ArrayList<>();
+        dfsFindDuplicateSubtrees(root, map);
+
+        for (List<TreeNode> values : map.values()) {
+            if (values.size() > 1)
+                ans.add(values.get(0));
+        }
+
+        return ans;
+    }
+
+    private String dfsFindDuplicateSubtrees(TreeNode root, Map<String, List<TreeNode>> map) {
+        if (root == null)
+            return ".";
+
+        String left = dfsFindDuplicateSubtrees(root.getLeft(), map);
+        String right = dfsFindDuplicateSubtrees(root.getRight(), map);
+
+        String key = new StringBuilder(root.getVal()).append("-").append(left).append("-").append(right).toString();
+
+        if (!map.containsKey(key))
+            map.put(key, new ArrayList<>());
+
+        map.get(key).add(root);
+
+        return key;
     }
 
     private enum CameraType {

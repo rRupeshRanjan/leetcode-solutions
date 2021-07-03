@@ -143,4 +143,32 @@ class BinaryTreeProblemsTest {
         scenarios.forEach((input, expected) -> assertTrue(testUtils.areTreesEqualByValue(expected,
                 binaryTreeProblems.buildTreeFromPreorderInorder(input.getLeft(), input.getRight()))));
     }
+
+    @Test
+    void testFindLeaves() {
+        Map<TreeNode, List<List<Integer>>> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3)),
+                Arrays.asList(Arrays.asList(4, 5, 3), Collections.singletonList(2), Collections.singletonList(1)));
+        scenarios.put(new TreeNode(1), Collections.singletonList(Collections.singletonList(1)));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.findLeaves(input)));
+    }
+
+    @Test
+    void testFindDuplicateSubtrees() {
+        Map<TreeNode, List<TreeNode>> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(2, 1, 1), Collections.singletonList(new TreeNode((1))));
+        scenarios.put(new TreeNode(2, new TreeNode(2, 3, null), new TreeNode(2, 3, null)),
+                Arrays.asList(new TreeNode(3), new TreeNode(2, 3, null)));
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, null),
+                        new TreeNode(3, new TreeNode(2, 4, null), new TreeNode(4))),
+                Arrays.asList(new TreeNode(4), new TreeNode(2, 4, null)));
+
+        scenarios.forEach((input, expected) -> {
+            List<TreeNode> duplicateSubtrees = binaryTreeProblems.findDuplicateSubtrees(input);
+            for (int i = 0; i < duplicateSubtrees.size(); i++) {
+                assertTrue(testUtils.areTreesEqualByValue(duplicateSubtrees.get(i), expected.get(i)));
+            }
+        });
+    }
 }

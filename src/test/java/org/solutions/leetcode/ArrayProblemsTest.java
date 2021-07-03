@@ -592,4 +592,13 @@ class ArrayProblemsTest {
         scenarios.forEach((input, expected) ->
                 assertEquals(expected, arrayProblems.longestOnes(input.getLeft(), input.getRight())));
     }
+
+    @Test
+    void testCarFleet() {
+        Map<Triple<Integer, int[], int[]>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(12, new int[]{10, 8, 0, 5, 3}, new int[]{2, 4, 1, 1, 3}), 3);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.carFleet(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
 }
