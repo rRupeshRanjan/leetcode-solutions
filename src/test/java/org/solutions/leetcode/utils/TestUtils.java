@@ -49,6 +49,8 @@ public class TestUtils {
     }
 
     public ListNode getLinkedList(List<Integer> entries) {
+        if (entries.size() == 0)
+            return null;
         return getLinkedListWithCycle(entries, -1);
     }
 }

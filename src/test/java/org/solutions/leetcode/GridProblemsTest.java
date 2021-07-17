@@ -279,6 +279,73 @@ class GridProblemsTest {
                 assertEquals(expected, gridProblems.makeConnected(input.getLeft(), input.getRight())));
     }
 
+    @Test
+    void testAccountsMerge() {
+        Map<List<List<String>>, List<List<String>>> scenarios = new HashMap<>();
+        scenarios.put(
+                Arrays.asList(
+                        Arrays.asList("John", "johnsmith@mail.com", "john_newyork@mail.com"),
+                        Arrays.asList("John", "johnsmith@mail.com", "john00@mail.com"),
+                        Arrays.asList("Mary", "mary@mail.com"),
+                        Arrays.asList("John", "johnnybravo@mail.com")),
+                Arrays.asList(
+                        Arrays.asList("John", "johnnybravo@mail.com"),
+                        Arrays.asList("Mary", "mary@mail.com"),
+                        Arrays.asList("John", "john00@mail.com", "john_newyork@mail.com", "johnsmith@mail.com")));
+
+        scenarios.put(
+                Arrays.asList(
+                        Arrays.asList("Gabe", "Gabe0@m.co", "Gabe3@m.co", "Gabe1@m.co"),
+                        Arrays.asList("Kevin", "Kevin3@m.co", "Kevin5@m.co", "Kevin0@m.co"),
+                        Arrays.asList("Ethan", "Ethan5@m.co", "Ethan4@m.co", "Ethan0@m.co"),
+                        Arrays.asList("Hanzo", "Hanzo3@m.co", "Hanzo1@m.co", "Hanzo0@m.co"),
+                        Arrays.asList("Fern", "Fern5@m.co", "Fern1@m.co", "Fern0@m.co")),
+
+                Arrays.asList(
+                        Arrays.asList("Fern", "Fern0@m.co", "Fern1@m.co", "Fern5@m.co"),
+                        Arrays.asList("Hanzo", "Hanzo0@m.co", "Hanzo1@m.co", "Hanzo3@m.co"),
+                        Arrays.asList("Kevin", "Kevin0@m.co", "Kevin3@m.co", "Kevin5@m.co"),
+                        Arrays.asList("Gabe", "Gabe0@m.co", "Gabe1@m.co", "Gabe3@m.co"),
+                        Arrays.asList("Ethan", "Ethan0@m.co", "Ethan4@m.co", "Ethan5@m.co")));
+
+        scenarios.forEach((input, expected) -> assertTrue(expected.containsAll(gridProblems.accountsMerge(input))));
+    }
+
+    @Test
+    void testShortestPathWithObstacleElimination() {
+        Map<Pair<int[][], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[][]{{0, 0, 0}, {1, 1, 0}, {0, 0, 0}, {0, 1, 1}, {0, 0, 0}}, 1), 6);
+        scenarios.put(Pair.of(new int[][]{{0, 1, 1}, {1, 1, 1}, {1, 0, 0}}, 1), -1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                gridProblems.shortestPathWithObstacleElimination(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testShortestPathToGetFood() {
+        Map<char[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new char[][]{
+                {'X', 'X', 'X', 'X', 'X', 'X'},
+                {'X', '*', 'O', 'O', 'O', 'X'},
+                {'X', 'O', 'O', '#', 'O', 'X'},
+                {'X', 'X', 'X', 'X', 'X', 'X'}}, 3);
+        scenarios.put(new char[][]{
+                {'X', 'X', 'X', 'X', 'X'},
+                {'X', '*', 'X', 'O', 'X'},
+                {'X', 'O', 'X', '#', 'X'},
+                {'X', 'X', 'X', 'X', 'X'}}, -1);
+        scenarios.put(new char[][]{
+                {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
+                {'X', '*', 'O', 'X', 'O', '#', 'O', 'X'},
+                {'X', 'O', 'O', 'X', 'O', 'O', 'X', 'X'},
+                {'X', 'O', 'O', 'O', 'O', '#', 'O', 'X'},
+                {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}}, 6);
+        scenarios.put(new char[][]{{'O', '*'}, {'#', 'O'}}, 2);
+        scenarios.put(new char[][]{{'X', '*'}, {'#', 'X'}}, -1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.shortestPathToGetFood(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

@@ -450,4 +450,73 @@ public class BinaryTreeProblems {
         LEAF, PARENT, COVERED
     }
 
+    /**
+     * Q. 1110. Delete Nodes And Return Forest
+     * <p>
+     * Given the root of a binary tree, each node in the tree has a distinct value.
+     * After deleting all nodes with a value in to_delete, we are left with a forest (a disjoint union of trees).
+     * Return the roots of the trees in the remaining forest. You may return the result in any order.
+     * <p>
+     * tags:: dfs, binaryTree
+     */
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        Set<Integer> toDelete = new HashSet<>();
+        List<TreeNode> result = new ArrayList<>();
+
+        for (int num : to_delete)
+            toDelete.add(num);
+
+        if (!toDelete.contains(root.getVal()))
+            result.add(root);
+
+        delNodesHelper(root, toDelete, result);
+        return result;
+    }
+
+    private TreeNode delNodesHelper(TreeNode node, Set<Integer> toDelete, List<TreeNode> result) {
+        if (node == null)
+            return null;
+
+        node.setLeft(delNodesHelper(node.getLeft(), toDelete, result));
+        node.setRight(delNodesHelper(node.getRight(), toDelete, result));
+
+        if (toDelete.contains(node.getVal())) {
+            if (node.getLeft() != null) result.add(node.getLeft());
+            if (node.getRight() != null) result.add(node.getRight());
+            return null;
+        }
+
+        return node;
+    }
+
+    /**
+     * Q. 515 Find Largest Value in Each Tree Row
+     * <p>
+     * Given the root of a binary tree, return an array of the largest value in each row of the tree (0-indexed).
+     * <p>
+     * tags:: bfs, binaryTree
+     */
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null)
+            return result;
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            int max = Integer.MIN_VALUE;
+
+            for (int i = q.size(); i > 0; i--) {
+                TreeNode poll = q.poll();
+                max = Math.max(max, poll.getVal());
+
+                if (poll.getLeft() != null) q.offer(poll.getLeft());
+                if (poll.getRight() != null) q.offer(poll.getRight());
+            }
+            result.add(max);
+        }
+
+        return result;
+    }
 }

@@ -171,4 +171,48 @@ class BinaryTreeProblemsTest {
             }
         });
     }
+
+    @Test
+    void testDelNodes() {
+        Map<Pair<TreeNode, int[]>, List<TreeNode>> scenarios = new HashMap<>();
+        scenarios.put(
+                Pair.of(
+                        new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3, 6, 7)),
+                        new int[]{3, 5}),
+                Arrays.asList(
+                        new TreeNode(1, new TreeNode(2, 4, null), null),
+                        new TreeNode(6), new TreeNode(7))
+        );
+        scenarios.put(
+                Pair.of(
+                        new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3, 6, 7)),
+                        new int[]{1, 3, 5}),
+                Arrays.asList(new TreeNode(6), new TreeNode(7), new TreeNode(2, 4, null))
+        );
+        scenarios.put(
+                Pair.of(
+                        new TreeNode(1, new TreeNode(2, null, 3), new TreeNode(4)),
+                        new int[]{3}),
+                Collections.singletonList(new TreeNode(1, 2, 4))
+        );
+
+
+        scenarios.forEach((input, expected) -> {
+            List<TreeNode> actual = binaryTreeProblems.delNodes(input.getLeft(), input.getRight());
+            assertTrue(actual.size() == expected.size() && expected.containsAll(actual));
+        });
+    }
+
+    @Test
+    void testLargestValues() {
+        Map<TreeNode, List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, new TreeNode(3, 5, 3), new TreeNode(2, null, 9)),
+                Arrays.asList(1, 3, 9));
+        scenarios.put(new TreeNode(1, 2, 3), Arrays.asList(1, 3));
+        scenarios.put(new TreeNode(1), Collections.singletonList(1));
+        scenarios.put(new TreeNode(1, null, 2), Arrays.asList(1, 2));
+        scenarios.put(null, Collections.emptyList());
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.largestValues(input)));
+    }
 }

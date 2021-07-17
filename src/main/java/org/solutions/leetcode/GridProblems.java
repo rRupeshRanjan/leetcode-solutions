@@ -831,4 +831,206 @@ public class GridProblems {
 
         return (cycles >= unlinked) ? unlinked : -1;
     }
+
+    /**
+     * Q. 721 Accounts Merge
+     * <p>
+     * Given a list of accounts where each element accounts[i] is a list of strings, where the first element
+     * accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account.
+     * Now, we would like to merge these accounts. Two accounts definitely belong to the same person if there is some
+     * common email to both accounts. Note that even if two accounts have the same name, they may belong to different
+     * people as people could have the same name. A person can have any number of accounts initially, but all of their
+     * accounts definitely have the same name.
+     * <p>
+     * After merging the accounts, return the accounts in the following format:
+     * The first element of each account is the name, and the rest of the elements are emails in sorted order.
+     * The accounts themselves can be returned in any order.
+     * <p>
+     * tags:: dfs, graph
+     */
+    public List<List<String>> accountsMerge(List<List<String>> accounts) {
+        Map<String, List<String>> graph = new HashMap<>();
+        Map<String, String> emailToName = new HashMap<>();
+        Set<String> seen = new HashSet<>();
+        List<List<String>> answer = new ArrayList<>();
+
+        for (List<String> account : accounts) {
+            String email = account.get(0);
+            for (int i = 1; i < account.size(); i++) {
+                graph.computeIfAbsent(account.get(i), x -> new ArrayList<>()).add(account.get(1));
+                graph.computeIfAbsent(account.get(1), x -> new ArrayList<>()).add(account.get(i));
+                emailToName.put(account.get(i), email);
+            }
+        }
+
+        for (String email : graph.keySet()) {
+            if (!seen.contains(email)) {
+                Stack<String> stack = new Stack<>();
+                List<String> component = new ArrayList<>();
+                seen.add(email);
+                stack.push(email);
+                while (!stack.isEmpty()) {
+                    String node = stack.pop();
+                    component.add(node);
+                    for (String neighbour : graph.get(node)) {
+                        if (!seen.contains(neighbour)) {
+                            seen.add(neighbour);
+                            stack.add(neighbour);
+                        }
+                    }
+                }
+
+                Collections.sort(component);
+                component.add(0, emailToName.get(component.get(0)));
+                answer.add(component);
+            }
+        }
+
+        return answer;
+    }
+
+    /**
+     * Q. 1293. Shortest Path in a Grid with Obstacles Elimination
+     * <p>
+     * Given a m * n grid, where each cell is either 0 (empty) or 1 (obstacle).
+     * In one step, you can move up, down, left or right from and to an empty cell.
+     * <p>
+     * Return the minimum number of steps to walk from the upper left corner (0, 0) to the lower right corner (m-1, n-1)
+     * given that you can eliminate at most k obstacles.
+     * If it is not possible to find such walk return -1.
+     * <p>
+     * tags:: bfs
+     */
+    public int shortestPathWithObstacleElimination(int[][] grid, int k) {
+        int rows = grid.length, cols = grid[0].length, steps = 0;
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+        int[][] obstacles = new int[rows][cols];
+        for (int i = 0; i < rows; i++)
+            Arrays.fill(obstacles[i], Integer.MAX_VALUE);
+        obstacles[0][0] = 0;
+
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{0, 0, 0});
+
+        while (!q.isEmpty()) {
+            for (int i = q.size(); i > 0; i--) {
+                int[] poll = q.poll();
+
+                if (poll[0] == rows - 1 && poll[1] == cols - 1)
+                    return steps;
+
+                for (int[] dir : dirs) {
+                    int nextI = poll[0] + dir[0];
+                    int nextJ = poll[1] + dir[1];
+
+                    if (nextI < 0 || nextI >= rows || nextJ < 0 || nextJ >= cols)
+                        continue;
+
+                    int nextK = grid[nextI][nextJ] + poll[2];
+                    if (nextK >= obstacles[nextI][nextJ] || nextK > k)
+                        continue;
+
+                    obstacles[nextI][nextJ] = nextK;
+                    q.offer(new int[]{nextI, nextJ, nextK});
+                }
+            }
+            steps++;
+        }
+
+        return -1;
+    }
+
+    /**
+     * Q. 1730 Shortest Path to Get Food
+     * <p>
+     * You are starving and you want to eat food as quickly as possible. You want to find the shortest path to arrive
+     * at any food cell. You are given an m x n character matrix, grid, of these different types of cells:
+     * <p>
+     * '*' is your location. There is exactly one '*' cell.
+     * '#' is a food cell. There may be multiple food cells.
+     * 'O' is free space, and you can travel through these cells.
+     * 'X' is an obstacle, and you cannot travel through these cells.
+     * <p>
+     * You can travel to north, east, south, or west of your current location if there is not an obstacle.
+     * Return the length of the shortest path for you to reach any food cell.
+     * If there is no path for you to reach food, return -1.
+     * <p>
+     * tags:: bfs
+     */
+    public int shortestPathToGetFood(char[][] grid) {
+        int rows = grid.length, cols = grid[0].length, steps = 0;
+        int[][] dist = new int[rows][cols];
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+        Queue<int[]> q = new LinkedList<>();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                dist[i][j] = Integer.MAX_VALUE - 1;
+                if (grid[i][j] == '*') {
+                    dist[i][j] = 0;
+                    q.offer(new int[]{i, j});
+                }
+            }
+        }
+
+        while (!q.isEmpty()) {
+            for (int i = q.size(); i > 0; i--) {
+                int[] poll = q.poll();
+
+                if (grid[poll[0]][poll[1]] == '#')
+                    return steps;
+
+                for (int[] dir : dirs) {
+                    int nextI = poll[0] + dir[0];
+                    int nextJ = poll[1] + dir[1];
+
+                    if (nextI < 0 || nextJ < 0 || nextI >= rows || nextJ >= cols ||
+                            grid[nextI][nextJ] == 'X' || dist[nextI][nextJ] <= dist[poll[0]][poll[1]] + 1)
+                        continue;
+
+                    dist[nextI][nextJ] = dist[poll[0]][poll[1]] + 1;
+                    q.offer(new int[]{nextI, nextJ});
+                }
+            }
+            steps++;
+        }
+
+        return -1;
+    }
+
+    /**
+     * Q. 1376 Time Needed to Inform All Employees
+     * <p>
+     * A company has n employees with a unique ID for each employee from 0 to n - 1. The head of the company is the one
+     * with headID. Each employee has one direct manager given in the manager array where manager[i] is the direct
+     * manager of the i-th employee, manager[headID] = -1. Also, it is guaranteed that the subordination relationships
+     * have a tree structure. The head of the company wants to inform all the company employees of an urgent piece of
+     * news. He will inform his direct subordinates, and they will inform their subordinates, and so on until all
+     * employees know about the urgent news. The i-th employee needs informTime[i] minutes to inform all of his direct
+     * subordinates (i.e., After informTime[i] minutes, all his direct subordinates can start spreading the news).
+     * <p>
+     * Return the number of minutes needed to inform all the employees about the urgent news.
+     * <p>
+     * tags:: dfs, nAryTree, n-ary tree
+     */
+    public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+        Map<Integer, List<Integer>> tree = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            tree.computeIfAbsent(manager[i], x -> new ArrayList<>()).add((i));
+        }
+        return dfsNumOfMinutes(tree, informTime, headID);
+    }
+
+    private int dfsNumOfMinutes(Map<Integer, List<Integer>> tree, int[] informTime, int headId) {
+        int currTime = 0;
+        if (!tree.containsKey(headId))
+            return currTime;
+
+        for (int subordinate : tree.get(headId)) {
+            currTime = Math.max(currTime, dfsNumOfMinutes(tree, informTime, subordinate) + informTime[headId]);
+        }
+
+        return currTime;
+    }
 }

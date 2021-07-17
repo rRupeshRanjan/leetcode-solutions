@@ -885,4 +885,262 @@ public class StringProblems {
 
         return start / completeString.length();
     }
+
+    /**
+     * Q. 1525 Number of Good Ways to Split a String
+     * <p>
+     * You are given a string s, a split is called good if you can split s into 2 non-empty strings p and q where its
+     * concatenation is equal to s and the number of distinct letters in p and q are the same.
+     * <p>
+     * Return the number of good splits you can make in s.
+     * <p>
+     * tags:: string
+     */
+    public int numSplits(String s) {
+        int[] leftFreq = new int[26], rightFreq = new int[26];
+        int answer = 0, leftCount = 0, rightCount = 0, n = s.length();
+
+        for (char ch : s.toCharArray()) {
+            rightFreq[ch - 'a']++;
+            if (rightFreq[ch - 'a'] == 1)
+                rightCount++;
+        }
+
+        for (int i = 0; i < n - 1; i++) {
+            int index = s.charAt(i) - 'a';
+
+            if (++leftFreq[index] == 1) leftCount++;
+            if (--rightFreq[index] == 0) rightCount--;
+
+            if (leftCount == rightCount)
+                answer++;
+        }
+
+        return answer;
+    }
+
+    /**
+     * Q. 139 Word Break
+     * <p>
+     * Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a
+     * space-separated sequence of one or more dictionary words.
+     * <p>
+     * Note that the same word in the dictionary may be reused multiple times in the segmentation.
+     * <p>
+     * tags:: dp, string, dynamicProgramming
+     */
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                dp[i] = dp[j] && dict.contains(s.substring(j, i));
+                if (dp[i])
+                    break;
+            }
+        }
+
+        return dp[s.length()];
+    }
+
+    /**
+     * Q. 929. Unique Email Addresses
+     * <p>
+     * Every valid email consists of a local name and a domain name, separated by the '@' sign.
+     * Besides lowercase letters, the email may contain one or more '.' or '+'.
+     * <p>
+     * For example, in "alice@leetcode.com", "alice" is the local name, and "leetcode.com" is the domain name.
+     * If you add periods '.' between some characters in the local name part of an email address, mail sent there will
+     * be forwarded to the same address without dots in local name. Note that this rule does not apply to domain names.
+     * <p>
+     * For example, "alice.z@leetcode.com" and "alicez@leetcode.com" forward to the same email address.
+     * If you add a plus '+' in the local name, everything after the first plus sign will be ignored.
+     * This allows certain emails to be filtered. Note that this rule does not apply to domain names.
+     * <p>
+     * For example, "m.y+name@email.com" will be forwarded to "my@email.com".
+     * It is possible to use both of these rules at the same time.
+     * <p>
+     * Given an array of strings emails where we send one email to each email[i],
+     * return the number of different addresses that actually receive mails.
+     * <p>
+     * tags:: string
+     */
+    public int uniqueEmailAddresses(String[] emails) {
+        Set<String> uniqueEmailAddress = new HashSet<>();
+        for (String email : emails) {
+
+            // [user, domain]
+            String[] split = email.split("@");
+            String user = split[0].split("\\+")[0].replaceAll("\\.", "");
+
+            uniqueEmailAddress.add(user + "@" + split[1]);
+        }
+
+        return uniqueEmailAddress.size();
+    }
+
+    /**
+     * Q. 482. License Key Formatting
+     * <p>
+     * You are given a license key represented as a string s that consists of only alphanumeric characters and dashes.
+     * The string is separated into n + 1 groups by n dashes. You are also given an integer k.
+     * <p>
+     * We want to reformat the string s such that each group contains exactly k characters, except for the first group,
+     * which could be shorter than k but still must contain at least one character. Furthermore, there must be a dash
+     * inserted between two groups, and you should convert all lowercase letters to uppercase.
+     * <p>
+     * Return the reformatted license key.
+     * <p>
+     * tags:: string
+     */
+    public String licenseKeyFormatting(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        int alphabetCount = 0;
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == '-')
+                continue;
+
+            if (alphabetCount == k) {
+                sb.append("-");
+                alphabetCount = 0;
+            }
+
+            sb.append(Character.toUpperCase(s.charAt(i)));
+            alphabetCount++;
+        }
+
+        sb.reverse();
+        return sb.toString();
+    }
+
+    /**
+     * Q. 76 Minimum Window Substring
+     * <p>
+     * Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that
+     * every character in t (including duplicates) is included in the window.
+     * If there is no such substring, return the empty string "".
+     * <p>
+     * The testcases will be generated such that the answer is unique.
+     * A substring is a contiguous sequence of characters within the string.
+     * <p>
+     * tags:: string, slidingWindow
+     */
+    public String minWindow(String s, String t) {
+        int[] freq = new int[128];
+        int counter = t.length(), start = 0, end = 0, minLength = Integer.MAX_VALUE, minStart = 0;
+
+        for (char ch : t.toCharArray())
+            freq[ch]++;
+
+        while (end < s.length()) {
+            char ch1 = s.charAt(end++);
+            if (freq[ch1] > 0)
+                counter--;
+            freq[ch1]--;
+
+
+            while (counter == 0) {
+                if (minLength > end - start) {
+                    minLength = end - start;
+                    minStart = start;
+                }
+
+                char ch2 = s.charAt(start++);
+                freq[ch2]++;
+                if (freq[ch2] > 0)
+                    counter++;
+            }
+        }
+
+        return minLength == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLength);
+    }
+
+    /**
+     * Q. 340. Longest Substring with At Most K Distinct Characters
+     * <p>
+     * Given a string s and an integer k,
+     * return the length of the longest substring of s that contains at most k distinct characters.
+     * <p>
+     * tags:: string, slidingWindow
+     */
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        int[] freq = new int[256];
+        int counter = 0, maxLen = 0, start = 0, end = 0;
+
+        while (end < s.length()) {
+            char ch1 = s.charAt(end++);
+            if (freq[ch1] == 0)
+                counter++;
+            freq[ch1]++;
+
+            maxLen = Math.max(maxLen, end - start - 1);
+            while (counter > k) {
+                char ch2 = s.charAt(start++);
+                freq[ch2]--;
+                if (freq[ch2] == 0)
+                    counter--;
+            }
+        }
+
+        return Math.max(maxLen, end - start);
+    }
+
+    /**
+     * Q. 159 Longest Substring with At Most Two Distinct Characters
+     * <p>
+     * Given a string s, return the length of the longest substring that contains at most two distinct characters.
+     * <p>
+     * tags:: string, slidingWindow
+     */
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        int[] map = new int[128];
+        int start = 0, end = 0, counter = 0, maxLength = 0;
+
+        while (end < s.length()) {
+            char ch1 = s.charAt(end++);
+            map[ch1]++;
+            if (map[ch1] == 1)
+                counter++;
+
+            while (counter > 2) {
+                char ch2 = s.charAt(start++);
+                map[ch2]--;
+                if (map[ch2] == 0)
+                    counter--;
+            }
+            maxLength = Math.max(maxLength, end - start);
+        }
+
+        return maxLength;
+    }
+
+    /**
+     * Q. 20. Valid Parentheses
+     * <p>
+     * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
+     * determine if the input string is valid.
+     * <p>
+     * An input string is valid if:
+     * Open brackets must be closed by the same type of brackets.
+     * Open brackets must be closed in the correct order.
+     * <p>
+     * tags:: string, stack
+     */
+    public boolean isValid(String s) {
+        Map<Character, Character> map = Map.of('}', '{', ')', '(', ']', '[');
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : s.toCharArray()) {
+            if (map.containsKey(ch)) {
+                if (stack.isEmpty() || !stack.pop().equals(map.get(ch)))
+                    return false;
+            } else
+                stack.push(ch);
+        }
+
+        return stack.isEmpty();
+    }
 }

@@ -360,4 +360,95 @@ class StringProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected,
                 stringProblems.sentenceScreenFitting(input.getLeft(), input.getMiddle(), input.getRight())));
     }
+
+    @Test
+    void testNumSplits() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("aacaba", 2);
+        scenarios.put("abcd", 1);
+        scenarios.put("aaaaa", 4);
+        scenarios.put("acbadbaada", 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.numSplits(input)));
+    }
+
+    @Test
+    void testWordBreak() {
+        Map<Pair<String, List<String>>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("leetcode", Arrays.asList("leet", "code")), true);
+        scenarios.put(Pair.of("applepenapple", Arrays.asList("apple", "pen")), true);
+        scenarios.put(Pair.of("catsandog", Arrays.asList("cats", "sand", "dog", "cat", "and")), false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                stringProblems.wordBreak(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testUniqueEmailAddresses() {
+        Map<String[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new String[]{"test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com",
+                "testemail+david@lee.tcode.com"}, 2);
+        scenarios.put(new String[]{"a@leetcode.com", "b@leetcode.com", "c@leetcode.com"}, 3);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.uniqueEmailAddresses(input)));
+    }
+
+    @Test
+    void testLicenseKeyFormatting() {
+        Map<Pair<String, Integer>, String> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("5F3Z-2e-9-w", 4), "5F3Z-2E9W");
+        scenarios.put(Pair.of("2-5g-3-J", 2), "2-5G-3J");
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, stringProblems.licenseKeyFormatting(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testMinWindow() {
+        Map<Pair<String, String>, String> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("ADOBECODEBANC", "ABC"), "BANC");
+        scenarios.put(Pair.of("a", "a"), "a");
+        scenarios.put(Pair.of("a", "aa"), "");
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, stringProblems.minWindow(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testLengthOfLongestSubstringKDistinct() {
+        Map<Pair<String, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("eceba", 2), 3);
+        scenarios.put(Pair.of("aaaaa", 2), 5);
+        scenarios.put(Pair.of("aa", 1), 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                stringProblems.lengthOfLongestSubstringKDistinct(input.getLeft(), input.getRight()))
+        );
+    }
+
+    @Test
+    void testLengthOfLongestSubstringTwoDistinct() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("eceba", 3);
+        scenarios.put("ccaabbb", 5);
+        scenarios.put("aaaaa", 5);
+        scenarios.put("aa", 2);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, stringProblems.lengthOfLongestSubstringTwoDistinct(input))
+        );
+    }
+
+    @Test
+    void testIsValid() {
+        Map<String, Boolean> scenarios = new HashMap<>();
+        scenarios.put("()", true);
+        scenarios.put("()[]{}", true);
+        scenarios.put("(]", false);
+        scenarios.put("([)]", false);
+        scenarios.put("{[]}", true);
+        scenarios.put("]ar", false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.isValid(input)));
+    }
 }

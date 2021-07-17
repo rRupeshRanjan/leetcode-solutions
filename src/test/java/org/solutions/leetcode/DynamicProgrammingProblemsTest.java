@@ -256,4 +256,14 @@ class DynamicProgrammingProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.longestLine(input)));
     }
+
+    @Test
+    void testOddEvenJump() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{10, 13, 12, 14, 15}, 2);
+        scenarios.put(new int[]{2, 3, 1, 1, 4}, 3);
+        scenarios.put(new int[]{5, 1, 3, 4, 2}, 3);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.oddEvenJump(input)));
+    }
 }

@@ -113,4 +113,18 @@ class LinkedListProblemsTest {
                         expected, linkedListProblems.removeNthFromEnd(input.getLeft(), input.getRight()))));
     }
 
+    @Test
+    void testMergeKLists() {
+        Map<ListNode[], ListNode> scenarios = new HashMap<>();
+        scenarios.put(new ListNode[]{
+                testUtils.getLinkedList(Arrays.asList(1, 4, 5)),
+                testUtils.getLinkedList(Arrays.asList(1, 3, 4)),
+                testUtils.getLinkedList(Arrays.asList(2, 6))
+        }, testUtils.getLinkedList(Arrays.asList(1, 1, 2, 3, 4, 4, 5, 6)));
+        scenarios.put(new ListNode[]{}, null);
+        scenarios.put(new ListNode[]{null}, null);
+
+        scenarios.forEach((input, expected) -> assertTrue(
+                testUtils.areLinkedListsEqualByValue(expected, linkedListProblems.mergeKLists(input))));
+    }
 }

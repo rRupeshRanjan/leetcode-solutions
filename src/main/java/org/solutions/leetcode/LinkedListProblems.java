@@ -173,24 +173,53 @@ public class LinkedListProblems {
      * tags:: linkedList
      */
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode temp = head;
-        int length = 0;
+        ListNode dummy = new ListNode(-1);
+        dummy.setNext(head);
+        ListNode fast = dummy, slow = dummy;
 
-        while (temp != null) {
-            temp = temp.getNext();
-            length++;
+        for (int i = 1; i <= n + 1; i++) {
+            fast = fast.getNext();
         }
 
-        if (length == n)
-            return head.getNext();
-
-        temp = head;
-        for (int i = 1; i < length - n; i++) {
-            temp = temp.getNext();
+        while (fast != null) {
+            slow = slow.getNext();
+            fast = fast.getNext();
         }
 
-        temp.setNext((temp.getNext() == null) ? null : temp.getNext().getNext());
-        return head;
+        slow.setNext(slow.getNext().getNext());
+        return dummy.getNext();
+    }
+
+    /**
+     * Q. 23 Merge k Sorted Lists
+     * You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+     * <p>
+     * Merge all the linked-lists into one sorted linked-list and return it.
+     * <p>
+     * tags:: heap, linkedList
+     */
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0)
+            return null;
+
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(ListNode::getVal));
+        ListNode dummy = new ListNode(0), head = dummy;
+
+        for (ListNode list : lists) {
+            if (list != null)
+                pq.add(list);
+        }
+
+        while (!pq.isEmpty()) {
+            ListNode temp = pq.poll();
+            head.setNext(temp);
+            head = head.getNext();
+
+            if (temp.getNext() != null)
+                pq.add(temp.getNext());
+        }
+
+        return dummy.getNext();
     }
 }
 

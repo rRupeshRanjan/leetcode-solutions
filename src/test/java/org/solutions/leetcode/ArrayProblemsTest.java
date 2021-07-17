@@ -601,4 +601,98 @@ class ArrayProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected,
                 arrayProblems.carFleet(input.getLeft(), input.getMiddle(), input.getRight())));
     }
+
+    @Test
+    void testMinDifference() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{5, 3, 2, 4}, 0);
+        scenarios.put(new int[]{1, 5, 0, 10, 14}, 1);
+        scenarios.put(new int[]{6, 6, 0, 1, 1, 4, 6}, 2);
+        scenarios.put(new int[]{1, 5, 6, 14, 15}, 1);
+        scenarios.put(new int[]{1, 5, 6, 14, 15}, 1);
+        scenarios.put(new int[]{82, 81, 95, 75, 20}, 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.minDifference(input)));
+    }
+
+    @Test
+    void testTotalFruit() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 1}, 3);
+        scenarios.put(new int[]{0, 1, 2, 2}, 3);
+        scenarios.put(new int[]{1, 2, 3, 2, 2}, 4);
+        scenarios.put(new int[]{3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4}, 5);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.totalFruit(input)));
+    }
+
+    @Test
+    void testNextPermutation() {
+        Map<int[], int[]> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3}, new int[]{1, 3, 2});
+        scenarios.put(new int[]{3, 2, 1}, new int[]{1, 2, 3});
+        scenarios.put(new int[]{1, 5, 8, 4, 7, 6, 4, 3, 1}, new int[]{1, 5, 8, 6, 1, 3, 4, 4, 7});
+
+        scenarios.forEach((input, expected) -> {
+            arrayProblems.nextPermutation(input);
+            assertArrayEquals(expected, input);
+        });
+    }
+
+    @Test
+    void testJumpGameV() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12}, 2), 4);
+        scenarios.put(Pair.of(new int[]{3, 3, 3, 3, 3}, 3), 1);
+        scenarios.put(Pair.of(new int[]{7, 6, 5, 4, 3, 2, 1}, 1), 7);
+        scenarios.put(Pair.of(new int[]{7, 1, 7, 1, 7, 1}, 2), 2);
+        scenarios.put(Pair.of(new int[]{7}, 1), 1);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.jumpGameV(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testJumpGameVI() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, -1, -2, 4, -7, 3}, 2), 7);
+        scenarios.put(Pair.of(new int[]{10, -5, -2, 4, 0, 3}, 3), 17);
+        scenarios.put(Pair.of(new int[]{1, -5, -20, 4, -1, 3, -6, -3}, 2), 0);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.jumpGameVI(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testJumpGameVII() {
+        Map<Triple<String, Integer, Integer>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Triple.of("011010", 2, 3), true);
+        scenarios.put(Triple.of("01101110", 2, 3), false);
+        scenarios.put(Triple.of("01", 0, 1), false);
+        scenarios.put(Triple.of("0000000000", 2, 5), true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.jumpGameVII(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testPlusOne() {
+        Map<int[], int[]> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3}, new int[]{1, 2, 4});
+        scenarios.put(new int[]{1, 2, 9}, new int[]{1, 3, 0});
+        scenarios.put(new int[]{9}, new int[]{1, 0});
+        scenarios.put(new int[]{0}, new int[]{1});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, arrayProblems.plusOne(input)));
+    }
+
+    @Test
+    void testFindKthLargest() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{2, 1, 5, 6, 4}, 2), 5);
+        scenarios.put(Pair.of(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4), 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.findKthLargest(input.getLeft(), input.getRight())));
+    }
 }

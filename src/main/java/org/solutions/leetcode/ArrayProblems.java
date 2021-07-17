@@ -1133,7 +1133,7 @@ public class ArrayProblems {
     }
 
     /**
-     * helper dfs method fo k subsets with equal sum
+     * helper dfs method for k subsets with equal sum
      */
     private boolean dfsSubSetSum(int[] nums, boolean[] visited, int index, int sum, int target, int round) {
         if (round == 0)
@@ -1704,5 +1704,256 @@ public class ArrayProblems {
         }
 
         return count;
+    }
+
+    /**
+     * Q. 1509 Minimum Difference Between Largest and Smallest Value in Three Moves
+     * <p>
+     * Given an array nums, you are allowed to choose one element of nums and change it by any value in one move.
+     * Return the minimum difference between the largest and smallest value of nums after perfoming at most 3 moves.
+     * <p>
+     * tags:: array
+     */
+    public int minDifference(int[] nums) {
+        if (nums.length <= 4)
+            return 0;
+
+        int n = nums.length;
+        Arrays.sort(nums);
+        return Math.min(
+                Math.min(nums[n - 1] - nums[3], nums[n - 2] - nums[2]),
+                Math.min(nums[n - 3] - nums[1], nums[n - 4] - nums[0]));
+    }
+
+    /**
+     * Q. 904. Fruit Into Baskets
+     * <p>
+     * You are visiting a farm that has a single row of fruit trees arranged from left to right.
+     * The trees are represented by an integer array fruits where fruits[i] is the type of fruit the ith tree produces.
+     * <p>
+     * You want to collect as much fruit as possible. However, the owner has some strict rules that you must follow:
+     * <p>
+     * You only have two baskets, and each basket can only hold a single type of fruit.
+     * There is no limit on the amount of fruit each basket can hold.
+     * Starting from any tree of your choice, you must pick exactly one fruit from every tree (including the start tree)
+     * while moving to the right.
+     * The picked fruits must fit in one of your baskets.
+     * Once you reach a tree with fruit that cannot fit in your baskets, you must stop.
+     * <p>
+     * Given the integer array fruits, return the maximum number of fruits you can pick.
+     * <p>
+     * tags:: array
+     */
+    public int totalFruit(int[] fruits) {
+        if (fruits == null || fruits.length == 0)
+            return 0;
+
+        Map<Integer, Integer> map = new HashMap<>();
+        int maxCount = 0, lastIndex = 0;
+
+        for (int i = 0; i < fruits.length; i++) {
+            map.put(fruits[i], map.getOrDefault(fruits[i], 0) + 1);
+
+            if (map.size() > 2) {
+                maxCount = Math.max(maxCount, i - lastIndex);
+
+                while (map.size() > 2) {
+                    map.put(fruits[lastIndex], map.get(fruits[lastIndex]) - 1);
+                    map.remove(fruits[lastIndex], 0);
+                    lastIndex++;
+                }
+            }
+        }
+
+        maxCount = Math.max(maxCount, fruits.length - lastIndex);
+        return maxCount;
+    }
+
+    /**
+     * Q. 31. Next Permutation
+     * <p>
+     * Implement next permutation, which rearranges numbers into lexicographically next greater permutation of numbers.
+     * If such an arrangement isn't possible, it must rearrange it as lowest possible order
+     * (i.e., sorted in ascending order).
+     * <p>
+     * The replacement must be in place and use only constant extra memory.
+     * <p>
+     * tags:: array
+     */
+    public void nextPermutation(int[] nums) {
+        int left = nums.length - 1, right = nums.length - 1;
+
+        while (left > 0 && nums[left] <= nums[left - 1])
+            left--;
+
+        while (right > left && nums[right] <= nums[Math.max(0, left - 1)])
+            right--;
+
+        int temp = nums[Math.max(0, left - 1)];
+        nums[Math.max(0, left - 1)] = nums[right];
+        nums[right] = temp;
+
+        right = nums.length - 1;
+        while (left < right) {
+            temp = nums[left];
+            nums[left++] = nums[right];
+            nums[right--] = temp;
+        }
+    }
+
+    /**
+     * Q. 1340 Jump Game V
+     * <p>
+     * Given an array of integers arr and an integer d. In one step you can jump from index i to index:
+     * <p>
+     * i + x where: i + x < arr.length and 0 < x <= d.
+     * i - x where: i - x >= 0 and 0 < x <= d.
+     * In addition, you can only jump from index i to index j if arr[i] > arr[j] and arr[i] > arr[k]
+     * for all indices k between i and j (More formally min(i, j) < k < max(i, j)).
+     * <p>
+     * You can choose any index of the array and start jumping.
+     * Notice that you can not jump outside of the array at any time.
+     * <p>
+     * Return the maximum number of indices you can visit.
+     * <p>
+     * tags:: array, dfs, dp
+     */
+    public int jumpGameV(int[] nums, int d) {
+        int[] dp = new int[nums.length];
+        int maxJumps = 1;
+
+        for (int i = 0; i < nums.length; i++) {
+            maxJumps = Math.max(maxJumps, jumpGameVDfs(nums, d, i, dp));
+        }
+
+        return maxJumps;
+    }
+
+    private int jumpGameVDfs(int[] nums, int d, int index, int[] dp) {
+        if (dp[index] != 0)
+            return dp[index];
+
+        int currMax = 1;
+        for (int i = index + 1; i <= Math.min(index + d, nums.length - 1) && nums[index] > nums[i]; i++)
+            currMax = Math.max(currMax, 1 + jumpGameVDfs(nums, d, i, dp));
+
+        for (int i = index - 1; i >= Math.max(index - d, 0) && nums[index] > nums[i]; i--)
+            currMax = Math.max(currMax, 1 + jumpGameVDfs(nums, d, i, dp));
+
+        dp[index] = currMax;
+        return currMax;
+    }
+
+    /**
+     * Q. 1696 Jump Game VI
+     * <p>
+     * You are given a 0-indexed integer array nums and an integer k.
+     * <p>
+     * You are initially standing at index 0. In one move, you can jump at most k steps forward without going outside
+     * the boundaries of the array. That is, you can jump from index i to any index in the range
+     * [i + 1, min(n - 1, i + k)] inclusive.
+     * <p>
+     * You want to reach the last index of the array (index n - 1).
+     * Your score is the sum of all nums[j] for each index j you visited in the array.
+     * Return the maximum score you can get.
+     * <p>
+     * tags:: array, heap
+     */
+    public int jumpGameVI(int[] nums, int k) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        int score = nums[0];
+        pq.add(new int[]{nums[0], 0});
+
+        for (int i = 1; i < nums.length; i++) {
+            while (pq.peek()[1] < i - k)
+                pq.poll();
+            score = pq.peek()[0] + nums[i];
+            pq.add(new int[]{score, i});
+        }
+
+        return score;
+    }
+
+    /**
+     * Q. 1871 Jump Game VII
+     * <p>
+     * You are given a 0-indexed binary string s and two integers minJump and maxJump.
+     * In the beginning, you are standing at index 0, which is equal to '0'.
+     * You can move from index i to index j if the following conditions are fulfilled:
+     * i + minJump <= j <= min(i + maxJump, s.length - 1), and
+     * s[j] == '0'.
+     * <p>
+     * Return true if you can reach index s.length - 1 in s, or false otherwise.
+     * <p>
+     * tags:: dp, array
+     */
+    public boolean jumpGameVII(String s, int minJump, int maxJump) {
+        int windowZeroCount = 0, len = s.length();
+        boolean[] dp = new boolean[len];
+        dp[0] = true;
+
+        for (int i = 1; i < len; i++) {
+            if (i >= minJump && dp[i - minJump])
+                windowZeroCount++;
+            if (i > maxJump && dp[i - maxJump - 1])
+                windowZeroCount--;
+
+            dp[i] = windowZeroCount > 0 && s.charAt(i) == '0';
+        }
+
+        return dp[len - 1];
+    }
+
+    /**
+     * Q. 66 Plus One
+     * <p>
+     * Given a non-empty array of decimal digits representing a non-negative integer, increment one to the integer.
+     * The digits are stored such that the most significant digit is at the head of the list,
+     * and each element in the array contains a single digit.
+     * <p>
+     * You may assume the integer does not contain any leading zero, except the number 0 itself.
+     * <p>
+     * tags:: array, math
+     */
+    public int[] plusOne(int[] digits) {
+        int carry = 1;
+        for (int i = digits.length - 1; i >= 0 && carry > 0; i--) {
+            digits[i] += carry;
+            if (digits[i] == 10) {
+                carry = 1;
+                digits[i] %= 10;
+            } else {
+                carry = 0;
+            }
+        }
+
+        if (carry == 1) {
+            int[] answer = new int[digits.length + 1];
+            answer[0] = 1;
+            System.arraycopy(digits, 0, answer, 1, digits.length);
+            return answer;
+        }
+
+        return digits;
+    }
+
+    /**
+     * Q. 215. Kth Largest Element in an Array
+     * <p>
+     * Given an integer array nums and an integer k, return the kth largest element in the array.
+     * Note that it is the kth largest element in the sorted order, not the kth distinct element.
+     * <p>
+     * tags:: array, heap
+     */
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (int num : nums) {
+            pq.add(num);
+            if (pq.size() > k)
+                pq.poll();
+        }
+
+        return pq.poll();
     }
 }
