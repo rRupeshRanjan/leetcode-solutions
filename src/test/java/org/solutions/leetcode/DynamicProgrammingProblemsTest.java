@@ -73,7 +73,6 @@ class DynamicProgrammingProblemsTest {
         scenarios.put(Pair.of(2, new int[]{3, 2, 6, 5, 0, 3}), 7);
         scenarios.put(Pair.of(2, null), 0);
 
-
         scenarios.forEach((input, expected) ->
                 assertEquals(expected, dpProblems.maxProfit4(input.getLeft(), input.getRight())));
     }
@@ -265,5 +264,16 @@ class DynamicProgrammingProblemsTest {
         scenarios.put(new int[]{5, 1, 3, 4, 2}, 3);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.oddEvenJump(input)));
+    }
+
+    @Test
+    void testHouseRobber() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3, 1}, 4);
+        scenarios.put(new int[]{2, 7, 9, 3, 1}, 12);
+        scenarios.put(new int[]{1}, 1);
+        scenarios.put(new int[]{1, 2}, 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.houseRobber(input)));
     }
 }

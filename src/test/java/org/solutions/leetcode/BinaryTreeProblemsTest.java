@@ -204,6 +204,21 @@ class BinaryTreeProblemsTest {
     }
 
     @Test
+    void testDiameterOfBinaryTree() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3)), 3);
+        scenarios.put(new TreeNode(1, 2, null), 1);
+        scenarios.put(null, 0);
+        scenarios.put(new TreeNode(1,
+                new TreeNode(2,
+                        new TreeNode(3, new TreeNode(4, 1, null), null),
+                        new TreeNode(2, null, new TreeNode(1, null, 9))),
+                new TreeNode(3)), 6);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.diameterOfBinaryTree(input)));
+    }
+
+    @Test
     void testLargestValues() {
         Map<TreeNode, List<Integer>> scenarios = new HashMap<>();
         scenarios.put(new TreeNode(1, new TreeNode(3, 5, 3), new TreeNode(2, null, 9)),

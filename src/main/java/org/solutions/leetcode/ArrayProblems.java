@@ -1956,4 +1956,131 @@ public class ArrayProblems {
 
         return pq.poll();
     }
+
+    /**
+     * Q. 163 Missing Ranges
+     * <p>
+     * You are given an inclusive range [lower, upper] and a sorted unique integer array nums, where all elements are
+     * in the inclusive range. A number x is considered missing if x is in the range [lower, upper] and x is not in nums.
+     * <p>
+     * Return the smallest sorted list of ranges that cover every missing number exactly.
+     * That is, no element of nums is in any of the ranges, and each missing number is in one of the ranges.
+     * <p>
+     * Each range [a,b] in the list should be output as:
+     * "a->b" if a != b
+     * "a" if a == b
+     * <p>
+     * tags:: array, string
+     */
+    public List<String> findMissingRanges(int[] nums, int lower, int higher) {
+        List<String> answer = new ArrayList<>();
+        for (int num : nums) {
+            if (num != lower) {
+                int high = num - 1;
+                if (lower == high)
+                    answer.add(lower + "");
+                else
+                    answer.add(lower + "->" + high);
+            }
+
+            lower = num + 1;
+        }
+
+        if (lower == higher)
+            answer.add(higher + "");
+        else if (lower < higher)
+            answer.add(lower + "->" + higher);
+
+        return answer;
+    }
+
+    /**
+     * Q. 252 Meeting Rooms
+     * <p>
+     * Given an array of meeting time intervals where intervals[i] = [starti, endi],
+     * determine if a person could attend all meetings.
+     * <p>
+     * tags:: array, sorting
+     */
+    public boolean canAttendMeetings(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        for (int i = 0; i < intervals.length - 1; i++) {
+            if (intervals[i][1] > intervals[i + 1][0])
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Q. 253 Meeting Rooms II
+     * <p>
+     * Given an array of meeting time intervals intervals where intervals[i] = [starti, endi],
+     * return the minimum number of conference rooms required.
+     * <p>
+     * tags:: array, heap
+     */
+    public int minMeetingRooms(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (int[] interval : intervals) {
+            if (!pq.isEmpty() && pq.peek() < interval[0])
+                pq.poll();
+            pq.add(interval[1]);
+        }
+
+        return pq.size();
+    }
+
+    /**
+     * Q. 1060 Missing Element in Sorted Array
+     * <p>
+     * Given an integer array nums which is sorted in ascending order and all of its elements are unique and given
+     * also an integer k, return the kth missing number starting from the leftmost number of the array.
+     * <p>
+     * tags:: array, binarySearch
+     */
+    public int missingElement(int[] nums, int k) {
+        int start = 0, end = nums.length - 1;
+
+        if (k > nums[end] - nums[0] - end)
+            return nums[end] + k - (nums[end] - nums[0] - end);
+
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] - nums[0] - mid < k)
+                start = mid + 1;
+            else
+                end = mid;
+        }
+
+        return nums[start - 1] + k - (nums[start - 1] - nums[0] - (start - 1));
+    }
+
+    /**
+     * Q. 852 Peak Index in a Mountain Array
+     * <p>
+     * Let's call an array arr a mountain if the following properties hold:
+     * arr.length >= 3
+     * There exists some i with 0 < i < arr.length - 1 such that:
+     * arr[0] < arr[1] < ... arr[i-1] < arr[i]
+     * arr[i] > arr[i+1] > ... > arr[arr.length - 1]
+     * <p>
+     * Given an integer array arr that is guaranteed to be a mountain, return any i such that
+     * arr[0] < arr[1] < ... arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1].
+     * <p>
+     * tags:: binarySearch
+     */
+    public int peakIndexInMountainArray(int[] arr) {
+        int start = 0, end = arr.length - 1;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (arr[mid] > arr[mid + 1])
+                end = mid;
+            else
+                start = mid + 1;
+        }
+        return start;
+    }
 }

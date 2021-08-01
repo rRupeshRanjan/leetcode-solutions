@@ -221,5 +221,64 @@ public class LinkedListProblems {
 
         return dummy.getNext();
     }
-}
 
+    /**
+     * Q. 21 Merge Two Sorted Lists
+     * Merge two sorted linked lists and return it as a sorted list.
+     * The list should be made by splicing together the nodes of the first two lists.
+     * <p>
+     * tags:: twoPointer, linkedList
+     */
+    public ListNode mergeTwoLists(ListNode head1, ListNode head2) {
+        ListNode dummy = new ListNode(0), head = dummy;
+
+        while (head1 != null && head2 != null) {
+            if (head1.getVal() < head2.getVal()) {
+                head.setNext(head1);
+                head1 = head1.getNext();
+            } else {
+                head.setNext(head2);
+                head2 = head2.getNext();
+            }
+            head = head.getNext();
+        }
+
+        head.setNext(head1 == null ? head2 : head1);
+        return dummy.getNext();
+    }
+
+    /**
+     * Q. 2 Add Two Numbers
+     * <p>
+     * You are given two non-empty linked lists representing two non-negative integers.
+     * The digits are stored in reverse order, and each of their nodes contains a single digit.
+     * Add the two numbers and return the sum as a linked list.
+     * <p>
+     * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+     * <p>
+     * tags:: linkedList, twoPointer
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int carry = 0, sum = 0;
+        ListNode dummy = new ListNode(0), head = dummy;
+
+        while (l1 != null || l2 != null) {
+            int x = (l1 == null) ? 0 : l1.getVal();
+            int y = (l2 == null) ? 0 : l2.getVal();
+            sum = x + y + carry;
+            carry = sum / 10;
+
+            head.setNext(new ListNode(sum % 10));
+            head = head.getNext();
+
+            if (l1 != null) l1 = l1.getNext();
+            if (l2 != null) l2 = l2.getNext();
+        }
+
+        if (carry > 0) {
+            head.setNext(new ListNode(carry));
+        }
+
+        return dummy.getNext();
+    }
+}

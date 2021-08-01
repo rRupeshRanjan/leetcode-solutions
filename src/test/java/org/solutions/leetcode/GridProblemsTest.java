@@ -1,6 +1,7 @@
 package org.solutions.leetcode;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -344,6 +345,54 @@ class GridProblemsTest {
         scenarios.put(new char[][]{{'X', '*'}, {'#', 'X'}}, -1);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.shortestPathToGetFood(input)));
+    }
+
+    @Test
+    void testCalcEquation() {
+        Map<Triple<List<List<String>>, double[], List<List<String>>>, double[]> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(
+                Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "c")),
+                new double[]{2.0, 3.0},
+                Arrays.asList(Arrays.asList("a", "c"), Arrays.asList("b", "a"), Arrays.asList("a", "e"),
+                        Arrays.asList("a", "a"), Arrays.asList("x", "x"))
+        ), new double[]{6.00000, 0.50000, -1.00000, 1.00000, -1.00000});
+
+        scenarios.put(Triple.of(
+                Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "c"), Arrays.asList("bc", "cd")),
+                new double[]{1.5, 2.5, 5.0},
+                Arrays.asList(Arrays.asList("a", "c"), Arrays.asList("c", "b"), Arrays.asList("bc", "cd"),
+                        Arrays.asList("cd", "bc"))
+        ), new double[]{3.75000, 0.40000, 5.00000, 0.20000});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected,
+                gridProblems.calcEquation(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testNumOfMinutes() {
+        Map<Pair<Pair<Integer, Integer>, Pair<int[], int[]>>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(Pair.of(1, 0), Pair.of(new int[]{-1}, new int[]{0})), 0);
+        scenarios.put(Pair.of(Pair.of(6, 2),
+                Pair.of(new int[]{2, 2, -1, 2, 2, 2}, new int[]{0, 0, 1, 0, 0, 0})), 1);
+        scenarios.put(Pair.of(Pair.of(7, 6),
+                Pair.of(new int[]{1, 2, 3, 4, 5, 6, -1}, new int[]{0, 6, 5, 4, 3, 2, 1})), 21);
+        scenarios.put(Pair.of(Pair.of(15, 0), Pair.of(new int[]{-1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6},
+                new int[]{1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0})), 3);
+        scenarios.put(Pair.of(Pair.of(4, 2), Pair.of(new int[]{3, 3, -1, 2}, new int[]{0, 0, 162, 914})), 1076);
+
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.numOfMinutes(
+                input.getLeft().getLeft(), input.getLeft().getRight(),
+                input.getRight().getLeft(), input.getRight().getRight())));
+    }
+
+    @Test
+    void testRemoveStones() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 0}, {0, 2}, {1, 1}, {2, 0}, {2, 2}}, 3);
+        scenarios.put(new int[][]{{0, 0}}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.removeStones(input)));
     }
 
     private boolean listContainsArray(List<int[]> list, int[] array) {

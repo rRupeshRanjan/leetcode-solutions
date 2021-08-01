@@ -112,9 +112,8 @@ class ArrayProblemsTest {
         scenarios.put(Pair.of(new int[]{12, 24, 8, 32}, new int[]{13, 25, 32, 11}), new int[]{24, 32, 8, 12});
         scenarios.put(Pair.of(new int[]{3, 3, 4, 4}, new int[]{2, 2, 3, 3}), new int[]{3, 3, 4, 4});
 
-        scenarios.forEach((input, expected) -> {
-            assertArrayEquals(expected, arrayProblems.advantageCount(input.getLeft(), input.getRight()));
-        });
+        scenarios.forEach((input, expected) ->
+                assertArrayEquals(expected, arrayProblems.advantageCount(input.getLeft(), input.getRight())));
     }
 
     @Test
@@ -694,5 +693,62 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected,
                 arrayProblems.findKthLargest(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testFindMissingRanges() {
+        Map<Triple<int[], Integer, Integer>, List<String>> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(new int[]{0, 1, 3, 50, 75}, 0, 99), Arrays.asList("2", "4->49", "51->74", "76->99"));
+        scenarios.put(Triple.of(new int[]{}, 1, 1), Collections.singletonList("1"));
+        scenarios.put(Triple.of(new int[]{}, -3, -1), Collections.singletonList("-3->-1"));
+        scenarios.put(Triple.of(new int[]{-1}, -1, -1), Collections.emptyList());
+        scenarios.put(Triple.of(new int[]{-1}, -2, -1), Collections.singletonList("-2"));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                arrayProblems.findMissingRanges(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testCanAttendMeetings() {
+        Map<int[][], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 30}, {5, 10}, {15, 20}}, false);
+        scenarios.put(new int[][]{{7, 10}, {2, 4}}, true);
+        scenarios.put(new int[][]{}, true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.canAttendMeetings(input)));
+    }
+
+    @Test
+    void testMinMeetingRooms() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 30}, {5, 10}, {15, 20}}, 2);
+        scenarios.put(new int[][]{{7, 10}, {2, 4}}, 1);
+        scenarios.put(new int[][]{}, 0);
+        scenarios.put(new int[][]{{1, 10}, {2, 9}, {3, 8}}, 3);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.minMeetingRooms(input)));
+    }
+
+    @Test
+    void testMissingElement() {
+        Map<Pair<int[], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{4, 7, 9, 10}, 1), 5);
+        scenarios.put(Pair.of(new int[]{4, 7, 9, 10}, 3), 8);
+        scenarios.put(Pair.of(new int[]{1, 2, 4}, 3), 6);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.missingElement(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testPeakIndexInMountainArray() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{0, 1, 0}, 1);
+        scenarios.put(new int[]{0, 2, 1, 0}, 1);
+        scenarios.put(new int[]{0, 10, 5, 2}, 1);
+        scenarios.put(new int[]{3, 4, 5, 1}, 2);
+        scenarios.put(new int[]{24, 69, 100, 99, 79, 78, 67, 36, 26, 19}, 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.peakIndexInMountainArray(input)));
     }
 }

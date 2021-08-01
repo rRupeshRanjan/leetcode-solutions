@@ -127,4 +127,46 @@ class LinkedListProblemsTest {
         scenarios.forEach((input, expected) -> assertTrue(
                 testUtils.areLinkedListsEqualByValue(expected, linkedListProblems.mergeKLists(input))));
     }
+
+    @Test
+    void testMergeTwoLists() {
+        Map<Pair<ListNode, ListNode>, ListNode> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(
+                        testUtils.getLinkedList(Arrays.asList(1, 2, 4)),
+                        testUtils.getLinkedList(Arrays.asList(1, 3, 4))),
+                testUtils.getLinkedList(Arrays.asList(1, 1, 2, 3, 4, 4)));
+        scenarios.put(Pair.of(null, null), null);
+        scenarios.put(Pair.of(
+                        null,
+                        testUtils.getLinkedList(Arrays.asList(1, 3, 4))),
+                testUtils.getLinkedList(Arrays.asList(1, 3, 4)));
+
+        scenarios.forEach((input, expected) -> assertTrue(testUtils.areLinkedListsEqualByValue(
+                expected, linkedListProblems.mergeTwoLists(input.getLeft(), input.getRight())))
+        );
+    }
+
+    @Test
+    void testAddTwoNumbers() {
+        Map<Pair<ListNode, ListNode>, ListNode> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(
+                        testUtils.getLinkedList(Arrays.asList(2, 4, 3)),
+                        testUtils.getLinkedList(Arrays.asList(5, 6, 4))),
+                testUtils.getLinkedList(Arrays.asList(7, 0, 8)));
+        scenarios.put(Pair.of(
+                        testUtils.getLinkedList(Arrays.asList(2, 4, 8)),
+                        testUtils.getLinkedList(Arrays.asList(5, 6, 4))),
+                testUtils.getLinkedList(Arrays.asList(7, 0, 3, 1)));
+        scenarios.put(Pair.of(
+                        testUtils.getLinkedList(Collections.singletonList(0)),
+                        testUtils.getLinkedList(Collections.singletonList(0))),
+                testUtils.getLinkedList(Collections.singletonList(0)));
+        scenarios.put(Pair.of(
+                        testUtils.getLinkedList(Arrays.asList(9, 9, 9, 9, 9, 9, 9)),
+                        testUtils.getLinkedList(Arrays.asList(9, 9, 9, 9))),
+                testUtils.getLinkedList(Arrays.asList(8, 9, 9, 9, 0, 0, 0, 1)));
+
+        scenarios.forEach((input, expected) -> assertTrue(testUtils.areLinkedListsEqualByValue(expected,
+                linkedListProblems.addTwoNumbers(input.getLeft(), input.getRight()))));
+    }
 }

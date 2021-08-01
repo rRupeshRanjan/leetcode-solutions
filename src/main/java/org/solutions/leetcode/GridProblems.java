@@ -1033,4 +1033,116 @@ public class GridProblems {
 
         return currTime;
     }
+
+    /**
+     * Q. 399 Evaluate Division
+     * <p>
+     * You are given an array of variable pairs equations and an array of real numbers values,
+     * where equations[i] = [Ai, Bi] and values[i] represent the equation Ai / Bi = values[i].
+     * Each Ai or Bi is a string that represents a single variable.
+     * <p>
+     * You are also given some queries, where queries[j] = [Cj, Dj] represents the jth query
+     * where you must find the answer for Cj / Dj = ?.
+     * <p>
+     * Return the answers to all queries. If a single answer cannot be determined, return -1.0.
+     * Note: The input is always valid.
+     * You may assume that evaluating queries will not result in division by zero and that there is no contradiction.
+     * <p>
+     * tags:: dfs, graph
+     */
+    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        Map<String, Map<String, Double>> graph = new HashMap<>();
+        double[] answer = new double[queries.size()];
+
+        for (int i = 0; i < equations.size(); i++) {
+            String divisor = equations.get(i).get(1);
+            String dividend = equations.get(i).get(0);
+            double ratio = values[i];
+
+            graph.computeIfAbsent(divisor, x -> new HashMap<>()).put(dividend, 1 / ratio);
+            graph.computeIfAbsent(dividend, x -> new HashMap<>()).put(divisor, ratio);
+        }
+
+        for (int i = 0; i < queries.size(); i++) {
+            answer[i] = dfsCalcEquation(graph, queries.get(i).get(0), queries.get(i).get(1),
+                    1.0, new HashSet<>());
+        }
+
+        return answer;
+    }
+
+    private double dfsCalcEquation(Map<String, Map<String, Double>> graph, String curr, String target,
+                                   double accumulatedProduct, HashSet<String> seen) {
+        seen.add(curr);
+        double product = -1.0;
+
+        if (!graph.containsKey(curr) || !graph.containsKey(target))
+            return product;
+        else if (curr.equals(target))
+            return 1.0;
+
+        Map<String, Double> neighbours = graph.get(curr);
+        if (neighbours.containsKey(target))
+            return accumulatedProduct * neighbours.get(target);
+        else {
+            for (Map.Entry<String, Double> pair : neighbours.entrySet()) {
+                if (seen.contains(pair.getKey()))
+                    continue;
+
+                product = dfsCalcEquation(graph, pair.getKey(), target,
+                        pair.getValue() * accumulatedProduct, seen);
+
+                if (product != -1.0)
+                    break;
+            }
+        }
+        seen.remove(curr);
+        return product;
+    }
+
+    /**
+     * Q. 947 Most Stones Removed with Same Row or Column
+     * <p>
+     * On a 2D plane, we place n stones at some integer coordinate points. Each coordinate point may have at most one
+     * stone. A stone can be removed if it shares either the same row or the same column as another stone that has not
+     * been removed.
+     * <p>
+     * Given an array stones of length n where stones[i] = [xi, yi] represents the location of the ith stone,
+     * return the largest possible number of stones that can be removed.
+     * <p>
+     * constraints:
+     * 1 <= stones.length <= 1000
+     * 0 <= xi, yi <= 104
+     * tags:: union-find, graph
+     */
+    public int removeStones(int[][] stones) {
+        Map<Integer, Integer> graph = new HashMap<>();
+        int[] islandCount = new int[1];
+
+        for (int[] stone : stones) {
+            unionRemoveStones(stone[0], stone[1] + 10001, graph, islandCount);
+        }
+
+        return stones.length - islandCount[0];
+    }
+
+    private void unionRemoveStones(int x, int y, Map<Integer, Integer> graph, int[] islandCount) {
+        int xParent = findRemoveStones(x, graph, islandCount);
+        int yParent = findRemoveStones(y, graph, islandCount);
+
+        if (xParent != yParent) {
+            graph.put(xParent, yParent);
+            islandCount[0]--;
+        }
+    }
+
+    private int findRemoveStones(int node, Map<Integer, Integer> graph, int[] islandCount) {
+        if (graph.putIfAbsent(node, node) == null) {
+            islandCount[0]++;
+        }
+        if (node != graph.get(node)) {
+            graph.put(node, findRemoveStones(graph.get(node), graph, islandCount));
+        }
+        return graph.get(node);
+    }
 }
