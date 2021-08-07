@@ -451,4 +451,15 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.isValid(input)));
     }
+
+    @Test
+    void testLongestPalindrome() {
+        Map<String, List<String>> scenarios = new HashMap<>();
+        scenarios.put("babad", Arrays.asList("aba", "bab"));
+        scenarios.put("cbbd", Collections.singletonList("bb"));
+        scenarios.put("a", Collections.singletonList("a"));
+        scenarios.put("qc", Arrays.asList("q", "c"));
+
+        scenarios.forEach((input, expected) -> assertTrue(expected.contains(stringProblems.longestPalindrome(input))));
+    }
 }

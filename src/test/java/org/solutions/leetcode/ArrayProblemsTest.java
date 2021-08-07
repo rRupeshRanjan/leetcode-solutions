@@ -751,4 +751,36 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.peakIndexInMountainArray(input)));
     }
+
+    @Test
+    void testFindMinInRotatedArray() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{3, 4, 5, 1, 2}, 1);
+        scenarios.put(new int[]{4, 5, 6, 7, 0, 1, 2}, 0);
+        scenarios.put(new int[]{11, 13, 15, 17}, 11);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.findMinInRotatedArray(input)));
+    }
+
+    @Test
+    void testFindMinInRotatedArrayII() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{2, 2, 2, 0, 1, 2, 2}, 0);
+        scenarios.put(new int[]{1, 3, 5}, 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.findMinInRotatedArrayII(input)));
+    }
+
+    @Test
+    void testSortColors() {
+        Map<int[], int[]> scenarios = new HashMap<>();
+        scenarios.put(new int[]{2, 0, 2, 1, 1, 0}, new int[]{0, 0, 1, 1, 2, 2});
+        scenarios.put(new int[]{2, 0, 1}, new int[]{0, 1, 2});
+        scenarios.put(new int[]{0}, new int[]{0});
+
+        scenarios.forEach((input, expected) -> {
+            arrayProblems.sortColors(input);
+            assertArrayEquals(expected, input);
+        });
+    }
 }

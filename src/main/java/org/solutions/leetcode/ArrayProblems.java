@@ -2083,4 +2083,105 @@ public class ArrayProblems {
         }
         return start;
     }
+
+    /**
+     * Q. 153 Find Minimum in Rotated Sorted Array
+     * <p>
+     * Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example,
+     * the array nums = [0,1,2,4,5,6,7] might become:
+     * [4,5,6,7,0,1,2] if it was rotated 4 times.
+     * [0,1,2,4,5,6,7] if it was rotated 7 times.
+     * Notice that rotating an array [a[0], a[1], a[2], ..., a[n-1]] 1 time results in the array
+     * [a[n-1], a[0], a[1], a[2], ..., a[n-2]].
+     * <p>
+     * Given the sorted rotated array nums of unique elements, return the minimum element of this array.
+     * You must write an algorithm that runs in O(log n) time.
+     * <p>
+     * tags::binarySearch, array
+     */
+    public int findMinInRotatedArray(int[] nums) {
+        int start = 0, end = nums.length - 1;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (nums[mid] > nums[end])
+                start = mid + 1;
+            else
+                end = mid;
+        }
+
+        return nums[start];
+    }
+
+    /**
+     * Q. 154. Find Minimum in Rotated Sorted Array II
+     * <p>
+     * Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example,
+     * the array nums = [0,1,4,4,5,6,7] might become:
+     * [4,5,6,7,0,1,4] if it was rotated 4 times.
+     * [0,1,4,4,5,6,7] if it was rotated 7 times.
+     * Notice that rotating an array [a[0], a[1], a[2], ..., a[n-1]] 1 time results in the
+     * array [a[n-1], a[0], a[1], a[2], ..., a[n-2]].
+     * <p>
+     * Given the sorted rotated array nums that may contain duplicates, return the minimum element of this array.
+     * You must decrease the overall operation steps as much as possible.
+     * <p>
+     * tags::binarySearch, array
+     */
+    public int findMinInRotatedArrayII(int[] nums) {
+        int start = 0, end = nums.length - 1;
+        while (start < end) {
+            while (start < nums.length - 2 && nums[start] == nums[start + 1])
+                start++;
+            while (end > 0 && nums[end] == nums[end - 1])
+                end--;
+
+            int mid = start + (end - start) / 2;
+            if (nums[mid] > nums[end])
+                start = mid + 1;
+            else
+                end = mid;
+        }
+
+        return nums[start];
+    }
+
+    /**
+     * Q. 75 Sort Colors
+     * <p>
+     * Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same
+     * color are adjacent, with the colors in the order red, white, and blue. We will use the integers 0, 1, and 2 to
+     * represent the color red, white, and blue, respectively.
+     * <p>
+     * You must solve this problem without using the library's sort function.
+     * <p>
+     * tags:: quickSort, countingSort, array
+     */
+    public void sortColors(int[] nums) {
+        quickSort(nums, 0, nums.length - 1);
+    }
+
+    /**
+     * QuickSort algorithm implementation
+     */
+    private void quickSort(int[] nums, int start, int end) {
+        if (start >= end)
+            return;
+
+        int i = start, j = end, mid = start + (end - start) / 2;
+        int pivot = nums[mid];
+
+        while (i <= j) {
+            while (nums[i] < pivot) i++;
+            while (nums[j] > pivot) j--;
+
+            if (i <= j) {
+                int temp = nums[j];
+                nums[j--] = nums[i];
+                nums[i++] = temp;
+            }
+        }
+
+        quickSort(nums, i, end);
+        quickSort(nums, start, j);
+    }
 }

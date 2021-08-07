@@ -395,6 +395,26 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.removeStones(input)));
     }
 
+    @Test
+    void testSearchMatrix() {
+        Map<Pair<int[][], Integer>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3), true);
+        scenarios.put(Pair.of(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13), false);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, gridProblems.searchMatrix(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testCountBattleships() {
+        Map<char[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new char[][]{{'X', '.', '.', 'X'}, {'.', '.', '.', 'X'}, {'.', '.', '.', 'X'}}, 2);
+        scenarios.put(new char[][]{{'X'}}, 1);
+        scenarios.put(new char[][]{{'.'}}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.countBattleships(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

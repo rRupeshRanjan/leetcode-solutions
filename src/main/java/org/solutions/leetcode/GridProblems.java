@@ -1145,4 +1145,74 @@ public class GridProblems {
         }
         return graph.get(node);
     }
+
+    /**
+     * Q. 74 Search a 2D Matrix
+     * <p>
+     * Write an efficient algorithm that searches for a value in an m x n matrix.
+     * This matrix has the following properties:
+     * Integers in each row are sorted from left to right.
+     * The first integer of each row is greater than the last integer of the previous row.
+     * <p>
+     * Q. 240 Search a 2D Matrix II
+     * <p>
+     * Write an efficient algorithm that searches for a target value in an m x n integer matrix.
+     * The matrix has the following properties:
+     * Integers in each row are sorted in ascending from left to right.
+     * Integers in each column are sorted in ascending from top to bottom.
+     * <p>
+     * tags::binarySearch
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int rows = matrix.length, cols = matrix[0].length;
+        int row = 0, col = cols - 1;
+
+        while (row >= 0 && row < rows && col >= 0 && col < cols) {
+            if (matrix[row][col] == target)
+                return true;
+            else if (matrix[row][col] > target)
+                col--;
+            else
+                row++;
+        }
+
+        return false;
+    }
+
+    /**
+     * Q. 419 Battleships in a Board
+     * <p>
+     * Given an m x n matrix board where each cell is a battleship 'X' or empty '.',
+     * return the number of the battleships on board.
+     * <p>
+     * Battleships can only be placed horizontally or vertically on board. In other words, they can only be made of the
+     * shape 1 x k (1 row, k columns) or k x 1 (k rows, 1 column), where k can be of any size.
+     * At least one horizontal or vertical cell separates between two battleships (there are no adjacent battleships).
+     * <p>
+     * tags::dfs
+     */
+    public int countBattleships(char[][] board) {
+        int count = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 'X') {
+                    countBattleshipsDfs(board, i, j);
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private void countBattleshipsDfs(char[][] board, int i, int j) {
+        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || board[i][j] == '.')
+            return;
+
+        board[i][j] = '.';
+        countBattleshipsDfs(board, i + 1, j);
+        countBattleshipsDfs(board, i - 1, j);
+        countBattleshipsDfs(board, i, j + 1);
+        countBattleshipsDfs(board, i, j - 1);
+    }
 }
