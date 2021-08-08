@@ -276,4 +276,29 @@ class DynamicProgrammingProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.houseRobber(input)));
     }
+
+    @Test
+    void testHouseRobberII() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{0}, 0);
+        scenarios.put(new int[]{10}, 10);
+        scenarios.put(new int[]{2, 3, 2}, 3);
+        scenarios.put(new int[]{1, 2, 3, 1}, 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.houseRobberII(input)));
+    }
+
+    @Test
+    void testCoinChangeII() {
+        Map<Pair<Integer, int[]>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(5, new int[]{1, 2, 5}), 4);
+        scenarios.put(Pair.of(3, new int[]{2}), 0);
+        scenarios.put(Pair.of(10, new int[]{10}), 1);
+        scenarios.put(Pair.of(500, new int[]{1, 2, 5}), 12701);
+        scenarios.put(Pair.of(0, new int[]{7}), 1);
+        scenarios.put(Pair.of(100, new int[]{}), 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                dpProblems.coinChangeII(input.getLeft(), input.getRight())));
+    }
 }

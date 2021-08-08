@@ -1215,4 +1215,36 @@ public class GridProblems {
         countBattleshipsDfs(board, i, j + 1);
         countBattleshipsDfs(board, i, j - 1);
     }
+
+    /**
+     * Q. 54. Spiral Matrix
+     * Given an m x n matrix, return all elements of the matrix in spiral order.
+     * <p>
+     * tags:: grid
+     */
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> answer = new ArrayList<>();
+        int rows = matrix.length, cols = matrix[0].length;
+        int[] rowRange = new int[]{0, rows - 1}, colRange = new int[]{0, cols - 1};
+
+        while (answer.size() < rows * cols) {
+            for (int i = colRange[0]; i <= colRange[1] && answer.size() < rows * cols; i++)
+                answer.add(matrix[rowRange[0]][i]);
+            rowRange[0]++;
+
+            for (int i = rowRange[0]; i <= rowRange[1] && answer.size() < rows * cols; i++)
+                answer.add(matrix[i][colRange[1]]);
+            colRange[1]--;
+
+            for (int i = colRange[1]; i >= colRange[0] && answer.size() < rows * cols; i--)
+                answer.add(matrix[rowRange[1]][i]);
+            rowRange[1]--;
+
+            for (int i = rowRange[1]; i >= rowRange[0] && answer.size() < rows * cols; i--)
+                answer.add(matrix[i][colRange[0]]);
+            colRange[0]++;
+        }
+
+        return answer;
+    }
 }

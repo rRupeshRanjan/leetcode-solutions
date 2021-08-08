@@ -5,6 +5,7 @@ import java.util.*;
 public class DynamicProgrammingProblems {
 
     /**
+     * Q. 322 Coin Change
      * You are given coins of different denominations and a total amount of money amount.
      * Write a function to compute the fewest number of coins that you need to make up that amount.
      * If that amount of money cannot be made up by any combination of the coins, return -1.
@@ -654,12 +655,74 @@ public class DynamicProgrammingProblems {
         if (nums.length == 1)
             return nums[0];
 
-        int[] dp = new int[nums.length + 1];
-        dp[1] = nums[0];
+        int skip = 0, take = nums[0];
         for (int i = 1; i < nums.length; i++) {
-            dp[i + 1] = Math.max(dp[i - 1] + nums[i], dp[i]);
+            int temp = take;
+            take = Math.max(skip + nums[i], take);
+            skip = temp;
         }
 
-        return dp[nums.length];
+        return Math.max(skip, take);
+    }
+
+    /**
+     * Q. 213. House Robber II
+     * <p>
+     * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money
+     * stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the
+     * last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the
+     * police if two adjacent houses were broken into on the same night.
+     * <p>
+     * Given an integer array nums representing the amount of money of each house, return the maximum amount of money
+     * you can rob tonight without alerting the police.
+     * <p>
+     * tags::dp, array
+     */
+    public int houseRobberII(int[] nums) {
+        return Math.max(houseRobber(nums, 0, nums.length - 2), houseRobber(nums, 1, nums.length - 1));
+    }
+
+    /*
+     * Helper method for house robber II
+     * Does the same thing as house robber, but with limits on indices to check
+     * */
+    private int houseRobber(int[] nums, int start, int end) {
+        if (nums.length == 1)
+            return nums[0];
+
+        int skip = 0, take = nums[0];
+        for (int i = start; i < end; i++) {
+            int temp = take;
+            take = Math.max(take, skip + nums[i]);
+            skip = temp;
+        }
+
+        return Math.max(skip, take);
+    }
+
+    /**
+     * Q. 518. Coin Change 2
+     * <p>
+     * You are given an integer array coins representing coins of different denominations and an integer amount
+     * representing a total amount of money. Return the number of combinations that make up that amount. If that amount
+     * of money cannot be made up by any combination of the coins, return 0.
+     * <p>
+     * You may assume that you have an infinite number of each kind of coin.
+     * The answer is guaranteed to fit into a signed 32-bit integer.
+     * <p>
+     * tags::dp, dynamicProgramming, array
+     */
+    public int coinChangeII(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+
+        for (int coin : coins) {
+            for (int i = 1; i <= amount; i++) {
+                if (i >= coin)
+                    dp[i] += dp[i - coin];
+            }
+        }
+
+        return dp[amount];
     }
 }

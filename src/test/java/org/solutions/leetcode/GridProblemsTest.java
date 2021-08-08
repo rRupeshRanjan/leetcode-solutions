@@ -415,6 +415,16 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.countBattleships(input)));
     }
 
+    @Test
+    void testSpiralOrder() {
+        Map<int[][], List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, List.of(1, 2, 3, 6, 9, 8, 7, 4, 5));
+        scenarios.put(new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}},
+                List.of(1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.spiralOrder(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

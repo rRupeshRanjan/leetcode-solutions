@@ -230,4 +230,17 @@ class BinaryTreeProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.largestValues(input)));
     }
+
+    @Test
+    void testHouseRobberIII() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(3,
+                new TreeNode(2, null, 3),
+                new TreeNode(3, null, 1)), 7);
+        scenarios.put(new TreeNode(3,
+                new TreeNode(4, 1, 3),
+                new TreeNode(5, null, 1)), 9);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.houseRobberIII(input)));
+    }
 }

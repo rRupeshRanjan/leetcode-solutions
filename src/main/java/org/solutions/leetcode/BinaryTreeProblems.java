@@ -7,6 +7,7 @@ import java.util.*;
 public class BinaryTreeProblems {
 
     private int cameraCoverCount;
+
     /**
      * Q. 105 Construct Binary Tree from Preorder and Inorder Traversal
      * Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and
@@ -446,10 +447,6 @@ public class BinaryTreeProblems {
         return key;
     }
 
-    private enum CameraType {
-        LEAF, PARENT, COVERED
-    }
-
     /**
      * Q. 1110. Delete Nodes And Return Forest
      * <p>
@@ -544,5 +541,39 @@ public class BinaryTreeProblems {
 
         maxLength[0] = Math.max(maxLength[0], left + right);
         return Math.max(left, right) + 1;
+    }
+
+    /**
+     * Q. 337. House Robber III
+     * <p>
+     * The thief has found himself a new place for his thievery again. There's only one entrance to this area, root.
+     * Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that all
+     * houses in this place form a binary tree. It will automatically contact the police if two directly-linked houses
+     * were broken into on the same night.
+     * <p>
+     * Given the root of the binary tree, return the maximum amount of money the thief can rob without alerting police.
+     * <p>
+     * tags::binaryTree, dfs
+     */
+    public int houseRobberIII(TreeNode root) {
+        int[] nums = helperHouseRobberIII(root);
+        return Math.max(nums[0], nums[1]);
+    }
+
+    private int[] helperHouseRobberIII(TreeNode node) {
+        if (node == null)
+            return new int[]{0, 0}; // [not rob, rob]
+
+        int[] left = helperHouseRobberIII(node.getLeft());
+        int[] right = helperHouseRobberIII(node.getRight());
+
+        int notRob = Math.max(left[0], left[1]) + Math.max(right[0], right[1]); // not rob this node
+        int rob = left[0] + right[0] + node.getVal(); // rob this node
+
+        return new int[]{notRob, rob}; // [not rob, rob]
+    }
+
+    private enum CameraType {
+        LEAF, PARENT, COVERED
     }
 }

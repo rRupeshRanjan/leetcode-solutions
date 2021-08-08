@@ -1173,4 +1173,38 @@ public class StringProblems {
 
         return end - start - 1;
     }
+
+    /**
+     * Q. 49 49. Group Anagrams
+     * <p>
+     * Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+     * An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using
+     * all the original letters exactly once.
+     * <p>
+     * tags:: string, hashmap
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            String key = groupAnagramsGetKey(str);
+            map.computeIfAbsent(key, x -> new ArrayList<>()).add(str);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
+    private String groupAnagramsGetKey(String word) {
+        char[] freq = new char[26];
+        StringBuilder key = new StringBuilder();
+        for (char ch : word.toCharArray())
+            freq[ch - 'a']++;
+
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] > 0) {
+                key.append(i + 'a').append(freq[i]);
+            }
+        }
+
+        return key.toString();
+    }
 }

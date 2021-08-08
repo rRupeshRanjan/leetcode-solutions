@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayProblemsTest {
 
@@ -782,5 +781,14 @@ class ArrayProblemsTest {
             arrayProblems.sortColors(input);
             assertArrayEquals(expected, input);
         });
+    }
+
+    @Test
+    void testFindPeakElement() {
+        Map<int[], List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(new int[]{1, 2, 3, 1}, Collections.singletonList(2));
+        scenarios.put(new int[]{1, 2, 1, 3, 5, 6, 4}, Arrays.asList(1, 5));
+
+        scenarios.forEach((input, expected) -> assertTrue(expected.contains(arrayProblems.findPeakElement(input))));
     }
 }

@@ -462,4 +462,31 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertTrue(expected.contains(stringProblems.longestPalindrome(input))));
     }
+
+    @Test
+    void testGroupAnagrams() {
+        Map<String[], List<List<String>>> scenarios = new HashMap<>();
+        scenarios.put(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"},
+                List.of(
+                        List.of("bat"),
+                        List.of("nat", "tan"),
+                        List.of("ate", "eat", "tea")
+                ));
+        scenarios.put(new String[]{""}, List.of(List.of("")));
+        scenarios.put(new String[]{"a"}, List.of(List.of("a")));
+
+        scenarios.forEach((input, expected) -> {
+            int count = 0;
+            List<List<String>> answer = stringProblems.groupAnagrams(input);
+            for (List<String> ans : answer) {
+                for (List<String> exp : expected) {
+                    if (exp.containsAll(ans)) {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            assertEquals(count, expected.size());
+        });
+    }
 }
