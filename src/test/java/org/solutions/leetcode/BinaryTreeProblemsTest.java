@@ -1,6 +1,7 @@
 package org.solutions.leetcode;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.dataStructures.TreeNode;
@@ -242,5 +243,50 @@ class BinaryTreeProblemsTest {
                 new TreeNode(5, null, 1)), 9);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.houseRobberIII(input)));
+    }
+
+    @Test
+    void testLowestCommonAncestor() {
+        Map<Triple<TreeNode, TreeNode, TreeNode>, TreeNode> scenarios = new HashMap<>();
+
+        TreeNode leftRight = new TreeNode(4);
+        TreeNode left = new TreeNode(5, new TreeNode(6), leftRight);
+        TreeNode right = new TreeNode(1, 0, 8);
+        TreeNode root = new TreeNode(3, left, right);
+
+        scenarios.put(Triple.of(root, left, right), root);
+        scenarios.put(Triple.of(root, left, leftRight), left);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                binaryTreeProblems.lowestCommonAncestor(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testLowestCommonAncestorII() {
+        Map<Triple<TreeNode, TreeNode, TreeNode>, TreeNode> scenarios = new HashMap<>();
+
+        TreeNode leftRight = new TreeNode(4);
+        TreeNode left = new TreeNode(5, new TreeNode(6), leftRight);
+        TreeNode right = new TreeNode(1, 0, 8);
+        TreeNode root = new TreeNode(3, left, right);
+
+        scenarios.put(Triple.of(root, left, right), root);
+        scenarios.put(Triple.of(root, left, leftRight), left);
+        scenarios.put(Triple.of(root, left, new TreeNode(11)), null);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                binaryTreeProblems.lowestCommonAncestorII(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testLongestConsecutiveSequence() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, null,
+                new TreeNode(3, new TreeNode(2), new TreeNode(4, null, 5))), 3);
+        scenarios.put(new TreeNode(2, null,
+                new TreeNode(3, new TreeNode(2, 1, null), null)), 2);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, binaryTreeProblems.longestConsecutiveSequence(input)));
     }
 }

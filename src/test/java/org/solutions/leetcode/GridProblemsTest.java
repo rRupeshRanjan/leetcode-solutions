@@ -425,6 +425,31 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.spiralOrder(input)));
     }
 
+    @Test
+    void testMaxSideLength() {
+        Map<Pair<int[][], Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[][]{{1, 1, 3, 2, 4, 3, 2}, {1, 1, 3, 2, 4, 3, 2}, {1, 1, 3, 2, 4, 3, 2}}, 4), 2);
+        scenarios.put(Pair.of(new int[][]{{2, 2, 2, 2, 2}, {2, 2, 2, 2, 2}, {2, 2, 2, 2, 2}, {2, 2, 2, 2, 2}}, 1), 0);
+        scenarios.put(Pair.of(new int[][]{{1, 1, 1, 1}, {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}, 6), 3);
+        scenarios.put(Pair.of(new int[][]{{18, 70}, {61, 1}, {25, 85}, {4, 40}, {11, 96}, {97, 96}, {63, 45}}, 40184), 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                gridProblems.maxSideLength(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testSetZeroes() {
+        Map<int[][], int[][]> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, new int[][]{{1, 0, 1}, {0, 0, 0}, {1, 0, 1}});
+        scenarios.put(new int[][]{{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}},
+                new int[][]{{0, 0, 0, 0}, {0, 4, 5, 0}, {0, 3, 1, 0}});
+
+        scenarios.forEach((input, expected) -> {
+            gridProblems.setZeroes(input);
+            assertArrayEquals(expected, input);
+        });
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

@@ -489,4 +489,27 @@ class StringProblemsTest {
             assertEquals(count, expected.size());
         });
     }
+
+    @Test
+    void testReverseWords() {
+        Map<String, String> scenarios = new HashMap<>();
+        scenarios.put("the sky is blue", "blue is sky the");
+        scenarios.put("   hello world  ", "world hello");
+        scenarios.put("a good   example", "example good a");
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.reverseWords(input)));
+    }
+
+    @Test
+    void testReverseWordsII() {
+        Map<char[], char[]> scenarios = new HashMap<>();
+        scenarios.put(new char[]{'t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e'},
+                new char[]{'b', 'l', 'u', 'e', ' ', 'i', 's', ' ', 's', 'k', 'y', ' ', 't', 'h', 'e'});
+        scenarios.put(new char[]{'a'}, new char[]{'a'});
+
+        scenarios.forEach((input, expected) -> {
+            stringProblems.reverseWordsII(input);
+            assertArrayEquals(expected, input);
+        });
+    }
 }

@@ -16,7 +16,7 @@ public class StringProblems {
     }
 
     /**
-     * Q.821 Shortest Distance to a Character
+     * Q. 821 Shortest Distance to a Character
      * <p>
      * Given a string s and a character c that occurs in s, return an array of integers answer where
      * answer.length == s.length
@@ -437,7 +437,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 1647. Minimum Deletions to Make Character Frequencies Unique
+     * Q. 1647 Minimum Deletions to Make Character Frequencies Unique
      * <p>
      * A string s is called good if there are no two different characters in s that have the same frequency.
      * Given a string s, return the minimum number of characters you need to delete to make s good.
@@ -469,7 +469,7 @@ public class StringProblems {
     }
 
     /**
-     * 1048. Longest String Chain
+     * Q. 1048 Longest String Chain
      * <p>
      * Given a list of words, each word consists of English lowercase letters. Let's say word1 is a predecessor of word2
      * if and only if we can add exactly one letter anywhere in word1 to make it equal to word2.
@@ -499,7 +499,7 @@ public class StringProblems {
     }
 
     /**
-     * 609. Find Duplicate File in System
+     * Q. 609 Find Duplicate File in System
      * Given a list paths of directory info, including the directory path, and all the files with contents in this
      * directory, return all the duplicate files in the file system in terms of their paths. You may return the answer
      * in any order. A group of duplicate files consists of at least two files that have the same content.
@@ -531,7 +531,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 890. Find and Replace Pattern
+     * Q. 890 Find and Replace Pattern
      * Given a list of strings words and a string pattern, return a list of words[i] that match pattern. You may return
      * the answer in any order. A word matches the pattern if there exists a permutation of letters p so that after
      * replacing every letter x in the pattern with p(x), we get the desired word.
@@ -566,7 +566,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 150. Evaluate Reverse Polish Notation
+     * Q. 150 Evaluate Reverse Polish Notation
      * Evaluate the value of an arithmetic expression in Reverse Polish Notation.
      * Valid operators are +, -, *, and /. Each operand may be an integer or another expression.
      * <p>
@@ -749,7 +749,16 @@ public class StringProblems {
     }
 
     /**
-     *
+     * Q. 792 Number of Matching Subsequences
+     * <p>
+     * Given a string s and an array of strings words, return the number of words[i] that is a subsequence of s.
+     * <p>
+     * A subsequence of a string is a new string generated from the original string with some characters (can be none) 4
+     * deleted without changing the relative order of the remaining characters.
+     * <p>
+     * For example, "ace" is a subsequence of "abcde".
+     * <p>
+     * tags:: string
      */
     public int numMatchingSubseq(String s, String[] words) {
         List<String>[] str = new ArrayList[26];
@@ -779,7 +788,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 299. Bulls and Cows
+     * Q. 299 Bulls and Cows
      * <p>
      * You are playing the Bulls and Cows game with your friend.
      * <p>
@@ -814,7 +823,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 394. Decode String
+     * Q. 394 Decode String
      * <p>
      * Given an encoded string, return its decoded string.
      * The encoding rule is:
@@ -861,7 +870,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 418. Sentence Screen Fitting
+     * Q. 418 Sentence Screen Fitting
      * <p>
      * Given a rows x cols screen and a sentence represented as a list of strings, return the number of times the given
      * sentence can be fitted on the screen. The order of words in the sentence must remain unchanged, and a word
@@ -946,7 +955,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 929. Unique Email Addresses
+     * Q. 929 Unique Email Addresses
      * <p>
      * Every valid email consists of a local name and a domain name, separated by the '@' sign.
      * Besides lowercase letters, the email may contain one or more '.' or '+'.
@@ -982,7 +991,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 482. License Key Formatting
+     * Q. 482 License Key Formatting
      * <p>
      * You are given a license key represented as a string s that consists of only alphanumeric characters and dashes.
      * The string is separated into n + 1 groups by n dashes. You are also given an integer k.
@@ -1059,7 +1068,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 340. Longest Substring with At Most K Distinct Characters
+     * Q. 340 Longest Substring with At Most K Distinct Characters
      * <p>
      * Given a string s and an integer k,
      * return the length of the longest substring of s that contains at most k distinct characters.
@@ -1118,7 +1127,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 20. Valid Parentheses
+     * Q. 20 Valid Parentheses
      * <p>
      * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
      * determine if the input string is valid.
@@ -1145,7 +1154,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 5. Longest Palindromic Substring
+     * Q. 5 Longest Palindromic Substring
      * <p>
      * Given a string s, return the longest palindromic substring in s.
      * tags::string
@@ -1175,7 +1184,7 @@ public class StringProblems {
     }
 
     /**
-     * Q. 49 49. Group Anagrams
+     * Q. 49 Group Anagrams
      * <p>
      * Given an array of strings strs, group the anagrams together. You can return the answer in any order.
      * An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using
@@ -1206,5 +1215,62 @@ public class StringProblems {
         }
 
         return key.toString();
+    }
+
+    /**
+     * Q. 151 Reverse Words in a String
+     * <p>
+     * Given an input string s, reverse the order of the words.
+     * A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+     * <p>
+     * Return a string of the words in reverse order concatenated by a single space.
+     * <p>
+     * Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string
+     * should only have a single space separating the words. Do not include any extra spaces.
+     * <p>
+     * tags:: string, stack
+     */
+    public String reverseWords(String s) {
+        List<String> list = Arrays.asList(s.trim().split("\\s+"));
+        Collections.reverse(list);
+
+        StringBuilder sb = new StringBuilder();
+        list.forEach(st -> sb.append(st).append(" "));
+
+        sb.setLength(sb.length() - 1);
+        return sb.toString();
+    }
+
+    /**
+     * Q. 186 Reverse Words in a String II
+     * <p>
+     * Given a character array s, reverse the order of the words.
+     * A word is defined as a sequence of non-space characters. The words in s will be separated by a single space.
+     * <p>
+     * Your code must solve the problem in-place, i.e. without allocating extra space.
+     * <p>
+     * tags:: string, array
+     */
+    public void reverseWordsII(char[] s) {
+        int start = 0, end = 0;
+        reverseCharacterArray(s, 0, s.length - 1);
+
+        while (end < s.length) {
+            if (s[end] == ' ') {
+                reverseCharacterArray(s, start, end - 1);
+                start = end + 1;
+            }
+            end++;
+        }
+
+        reverseCharacterArray(s, start, s.length - 1);
+    }
+
+    private void reverseCharacterArray(char[] s, int start, int end) {
+        while (start < end) {
+            char temp = s[start];
+            s[start++] = s[end];
+            s[end--] = temp;
+        }
     }
 }

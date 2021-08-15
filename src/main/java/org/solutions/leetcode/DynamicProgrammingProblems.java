@@ -725,4 +725,61 @@ public class DynamicProgrammingProblems {
 
         return dp[amount];
     }
+
+    /**
+     * Q. 256 Paint House
+     * <p>
+     * There is a row of n houses, where each house can be painted one of three colors: red, blue, or green.
+     * The cost of painting each house with a certain color is different. You have to paint all the houses such that no
+     * two adjacent houses have the same color. The cost of painting each house with a certain color is represented by
+     * an n x 3 cost matrix costs.
+     * <p>
+     * For example, costs[0][0] is the cost of painting house 0 with the color red;
+     * costs[1][2] is the cost of painting house 1 with color green, and so on...
+     * <p>
+     * Return the minimum cost to paint all houses.
+     * <p>
+     * tags:: dynamicProgramming, dp, array
+     */
+    public int minCostPaintHouse(int[][] costs) {
+        for (int i = costs.length - 2; i >= 0; i--) {
+            for (int j = 0; j < costs[0].length; j++) {
+                costs[i][j] += minCostPaintHouseGetMinHelper(costs, i + 1, j);
+            }
+        }
+
+        return minCostPaintHouseGetMinHelper(costs, 0, -1);
+    }
+
+    /**
+     * Helper method for minCostPaintHouse and minCOstPaintHouseII
+     * gets min cost of paint from next row
+     */
+    private int minCostPaintHouseGetMinHelper(int[][] costs, int index, int excludeIndex) {
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < costs[0].length; i++) {
+            if (i != excludeIndex)
+                min = Math.min(min, costs[index][i]);
+        }
+
+        return min;
+    }
+
+    /**
+     * Q. 265 Paint House II
+     * <p>
+     * There are a row of n houses, each house can be painted with one of the k colors. The cost of painting each house
+     * with a certain color is different. You have to paint all the houses such that no two adjacent houses have the
+     * same color. The cost of painting each house with a certain color is represented by an n x k cost matrix costs.
+     * <p>
+     * For example, costs[0][0] is the cost of painting house 0 with color 0;
+     * costs[1][2] is the cost of painting house 1 with color 2, and so on...
+     * <p>
+     * Return the minimum cost to paint all houses.
+     * <p>
+     * tags:: dynamicProgramming, dp, array
+     */
+    public int minCostPaintHouseII(int[][] costs) {
+        return minCostPaintHouse(costs);
+    }
 }

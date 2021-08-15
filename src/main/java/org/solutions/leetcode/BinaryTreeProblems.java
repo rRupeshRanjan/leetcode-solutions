@@ -573,6 +573,94 @@ public class BinaryTreeProblems {
         return new int[]{notRob, rob}; // [not rob, rob]
     }
 
+    /**
+     * Q. 236 Lowest Common Ancestor of a Binary Tree
+     * <p>
+     * Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+     * According to the definition of LCA on Wikipedia:
+     * “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q
+     * as descendants (where we allow a node to be a descendant of itself)."
+     * <p>
+     * tags:: recursion, binaryTree, dfs
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q)
+            return root;
+
+        TreeNode left = lowestCommonAncestor(root.getLeft(), p, q);
+        TreeNode right = lowestCommonAncestor(root.getRight(), p, q);
+
+        if (left != null && right != null)
+            return root;
+        return (left == null) ? right : left;
+    }
+
+    /**
+     * Q. 1644 Lowest Common Ancestor of a Binary Tree II
+     * Given the root of a binary tree, return the lowest common ancestor (LCA) of two given nodes, p and q.
+     * If either node p or q does not exist in the tree, return null. All values of the nodes in the tree are unique.
+     * <p>
+     * According to the definition of LCA on Wikipedia:
+     * "The lowest common ancestor of two nodes p and q in a binary tree T is the lowest node that has both p and q as
+     * descendants (where we allow a node to be a descendant of itself)".
+     * A descendant of a node x is a node y that is on the path from node x to some leaf node.
+     * <p>
+     * tags::binaryTree, dfs
+     */
+    public TreeNode lowestCommonAncestorII(TreeNode root, TreeNode p, TreeNode q) {
+        int[] count = new int[1];
+        TreeNode lca = lowestCommonAncestorIIHelper(root, p, q, count);
+        return (count[0] == 2) ? lca : null;
+    }
+
+    private TreeNode lowestCommonAncestorIIHelper(TreeNode root, TreeNode p, TreeNode q, int[] count) {
+        if (root == null)
+            return root;
+
+        TreeNode left = lowestCommonAncestorIIHelper(root.getLeft(), p, q, count);
+        TreeNode right = lowestCommonAncestorIIHelper(root.getRight(), p, q, count);
+
+        if (root == p || root == q) {
+            count[0]++;
+            return root;
+        }
+
+        return (left == null) ? right : (right == null) ? left : root;
+    }
+
+    /**
+     * Q. 298 Binary Tree Longest Consecutive Sequence
+     * <p>
+     * Given the root of a binary tree, return the length of the longest consecutive sequence path.
+     * <p>
+     * The path refers to any sequence of nodes from some starting node to any node in the tree along the parent-child
+     * connections. The longest consecutive path needs to be from parent to child (cannot be the reverse).
+     * <p>
+     * tags:: dfs, recursion
+     */
+    public int longestConsecutiveSequence(TreeNode root) {
+        int[] maxCount = new int[1];
+        longestConsecutiveSequenceHelper(root, maxCount);
+        return maxCount[0];
+    }
+
+    private int longestConsecutiveSequenceHelper(TreeNode root, int[] maxCount) {
+        if (root == null)
+            return 0;
+
+        int left = longestConsecutiveSequenceHelper(root.getLeft(), maxCount) + 1;
+        int right = longestConsecutiveSequenceHelper(root.getRight(), maxCount) + 1;
+
+        if (root.getLeft() != null && root.getVal() + 1 != root.getLeft().getVal())
+            left = 1;
+        if (root.getRight() != null && root.getVal() + 1 != root.getRight().getVal())
+            right = 1;
+
+        int count = Math.max(left, right);
+        maxCount[0] = Math.max(maxCount[0], count);
+        return count;
+    }
+
     private enum CameraType {
         LEAF, PARENT, COVERED
     }

@@ -973,16 +973,13 @@ public class ArrayProblems {
         for (int num : nums)
             set.add(num);
 
-        int currStreak = 0, maxStreak = 0;
+        int maxStreak = 0;
         for (int num : set) {
             if (!set.contains(num - 1)) {
-                currStreak = 1;
-                int currNum = num;
+                int currNum = num, currStreak = 1;
 
-                while (set.contains(currNum + 1)) {
-                    currNum++;
+                while (set.contains(++currNum))
                     currStreak++;
-                }
 
                 maxStreak = Math.max(maxStreak, currStreak);
             }
@@ -2208,5 +2205,43 @@ public class ArrayProblems {
         }
 
         return start;
+    }
+
+    /**
+     * Q. 735 Asteroid Collision
+     * <p>
+     * We are given an array asteroids of integers representing asteroids in a row.
+     * For each asteroid, the absolute value represents its size, and the sign represents its direction
+     * (positive meaning right, negative meaning left). Each asteroid moves at the same speed.
+     * <p>
+     * Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode.
+     * If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
+     * <p>
+     * tags:: stack, array
+     */
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> stack = new Stack<>();
+
+        for (int ast : asteroids) {
+            if (ast > 0)
+                stack.push(ast);
+            else {
+                while (!stack.isEmpty() && stack.peek() > 0 && ast + stack.peek() < 0)
+                    stack.pop();
+
+                if (stack.isEmpty() || stack.peek() < 0)
+                    stack.push(ast);
+                else if (ast + stack.peek() == 0)
+                    stack.pop();
+
+            }
+        }
+
+        int[] ans = new int[stack.size()];
+        for (int i = ans.length - 1; i >= 0; i--) {
+            ans[i] = stack.pop();
+        }
+
+        return ans;
     }
 }

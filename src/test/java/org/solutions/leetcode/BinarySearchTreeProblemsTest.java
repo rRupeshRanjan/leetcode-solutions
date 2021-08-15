@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.dataStructures.TreeNode;
@@ -8,6 +9,7 @@ import org.solutions.leetcode.utils.TestUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BinarySearchTreeProblemsTest {
@@ -80,5 +82,21 @@ class BinarySearchTreeProblemsTest {
 
         scenarios.forEach((input, expected) ->
                 assertTrue(testUtils.areTreesEqualByValue(expected, bst.bstFromPreorder(input))));
+    }
+
+    @Test
+    void testLowestCommonAncestor() {
+        Map<Triple<TreeNode, TreeNode, TreeNode>, TreeNode> scenarios = new HashMap<>();
+
+        TreeNode leftRight = new TreeNode(4);
+        TreeNode left = new TreeNode(2, new TreeNode(0), leftRight);
+        TreeNode right = new TreeNode(8, 7, 9);
+        TreeNode root = new TreeNode(6, left, right);
+
+        scenarios.put(Triple.of(root, left, right), root);
+        scenarios.put(Triple.of(root, left, leftRight), left);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                bst.lowestCommonAncestor(input.getLeft(), input.getMiddle(), input.getRight())));
     }
 }

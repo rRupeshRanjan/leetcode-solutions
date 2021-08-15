@@ -791,4 +791,16 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertTrue(expected.contains(arrayProblems.findPeakElement(input))));
     }
+
+    @Test
+    void testAsteroidCollision() {
+        Map<int[], int[]> scenarios = new HashMap<>();
+        scenarios.put(new int[]{5, 10, -5}, new int[]{5, 10});
+        scenarios.put(new int[]{5, -5}, new int[]{});
+        scenarios.put(new int[]{10, 2, -5}, new int[]{10});
+        scenarios.put(new int[]{-2, -1, 1, 2}, new int[]{-2, -1, 1, 2});
+        scenarios.put(new int[]{-2, -2, 1, -2}, new int[]{-2, -2, -2});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, arrayProblems.asteroidCollision(input)));
+    }
 }

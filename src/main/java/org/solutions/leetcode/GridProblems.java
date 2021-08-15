@@ -1247,4 +1247,69 @@ public class GridProblems {
 
         return answer;
     }
+
+    /**
+     * Q. 1292. Maximum Side Length of a Square with Sum Less than or Equal to Threshold
+     * <p>
+     * Given a m x n matrix mat and an integer threshold. Return the maximum side-length of a square with a sum less
+     * than or equal to threshold or return 0 if there is no such square.
+     * <p>
+     * tags::prefixSum, binarySearch
+     */
+    public int maxSideLength(int[][] mat, int threshold) {
+        int m = mat.length, n = mat[0].length, len = 1;
+        int[][] prefix = new int[m + 1][n + 1];
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                prefix[i][j] = mat[i - 1][j - 1] + prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1];
+
+                if (i >= len && j >= len && prefix[i - len][j - len] - prefix[i - len][j] - prefix[i][j - len] + prefix[i][j] <= threshold)
+                    len++;
+            }
+        }
+
+        return len - 1;
+    }
+
+    /**
+     * Q. 73 Set Matrix Zeroes
+     * <p>
+     * Given an m x n integer matrix, if an element is 0, set its entire row and column to 0's,
+     * and return the matrix.
+     * <p>
+     * You must do it in place.
+     * <p>
+     * tags:: grid, matrix
+     */
+    public void setZeroes(int[][] matrix) {
+        boolean firstRowZero = false, firstColZero = false;
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = matrix[0][j] = 0;
+
+                    if (i == 0) firstRowZero = true;
+                    if (j == 0) firstColZero = true;
+                }
+            }
+        }
+
+        for (int i = 1; i < matrix.length; i++) {
+            for (int j = 1; j < matrix[0].length; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0)
+                    matrix[i][j] = 0;
+            }
+        }
+
+        if (firstRowZero) {
+            Arrays.fill(matrix[0], 0);
+        }
+
+        if (firstColZero) {
+            for (int i = 0; i < matrix.length; i++)
+                matrix[i][0] = 0;
+        }
+    }
 }
