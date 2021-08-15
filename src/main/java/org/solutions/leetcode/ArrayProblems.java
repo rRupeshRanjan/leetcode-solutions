@@ -78,7 +78,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q.1640 Check Array Formation Through Concatenation
+     * Q. 1640 Check Array Formation Through Concatenation
      * <p>
      * You are given an array of distinct integers arr and an array of integer arrays pieces,
      * where the integers in pieces are distinct.
@@ -600,7 +600,7 @@ public class ArrayProblems {
     }
 
     /**
-     * 1354. Construct Target Array With Multiple Sums
+     * Q. 1354 Construct Target Array With Multiple Sums
      * <p>
      * You are given an array target of n integers. From a starting array arr consisting of n 1's,
      * you may perform the following procedure :
@@ -1248,7 +1248,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 16. 3Sum Closest
+     * Q. 16 3Sum Closest
      * <p>
      * Given an array nums of n integers and an integer target, find three integers in nums such that the sum is
      * closest to target.
@@ -1311,7 +1311,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 56. Merge Intervals
+     * Q. 56 Merge Intervals
      * <p>
      * Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals,
      * and return an array of the non-overlapping intervals that cover all the intervals in the input.
@@ -1340,7 +1340,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 315. Count of Smaller Numbers After Self
+     * Q. 315 Count of Smaller Numbers After Self
      * <p>
      * You are given an integer array nums and you have to return a new counts array.
      * The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
@@ -1382,7 +1382,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 875. Koko Eating Bananas
+     * Q. 875 Koko Eating Bananas
      * <p>
      * Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas.
      * The guards have gone and will come back in h hours. Koko can decide her bananas-per-hour eating speed of k.
@@ -1418,7 +1418,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 1011. Capacity To Ship Packages Within D Days
+     * Q. 1011 Capacity To Ship Packages Within D Days
      * <p>
      * A conveyor belt has packages that must be shipped from one port to another within days days.
      * <p>
@@ -1464,7 +1464,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 1482. Minimum Number of Days to Make m Bouquets
+     * Q. 1482 Minimum Number of Days to Make m Bouquets
      * <p>
      * Given an integer array bloomDay, an integer m and an integer k. We need to make m bouquets.
      * To make a bouquet, you need to use k adjacent flowers from the garden. The garden consists of n flowers,
@@ -1509,7 +1509,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 410. Split Array Largest Sum
+     * Q. 410 Split Array Largest Sum
      * Given an array nums which consists of non-negative integers and an integer m,
      * you can split the array into m non-empty continuous subarrays.
      * <p>
@@ -1551,7 +1551,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 668. Kth Smallest Number in Multiplication Table
+     * Q. 668 Kth Smallest Number in Multiplication Table
      * <p>
      * Nearly everyone has used the Multiplication Table.
      * The multiplication table of size m x n is an integer matrix mat where mat[i][j] == i * j (1-indexed).
@@ -1583,7 +1583,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 719. Find K-th Smallest Pair Distance
+     * Q. 719 Find K-th Smallest Pair Distance
      * <p>
      * The distance of a pair of integers a and b is defined as the absolute difference between a and b.
      * Given an integer array nums and an integer k, return the kth smallest distance among all the pairs
@@ -1618,7 +1618,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 487. Max Consecutive Ones II
+     * Q. 487 Max Consecutive Ones II
      * <p>
      * Given a binary array nums, return maximum number of consecutive 1's in the array if you can flip at most one 0.
      * <p>
@@ -1723,7 +1723,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 904. Fruit Into Baskets
+     * Q. 904 Fruit Into Baskets
      * <p>
      * You are visiting a farm that has a single row of fruit trees arranged from left to right.
      * The trees are represented by an integer array fruits where fruits[i] is the type of fruit the ith tree produces.
@@ -1767,7 +1767,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 31. Next Permutation
+     * Q. 31 Next Permutation
      * <p>
      * Implement next permutation, which rearranges numbers into lexicographically next greater permutation of numbers.
      * If such an arrangement isn't possible, it must rearrange it as lowest possible order
@@ -1935,7 +1935,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 215. Kth Largest Element in an Array
+     * Q. 215 Kth Largest Element in an Array
      * <p>
      * Given an integer array nums and an integer k, return the kth largest element in the array.
      * Note that it is the kth largest element in the sorted order, not the kth distinct element.
@@ -2110,7 +2110,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 154. Find Minimum in Rotated Sorted Array II
+     * Q. 154 Find Minimum in Rotated Sorted Array II
      * <p>
      * Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example,
      * the array nums = [0,1,4,4,5,6,7] might become:

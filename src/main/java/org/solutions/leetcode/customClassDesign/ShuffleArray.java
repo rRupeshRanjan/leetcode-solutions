@@ -3,15 +3,15 @@ package org.solutions.leetcode.customClassDesign;
 import java.util.Random;
 
 /**
- * Q. 384
- *
+ * Q. 384 Shuffle an Array
+ * <p>
  * Given an integer array nums, design an algorithm to randomly shuffle the array. Implement the Solution class:
  * Solution(int[] nums) Initializes the object with the integer array nums.
  * int[] reset() Resets the array to its original configuration and returns it.
  * int[] shuffle() Returns a random shuffling of the array.
- *
+ * <p>
  * tags:: design, fisher-yates, algorithm
- * */
+ */
 public class ShuffleArray {
     int[] nums;
     Random random;

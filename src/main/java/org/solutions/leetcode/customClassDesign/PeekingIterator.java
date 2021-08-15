@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Q.284
+ * Q. 284 Peeking Iterator
  * Given an Iterator class interface with methods: next() and hasNext(),
  * design and implement a PeekingIterator that support the peek() operation --
  * it essentially peek() at the element that will be returned by the next call to next().
- * */
+ */
 class PeekingIterator implements Iterator<Integer> {
     Queue<Integer> q = new LinkedList<>();
 

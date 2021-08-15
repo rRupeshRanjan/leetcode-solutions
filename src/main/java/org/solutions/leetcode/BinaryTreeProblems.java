@@ -18,7 +18,7 @@ public class BinaryTreeProblems {
     private int buildTreePreOrderInorderRootIndex;
 
     /**
-     * Q.199 Binary Tree Right Side View
+     * Q. 199 Binary Tree Right Side View
      * <p>
      * Given a binary tree, imagine yourself standing on the right side of it,
      * return the values of the nodes you can see ordered from top to bottom.
@@ -125,7 +125,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q.637 Average of Levels in Binary Tree
+     * Q. 637 Average of Levels in Binary Tree
      * Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
      * <p>
      * Tags:: binaryTree, bfs
@@ -154,7 +154,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q.623 Add One Row to Tree
+     * Q. 623 Add One Row to Tree
      * <p>
      * Given the root of a binary tree, then value v and depth d, you need to add a row of nodes with value v
      * at the given depth d. The root node is at depth 1.The adding rule is: given a positive integer depth d,
@@ -266,7 +266,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q.1302 Deepest Leaves Sum
+     * Q. 1302 Deepest Leaves Sum
      * <p>
      * Given the root of a binary tree, return the sum of values of its deepest leaves.
      * <p>
@@ -380,7 +380,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 366. Find Leaves of Binary Tree
+     * Q. 366 Find Leaves of Binary Tree
      * <p>
      * Given the root of a binary tree, collect a tree's nodes as if you were doing this:
      * Collect all the leaf nodes.
@@ -409,7 +409,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 652. Find Duplicate Subtrees
+     * Q. 652 Find Duplicate Subtrees
      * <p>
      * Given the root of a binary tree, return all duplicate subtrees.
      * For each kind of duplicate subtrees, you only need to return the root node of any one of them.
@@ -448,7 +448,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 1110. Delete Nodes And Return Forest
+     * Q. 1110 Delete Nodes And Return Forest
      * <p>
      * Given the root of a binary tree, each node in the tree has a distinct value.
      * After deleting all nodes with a value in to_delete, we are left with a forest (a disjoint union of trees).
@@ -518,7 +518,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q 543. Diameter of Binary Tree
+     * Q 543 Diameter of Binary Tree
      * <p>
      * Given the root of a binary tree, return the length of the diameter of the tree. The diameter of a binary tree is
      * the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
@@ -544,7 +544,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q. 337. House Robber III
+     * Q. 337 House Robber III
      * <p>
      * The thief has found himself a new place for his thievery again. There's only one entrance to this area, root.
      * Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that all

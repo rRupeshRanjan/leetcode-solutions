@@ -8,8 +8,8 @@ import java.util.Stack;
 public class BinarySearchTreeProblems {
 
     /**
-     * Q. 669
-     * Trim a Binary Search Tree
+     * Q. 669 Trim a Binary Search Tree
+     * <p>
      * Given the root of a binary search tree and the lowest and highest boundaries as low and high,
      * trim the tree so that all its elements lies in [low, high].
      * Trimming the tree should not change the relative structure of the elements that will remain in the tree
@@ -35,7 +35,9 @@ public class BinarySearchTreeProblems {
     }
 
     /**
-     * Q.1038 / 538
+     * Q. 1038  Binary Search Tree to Greater Sum Tree
+     * Q. 538 Convert BST to Greater Tree
+     * <p>
      * Given the root of a Binary Search Tree (BST), convert it to a Greater Tree such that
      * every key of the original BST is changed to the
      * original key plus sum of all keys greater than the original key in BST.
@@ -64,7 +66,7 @@ public class BinarySearchTreeProblems {
     }
 
     /**
-     * 109. Convert Sorted List to Binary Search Tree
+     * Q. 109 Convert Sorted List to Binary Search Tree
      * <p>
      * Given the head of a singly linked list where elements are sorted in ascending order, convert it to a height
      * balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth
@@ -94,7 +96,7 @@ public class BinarySearchTreeProblems {
     }
 
     /**
-     * 108. Convert Sorted Array to Binary Search Tree
+     * Q. 108 Convert Sorted Array to Binary Search Tree
      * <p>
      * Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced
      * binary search tree. A height-balanced binary tree is a binary tree in which the depth of the two subtrees of

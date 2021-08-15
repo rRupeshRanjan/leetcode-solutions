@@ -7,7 +7,7 @@ import java.util.*;
 public class TreeProblems {
 
     /**
-     * Q. 429
+     * Q. 429 N-ary Tree Level Order Traversal
      * <p>
      * Given an n-ary tree, return the level order traversal of its nodes' values.
      * <p>
@@ -37,9 +37,11 @@ public class TreeProblems {
     }
 
     /**
-     * Q. 589
+     * Q. 589 N-ary Tree Preorder Traversal
      * <p>
      * Given the root of an n-ary tree, return the preorder traversal of its nodes' values.
+     * <p>
+     * tags:: preorder
      */
     public List<Integer> naryPreorder(NaryTreeNode root) {
         List<Integer> result = new ArrayList<>();
@@ -62,6 +64,13 @@ public class TreeProblems {
         return result;
     }
 
+    /**
+     * Q. 590 N-ary Tree Postorder Traversal
+     * <p>
+     * Given the root of an n-ary tree, return the postorder traversal of its nodes' values.
+     * <p>
+     * tags:: postorder
+     */
     public List<Integer> naryPostorder(NaryTreeNode root) {
         List<Integer> result = new ArrayList<>();
         Stack<NaryTreeNode> stack = new Stack<>();

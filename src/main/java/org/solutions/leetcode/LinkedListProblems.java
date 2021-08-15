@@ -7,7 +7,7 @@ import java.util.*;
 public class LinkedListProblems {
 
     /**
-     * Q.141
+     * Q. 141 Linked List Cycle
      * Detect if there is a loop in linked list
      * <p>
      * Tags:: linkedList
@@ -28,7 +28,7 @@ public class LinkedListProblems {
     }
 
     /**
-     * Q.138
+     * Q. 138 Copy List with Random Pointer
      * A linked list of length n is given such that each node contains an additional random pointer,
      * which could point to any node in the list, or null. Construct a deep copy of the list.
      * The deep copy should consist of exactly n brand new nodes, where each new node has its value set to the value of
@@ -61,7 +61,7 @@ public class LinkedListProblems {
     }
 
     /**
-     * Q.160
+     * Q. 160 Intersection of Two Linked Lists
      * <p>
      * Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect.
      * If the two linked lists have no intersection at all, return null.
@@ -90,7 +90,7 @@ public class LinkedListProblems {
     }
 
     /**
-     * Q. 1721
+     * Q. 1721 Swapping Nodes in a Linked List
      * You are given the head of a linked list, and an integer k.
      * Return the head of the linked list after swapping the values of the kth node from the beginning
      * and the kth node from the end (the list is 1-indexed).
@@ -114,7 +114,7 @@ public class LinkedListProblems {
     }
 
     /**
-     * Q.234
+     * Q. 234
      * Given the head of a singly linked list, return true if it is a palindrome.
      * <p>
      * tags:: linkedList
@@ -136,7 +136,7 @@ public class LinkedListProblems {
     }
 
     /**
-     * Q. 86
+     * Q. 86 Palindrome Linked List
      * <p>
      * Given the head of a linked list and a value x, partition it such that all nodes less than x come before
      * nodes greater than or equal to x. You should preserve the original relative order of the nodes in
@@ -166,7 +166,7 @@ public class LinkedListProblems {
     }
 
     /**
-     * Q. 19
+     * Q. 19 Remove Nth Node From End of List
      * <p>
      * Given the head of a linked list, remove the nth node from the end of the list and return its head.
      * <p>

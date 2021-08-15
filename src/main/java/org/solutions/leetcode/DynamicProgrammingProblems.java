@@ -28,7 +28,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q.823
+     * Q. 823 Binary Trees With Factors
      * <p>
      * Given an array of unique integers, arr, where each integer arr[i] is strictly greater than 1.
      * We make a binary tree using these integers, and each number may be used for any number of times.
@@ -59,7 +59,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 121
+     * Q. 121 Best Time to Buy and Sell Stock
      * <p>
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in
@@ -83,7 +83,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 188
+     * Q. 188 Best Time to Buy and Sell Stock IV
      * <p>
      * You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and integer k.
      * Find the maximum profit you can achieve. You may complete at most k transactions.
@@ -113,7 +113,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q.123
+     * Q. 123 Best Time to Buy and Sell Stock III
      * <p>
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * Find the maximum profit you can achieve. You may complete at most two transactions.
@@ -127,7 +127,8 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 309
+     * Q. 309 Best time to by and sell stock with cooldown
+     * <p>
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * Find the maximum profit you can achieve. You may complete as many transactions as you like
      * (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
@@ -152,7 +153,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 376
+     * Q. 376 Wiggle Subsequence
      * <p>
      * Given an integer array nums, return the length of the longest wiggle sequence.
      * A wiggle sequence is a sequence where the differences between successive numbers strictly alternate
@@ -178,7 +179,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 354
+     * Q. 354 Russian Doll Envelopes
      * <p>
      * You are given a 2D array of integers envelopes where envelopes[i] = [wi, hi] represents the width and the
      * height of an envelope. One envelope can fit into another if and only if both the width and height of one envelope
@@ -205,7 +206,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 300
+     * Q. 300 Longest Increasing Subsequence
      * <p>
      * Given an integer array nums, return the length of the longest strictly increasing subsequence.
      * A subsequence is a sequence that can be derived from an array by deleting some or no elements without
@@ -232,7 +233,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 329
+     * Q. 329 Longest Increasing Path in a Matrix
      * <p>
      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.
      * From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or
@@ -255,7 +256,9 @@ public class DynamicProgrammingProblems {
     }
 
     private int longestIncreasingPathDfs(int[][] matrix, int i, int j, int m, int n, int[][] cache) {
-        if (cache[i][j] != 0) return cache[i][j];
+        if (cache[i][j] != 0)
+            return cache[i][j];
+
         int max = 1;
         for (int[] dir : new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}) {
             int x = i + dir[0];
@@ -271,7 +274,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 377
+     * Q. 377 Combination Sum IV
      * <p>
      * Given an array of distinct integers nums and a target integer target, return the number of possible combinations
      * that add up to target. The answer is guaranteed to fit in a 32-bit integer.
@@ -293,7 +296,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 120
+     * Q. 120 Triangle
      * <p>
      * Given a triangle array, return the minimum path sum from top to bottom. For each step,
      * you may move to an adjacent number of the row below. More formally, if you are on index i on the current row,
@@ -313,7 +316,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 1074
+     * Q. 1074 Number of submatrices that sum to target
      * <p>
      * Given a matrix and a target, return the number of non-empty submatrices that sum to target.
      * A submatrix x1, y1, x2, y2 is the set of all cells matrix[x][y] with x1 <= x <= x2 and y1 <= y <= y2.
@@ -351,7 +354,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 62
+     * Q. 62 Unique Paths
      * <p>
      * A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
      * The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right
@@ -373,7 +376,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 63
+     * Q. 63 Unique Paths II
      * <p>
      * A robot is located at the top-left corner of a m x n grid. The robot can only move either down or right at any
      * point in time. The robot is trying to reach the bottom-right corner of the grid. Now consider if some obstacles
@@ -401,7 +404,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 583. Delete Operation for Two Strings
+     * Q. 583 Delete Operation for Two Strings
      * <p>
      * Given two strings word1 and word2, return the minimum number of steps required to make word1 and word2 the same.
      * In one step, you can delete exactly one character in either string.
@@ -429,7 +432,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 1653. Minimum Deletions to Make String Balanced
+     * Q. 1653 Minimum Deletions to Make String Balanced
      * <p>
      * You are given a string s consisting only of characters 'a' and 'b'. You can delete any number of characters in s
      * to make s balanced. s is balanced if there is no pair of indices (i,j) such that i < j and s[i] = 'b' & s[j]= 'a'.
@@ -553,7 +556,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 562. Longest Line of Consecutive One in Matrix
+     * Q. 562 Longest Line of Consecutive One in Matrix
      * <p>
      * Given an m x n binary matrix mat, return the length of the longest line of consecutive one in the matrix.
      * The line could be horizontal, vertical, diagonal, or anti-diagonal.
@@ -584,7 +587,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 975. Odd Even Jump
+     * Q. 975 Odd Even Jump
      * <p>
      * You are given an integer array arr. From some starting index, you can make a series of jumps.
      * The (1st, 3rd, 5th, ...) jumps in the series are called odd-numbered jumps,
@@ -666,7 +669,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 213. House Robber II
+     * Q. 213 House Robber II
      * <p>
      * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money
      * stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the
@@ -701,7 +704,7 @@ public class DynamicProgrammingProblems {
     }
 
     /**
-     * Q. 518. Coin Change 2
+     * Q. 518 Coin Change 2
      * <p>
      * You are given an integer array coins representing coins of different denominations and an integer amount
      * representing a total amount of money. Return the number of combinations that make up that amount. If that amount

@@ -7,7 +7,7 @@ public class MathProblems {
     int countArrangement = 0;
 
     /**
-     * Q.1342
+     * Q. 1342 Number of steps to reduce a number to zero
      * Given a non-negative integer num, return the number of steps to reduce it to zero.
      * If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
      * <p>
@@ -26,7 +26,7 @@ public class MathProblems {
     }
 
     /**
-     * Q.575
+     * Q. 575 Distribute Candies
      * Alice has n candies, where the ith candy is of type candyType[i]. Alice noticed that she started to gain weight,
      * so she visited a doctor.The doctor advised Alice to only eat n / 2 of the candies she has (n is always even).
      * Alice likes her candies very much, and she wants to eat the maximum number of different types of candies while
@@ -50,7 +50,7 @@ public class MathProblems {
     }
 
     /**
-     * Q.645
+     * Q. 645 Set Mismatch
      * You have a set of integers s, which originally contains all the numbers from 1 to n.
      * Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set,
      * which results in repetition of one number and loss of another number.
@@ -72,7 +72,7 @@ public class MathProblems {
     }
 
     /**
-     * Q.268
+     * Q. 268 Missing Number
      * Given an array nums containing n distinct numbers in the range [0, n],
      * return the only number in the range that is missing from the array.
      * <p>
@@ -87,7 +87,7 @@ public class MathProblems {
     }
 
     /**
-     * Q. 869
+     * Q. 869 Reordered Power of 2
      * <p>
      * Starting with a positive integer N, we reorder the digits in any order (including the original order)
      * such that the leading digit is not zero.
@@ -118,7 +118,7 @@ public class MathProblems {
     }
 
     /**
-     * Q. 1551
+     * Q. 1551 Minimum Operations to Make Array Equal
      * <p>
      * You have an array arr of length n where arr[i] = (2 * i) + 1 for all valid values of i (i.e. 0 <= i < n).
      * In one operation, you can select two indices x and y where 0 <= x, y < n and subtract 1 from arr[x] and add 1
@@ -133,7 +133,7 @@ public class MathProblems {
     }
 
     /**
-     * Q. 326
+     * Q. 326 Power of Three
      * <p>
      * Given an integer n, return true if it is a power of three. Otherwise, return false.
      * An integer n is a power of three, if there exists an integer x such that n == 3^x.
@@ -149,7 +149,7 @@ public class MathProblems {
     }
 
     /**
-     * Q. 970
+     * Q. 970 Powerful Integers
      * <p>
      * Given three integers x, y, and bound, return a list of all the powerful integers that have a value less than or
      * equal to bound. An integer is powerful if it can be represented as xi + yj for some integers i >= 0 and j >= 0.
@@ -180,7 +180,7 @@ public class MathProblems {
     }
 
     /**
-     * 319. Bulb Switcher
+     * Q. 319 Bulb Switcher
      * <p>
      * There are n bulbs that are initially off. You first turn on all the bulbs, then you turn off every second bulb.
      * On the third round, you toggle every third bulb (turning on if it's off or turning off if it's on).
@@ -194,7 +194,7 @@ public class MathProblems {
     }
 
     /**
-     * Q. 204 count primes
+     * Q. 204 Count primes
      * <p>
      * Count the number of prime numbers less than a non-negative number, n.
      */

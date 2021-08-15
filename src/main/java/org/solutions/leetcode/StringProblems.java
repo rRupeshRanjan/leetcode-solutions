@@ -46,7 +46,7 @@ public class StringProblems {
     }
 
     /**
-     * Q.242 Valid Anagram
+     * Q. 242 Valid Anagram
      * <p>
      * Given two strings s and t , write a function to determine if t is an anagram of s.
      * <p>
