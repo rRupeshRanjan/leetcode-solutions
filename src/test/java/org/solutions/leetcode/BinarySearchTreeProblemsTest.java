@@ -99,4 +99,14 @@ class BinarySearchTreeProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected,
                 bst.lowestCommonAncestor(input.getLeft(), input.getMiddle(), input.getRight())));
     }
+
+    @Test
+    void testIsValidBST() {
+        Map<TreeNode, Boolean> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(2, 1, 3), true);
+        scenarios.put(new TreeNode(5, new TreeNode(1), new TreeNode(4, 3, 6)), false);
+        scenarios.put(new TreeNode(3), true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, bst.isValidBST(input)));
+    }
 }

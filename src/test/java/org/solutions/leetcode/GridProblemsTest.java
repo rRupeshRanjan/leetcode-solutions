@@ -450,6 +450,31 @@ class GridProblemsTest {
         });
     }
 
+    @Test
+    void testNumberOfProvinces() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 1, 0}, {1, 1, 0}, {0, 0, 1}}, 2);
+        scenarios.put(new int[][]{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 3);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.numberOfProvinces(input)));
+    }
+
+    @Test
+    void testFloodFill() {
+        Map<Pair<int[][], Triple<Integer, Integer, Integer>>, int[][]> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[][]{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}}, Triple.of(1, 1, 2)),
+                new int[][]{{2, 2, 2}, {2, 2, 0}, {2, 0, 1}});
+        scenarios.put(Pair.of(new int[][]{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}}, Triple.of(1, 1, 1)),
+                new int[][]{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}});
+        scenarios.put(Pair.of(new int[][]{{1, 1, 1}, {1, 1, 1}}, Triple.of(1, 1, 3)),
+                new int[][]{{3, 3, 3}, {3, 3, 3}});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected,
+                gridProblems.floodFill(input.getLeft(), input.getRight().getLeft(),
+                        input.getRight().getMiddle(), input.getRight().getRight()))
+        );
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

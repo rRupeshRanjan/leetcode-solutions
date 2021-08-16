@@ -803,4 +803,14 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertArrayEquals(expected, arrayProblems.asteroidCollision(input)));
     }
+
+    @Test
+    void testTrapRainWater() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}, 6);
+        scenarios.put(new int[]{4, 2, 0, 3, 2, 5}, 9);
+        scenarios.put(new int[]{}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.trapRainWater(input)));
+    }
 }

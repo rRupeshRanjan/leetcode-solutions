@@ -717,10 +717,18 @@ public class GridProblems {
         return new int[]{};
     }
 
-    private int find(int[] parent, int x) {
-        if (parent[x] != x)
-            parent[x] = find(parent, parent[x]);
-        return parent[x];
+    private int find(int[] arr, int x) {
+        if (x == arr[x])
+            return x;
+        return arr[x] = find(arr, arr[x]);
+    }
+
+    private void union(int[] arr, int x, int y) {
+        int xParent = find(arr, x);
+        int yParent = find(arr, y);
+
+        if (xParent != yParent)
+            arr[xParent] = yParent;
     }
 
     /**
@@ -1311,5 +1319,71 @@ public class GridProblems {
             for (int i = 0; i < matrix.length; i++)
                 matrix[i][0] = 0;
         }
+    }
+
+    /**
+     * Q. 547 Number of Provinces
+     * <p>
+     * There are n cities. Some of them are connected, while some are not. If city a is connected directly with city b,
+     * and city b is connected directly with city c, then city a is connected indirectly with city c.
+     * A province is a group of directly or indirectly connected cities and no other cities outside of the group.
+     * <p>
+     * You are given an n x n matrix isConnected where isConnected[i][j] = 1 if the ith city and the jth city are
+     * directly connected, and isConnected[i][j] = 0 otherwise.
+     * <p>
+     * Return the total number of provinces.
+     */
+    public int numberOfProvinces(int[][] isConnected) {
+        int[] arr = new int[isConnected.length];
+        int count = 0;
+
+        for (int i = 0; i < isConnected.length; i++)
+            arr[i] = i;
+
+        for (int i = 0; i < isConnected.length; i++) {
+            for (int j = i + 1; j < isConnected.length; j++) {
+                if (isConnected[i][j] == 1)
+                    union(arr, i, j);
+            }
+        }
+
+        for (int i = 0; i < isConnected.length; i++) {
+            if (arr[i] == i)
+                count++;
+        }
+
+        return count;
+    }
+
+    /**
+     * Q. 733 Flood Fill
+     * <p>
+     * An image is represented by an m x n integer grid image where image[i][j] represents the pixel value of the image.
+     * You are also given three integers sr, sc, and newColor. You should perform a flood fill on the image
+     * starting from the pixel image[sr][sc]. To perform a flood fill, consider the starting pixel, plus any pixels
+     * connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels
+     * connected 4-directionally to those pixels (also with the same color), and so on.
+     * Replace the color of all of aforementioned pixels with newColor.
+     * <p>
+     * Return the modified image after performing the flood fill.
+     * <p>
+     * tags:: dfs
+     */
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int color = image[sr][sc];
+        if (color != newColor)
+            dfsFloodFill(image, sr, sc, color, newColor);
+        return image;
+    }
+
+    public void dfsFloodFill(int[][] image, int sr, int sc, int color, int newColor) {
+        if (sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length || image[sr][sc] != color)
+            return;
+
+        image[sr][sc] = newColor;
+        dfsFloodFill(image, sr - 1, sc, color, newColor);
+        dfsFloodFill(image, sr + 1, sc, color, newColor);
+        dfsFloodFill(image, sr, sc - 1, color, newColor);
+        dfsFloodFill(image, sr, sc + 1, color, newColor);
     }
 }

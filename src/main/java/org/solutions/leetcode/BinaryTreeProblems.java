@@ -7,14 +7,6 @@ import java.util.*;
 public class BinaryTreeProblems {
 
     private int cameraCoverCount;
-
-    /**
-     * Q. 105 Construct Binary Tree from Preorder and Inorder Traversal
-     * Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and
-     * inorder is the inorder traversal of the same tree, construct and return the binary tree.
-     * <p>
-     * tags:: inorder, preorder, tree, dfs, array
-     */
     private int buildTreePreOrderInorderRootIndex;
 
     /**
@@ -53,6 +45,7 @@ public class BinaryTreeProblems {
 
     /**
      * Q. 94 Binary Tree Inorder Traversal
+     * <p>
      * Binary tree inorder traversal
      * <p>
      * Tags:: binaryTree, inorder, dfs
@@ -126,6 +119,7 @@ public class BinaryTreeProblems {
 
     /**
      * Q. 637 Average of Levels in Binary Tree
+     *
      * Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
      * <p>
      * Tags:: binaryTree, bfs
@@ -353,6 +347,14 @@ public class BinaryTreeProblems {
         return maxSumLevel;
     }
 
+    /**
+     * Q. 105 Construct Binary Tree from Preorder and Inorder Traversal
+     * <p>
+     * Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and
+     * inorder is the inorder traversal of the same tree, construct and return the binary tree.
+     * <p>
+     * tags:: inorder, preorder, tree, dfs, array
+     */
     public TreeNode buildTreeFromPreorderInorder(int[] preorder, int[] inorder) {
         buildTreePreOrderInorderRootIndex = 0;
         return recurseBuildTreePreorderInorder(0, preorder.length - 1, preorder, inorder);
@@ -518,7 +520,7 @@ public class BinaryTreeProblems {
     }
 
     /**
-     * Q 543 Diameter of Binary Tree
+     * Q. 543 Diameter of Binary Tree
      * <p>
      * Given the root of a binary tree, return the length of the diameter of the tree. The diameter of a binary tree is
      * the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
@@ -659,6 +661,72 @@ public class BinaryTreeProblems {
         int count = Math.max(left, right);
         maxCount[0] = Math.max(maxCount[0], count);
         return count;
+    }
+
+    /**
+     * Q. 102 Binary Tree Level Order Traversal
+     * <p>
+     * Given the root of a binary tree, return the level order traversal of its nodes' values.
+     * (i.e., from left to right, level by level).
+     * <p>
+     * tags:: bfs
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> levelOrderTraversal = new ArrayList<>();
+        if (root == null)
+            return levelOrderTraversal;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            List<Integer> holder = new ArrayList<>();
+            for (int i = queue.size(); i > 0; i--) {
+                TreeNode poll = queue.poll();
+                holder.add(poll.getVal());
+
+                if (poll.getLeft() != null) queue.add(poll.getLeft());
+                if (poll.getRight() != null) queue.add(poll.getRight());
+            }
+            levelOrderTraversal.addAll(List.of(holder));
+        }
+
+        return levelOrderTraversal;
+    }
+
+    /**
+     * Q. 103 Binary Tree Zigzag Level Order Traversal
+     * <p>
+     * Given the root of a binary tree, return the zigzag level order traversal of its nodes' values.
+     * (i.e., from left to right, then right to left for the next level and alternate between).
+     * <p>
+     * tags:: bfs
+     */
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> zigZagTraversal = new ArrayList<>();
+        if (root == null)
+            return zigZagTraversal;
+
+        boolean flip = false;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            List<Integer> holder = new ArrayList<>();
+            for (int i = queue.size(); i > 0; i--) {
+                TreeNode poll = queue.poll();
+                holder.add(poll.getVal());
+
+                if (poll.getLeft() != null) queue.add(poll.getLeft());
+                if (poll.getRight() != null) queue.add(poll.getRight());
+            }
+
+            if (flip) Collections.reverse(holder);
+            flip = !flip;
+            zigZagTraversal.addAll(List.of(holder));
+        }
+
+        return zigZagTraversal;
     }
 
     private enum CameraType {

@@ -289,4 +289,26 @@ class BinaryTreeProblemsTest {
         scenarios.forEach((input, expected) ->
                 assertEquals(expected, binaryTreeProblems.longestConsecutiveSequence(input)));
     }
+
+    @Test
+    void testLevelOrder() {
+        Map<TreeNode, List<List<Integer>>> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)),
+                List.of(List.of(3), List.of(9, 20), List.of(15, 7)));
+        scenarios.put(new TreeNode(1), List.of(List.of(1)));
+        scenarios.put(null, List.of());
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.levelOrder(input)));
+    }
+
+    @Test
+    void testZigzagLevelOrder() {
+        Map<TreeNode, List<List<Integer>>> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)),
+                List.of(List.of(3), List.of(20, 9), List.of(15, 7)));
+        scenarios.put(new TreeNode(1), List.of(List.of(1)));
+        scenarios.put(null, List.of());
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.zigzagLevelOrder(input)));
+    }
 }
