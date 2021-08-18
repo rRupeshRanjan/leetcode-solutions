@@ -703,7 +703,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 1863. Sum of All Subset XOR Totals
+     * Q. 1863 Sum of All Subset XOR Totals
      * <p>
      * The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty.
      * For example, the XOR total of the array [2,5,6] is 2 XOR 5 XOR 6 = 1.
@@ -1178,7 +1178,7 @@ public class ArrayProblems {
     }
 
     /**
-     * Q. 948. Bag of Tokens
+     * Q. 948 Bag of Tokens
      * <p>
      * You have an initial power of power, an initial score of 0, and a bag of tokens
      * where tokens[i] is the value of the ith token (0-indexed).

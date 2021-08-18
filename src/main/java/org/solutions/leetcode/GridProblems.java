@@ -421,7 +421,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 51. N-Queens
+     * Q. 51 N-Queens
      * <p>
      * The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack
      * each other. Given an integer n, return all distinct solutions to the n-queens puzzle.
@@ -638,7 +638,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 130. Surrounded Regions
+     * Q. 130 Surrounded Regions
      * <p>
      * Given an m x n matrix board containing 'X' and 'O', capture all regions surrounded by 'X'.
      * A region is captured by flipping all 'O's into 'X's in that surrounded region.
@@ -685,7 +685,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 684. Redundant Connection
+     * Q. 684 Redundant Connection
      * In this problem, a tree is an undirected graph that is connected and has no cycles.
      * <p>
      * You are given a graph that started as a tree with n nodes labeled from 1 to n, with one additional edge added.
@@ -732,7 +732,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 695. Max Area of Island
+     * Q. 695 Max Area of Island
      * <p>
      * You are given an m x n binary matrix grid. An island is a group of 1's (representing land) connected
      * 4-directionally (horizontal or vertical) You may assume all four edges of the grid are surrounded by water.
@@ -767,7 +767,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 200. Number of Islands
+     * Q. 200 Number of Islands
      * <p>
      * Given an m x n 2D binary grid grid which represents a map of '1' (land) and '0' (water), return number of islands.
      * <p>
@@ -802,7 +802,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 1319. Number of Operations to Make Network Connected
+     * Q. 1319 Number of Operations to Make Network Connected
      * <p>
      * There are n computers numbered from 0 to n-1 connected by ethernet cables connections forming a network
      * where connections[i] = [a, b] represents a connection between computers a and b. Any computer can reach any other
@@ -898,7 +898,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 1293. Shortest Path in a Grid with Obstacles Elimination
+     * Q. 1293 Shortest Path in a Grid with Obstacles Elimination
      * <p>
      * Given a m * n grid, where each cell is either 0 (empty) or 1 (obstacle).
      * In one step, you can move up, down, left or right from and to an empty cell.
@@ -1225,7 +1225,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 54. Spiral Matrix
+     * Q. 54 Spiral Matrix
      * Given an m x n matrix, return all elements of the matrix in spiral order.
      * <p>
      * tags:: grid
@@ -1257,7 +1257,7 @@ public class GridProblems {
     }
 
     /**
-     * Q. 1292. Maximum Side Length of a Square with Sum Less than or Equal to Threshold
+     * Q. 1292 Maximum Side Length of a Square with Sum Less than or Equal to Threshold
      * <p>
      * Given a m x n matrix mat and an integer threshold. Return the maximum side-length of a square with a sum less
      * than or equal to threshold or return 0 if there is no such square.
