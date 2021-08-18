@@ -279,6 +279,33 @@ class BinaryTreeProblemsTest {
     }
 
     @Test
+    void testLowestCommonAncestorIV() {
+        Map<Pair<TreeNode, TreeNode[]>, TreeNode> scenarios = new HashMap<>();
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(5);
+        TreeNode node6 = new TreeNode(6);
+        TreeNode node7 = new TreeNode(7);
+
+        node2.setLeft(node4);
+        node2.setRight(node5);
+        node3.setLeft(node6);
+        node3.setRight(node7);
+        node1.setLeft(node2);
+        node1.setRight(node3);
+
+        scenarios.put(Pair.of(node1, new TreeNode[]{node4, node5}), node2);
+        scenarios.put(Pair.of(node1, new TreeNode[]{node4, node5, node6}), node1);
+        scenarios.put(Pair.of(node1, new TreeNode[]{node4, node5, node6, node7}), node1);
+        scenarios.put(Pair.of(node1, new TreeNode[]{node1, node2}), node1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                binaryTreeProblems.lowestCommonAncestorIV(input.getLeft(), input.getRight())));
+    }
+
+    @Test
     void testLongestConsecutiveSequence() {
         Map<TreeNode, Integer> scenarios = new HashMap<>();
         scenarios.put(new TreeNode(1, null,
@@ -310,5 +337,16 @@ class BinaryTreeProblemsTest {
         scenarios.put(null, List.of());
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.zigzagLevelOrder(input)));
+    }
+
+    @Test
+    void testGoodNodes() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(3,
+                new TreeNode(1, 3, null),
+                new TreeNode(4, 1, 5)), 4);
+        scenarios.put(new TreeNode(3, new TreeNode(3, 4, 2), null), 3);
+        scenarios.put(new TreeNode(3), 1);
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.goodNodes(input)));
     }
 }

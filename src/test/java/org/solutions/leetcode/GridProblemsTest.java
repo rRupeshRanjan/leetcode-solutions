@@ -475,6 +475,33 @@ class GridProblemsTest {
         );
     }
 
+    @Test
+    void testFindSmallestRegion() {
+        Map<Triple<List<List<String>>, String, String>, String> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(
+                List.of(
+                        List.of("Earth", "North America", "South America"),
+                        List.of("North America", "United States", "Canada"),
+                        List.of("United States", "New York", "Boston"),
+                        List.of("Canada", "Ontario", "Quebec"),
+                        List.of("South America", "Brazil")
+                ), "Quebec", "New York"
+        ), "North America");
+        scenarios.put(Triple.of(
+                List.of(
+                        List.of("Earth", "North America", "South America"),
+                        List.of("North America", "United States", "Canada"),
+                        List.of("United States", "New York", "Boston"),
+                        List.of("Canada", "Ontario", "Quebec"),
+                        List.of("South America", "Brazil")
+                ), "Canada", "South America"
+        ), "Earth");
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.findSmallestRegion(
+                input.getLeft(), input.getMiddle(), input.getRight()
+        )));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

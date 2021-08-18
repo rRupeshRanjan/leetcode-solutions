@@ -329,4 +329,15 @@ class DynamicProgrammingProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.minCostPaintHouseII(input)));
     }
+
+    @Test
+    void testNumDecodings() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("12", 2);
+        scenarios.put("226", 3);
+        scenarios.put("0", 0);
+        scenarios.put("06", 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, dpProblems.numDecodings(input)));
+    }
 }

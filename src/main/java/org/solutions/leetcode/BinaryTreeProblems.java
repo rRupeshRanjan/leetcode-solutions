@@ -119,7 +119,7 @@ public class BinaryTreeProblems {
 
     /**
      * Q. 637 Average of Levels in Binary Tree
-     *
+     * <p>
      * Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
      * <p>
      * Tags:: binaryTree, bfs
@@ -631,6 +631,39 @@ public class BinaryTreeProblems {
     }
 
     /**
+     * Q. 1676 Lowest Common Ancestor of a Binary Tree IV
+     * <p>
+     * Given the root of a binary tree and an array of TreeNode objects nodes, return the lowest common ancestor (LCA)
+     * of all the nodes in nodes. All the nodes will exist in the tree, and all values of the tree's nodes are unique.
+     * <p>
+     * Extending the definition of LCA on Wikipedia: "The lowest common ancestor of n nodes p1, p2, ..., pn in a binary
+     * tree T is the lowest node that has every pi as a descendant (where we allow a node to be a descendant of itself)
+     * for every valid i". A descendant of a node x is a node y that is on the path from node x to some leaf node.
+     * <p>
+     * tags:: lca, dfs
+     */
+    public TreeNode lowestCommonAncestorIV(TreeNode root, TreeNode[] nodes) {
+        Set<Integer> set = new HashSet<>();
+        for (TreeNode node : nodes)
+            set.add(node.getVal());
+
+        return lowestCommonAncestorIVHelper(root, set);
+    }
+
+    private TreeNode lowestCommonAncestorIVHelper(TreeNode root, Set<Integer> set) {
+        if (root == null || set.contains(root.getVal()))
+            return root;
+
+        TreeNode left = lowestCommonAncestorIVHelper(root.getLeft(), set);
+        TreeNode right = lowestCommonAncestorIVHelper(root.getRight(), set);
+
+        if (left != null && right != null)
+            return root;
+        else
+            return (left != null) ? left : right;
+    }
+
+    /**
      * Q. 298 Binary Tree Longest Consecutive Sequence
      * <p>
      * Given the root of a binary tree, return the length of the longest consecutive sequence path.
@@ -727,6 +760,33 @@ public class BinaryTreeProblems {
         }
 
         return zigZagTraversal;
+    }
+
+    /**
+     * Q. 1448 Count Good Nodes in Binary Tree
+     * <p>
+     * Given a binary tree root, a node X in the tree is named good if in the path from root to X
+     * there are no nodes with a value greater than X.
+     * <p>
+     * Return the number of good nodes in the binary tree.
+     * <p>
+     * tags::dfs, binaryTree
+     */
+    public int goodNodes(TreeNode root) {
+        int[] count = new int[1];
+        dfsGoodNodes(root, root.getVal(), count);
+        return count[0];
+    }
+
+    private void dfsGoodNodes(TreeNode root, int maxVal, int[] count) {
+        if (root == null)
+            return;
+
+        if (root.getVal() >= maxVal)
+            count[0]++;
+
+        dfsGoodNodes(root.getLeft(), Math.max(maxVal, root.getVal()), count);
+        dfsGoodNodes(root.getRight(), Math.max(maxVal, root.getVal()), count);
     }
 
     private enum CameraType {

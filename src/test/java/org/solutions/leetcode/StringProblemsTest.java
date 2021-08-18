@@ -512,4 +512,16 @@ class StringProblemsTest {
             assertArrayEquals(expected, input);
         });
     }
+
+    @Test
+    void testReverseString() {
+        Map<char[], char[]> scenarios = new HashMap<>();
+        scenarios.put(new char[]{'h', 'e', 'l', 'l', 'o'}, new char[]{'o', 'l', 'l', 'e', 'h'});
+        scenarios.put(new char[]{'h', 'a', 'n', 'n', 'a'}, new char[]{'a', 'n', 'n', 'a', 'h'});
+
+        scenarios.forEach((input, expected) -> {
+            stringProblems.reverseString(input);
+            assertArrayEquals(expected, input);
+        });
+    }
 }

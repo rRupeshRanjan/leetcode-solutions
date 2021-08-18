@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,7 @@ import java.util.Map;
 public class HashTableProblems {
 
     /**
-     * Q. 554
+     * Q. 554 Brick Wall
      * <p>
      * There is a rectangular brick wall in front of you with n rows of bricks. The ith row has some number of bricks
      * each of the same height (i.e., one unit) but they can be of different widths. The total width of each row is the
@@ -37,7 +38,7 @@ public class HashTableProblems {
     }
 
     /**
-     * Q. 560
+     * Q. 560 Subarray Sum Equals K
      * <p>
      * Given an array of integers nums and an integer k,
      * return the total number of continuous subarrays whose sum equals to k.
@@ -59,7 +60,7 @@ public class HashTableProblems {
     }
 
     /**
-     * Q. 974
+     * Q. 974 Subarray Sums Divisible by K
      * <p>
      * Given an array A of integers, return number of (contiguous, non-empty) subarrays that have a sum divisible by K.
      * <p>
@@ -80,4 +81,39 @@ public class HashTableProblems {
         return res;
     }
 
+    /**
+     * Q. 347 Top K Frequent Elements
+     * <p>
+     * Given an integer array nums and an integer k, return the k most frequent elements.
+     * You may return the answer in any order.
+     * <p>
+     * tags::heap, array, hashTable
+     */
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        int maxFreq = Integer.MIN_VALUE;
+        for (int num : nums) {
+            int freq = freqMap.getOrDefault(num, 0) + 1;
+            freqMap.put(num, freq);
+            maxFreq = Math.max(maxFreq, freq);
+        }
+
+        ArrayList<Integer>[] count = new ArrayList[maxFreq + 1];
+        for (int key : freqMap.keySet()) {
+            int value = freqMap.get(key);
+            if (count[value] == null)
+                count[value] = new ArrayList<>();
+            count[value].add(key);
+        }
+
+        List<Integer> answer = new ArrayList<>();
+        for (int i = count.length - 1; i >= 0; i--) {
+            if (count[i] != null)
+                answer.addAll(count[i]);
+            if (answer.size() == k)
+                break;
+        }
+
+        return answer.stream().mapToInt(i -> i).toArray();
+    }
 }

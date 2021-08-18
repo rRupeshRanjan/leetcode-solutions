@@ -1039,7 +1039,7 @@ public class StringProblems {
      */
     public String minWindow(String s, String t) {
         int[] freq = new int[128];
-        int counter = t.length(), start = 0, end = 0, minLength = Integer.MAX_VALUE, minStart = 0;
+        int counter = t.length(), start = 0, end = 0, minLength = s.length() + 1, minStart = 0;
 
         for (char ch : t.toCharArray())
             freq[ch]++;
@@ -1049,7 +1049,6 @@ public class StringProblems {
             if (freq[ch1] > 0)
                 counter--;
             freq[ch1]--;
-
 
             while (counter == 0) {
                 if (minLength > end - start) {
@@ -1064,7 +1063,7 @@ public class StringProblems {
             }
         }
 
-        return minLength == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLength);
+        return minLength == s.length() + 1 ? "" : s.substring(minStart, minStart + minLength);
     }
 
     /**
@@ -1271,6 +1270,23 @@ public class StringProblems {
             char temp = s[start];
             s[start++] = s[end];
             s[end--] = temp;
+        }
+    }
+
+    /**
+     * Q. 344 Reverse String
+     * <p>
+     * Write a function that reverses a string. The input string is given as an array of characters s.
+     * <p>
+     * tags::string
+     */
+    public void reverseString(char[] str) {
+        int start = 0, end = str.length - 1;
+
+        while (start < end) {
+            char temp = str[end];
+            str[end--] = str[start];
+            str[start++] = temp;
         }
     }
 }

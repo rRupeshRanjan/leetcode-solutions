@@ -1386,4 +1386,39 @@ public class GridProblems {
         dfsFloodFill(image, sr, sc - 1, color, newColor);
         dfsFloodFill(image, sr, sc + 1, color, newColor);
     }
+
+    /**
+     * Q. 1257 Smallest Common Region
+     * <p>
+     * You are given some lists of regions where the first region of each list includes all other regions in that list.
+     * Naturally, if a region x contains another region y then x is bigger than y.
+     * Also, by definition, a region x contains itself.
+     * <p>
+     * Given two regions: region1 and region2, return the smallest region that contains both of them.
+     * If you are given regions r1, r2, and r3 such that r1 includes r3, it is guaranteed
+     * there is no r2 such that r2 includes r3. It is guaranteed the smallest region exists.
+     * <p>
+     * tags::dfs, lowestCommonAncestor
+     */
+    public String findSmallestRegion(List<List<String>> regions, String region1, String region2) {
+        Map<String, String> regionToParentMap = new HashMap<>();
+        Set<String> region1Parents = new HashSet<>();
+
+        for (List<String> region : regions) {
+            String parent = region.get(0);
+            for (int i = 1; i < region.size(); i++)
+                regionToParentMap.put(region.get(i), parent);
+        }
+
+        while (regionToParentMap.containsKey(region1)) {
+            region1Parents.add(region1);
+            region1 = regionToParentMap.get(region1);
+        }
+
+        while (!region1Parents.contains(region2) && regionToParentMap.containsKey(region2)) {
+            region2 = regionToParentMap.get(region2);
+        }
+
+        return region2;
+    }
 }

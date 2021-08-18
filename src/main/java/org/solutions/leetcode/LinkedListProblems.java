@@ -72,21 +72,13 @@ public class LinkedListProblems {
      * Tags:: linkedlist
      */
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        Set<ListNode> set = new HashSet<>();
-        ListNode temp = headA;
-        while (temp != null) {
-            set.add(temp);
-            temp = temp.getNext();
+        ListNode n1 = headA, n2 = headB;
+        while (n1 != n2) {
+            n1 = (n1 == null) ? headB : n1.getNext();
+            n2 = (n2 == null) ? headA : n2.getNext();
         }
 
-        temp = headB;
-        while (temp != null) {
-            if (set.contains(temp))
-                return temp;
-            temp = temp.getNext();
-        }
-
-        return null;
+        return n1;
     }
 
     /**
