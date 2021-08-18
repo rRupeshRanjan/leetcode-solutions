@@ -18,7 +18,7 @@ dependencies {
     implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.6'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
 }
 
 jacoco {
@@ -30,7 +30,19 @@ jacocoTestReport {
     dependsOn test
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.9
+            }
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
+
+check.dependsOn(jacocoTestCoverageVerification)
