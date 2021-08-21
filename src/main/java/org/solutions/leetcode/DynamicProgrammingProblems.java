@@ -4,6 +4,8 @@ import java.util.*;
 
 public class DynamicProgrammingProblems {
 
+    private static final int MOD = (int) (1e9 + 7);
+
     /**
      * Q. 322 Coin Change
      * You are given coins of different denominations and a total amount of money amount.
@@ -43,16 +45,15 @@ public class DynamicProgrammingProblems {
         Arrays.sort(arr);
         Map<Integer, Long> dp = new HashMap<>();
         long count = 0;
-        int mod = 1_000_000_007;
 
         for (int i = 0; i < arr.length; i++) {
             int a = arr[i];
             dp.put(a, 1L);
             for (int j = 0; j < i; j++) {
                 if (a % arr[j] == 0)
-                    dp.put(a, (dp.get(a) + dp.get(arr[j]) * dp.getOrDefault(a / arr[j], 0L)) % mod);
+                    dp.put(a, (dp.get(a) + dp.get(arr[j]) * dp.getOrDefault(a / arr[j], 0L)) % MOD);
             }
-            count = (count + dp.get(arr[i])) % mod;
+            count = (count + dp.get(arr[i])) % MOD;
         }
 
         return (int) count;
@@ -527,7 +528,7 @@ public class DynamicProgrammingProblems {
             }
             stack.push(i);
         }
-        return (int) (maxSum % 1000000007);
+        return (int) (maxSum % MOD);
     }
 
     /**

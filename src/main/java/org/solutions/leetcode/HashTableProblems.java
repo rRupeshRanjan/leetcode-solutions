@@ -1,9 +1,6 @@
 package org.solutions.leetcode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class HashTableProblems {
 
@@ -22,6 +19,9 @@ public class HashTableProblems {
      * tags:: hashMap, hashTable
      */
     public int leastBricks(List<List<Integer>> wall) {
+        if (wall == null || wall.size() == 0)
+            return 0;
+
         int ans = 0;
         Map<Integer, Integer> count = new HashMap<>();
 
@@ -40,12 +40,14 @@ public class HashTableProblems {
     /**
      * Q. 560 Subarray Sum Equals K
      * <p>
-     * Given an array of integers nums and an integer k,
-     * return the total number of continuous subarrays whose sum equals to k.
+     * Given array of integers nums and integer k, return total number of continuous subarrays whose sum equals to k.
      * <p>
      * tags:: array, hashTable, hashMap
      */
     public int subarraySum(int[] nums, int k) {
+        if (nums == null || nums.length == 0)
+            return 0;
+
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, 1);
         int sum = 0, ans = 0;
@@ -67,6 +69,9 @@ public class HashTableProblems {
      * tags:: array, hashTable
      */
     public int subarraysDivByK(int[] nums, int K) {
+        if (nums == null || nums.length == 0 || K == 0)
+            return 0;
+
         // hashmap can be used in place of array as well
         int[] counter = new int[K];
         counter[0] = 1;
@@ -90,6 +95,9 @@ public class HashTableProblems {
      * tags::heap, array, hashTable
      */
     public int[] topKFrequent(int[] nums, int k) {
+        if (nums == null || nums.length == 0)
+            return nums;
+
         Map<Integer, Integer> freqMap = new HashMap<>();
         int maxFreq = Integer.MIN_VALUE;
         for (int num : nums) {
@@ -115,5 +123,117 @@ public class HashTableProblems {
         }
 
         return answer.stream().mapToInt(i -> i).toArray();
+    }
+
+    /**
+     * Q. 1331 Rank Transform of an Array
+     * <p>
+     * Given an array of integers arr, replace each element with its rank. The rank represents how large the element is.
+     * The rank has the following rules:
+     * Rank is an integer starting from 1.
+     * The larger the element, the larger the rank. If two elements are equal, their rank must be the same.
+     * Rank should be as small as possible.
+     * <p>
+     * tags:: hashMap, array, sorting
+     */
+    public int[] arrayRankTransform(int[] arr) {
+        if (arr == null || arr.length == 0)
+            return arr;
+
+        int[] copy = arr.clone();
+        Map<Integer, Integer> rankMap = new HashMap<>();
+        int rank = 1;
+
+        Arrays.sort(copy);
+        for (int c : copy) {
+            if (!rankMap.containsKey(c))
+                rankMap.put(c, rank++);
+        }
+
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = rankMap.get(arr[i]);
+
+        return arr;
+    }
+
+    /**
+     * Q. 954 Array of Doubled Pairs
+     * <p>
+     * Given an integer array of even length arr, return true if it is possible to reorder arr such that
+     * arr[2 * i + 1] = 2 * arr[2 * i] for every 0 <= i < len(arr) / 2,
+     * or false otherwise.
+     * <p>
+     * tags:: hashTable, array
+     */
+    public boolean canReorderDoubled(int[] arr) {
+        if (arr == null || arr.length == 0)
+            return true;
+
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int a : arr) {
+            freqMap.put(a, freqMap.getOrDefault(a, 0) + 1);
+        }
+
+        Integer[] arr2 = new Integer[arr.length];
+        for (int i = 0; i < arr.length; i++)
+            arr2[i] = arr[i];
+        Arrays.sort(arr2, Comparator.comparing(Math::abs));
+
+        for (int a : arr2) {
+            if (freqMap.get(a) == 0)
+                continue;
+
+            if (freqMap.getOrDefault(2 * a, 0) <= 0)
+                return false;
+
+            freqMap.put(a, freqMap.get(a) - 1);
+            freqMap.put(2 * a, freqMap.get(2 * a) - 1);
+        }
+
+        return true;
+    }
+
+    /**
+     * Q. 36 Valid Sudoku
+     * <p>
+     * Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to following rules:
+     * Each row must contain the digits 1-9 without repetition.
+     * Each column must contain the digits 1-9 without repetition.
+     * Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+     * Note:
+     * A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+     * Only the filled cells need to be validated according to the mentioned rules.
+     * <p>
+     * tags:: grid, hashTable
+     */
+    public boolean isValidSudoku(char[][] board) {
+        Set<Character> seenRow = new HashSet<>();
+        Set<Character> seenCol = new HashSet<>();
+        Set<Character> seenSqr = new HashSet<>();
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.' && !seenRow.add(board[i][j]))
+                    return false;
+
+                if (board[j][i] != '.' && !seenCol.add(board[j][i]))
+                    return false;
+
+                if (i % 3 == 0 && j % 3 == 0) {
+                    for (int ii = i; ii < i + 3; ii++) {
+                        for (int jj = j; jj < j + 3; jj++) {
+                            if (board[ii][jj] != '.' && !seenSqr.add(board[ii][jj]))
+                                return false;
+                        }
+                    }
+                    seenSqr.clear();
+                }
+            }
+
+            seenRow.clear();
+            seenCol.clear();
+        }
+
+        return true;
     }
 }

@@ -32,11 +32,15 @@ public class MathProblems {
      * Alice likes her candies very much, and she wants to eat the maximum number of different types of candies while
      * still following the doctor's advice.
      * <p>
-     * Given the integer array candyType of length n, return the maximum number of different types of candies she can eat if she only eats n / 2 of them.
+     * Given the integer array candyType of length n,
+     * return the maximum number of different types of candies she can eat if she only eats n / 2 of them.
      * <p>
      * Tags:: math
      */
     public int distributeCandies(int[] candyType) {
+        if (candyType == null || candyType.length == 0)
+            return 0;
+
         Set<Integer> set = new HashSet<>();
 
         for (int c : candyType) {
@@ -61,6 +65,9 @@ public class MathProblems {
      * Tags:: math
      */
     public int[] findErrorNums(int[] nums) {
+        if (nums == null || nums.length < 2)
+            return new int[]{};
+
         int diff = 0, sqDiff = 0, sum;
         for (int i = 0; i < nums.length; i++) {
             diff += i + 1 - nums[i];
@@ -79,6 +86,9 @@ public class MathProblems {
      * Tags:: math
      */
     public int missingNumber(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return -1;
+
         int n = nums.length, sum = 0;
         for (int num : nums)
             sum += num;

@@ -524,4 +524,16 @@ class StringProblemsTest {
             assertArrayEquals(expected, input);
         });
     }
+
+    @Test
+    void testMinFlipsMonoIncreasing() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("00110", 1);
+        scenarios.put("010110", 2);
+        scenarios.put("00011000", 2);
+        scenarios.put("", 0);
+        scenarios.put(null, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minFlipsMonoIncreasing(input)));
+    }
 }

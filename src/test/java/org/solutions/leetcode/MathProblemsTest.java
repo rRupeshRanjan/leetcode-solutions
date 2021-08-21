@@ -34,6 +34,8 @@ class MathProblemsTest {
         scenarios.put(new int[]{1, 1, 2, 2, 3, 3}, 3);
         scenarios.put(new int[]{1, 1, 2, 3}, 2);
         scenarios.put(new int[]{6, 6, 6, 6}, 1);
+        scenarios.put(new int[]{}, 0);
+        scenarios.put(null, 0);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.distributeCandies(input)));
     }
@@ -43,6 +45,9 @@ class MathProblemsTest {
         Map<int[], int[]> scenarios = new HashMap<>();
         scenarios.put(new int[]{1, 2, 2, 4}, new int[]{2, 3});
         scenarios.put(new int[]{1, 1}, new int[]{1, 2});
+        scenarios.put(new int[]{}, new int[]{});
+        scenarios.put(new int[]{1}, new int[]{});
+        scenarios.put(null, new int[]{});
 
         scenarios.forEach((input, expected) -> assertArrayEquals(expected, mathProblems.findErrorNums(input)));
     }
@@ -54,6 +59,8 @@ class MathProblemsTest {
         scenarios.put(new int[]{0, 1}, 2);
         scenarios.put(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}, 8);
         scenarios.put(new int[]{0}, 1);
+        scenarios.put(new int[]{}, -1);
+        scenarios.put(null, -1);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.missingNumber(input)));
     }

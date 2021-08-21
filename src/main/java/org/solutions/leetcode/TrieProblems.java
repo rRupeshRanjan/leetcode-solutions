@@ -21,6 +21,9 @@ public class TrieProblems {
      * @see org.solutions.leetcode.StringProblems#minimumLengthEncoding(String[])
      */
     public int minimumLengthEncoding(String[] words) {
+        if (words == null || words.length == 0)
+            return 0;
+
         Map<TrieNode, Integer> nodes = new HashMap<>();
         TrieNode trie = new TrieNode();
 

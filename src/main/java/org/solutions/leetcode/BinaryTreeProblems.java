@@ -6,6 +6,7 @@ import java.util.*;
 
 public class BinaryTreeProblems {
 
+    private static final int MOD = (int) (1e9 + 7);
     private int cameraCoverCount;
     private int buildTreePreOrderInorderRootIndex;
 
@@ -787,6 +788,45 @@ public class BinaryTreeProblems {
 
         dfsGoodNodes(root.getLeft(), Math.max(maxVal, root.getVal()), count);
         dfsGoodNodes(root.getRight(), Math.max(maxVal, root.getVal()), count);
+    }
+
+    /**
+     * Q. 1339. Maximum Product of Splitted Binary Tree
+     * <p>
+     * Given the root of a binary tree, split the binary tree into two subtrees by removing one edge such that the
+     * product of the sums of the subtrees is maximized.
+     * <p>
+     * Return maximum product of the sums of two subtrees. Since the answer may be too large, return it modulo 109 + 7.
+     * Note that you need to maximize the answer before taking the mod and not after taking it.
+     * <p>
+     * tags:: binaryTree, dfs, recursion
+     */
+    public int maxProduct(TreeNode root) {
+        List<Integer> sumList = new ArrayList<>();
+        long totalSum = maxProductHelper(root, sumList);
+        long maxSum = 0;
+
+        for (int sum : sumList) {
+            maxSum = Math.max(maxSum, sum * (totalSum - sum));
+        }
+
+        return (int) (maxSum % MOD);
+    }
+
+    /**
+     * Helper method for maxProduct
+     * Computes sum of all nodes below given root, and puts into sumList
+     */
+    private int maxProductHelper(TreeNode root, List<Integer> sumList) {
+        if (root == null)
+            return 0;
+
+        int leftSum = maxProductHelper(root.getLeft(), sumList);
+        int rightSum = maxProductHelper(root.getRight(), sumList);
+
+        int totalSum = leftSum + rightSum + root.getVal();
+        sumList.add(totalSum);
+        return totalSum;
     }
 
     private enum CameraType {

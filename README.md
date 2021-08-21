@@ -25,6 +25,7 @@ List of questions solved:
 		32. Longest Valid Parentheses <br>
 		33. Search in Rotated Sorted Array <br>
 		34. Find First and Last Position of Element in Sorted Array <br>
+        36. Valid sudoku <br>
 		42. Trapping Rain Water <br>
 		45. Jump Game II <br>
 		48. Rotate Image <br>
@@ -222,9 +223,11 @@ List of questions solved:
 		904. Fruit Into Baskets <br>
 		916. Word Subsets <br>
 		923. 3Sum With Multiplicity <br>
+        926. Flip String to Monotone Increasing <br>
 		929. Unique Email Addresses <br>
 		947. Most Stones Removed with Same Row or Column <br>
 		948. Bag of Tokens <br>
+        954. Array of Doubled Pairs <br>
 		968. Binary Tree Cameras <br>
 		970. Powerful Integers <br>
 		971. Flip Binary Tree To Match Preorder Traversal <br>
@@ -257,6 +260,7 @@ List of questions solved:
 		1302. Deepest Leaves Sum <br>
 		1306. Jump Game III <br>
 		1319. Number of Operations to Make Network Connected <br>
+        1331. Rank Transform of an Array <br>
 		1337. The K Weakest Rows in a Matrix <br>
 		1340. Jump Game V <br>
 		1342. Number of steps to reduce a number to zero <br>

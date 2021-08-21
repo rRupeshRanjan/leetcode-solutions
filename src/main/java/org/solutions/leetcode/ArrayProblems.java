@@ -223,7 +223,6 @@ public class ArrayProblems {
      * tags::math, array, sum
      */
     public int threeSumMulti(int[] arr, int target) {
-        int MOD = 1_000_000_007;
         long[] count = new long[101];
 
         for (int a : arr)
@@ -819,7 +818,7 @@ public class ArrayProblems {
         long hcutsMax = getMaxDiff(horizontalCuts, h);
         long vcutsMax = getMaxDiff(verticalCuts, w);
 
-        return ((int) ((hcutsMax * vcutsMax) % 1000000007));
+        return ((int) ((hcutsMax * vcutsMax) % MOD));
     }
 
     private int getMaxDiff(int[] arr, int n) {

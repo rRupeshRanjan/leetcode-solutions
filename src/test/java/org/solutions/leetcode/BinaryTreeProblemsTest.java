@@ -31,7 +31,7 @@ class BinaryTreeProblemsTest {
         scenarios.put(new TreeNode(1, new TreeNode(2, null, 4), new TreeNode(3)),
                 Arrays.asList(1, 3, 4));
         scenarios.put(new TreeNode(1, new TreeNode(2, null, 4), null), Arrays.asList(1, 2, 4));
-        scenarios.put(new TreeNode(1, new TreeNode(2), null), Arrays.asList(1, 2));
+        scenarios.put(new TreeNode(1, 2, null), Arrays.asList(1, 2));
         scenarios.put(new TreeNode(1), Collections.singletonList(1));
         scenarios.put(null, Collections.emptyList());
 
@@ -85,9 +85,9 @@ class BinaryTreeProblemsTest {
     @Test
     void testAverageOfLevels() {
         Map<TreeNode, List<Double>> scenarios = new HashMap<>();
-        scenarios.put(new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)),
+        scenarios.put(new TreeNode(3, 9, new TreeNode(20, 15, 7)),
                 Arrays.asList(3d, 14.5, 11d));
-        scenarios.put(new TreeNode(3, new TreeNode(9, 15, 7), new TreeNode(20)),
+        scenarios.put(new TreeNode(3, new TreeNode(9, 15, 7), 20),
                 Arrays.asList(3d, 14.5, 11d));
         scenarios.put(null, Collections.emptyList());
         scenarios.put(new TreeNode(1), Collections.singletonList(1d));
@@ -108,7 +108,7 @@ class BinaryTreeProblemsTest {
     void testFlatten() {
         TreeNode input = new TreeNode(1, new TreeNode(2, 3, 4), new TreeNode(5, null, 6));
         TreeNode expected = new TreeNode(1, null, new TreeNode(2, null, new TreeNode(3, null,
-                new TreeNode(4, null, new TreeNode(5, null, new TreeNode(6))))));
+                new TreeNode(4, null, new TreeNode(5, null, 6)))));
 
         binaryTreeProblems.flatten(input);
         assertEquals(expected, input);
@@ -118,7 +118,7 @@ class BinaryTreeProblemsTest {
     void testMinCameraCover() {
         Map<TreeNode, Integer> scenarios = new HashMap<>();
         scenarios.put(new TreeNode(0, new TreeNode(0, 0, 0), null), 1);
-        scenarios.put(new TreeNode(0, new TreeNode(0, new TreeNode(0, null, new TreeNode(0)), null), null), 2);
+        scenarios.put(new TreeNode(0, new TreeNode(0, new TreeNode(0, null, 0), null), null), 2);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.minCameraCover(input)));
     }
@@ -126,10 +126,10 @@ class BinaryTreeProblemsTest {
     @Test
     void testMaxLevelSum() {
         Map<TreeNode, Integer> scenarios = new HashMap<>();
-        scenarios.put(new TreeNode(1, new TreeNode(7, 7, -8), new TreeNode(0)), 2);
-        scenarios.put(new TreeNode(1, new TreeNode(7, 7, 8), new TreeNode(0)), 3);
+        scenarios.put(new TreeNode(1, new TreeNode(7, 7, -8), 0), 2);
+        scenarios.put(new TreeNode(1, new TreeNode(7, 7, 8), 0), 3);
         scenarios.put(new TreeNode(989, null,
-                new TreeNode(10250, new TreeNode(98693), new TreeNode(-89388, null, -32127))), 2);
+                new TreeNode(10250, 98693, new TreeNode(-89388, null, -32127))), 2);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.maxLevelSum(input)));
     }
@@ -138,7 +138,7 @@ class BinaryTreeProblemsTest {
     void testBuildTreeFromPreorderInorder() {
         Map<Pair<int[], int[]>, TreeNode> scenarios = new HashMap<>();
         scenarios.put(Pair.of(new int[]{3, 9, 20, 15, 7}, new int[]{9, 3, 15, 20, 7}),
-                new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)));
+                new TreeNode(3, 9, new TreeNode(20, 15, 7)));
         scenarios.put(Pair.of(new int[]{-1}, new int[]{-1}), new TreeNode(-1));
 
         scenarios.forEach((input, expected) -> assertTrue(testUtils.areTreesEqualByValue(expected,
@@ -148,7 +148,7 @@ class BinaryTreeProblemsTest {
     @Test
     void testFindLeaves() {
         Map<TreeNode, List<List<Integer>>> scenarios = new HashMap<>();
-        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3)),
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), 3),
                 Arrays.asList(Arrays.asList(4, 5, 3), Collections.singletonList(2), Collections.singletonList(1)));
         scenarios.put(new TreeNode(1), Collections.singletonList(Collections.singletonList(1)));
 
@@ -162,7 +162,7 @@ class BinaryTreeProblemsTest {
         scenarios.put(new TreeNode(2, new TreeNode(2, 3, null), new TreeNode(2, 3, null)),
                 Arrays.asList(new TreeNode(3), new TreeNode(2, 3, null)));
         scenarios.put(new TreeNode(1, new TreeNode(2, 4, null),
-                        new TreeNode(3, new TreeNode(2, 4, null), new TreeNode(4))),
+                        new TreeNode(3, new TreeNode(2, 4, null), 4)),
                 Arrays.asList(new TreeNode(4), new TreeNode(2, 4, null)));
 
         scenarios.forEach((input, expected) -> {
@@ -192,7 +192,7 @@ class BinaryTreeProblemsTest {
         );
         scenarios.put(
                 Pair.of(
-                        new TreeNode(1, new TreeNode(2, null, 3), new TreeNode(4)),
+                        new TreeNode(1, new TreeNode(2, null, 3), 4),
                         new int[]{3}),
                 Collections.singletonList(new TreeNode(1, 2, 4))
         );
@@ -207,14 +207,14 @@ class BinaryTreeProblemsTest {
     @Test
     void testDiameterOfBinaryTree() {
         Map<TreeNode, Integer> scenarios = new HashMap<>();
-        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3)), 3);
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), 3), 3);
         scenarios.put(new TreeNode(1, 2, null), 1);
         scenarios.put(null, 0);
         scenarios.put(new TreeNode(1,
                 new TreeNode(2,
                         new TreeNode(3, new TreeNode(4, 1, null), null),
                         new TreeNode(2, null, new TreeNode(1, null, 9))),
-                new TreeNode(3)), 6);
+                3), 6);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.diameterOfBinaryTree(input)));
     }
@@ -250,7 +250,7 @@ class BinaryTreeProblemsTest {
         Map<Triple<TreeNode, TreeNode, TreeNode>, TreeNode> scenarios = new HashMap<>();
 
         TreeNode leftRight = new TreeNode(4);
-        TreeNode left = new TreeNode(5, new TreeNode(6), leftRight);
+        TreeNode left = new TreeNode(5, 6, leftRight);
         TreeNode right = new TreeNode(1, 0, 8);
         TreeNode root = new TreeNode(3, left, right);
 
@@ -266,7 +266,7 @@ class BinaryTreeProblemsTest {
         Map<Triple<TreeNode, TreeNode, TreeNode>, TreeNode> scenarios = new HashMap<>();
 
         TreeNode leftRight = new TreeNode(4);
-        TreeNode left = new TreeNode(5, new TreeNode(6), leftRight);
+        TreeNode left = new TreeNode(5, 6, leftRight);
         TreeNode right = new TreeNode(1, 0, 8);
         TreeNode root = new TreeNode(3, left, right);
 
@@ -309,7 +309,7 @@ class BinaryTreeProblemsTest {
     void testLongestConsecutiveSequence() {
         Map<TreeNode, Integer> scenarios = new HashMap<>();
         scenarios.put(new TreeNode(1, null,
-                new TreeNode(3, new TreeNode(2), new TreeNode(4, null, 5))), 3);
+                new TreeNode(3, 2, new TreeNode(4, null, 5))), 3);
         scenarios.put(new TreeNode(2, null,
                 new TreeNode(3, new TreeNode(2, 1, null), null)), 2);
 
@@ -320,7 +320,7 @@ class BinaryTreeProblemsTest {
     @Test
     void testLevelOrder() {
         Map<TreeNode, List<List<Integer>>> scenarios = new HashMap<>();
-        scenarios.put(new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)),
+        scenarios.put(new TreeNode(3, 9, new TreeNode(20, 15, 7)),
                 List.of(List.of(3), List.of(9, 20), List.of(15, 7)));
         scenarios.put(new TreeNode(1), List.of(List.of(1)));
         scenarios.put(null, List.of());
@@ -331,7 +331,7 @@ class BinaryTreeProblemsTest {
     @Test
     void testZigzagLevelOrder() {
         Map<TreeNode, List<List<Integer>>> scenarios = new HashMap<>();
-        scenarios.put(new TreeNode(3, new TreeNode(9), new TreeNode(20, 15, 7)),
+        scenarios.put(new TreeNode(3, 9, new TreeNode(20, 15, 7)),
                 List.of(List.of(3), List.of(20, 9), List.of(15, 7)));
         scenarios.put(new TreeNode(1), List.of(List.of(1)));
         scenarios.put(null, List.of());
@@ -348,5 +348,15 @@ class BinaryTreeProblemsTest {
         scenarios.put(new TreeNode(3, new TreeNode(3, 4, 2), null), 3);
         scenarios.put(new TreeNode(3), 1);
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.goodNodes(input)));
+    }
+
+    @Test
+    void testMaxProduct() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1,
+                new TreeNode(2, 4, 5), new TreeNode(3, 6, null)), 110);
+        scenarios.put(new TreeNode(1, null, new TreeNode(2, 3, new TreeNode(4, 5, 6))), 90);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.maxProduct(input)));
     }
 }

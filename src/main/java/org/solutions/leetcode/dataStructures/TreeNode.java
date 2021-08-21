@@ -16,10 +16,18 @@ public class TreeNode {
         this.val = val;
     }
 
-    public TreeNode(int val, Integer leftVal, Integer rightVal) {
+    public TreeNode(int val, Object left, Object right) {
         this.val = val;
-        if (leftVal != null) this.setLeft(new TreeNode(leftVal));
-        if (rightVal != null) this.setRight(new TreeNode(rightVal));
+
+        if (left instanceof Integer)
+            this.setLeft(new TreeNode((Integer) left));
+        else
+            this.setLeft((TreeNode) left);
+
+        if (right instanceof Integer)
+            this.setRight(new TreeNode((Integer) right));
+        else
+            this.setRight((TreeNode) right);
     }
 
     @Override

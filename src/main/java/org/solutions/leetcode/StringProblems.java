@@ -1289,4 +1289,31 @@ public class StringProblems {
             str[start++] = temp;
         }
     }
+
+    /**
+     * Q. 926 Flip String to Monotone Increasing
+     * <p>
+     * A binary string is monotone increasing if it consists of some number of 0's (possibly none),
+     * followed by some number of 1's (also possibly none).
+     * <p>
+     * You are given a binary string s. You can flip s[i] changing it from 0 to 1 or from 1 to 0.
+     * Return the minimum number of flips to make s monotone increasing.
+     * <p>
+     * tags:: string
+     */
+    public int minFlipsMonoIncreasing(String s) {
+        if (s == null || s.length() == 0)
+            return 0;
+
+        int flips = 0, ones = 0;
+        for (char ch : s.toCharArray()) {
+            if (ch == '0')
+                flips++;
+            else
+                ones++;
+            flips = Math.min(ones, flips);
+        }
+
+        return flips;
+    }
 }
