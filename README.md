@@ -1,12 +1,13 @@
-This contains leetcode solutions for a handful of questions.
+![Build Status](https://github.com/rRupeshRanjan/leetcode-solutions/actions/workflows/gradle.yml/badge.svg?branch=master)
+![Leetcode Solutions](https://img.shields.io/badge/Leetcode-Solutions-brightgreen)
 
-Other useful resources
+This contains leetcode solutions (in Java) for a handful of questions.
 
+Other useful resources for interview preparation:
 - https://github.com/jwasham/coding-interview-university
 - https://github.com/donnemartin/system-design-primer
 
-List of questions solved:
-
+Solutions available for below questions:
 <details>
 	<summary>1-100</summary>
 		<p>
