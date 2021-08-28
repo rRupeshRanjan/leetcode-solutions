@@ -137,4 +137,23 @@ class HashTableProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, htProblems.isValidSudoku(input)));
     }
+
+    @Test
+    void testCheckSubarraySum() {
+        Map<Pair<int[], Integer>, Boolean> scenarios = new HashMap<>();
+
+        scenarios.put(Pair.of(new int[]{23, 2, 4, 6, 7}, 6), true);
+        scenarios.put(Pair.of(new int[]{23, 2, 4, 6, 6}, 7), true);
+        scenarios.put(Pair.of(new int[]{23, 2, 6, 6, 7}, 6), true);
+        scenarios.put(Pair.of(new int[]{23, 2, 6, 4, 7}, 13), false);
+        scenarios.put(Pair.of(new int[]{23, 2, 4, 6, 7}, 13), true);
+        scenarios.put(Pair.of(new int[]{0}, 1), false);
+        scenarios.put(Pair.of(new int[]{5, 0, 0, 0}, 3), true);
+        scenarios.put(Pair.of(new int[]{0, 0}, 1), true);
+        scenarios.put(Pair.of(new int[]{0, 1, 0, 3, 0, 4, 0, 4, 0}, 5), false);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, htProblems.checkSubArraySum(input.getLeft(), input.getRight())));
+    }
+
 }

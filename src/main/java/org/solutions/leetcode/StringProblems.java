@@ -1316,4 +1316,46 @@ public class StringProblems {
 
         return flips;
     }
+
+    /**
+     * Q. 678 Valid Parenthesis String
+     * <p>
+     * Given a string s containing only three types of characters: '(', ')' and '*', return true if s is valid.
+     * The following rules define a valid string:
+     * 1. Any left parenthesis '(' must have a corresponding right parenthesis ')'.
+     * 2. Any right parenthesis ')' must have a corresponding left parenthesis '('.
+     * 3. Left parenthesis '(' must go before the corresponding right parenthesis ')'.
+     * 4. '*' could be treated as a single right parenthesis ')' or a single left parenthesis '(' or an empty string "".
+     * <p>
+     * tags::string, two-pass, braces
+     */
+    public boolean checkValidString(String s) {
+        int leftBalance = 0, rightBalance = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '(' || ch == '*')
+                leftBalance++;
+            else
+                leftBalance--;
+            if (leftBalance < 0)
+                return false;
+        }
+
+        if (leftBalance == 0)
+            return true;
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char ch = s.charAt(i);
+            if (ch == ')' || ch == '*')
+                rightBalance++;
+            else
+                rightBalance--;
+
+            if (rightBalance < 0)
+                return false;
+        }
+
+        return true;
+    }
 }

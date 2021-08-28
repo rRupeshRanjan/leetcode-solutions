@@ -813,4 +813,75 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.trapRainWater(input)));
     }
+
+    @Test
+    void testRemoveDuplicates() {
+        Map<int[], Pair<Integer, int[]>> scenarios = new HashMap<>();
+
+        scenarios.put(new int[]{1, 1, 2, 2, 3, 4}, Pair.of(4, new int[]{1, 2, 3, 4}));
+        scenarios.put(new int[]{1, 1, 2}, Pair.of(2, new int[]{1, 2}));
+        scenarios.put(new int[]{1, 2, 3}, Pair.of(3, new int[]{1, 2, 3}));
+        scenarios.put(new int[]{}, Pair.of(0, new int[]{}));
+        scenarios.put(null, Pair.of(0, null));
+
+        scenarios.forEach((input, expected) -> {
+            int index = arrayProblems.removeDuplicates(input);
+            assertEquals(expected.getLeft(), index);
+
+            if (expected.getRight() != null && expected.getRight().length > 0) {
+                for (int i = 0; i < index; i++)
+                    assertEquals(expected.getRight()[i], input[i]);
+            }
+        });
+    }
+
+    @Test
+    void testRemoveDuplicatesII() {
+        Map<int[], Pair<Integer, int[]>> scenarios = new HashMap<>();
+
+        scenarios.put(new int[]{1, 1, 2, 2, 3, 4}, Pair.of(6, new int[]{1, 1, 2, 2, 3, 4}));
+        scenarios.put(new int[]{1, 1, 1}, Pair.of(2, new int[]{1, 1}));
+        scenarios.put(new int[]{1, 2, 3}, Pair.of(3, new int[]{1, 2, 3}));
+        scenarios.put(new int[]{}, Pair.of(0, new int[]{}));
+        scenarios.put(null, Pair.of(0, null));
+
+        scenarios.forEach((input, expected) -> {
+            int index = arrayProblems.removeDuplicatesII(input);
+            assertEquals(expected.getLeft(), index);
+
+            if (expected.getRight() != null && expected.getRight().length > 0) {
+                for (int i = 0; i < index; i++)
+                    assertEquals(expected.getRight()[i], input[i]);
+            }
+        });
+    }
+
+    @Test
+    void testProductExceptSelf() {
+        Map<int[], int[]> scenarios = new HashMap<>();
+
+        scenarios.put(new int[]{1, 2, 3, 4}, new int[]{24, 12, 8, 6});
+        scenarios.put(new int[]{-1, 1, 0, -3, 3}, new int[]{0, 0, 9, 0, 0});
+        scenarios.put(new int[]{}, new int[]{});
+        scenarios.put(null, new int[]{});
+
+        scenarios.forEach((input, expected) ->
+                assertArrayEquals(expected, arrayProblems.productExceptSelf(input)));
+    }
+
+    @Test
+    void testMoveZeroes() {
+        Map<int[], int[]> scenarios = new HashMap<>();
+        scenarios.put(new int[]{0, 1, 2, 0, 3}, new int[]{1, 2, 3, 0, 0});
+        scenarios.put(new int[]{0, 1, 2, 3}, new int[]{1, 2, 3, 0});
+        scenarios.put(new int[]{1, 2, 3}, new int[]{1, 2, 3});
+        scenarios.put(new int[]{0}, new int[]{0});
+        scenarios.put(new int[]{}, new int[]{});
+        scenarios.put(null, null);
+
+        scenarios.forEach((input, expected) -> {
+            arrayProblems.moveZeroes(input);
+            assertArrayEquals(expected, input);
+        });
+    }
 }

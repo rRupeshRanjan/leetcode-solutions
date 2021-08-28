@@ -2269,4 +2269,114 @@ public class ArrayProblems {
 
         return water;
     }
+
+    /**
+     * Q. 26 Remove Duplicates from Sorted Array
+     * <p>
+     * Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique
+     * element appears only once. The relative order of the elements should be kept the same.
+     * Since it is impossible to change the length of the array in some languages, you must instead have the result be
+     * placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates,
+     * then the first k elements of nums should hold the final result. It does not matter what you leave beyond the
+     * first k elements.
+     * <p>
+     * Return k after placing the final result in the first k slots of nums.
+     * <p>
+     * Do not allocate extra space for another array.
+     * You must do this by modifying the input array in-place with O(1) extra memory.
+     * <p>
+     * tags:: array, in-place
+     */
+    public int removeDuplicates(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return 0;
+        int pos = 1, lastNum = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != lastNum) {
+                nums[pos++] = nums[i];
+                lastNum = nums[i];
+            }
+        }
+
+        return pos;
+    }
+
+    /**
+     * Q. 80 Remove Duplicates from Sorted Array II
+     * <p>
+     * Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique
+     * element appears at most twice. The relative order of the elements should be kept the same.
+     * Since it is impossible to change the length of the array in some languages, you must instead have the result be
+     * placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates,
+     * then the first k elements of nums should hold the final result. It does not matter what you leave beyond the
+     * first k elements.
+     * <p>
+     * Return k after placing the final result in the first k slots of nums.
+     * <p>
+     * Do not allocate extra space for another array.
+     * You must do this by modifying the input array in-place with O(1) extra memory.
+     * <p>
+     * tags:: array, in-place
+     */
+    public int removeDuplicatesII(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return 0;
+
+        int pos = 0, maxCountAllowed = 2;
+        for (int num : nums) {
+            if (pos < maxCountAllowed || num > nums[pos - maxCountAllowed])
+                nums[pos++] = num;
+        }
+
+        return pos;
+    }
+
+    /**
+     * Q. 238 Product of Array Except Self
+     * Given an integer array nums, return an array answer such that answer[i] is equal to the product of all elements
+     * of nums except nums[i]. The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+     * <p>
+     * You must write an algorithm that runs in O(n) time and without using the division operation.
+     * <p>
+     * tags:: array
+     */
+    public int[] productExceptSelf(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return new int[]{};
+
+        int[] answer = new int[nums.length];
+        answer[0] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            answer[i] = answer[i - 1] * nums[i - 1];
+        }
+
+        int right = 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            answer[i] *= right;
+            right *= nums[i];
+        }
+
+        return answer;
+    }
+
+    /**
+     * Q. 283 Move Zeroes
+     * Given an integer array nums, move all 0's to the end of it while maintaining the
+     * relative order of the non-zero elements.
+     * Note that you must do this in-place without making a copy of the array.
+     * <p>
+     * tags:: array, in-place
+     */
+    public void moveZeroes(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return;
+
+        int index = 0;
+        for (int num : nums) {
+            if (num != 0)
+                nums[index++] = num;
+        }
+
+        Arrays.fill(nums, index, nums.length, 0);
+    }
 }

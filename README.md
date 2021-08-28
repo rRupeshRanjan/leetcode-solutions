@@ -21,6 +21,7 @@ List of questions solved:
 		21. Merge Two Sorted Lists <br>
 		22. Generate Parentheses <br>
 		23. Merge k Sorted Lists <br>
+        26. Remove Duplicates from Sorted Array <br>
 		31. Next Permutation <br>
 		32. Longest Valid Parentheses <br>
 		33. Search in Rotated Sorted Array <br>
@@ -44,6 +45,7 @@ List of questions solved:
 		74. Search a 2D Matrix <br>
 		75. Sort Colors <br>
 		76. Minimum Window Substring <br>
+        80. Remove Duplicates from Sorted Array II <br>
 		84. Largest Rectangle in Histogram <br>
 		86. Palindrome Linked List <br>
 		91. Decode Ways <br>
@@ -102,13 +104,16 @@ List of questions solved:
 		234. Palindrome Linked List <br>
 		235. Lowest Common Ancestor of a Binary Search Tree <br>
 		236. Lowest Common Ancestor of a Binary Tree <br>
+        238. Product of Array Except Self <br>
 		240. Search a 2D Matrix II <br>
 		242. Valid Anagram <br>
 		252. Meeting Rooms <br>
 		253. Meeting Rooms II <br>
 		256. Paint House <br>
+        261. Graph Valid Tree <br>
 		265. Paint House II <br>
 		268. Missing Number <br>
+        283. Move Zeroes <br>
 		284. Peeking Iterator <br>
 		298. Binary Tree Longest Consecutive Sequence <br>
 		299. Bulls and Cows <br>
@@ -117,7 +122,7 @@ List of questions solved:
 </details>
 
 <details>
-	<summary>301-500</summary>
+	<summary>301-400</summary>
 		<p>
 		309. Best time to by and sell stock with cooldown <br>
 		315. Count of Smaller Numbers After Self <br>
@@ -138,6 +143,12 @@ List of questions solved:
 		384. Shuffle an Array <br>
 		394. Decode String <br>
 		399. Evaluate Division <br>
+        </p>
+</details>
+
+<details>
+	<summary>401-500</summary>
+		<p>
 		410. Split Array Largest Sum <br>
 		413. Arithmetic Slices <br>
 		417. Pacific Atlantic Water Flow <br>
@@ -155,10 +166,11 @@ List of questions solved:
 </details>
 
 <details>
-	<summary>501-700</summary>
+	<summary>501-600</summary>
 		<p>
 		515. Find Largest Value in Each Tree Row <br>
 		518. Coin Change 2 <br>
+        523. Continuous Subarray Sum <br>
 		526. Beautiful Arrangement <br>
 		535. Encode and Decode TinyURL <br>
 		538. Convert BST to Greater Tree <br>
@@ -173,6 +185,12 @@ List of questions solved:
 		589. N-ary Tree Preorder Traversal <br>
 		590. N-ary Tree Postorder Traversal <br>
 		594. Longest Harmonious Subsequence <br>
+        </p>
+</details>
+
+<details>
+	<summary>601-700</summary>
+		<p>
 		609. Find Duplicate File in System <br>
 		622. Design Circular Queue <br>
 		623. Add One Row to Tree <br>
@@ -184,6 +202,7 @@ List of questions solved:
 		665. Non-decreasing Array <br>
 		668. Kth Smallest Number in Multiplication Table <br>
 		669. Trim a Binary Search Tree <br>
+        678. Valid Parenthesis String <br>
 		684. Redundant Connection <br>
 		695. Max Area of Island <br>
 		696. Count Binary Substrings <br>
@@ -192,7 +211,7 @@ List of questions solved:
 </details>
 
 <details>
-	<summary>701-1000</summary>
+	<summary>701-800</summary>
 		<p>
 		714. Best Time to Buy and Sell Stock with Transaction Fee <br>
 		719. Find K-th Smallest Pair Distance <br>
@@ -207,6 +226,12 @@ List of questions solved:
 		792. Number of Matching Subsequences <br>
 		795. Number of Subarrays with Bounded Maximum <br>
 		797. All Paths From Source to Target <br>
+        </p>
+</details>
+
+<details>
+    <summary>801-900</summary>
+        <p>
 		820. Short Encoding of Words <br>
 		820. Short Encoding of Words <br>
 		821. Shortest Distance to a Character <br>
@@ -220,6 +245,12 @@ List of questions solved:
 		875. Koko Eating Bananas <br>
 		886. Possible Bipartition <br>
 		890. Find and Replace Pattern <br>
+        </p>
+</details>
+
+<details>
+    <summary>901-1000</summary>
+        <p>
 		904. Fruit Into Baskets <br>
 		916. Word Subsets <br>
 		923. 3Sum With Multiplicity <br>
@@ -237,7 +268,7 @@ List of questions solved:
 </details>
 
 <details>
-	<summary>1001-1500</summary>
+	<summary>1001-1100</summary>
 		<p>
 		1004. Max Consecutive Ones III <br>
 		1008. Construct Binary Search Tree from Preorder Traversal <br>
@@ -249,14 +280,32 @@ List of questions solved:
 		1074. Number of submatrices that sum to target <br>
 		1091. Shortest Path in Binary Matrix <br>
 		1094. Car Pooling <br>
+        </p>
+</details>
+
+<details>
+	<summary>1101-1200</summary>
+		<p>
 		1110. Delete Nodes And Return Forest <br>
 		1161. Maximum Level Sum of a Binary Tree <br>
 		1162. As Far from Land as Possible <br>
+        </p>
+</details>
+
+<details>
+	<summary>1201-1300</summary>
+		<p>
 		1209. Remove All Adjacent Duplicates in String II <br>
 		1233. Remove Sub-Folders from the Filesystem <br>
 		1257. Smallest Common Region <br>
 		1292. Maximum Side Length of a Square with Sum Less than or Equal to Threshold <br>
 		1293. Shortest Path in a Grid with Obstacles Elimination <br>
+        </p>
+</details>
+
+<details>
+	<summary>1301-1400</summary>
+		<p>
 		1302. Deepest Leaves Sum <br>
 		1306. Jump Game III <br>
 		1319. Number of Operations to Make Network Connected <br>
@@ -269,7 +318,13 @@ List of questions solved:
 		1376. Time Needed to Inform All Employees <br>
 		1383. Maximum Performance of a Team <br>
 		1396. Design Underground System <br>
-		1423. Maximum Points You Can Obtain from Cards <br>
+        </p>
+</details>
+
+<details>
+	<summary>1401-1500</summary>
+		<p>
+        1423. Maximum Points You Can Obtain from Cards <br>
 		1448. Count Good Nodes in Binary Tree <br>
 		1461. Check If a String Contains All Binary Codes of Size K <br>
 		1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts <br>
@@ -279,13 +334,19 @@ List of questions solved:
 </details>
 
 <details>
-	<summary>1501-2000</summary>
+	<summary>1501-1600</summary>
 		<p>
 		1509. Minimum Difference Between Largest and Smallest Value in Three Moves <br>
 		1525. Number of Good Ways to Split a String <br>
 		1529. Bulb Switcher IV <br>
 		1551. Minimum Operations to Make Array Equal <br>
 		1589. Maximum Sum Obtained of Any Permutation <br>
+        </p>
+</details>
+
+<details>
+	<summary>1601-1700</summary>
+		<p>
 		1640. Check Array Formation Through Concatenation <br>
 		1642. Furthest Building You Can Reach <br>
 		1644. Lowest Common Ancestor of a Binary Tree II <br>
@@ -295,10 +356,22 @@ List of questions solved:
 		1689. Partitioning Into Minimum Number Of Deci-Binary Numbers <br>
 		1695. Maximum Erasure Value <br>
 		1696. Jump Game VI <br>
+        </p>
+</details>
+
+<details>
+	<summary>1701-1800</summary>
+		<p>
 		1704. Determine if String Halves Are Alike <br>
 		1721. Swapping Nodes in a Linked List <br>
 		1730. Shortest Path to Get Food <br>
 		1749. Maximum Absolute Sum of Any Subarray <br>
+        </p>
+</details>
+
+<details>
+	<summary>1801-1900</summary>
+		<p>
 		1856. Maximum Subarray Min-Product <br>
 		1863. Sum of All Subset XOR Totals <br>
 		1871. Jump Game VII <br>

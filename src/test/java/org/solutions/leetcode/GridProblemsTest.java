@@ -502,6 +502,19 @@ class GridProblemsTest {
         )));
     }
 
+    @Test
+    void testValidTree() {
+        Map<Pair<Integer, int[][]>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(2, new int[][]{{0, 1}}), true);
+        scenarios.put(Pair.of(5, new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 4}}), true);
+        scenarios.put(Pair.of(5, new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 4}, {1, 2}}), false);
+        scenarios.put(Pair.of(5, new int[][]{{0, 1}, {0, 2}, {0, 3}}), false);
+        scenarios.put(Pair.of(1, new int[][]{}), true);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, gridProblems.validTree(input.getLeft(), input.getRight())));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

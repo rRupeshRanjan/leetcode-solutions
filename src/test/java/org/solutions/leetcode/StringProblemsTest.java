@@ -536,4 +536,18 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minFlipsMonoIncreasing(input)));
     }
+
+    @Test
+    void testCheckValidString() {
+        Map<String, Boolean> scenarios = new HashMap<>();
+        scenarios.put("()", true);
+        scenarios.put("(()", false);
+        scenarios.put("((*)", true);
+        scenarios.put("(*)", true);
+        scenarios.put("(*", true);
+        scenarios.put(")(", false);
+        scenarios.put("(((())))", true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.checkValidString(input)));
+    }
 }

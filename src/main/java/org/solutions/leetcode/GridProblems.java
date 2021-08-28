@@ -1421,4 +1421,41 @@ public class GridProblems {
 
         return region2;
     }
+
+    /**
+     * Q. 261 Graph Valid Tree
+     * <p>
+     * You have a graph of n nodes labeled from 0 to n - 1. You are given an integer n and a list of edges where
+     * edges[i] = [ai, bi] indicates that there is an undirected edge between nodes ai and bi in the graph.
+     * <p>
+     * Return true if the edges of the given graph make up a valid tree, and false otherwise.
+     * <p>
+     * tags:: graph, union-find
+     */
+    public boolean validTree(int n, int[][] edges) {
+        if (edges.length != n - 1)
+            return false;
+
+        int[] parents = new int[n];
+        for (int i = 0; i < n; i++)
+            parents[i] = i;
+
+        for (int[] edge : edges) {
+            if (!unionValidTree(parents, edge[0], edge[1]))
+                return false;
+        }
+
+        return true;
+    }
+
+    private boolean unionValidTree(int[] parents, int x, int y) {
+        int xParent = find(parents, x);
+        int yParent = find(parents, y);
+
+        if (xParent == yParent)
+            return false;
+
+        parents[xParent] = yParent;
+        return true;
+    }
 }

@@ -236,4 +236,33 @@ public class HashTableProblems {
 
         return true;
     }
+
+    /**
+     * Q. 523 Continuous Subarray Sum
+     * <p>
+     * Given an integer array nums and an integer k, return true if nums has a continuous subarray of size at least
+     * two whose elements sum up to a multiple of k, or false otherwise.
+     * <p>
+     * An integer x is a multiple of k if there exists an integer n such that x = n * k. 0 is always a multiple of k.
+     * <p>
+     * tags:: array, hashTable
+     */
+    public boolean checkSubArraySum(int[] nums, int k) {
+        Map<Integer, Integer> remainders = new HashMap<>();
+        int sum = 0;
+
+        remainders.put(0, -1);
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            sum %= k;
+
+            if (!remainders.containsKey(sum)) {
+                remainders.put(sum, i);
+            } else {
+                if (i - remainders.get(sum) > 1)
+                    return true;
+            }
+        }
+        return false;
+    }
 }
