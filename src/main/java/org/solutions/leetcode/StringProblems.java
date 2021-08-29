@@ -1358,4 +1358,91 @@ public class StringProblems {
 
         return true;
     }
+
+    /**
+     * Q. 125 Valid Palindrome
+     * <p>
+     * Given a string s, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+     * <p>
+     * tags:: string
+     */
+    public boolean isValidPalindrome(String s) {
+        s = s.toLowerCase().chars()
+                .mapToObj(i -> (char) i)
+                .filter(Character::isLetterOrDigit)
+                .map(Object::toString)
+                .collect(Collectors.joining());
+
+        return s.equals(new StringBuilder(s).reverse().toString());
+    }
+
+    /**
+     * Q. 161 One Edit Distance
+     * Given two strings s and t, return true if they are both one edit distance apart, otherwise return false.
+     * A string s is said to be one distance apart from a string t if you can:
+     * - Insert exactly one character into s to get t.
+     * - Delete exactly one character from s to get t.
+     * - Replace exactly one character of s with a different character to get t.
+     * <p>
+     * tags:: string
+     */
+    public boolean isOneEditDistance(String s, String t) {
+        if (Math.abs(s.length() - t.length()) > 1 || s.equals(t))
+            return false;
+
+        if (s.length() < t.length())
+            return isOneEditDistance(t, s);
+
+        int i = 0, j = 0, count = 0;
+        if (s.length() == t.length()) {
+            while (i < s.length() && j < t.length()) {
+                if (s.charAt(i++) != t.charAt(j++)) {
+                    if (count == 0)
+                        count++;
+                    else
+                        return false;
+                }
+            }
+        } else {
+            while (i < s.length() && j < t.length()) {
+                if (s.charAt(i++) != t.charAt(j)) {
+                    if (count == 0)
+                        count++;
+                    else
+                        return false;
+                } else {
+                    j++;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Q. 680 Valid Palindrome II
+     * <p>
+     * Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+     * <p>
+     * tags:: string, twoPointer
+     */
+    public boolean isValidPalindromeII(String s) {
+        for (int i = 0, j = s.length() - 1; i < s.length() && j >= 0; i++, j--) {
+            if (s.charAt(i) != s.charAt(j)) {
+                int j2 = j - 1, i2 = i + 1;
+
+                while (i < j2 && s.charAt(i) == s.charAt(j2)) {
+                    i++;
+                    j2--;
+                }
+
+                while (i2 < j && s.charAt(i2) == s.charAt(j)) {
+                    i2++;
+                    j--;
+                }
+
+                return (i >= j2 || i2 >= j);
+            }
+        }
+        return true;
+    }
 }

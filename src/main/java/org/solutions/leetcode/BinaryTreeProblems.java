@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.solutions.leetcode.dataStructures.TreeNode;
 
 import java.util.*;
@@ -827,6 +828,43 @@ public class BinaryTreeProblems {
         int totalSum = leftSum + rightSum + root.getVal();
         sumList.add(totalSum);
         return totalSum;
+    }
+
+    /**
+     * Q. 314 Binary Tree Vertical Order Traversal
+     * <p>
+     * Given the root of a binary tree, return the vertical order traversal of its nodes' values.
+     * (i.e., from top to bottom, column by column).
+     * <p>
+     * If two nodes are in the same row and column, the order should be from left to right.
+     */
+    public List<List<Integer>> verticalOrder(TreeNode root) {
+        if (root == null)
+            return new ArrayList<>();
+
+        TreeMap<Integer, List<Integer>> map = new TreeMap<>();
+        Queue<Pair<Integer, TreeNode>> q = new LinkedList<>();
+        q.offer(Pair.of(0, root));
+
+        while (!q.isEmpty()) {
+            for (int i = q.size() - 1; i >= 0; i--) {
+                Pair<Integer, TreeNode> poll = q.poll();
+
+                assert poll != null;
+                TreeNode node = poll.getValue();
+                int index = poll.getKey();
+
+                map.computeIfAbsent(index, x -> new ArrayList<>()).add(node.getVal());
+
+                if (node.getLeft() != null)
+                    q.offer(Pair.of(index - 1, node.getLeft()));
+
+                if (node.getRight() != null)
+                    q.offer(Pair.of(index + 1, node.getRight()));
+            }
+        }
+
+        return new ArrayList<>(map.values());
     }
 
     private enum CameraType {

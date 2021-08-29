@@ -49,6 +49,7 @@ Solutions available for below questions:
         80. Remove Duplicates from Sorted Array II <br>
 		84. Largest Rectangle in Histogram <br>
 		86. Palindrome Linked List <br>
+        88. Merge Sorted Array <br>
 		91. Decode Ways <br>
 		94. Binary Tree Inorder Traversal <br>
 		98. Validate Binary Search Tree <br>
@@ -68,6 +69,7 @@ Solutions available for below questions:
 		121. Best Time to Buy and Sell Stock <br>
 		122. Best Time to Buy and Sell Stock II <br>
 		123. Best Time to Buy and Sell Stock III <br>
+        125. Valid Palindrome <br>
 		128. Longest Consecutive Sequence <br>
 		130. Surrounded Regions <br>
 		134. Gas Station <br>
@@ -82,6 +84,7 @@ Solutions available for below questions:
 		154. Find Minimum in Rotated Sorted Array II <br>
 		159. Longest Substring with At Most Two Distinct Characters <br>
 		160. Intersection of Two Linked Lists <br>
+        161. One Edit Distance <br>
 		162. Find Peak Element <br>
 		163. Missing Ranges <br>
 		164. Maximum Gap <br>
@@ -126,6 +129,7 @@ Solutions available for below questions:
 	<summary>301-400</summary>
 		<p>
 		309. Best time to by and sell stock with cooldown <br>
+        314. Binary Tree Vertical Order Traversal <br>
 		315. Count of Smaller Numbers After Self <br>
 		318. Maximum Product of Word Lengths <br>
 		319. Bulb Switcher <br>
@@ -204,6 +208,7 @@ Solutions available for below questions:
 		668. Kth Smallest Number in Multiplication Table <br>
 		669. Trim a Binary Search Tree <br>
         678. Valid Parenthesis String <br>
+        680. Valid Palindrome II <br>
 		684. Redundant Connection <br>
 		695. Max Area of Island <br>
 		696. Count Binary Substrings <br>
