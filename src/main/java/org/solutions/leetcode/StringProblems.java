@@ -1445,4 +1445,120 @@ public class StringProblems {
         }
         return true;
     }
+
+    /**
+     * Q. 1249 Minimum Remove to Make Valid Parentheses
+     * Given a string s of '(' , ')' and lowercase English characters.
+     * <p>
+     * Your task is to remove the minimum number of parentheses ( '(' or ')', in any positions )
+     * so that the resulting parentheses string is valid and return any valid string.
+     * <p>
+     * Formally, a parentheses string is valid if and only if:
+     * <p>
+     * It is the empty string, contains only lowercase characters, or
+     * It can be written as AB (A concatenated with B), where A and B are valid strings, or
+     * It can be written as (A), where A is a valid string.
+     * <p>
+     * tags:: string, stack
+     */
+    public String minRemoveToMakeValid(String s) {
+        Stack<Integer> stack = new Stack<>();
+        Set<Integer> set = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            if (ch == '(')
+                stack.add(i);
+            else if (ch == ')') {
+                if (stack.isEmpty())
+                    set.add(i);
+                else
+                    stack.pop();
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            set.add(stack.pop());
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            if (!set.contains(i))
+                sb.append(s.charAt(i));
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * Q. 140 Word Break II
+     * <p>
+     * Given a string s and a dictionary of strings wordDict, add spaces in s to construct a sentence
+     * where each word is a valid dictionary word. Return all such possible sentences in any order.
+     * <p>
+     * Note that the same word in the dictionary may be reused multiple times in the segmentation.
+     * <p>
+     * tags:: string, bfs
+     */
+    public List<String> wordBreakII(String s, List<String> wordDict) {
+        List<String> results = new ArrayList<>();
+        Queue<Pair<String, Integer>> q = new LinkedList<>();
+        Set<String> wordSet = new HashSet<>(wordDict);
+
+        q.offer(Pair.of("", 0));
+        while (!q.isEmpty()) {
+            Pair<String, Integer> curr = q.remove();
+
+            if (curr.getRight() == s.length()) {
+                results.add(curr.getLeft());
+                continue;
+            }
+
+            for (int i = curr.getRight() + 1; i <= s.length(); i++) {
+                String currWord = curr.getLeft();
+                String nextWord = s.substring(curr.getRight(), i);
+
+                if (wordSet.contains(nextWord)) {
+                    q.offer(Pair.of(
+                            (Objects.equals(currWord, "")) ? nextWord : currWord + " " + nextWord, i
+                    ));
+                }
+            }
+        }
+
+        return results;
+    }
+
+    /**
+     * Q. 1041 Robot Bounded In Circle
+     * On an infinite plane, a robot initially stands at (0, 0) and faces north.
+     * The robot can receive one of three instructions:
+     * "G": go straight 1 unit;
+     * "L": turn 90 degrees to the left;
+     * "R": turn 90 degrees to the right.
+     * The robot performs the instructions given in order, and repeats them forever.
+     * <p>
+     * Return true if and only if there exists a circle in the plane such that the robot never leaves the circle.
+     * <p>
+     * tags:: string, math
+     */
+    public boolean isRobotBounded(String instructions) {
+        // north - 0, east - 1, south - 2, west - 3
+        int[][] dirs = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int index = 0, x = 0, y = 0;
+
+        for (char ch : instructions.toCharArray()) {
+            if (ch == 'L')
+                index = (index + 1) % 4;
+            else if (ch == 'R')
+                index = (index + 3) % 4;
+            else {
+                x += dirs[index][0];
+                y += dirs[index][1];
+            }
+        }
+
+        return (x == 0 && y == 0) || index != 0;
+    }
 }

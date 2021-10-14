@@ -2398,4 +2398,36 @@ public class ArrayProblems {
             nums1[k--] = (i < 0 || nums1[i] < nums2[j]) ? nums2[j--] : nums1[i--];
         }
     }
+
+    /**
+     * Q. 1013 Partition Array Into Three Parts With Equal Sum
+     * <p>
+     * Given an array of integers arr,
+     * return true if we can partition the array into three non-empty parts with equal sums.
+     * <p>
+     * Formally, we can partition the array if we can find indexes
+     * i + 1 < j with
+     * (arr[0] + arr[1] + ... + arr[i] ==
+     * arr[i + 1] + arr[i + 2] + ... + arr[j - 1] ==
+     * arr[j] + arr[j + 1] + ... + arr[arr.length - 1])
+     * <p>
+     * tags:: array
+     */
+    public boolean canThreePartsEqualSum(int[] arr) {
+        int sum = Arrays.stream(arr).sum();
+        int currSum = 0, count = 0;
+
+        if (sum % 3 != 0)
+            return false;
+
+        for (int a : arr) {
+            currSum += a;
+            if (currSum == sum / 3) {
+                currSum = 0;
+                count++;
+            }
+        }
+
+        return count >= 3;
+    }
 }

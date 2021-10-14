@@ -75,6 +75,7 @@ Solutions available for below questions:
 		134. Gas Station <br>
 		138. Copy List with Random Pointer <br>
 		139. Word Break <br>
+        140. Word Break II <br>
 		141. Linked List Cycle <br>
 		144. Binary Tree Preorder Traversal <br>
 		145. Binary Tree Postorder Traversal <br>
@@ -242,6 +243,7 @@ Solutions available for below questions:
 		820. Short Encoding of Words <br>
 		821. Shortest Distance to a Character <br>
 		823. Binary Trees With Factors <br>
+        827. Making A Large Island <br>
 		841. Keys and Rooms <br>
 		849. Maximize Distance to Closest Person <br>
 		852. Peak Index in a Mountain Array <br>
@@ -268,6 +270,7 @@ Solutions available for below questions:
 		968. Binary Tree Cameras <br>
 		970. Powerful Integers <br>
 		971. Flip Binary Tree To Match Preorder Traversal <br>
+        973. K Closest Points to Origin <br>
 		974. Subarray Sums Divisible by K <br>
 		975. Odd Even Jump <br>
 		</p>
@@ -279,7 +282,9 @@ Solutions available for below questions:
 		1004. Max Consecutive Ones III <br>
 		1008. Construct Binary Search Tree from Preorder Traversal <br>
 		1011. Capacity To Ship Packages Within D Days <br>
-		1038.  Binary Search Tree to Greater Sum Tree <br>
+        1013. Partition Array Into Three Parts With Equal Sum <br>
+		1038. Binary Search Tree to Greater Sum Tree <br>
+        1041. Robot Bounded In Circle <br>
 		1047. Remove All Adjacent Duplicates In String <br>
 		1048. Longest String Chain <br>
 		1060. Missing Element in Sorted Array <br>
@@ -303,6 +308,7 @@ Solutions available for below questions:
 		<p>
 		1209. Remove All Adjacent Duplicates in String II <br>
 		1233. Remove Sub-Folders from the Filesystem <br>
+        1249. Minimum Remove to Make Valid Parentheses <br>
 		1257. Smallest Common Region <br>
 		1292. Maximum Side Length of a Square with Sum Less than or Equal to Threshold <br>
 		1293. Shortest Path in a Grid with Obstacles Elimination <br>

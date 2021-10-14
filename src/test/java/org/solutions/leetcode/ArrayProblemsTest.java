@@ -978,4 +978,15 @@ class ArrayProblemsTest {
             assertArrayEquals(expected, input.getLeft().getLeft());
         });
     }
+
+    @Test
+    void testCanThreePartsEqualSum() {
+        Map<int[], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[]{0, 2, 1, -6, 6, -7, 9, 1, 2, 0, 1}, true);
+        scenarios.put(new int[]{0, 0, 0, 0}, true);
+        scenarios.put(new int[]{0, 2, 1, -6, 6, 7, 9, -1, 2, 0, 1}, false);
+        scenarios.put(new int[]{3, 3, 6, 5, -2, 2, 5, 1, -9, 4}, true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.canThreePartsEqualSum(input)));
+    }
 }

@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -152,6 +153,16 @@ class MathProblemsTest {
         scenarios.put(3, 5);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.countArrangement(input)));
+    }
+
+    @Test
+    void testKClosest() {
+        Map<Pair<int[][], Integer>, int[][]> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[][]{{1, 3}, {-2, 2}}, 1), new int[][]{{-2, 2}});
+        scenarios.put(Pair.of(new int[][]{{3, 3}, {5, -1}, {-2, 4}}, 2), new int[][]{{-2, 4}, {3, 3}});
+
+        scenarios.forEach((input, expected) ->
+                assertArrayEquals(expected, mathProblems.kClosest(input.getLeft(), input.getRight())));
     }
 
     private boolean containsInAnyOrder(List<Integer> expected, List<Integer> input) {

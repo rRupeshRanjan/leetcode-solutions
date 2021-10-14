@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.exceptions.BadInputException;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -641,5 +642,41 @@ class StringProblemsTest {
         scenarios.put("abcdef", false);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.isValidPalindromeII(input)));
+    }
+
+    @Test
+    void testMinRemoveToMakeValid() {
+        Map<String, String> scenarios = new HashMap<>();
+        scenarios.put("lee(t(c)o)de)", "lee(t(c)o)de");
+        scenarios.put("a)b(c)d", "ab(c)d");
+        scenarios.put("))((", "");
+        scenarios.put("(a(b(c)d)", "a(b(c)d)");
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minRemoveToMakeValid(input)));
+    }
+
+    @Test
+    void testWordBreakII() {
+        Map<Pair<String, List<String>>, List<String>> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("catsanddog", Arrays.asList("cat", "cats", "and", "sand", "dog")),
+                Arrays.asList("cats and dog", "cat sand dog"));
+        scenarios.put(Pair.of("pineapplepenapple", Arrays.asList("apple", "pen", "applepen", "pine", "pineapple")),
+                Arrays.asList("pine apple pen apple", "pineapple pen apple", "pine applepen apple"));
+        scenarios.put(Pair.of("catsandog", Arrays.asList("cats", "dog", "sand", "and", "cat")), List.of());
+
+        scenarios.forEach((input, expected) -> assertTrue(
+                expected.containsAll(
+                        stringProblems.wordBreakII(input.getLeft(), input.getRight()))));
+    }
+
+    @Test
+    void testIsRobotBounded() {
+        Map<String, Boolean> scenarios = new HashMap<>();
+        scenarios.put("GGLLGG", true);
+        scenarios.put("GG", false);
+        scenarios.put("LL", true);
+        scenarios.put("GL", true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.isRobotBounded(input)));
     }
 }

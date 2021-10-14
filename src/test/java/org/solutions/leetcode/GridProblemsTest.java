@@ -515,6 +515,19 @@ class GridProblemsTest {
                 assertEquals(expected, gridProblems.validTree(input.getLeft(), input.getRight())));
     }
 
+    @Test
+    void testLargestIsland() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 0}, {0, 1}}, 3);
+        scenarios.put(new int[][]{{1, 1}, {0, 1}}, 4);
+        scenarios.put(new int[][]{{1, 1}, {1, 1}}, 4);
+        scenarios.put(new int[][]{{0, 0}, {0, 0}}, 1);
+        scenarios.put(new int[][]{{0, 0, 0, 0, 0, 0, 0}, {0, 1, 1, 1, 1, 0, 0}, {0, 1, 0, 0, 1, 0, 0}, {1, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 0, 0}, {0, 1, 0, 0, 1, 0, 0}, {0, 1, 1, 1, 1, 0, 0}}, 18);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.largestIsland(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

@@ -748,22 +748,11 @@ public class GridProblems {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 1)
-                    maxArea = Math.max(maxArea, bfsMaxAreaOfIsland(grid, i, j));
+                    maxArea = Math.max(maxArea, getIslandArea(i, j, grid, 0));
             }
         }
 
         return maxArea;
-    }
-
-    private int bfsMaxAreaOfIsland(int[][] grid, int i, int j) {
-        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] != 1)
-            return 0;
-
-        grid[i][j] = 0;
-        return 1 + bfsMaxAreaOfIsland(grid, i - 1, j) +
-                bfsMaxAreaOfIsland(grid, i + 1, j) +
-                bfsMaxAreaOfIsland(grid, i, j - 1) +
-                bfsMaxAreaOfIsland(grid, i, j + 1);
     }
 
     /**
@@ -1457,5 +1446,71 @@ public class GridProblems {
 
         parents[xParent] = yParent;
         return true;
+    }
+
+    /**
+     * Q. 827 Making A Large Island
+     * <p>
+     * You are given an n x n binary matrix grid. You are allowed to change at most one 0 to be 1.
+     * Return the size of the largest island in grid after applying this operation.
+     * An island is a 4-directionally connected group of 1s.
+     * <p>
+     * tags::dfs, grid, island
+     */
+    public int largestIsland(int[][] grid) {
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+        int size = grid.length;
+        int maxArea = 0, id = 2;
+        Map<Integer, Integer> areaIdMap = new HashMap<>();
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (grid[i][j] == 1) {
+                    int area = getIslandArea(i, j, grid, id);
+                    areaIdMap.put(id++, area);
+                    maxArea = Math.max(maxArea, area);
+                }
+            }
+        }
+
+        if (maxArea == size * size)
+            return maxArea;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (grid[i][j] == 0) {
+                    int currArea = 1;
+                    Set<Integer> sectors = new HashSet<>();
+
+                    for (int[] dir : dirs) {
+                        int nextI = i + dir[0];
+                        int nextJ = j + dir[1];
+
+                        if (nextI >= 0 && nextI < grid.length && nextJ >= 0 && nextJ < grid.length && grid[nextI][nextJ] >= 2)
+                            sectors.add(grid[nextI][nextJ]);
+                    }
+
+                    for (int sector : sectors)
+                        currArea += areaIdMap.get(sector);
+
+                    maxArea = Math.max(maxArea, currArea);
+                }
+            }
+        }
+
+        return maxArea;
+    }
+
+    private int getIslandArea(int i, int j, int[][] grid, int id) {
+        if (i < 0 || j < 0 || i == grid.length || j == grid[0].length || grid[i][j] != 1)
+            return 0;
+
+        grid[i][j] = id;
+
+        return 1 +
+                getIslandArea(i - 1, j, grid, id) +
+                getIslandArea(i + 1, j, grid, id) +
+                getIslandArea(i, j - 1, grid, id) +
+                getIslandArea(i, j + 1, grid, id);
     }
 }
