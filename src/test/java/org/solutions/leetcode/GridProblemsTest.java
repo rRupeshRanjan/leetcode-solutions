@@ -528,6 +528,37 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.largestIsland(input)));
     }
 
+    @Test
+    void testClosedIsland() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 1, 1, 1, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 1, 1, 0}, {1, 0, 1, 0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 0, 1, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 0}}, 2);
+        scenarios.put(new int[][]{{0, 0, 1, 0, 0}, {0, 1, 0, 1, 0}, {0, 1, 1, 1, 0}}, 1);
+        scenarios.put(new int[][]{{1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 1}, {1, 0, 1, 1, 1, 0, 1},
+                {1, 0, 1, 0, 1, 0, 1}, {1, 0, 1, 1, 1, 0, 1}, {1, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 1, 1, 1, 1}}, 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.closedIsland(input)));
+    }
+
+    @Test
+    void testIslandPerimeter() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}}, 16);
+        scenarios.put(new int[][]{{1}}, 4);
+        scenarios.put(new int[][]{{0, 1}}, 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.islandPerimeter(input)));
+    }
+
+    @Test
+    void testNumEnclaves() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 0, 0, 0}, {1, 0, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}}, 3);
+        scenarios.put(new int[][]{{0, 1, 1, 0}, {0, 0, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.numEnclaves(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

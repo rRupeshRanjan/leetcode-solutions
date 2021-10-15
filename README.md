@@ -164,6 +164,7 @@ Solutions available for below questions:
 		453. Minimum Moves to Equal Array Elements <br>
 		456. 132 Pattern <br>
 		462. Minimum Moves to Equal Array Elements II <br>
+        463. Island Perimeter <br>
 		473. Matchsticks to Square <br>
 		474. Ones and Zeroes <br>
 		482. License Key Formatting <br>
@@ -283,6 +284,7 @@ Solutions available for below questions:
 		1008. Construct Binary Search Tree from Preorder Traversal <br>
 		1011. Capacity To Ship Packages Within D Days <br>
         1013. Partition Array Into Three Parts With Equal Sum <br>
+        1020. Number of Enclaves <br>
 		1038. Binary Search Tree to Greater Sum Tree <br>
         1041. Robot Bounded In Circle <br>
 		1047. Remove All Adjacent Duplicates In String <br>
@@ -309,6 +311,7 @@ Solutions available for below questions:
 		1209. Remove All Adjacent Duplicates in String II <br>
 		1233. Remove Sub-Folders from the Filesystem <br>
         1249. Minimum Remove to Make Valid Parentheses <br>
+        1254. Number of Closed Islands <br>
 		1257. Smallest Common Region <br>
 		1292. Maximum Side Length of a Square with Sum Less than or Equal to Threshold <br>
 		1293. Shortest Path in a Grid with Obstacles Elimination <br>

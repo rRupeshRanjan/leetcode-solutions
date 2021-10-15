@@ -1513,4 +1513,117 @@ public class GridProblems {
                 getIslandArea(i, j - 1, grid, id) +
                 getIslandArea(i, j + 1, grid, id);
     }
+
+    /**
+     * Q. 1254 Number of Closed Islands
+     * <p>
+     * Given a 2D grid consists of 0s (land) and 1s (water).
+     * An island is a maximal 4-directionally connected group of 0s and a closed island is an island totally
+     * (all left, top, right, bottom) surrounded by 1s.
+     * Return the number of closed islands.
+     * <p>
+     * tags:: dfs
+     */
+    public int closedIsland(int[][] grid) {
+        int rows = grid.length, cols = grid[0].length, count = 0;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == 0)
+                    count += dfsClosedIsland(i, j, grid);
+            }
+        }
+
+        return count;
+    }
+
+    private int dfsClosedIsland(int i, int j, int[][] grid) {
+        if (i < 0 || j < 0 || i == grid.length || j == grid[0].length)
+            return 0;
+
+        if (grid[i][j] == 1)
+            return 1;
+
+        grid[i][j] = 1;
+        return dfsClosedIsland(i + 1, j, grid) &
+                dfsClosedIsland(i - 1, j, grid) &
+                dfsClosedIsland(i, j - 1, grid) &
+                dfsClosedIsland(i, j + 1, grid);
+    }
+
+    /**
+     * Q. 463 Island Perimeter
+     * <p>
+     * You are given row x col grid representing a map where
+     * grid[i][j] = 1 represents land and grid[i][j] = 0 represents water.
+     * Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water,
+     * and there is exactly one island (i.e., one or more connected land cells).
+     * The island doesn't have "lakes", meaning the water inside isn't connected to the water around the island.
+     * One cell is a square with side length 1. The grid is rectangular, width and height don't exceed 100.
+     * <p>
+     * Determine the perimeter of the island.
+     * <p>
+     * tags::maths, counting
+     */
+    public int islandPerimeter(int[][] grid) {
+        int perimeter = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    perimeter += 4;
+
+                    if (i < grid.length - 1)
+                        perimeter -= 2 * grid[i + 1][j];
+                    if (j < grid[0].length - 1)
+                        perimeter -= 2 * grid[i][j + 1];
+                }
+            }
+        }
+
+        return perimeter;
+    }
+
+    /**
+     * Q. 1020 Number of Enclaves
+     * <p>
+     * You are given an m x n binary matrix grid, where 0 represents a sea cell and 1 represents a land cell.
+     * A move consists of walking from one land cell to another adjacent (4-directionally) land cell or walking off the
+     * boundary of the grid. Return the number of land cells in grid for which we cannot walk off the boundary of
+     * the grid in any number of moves.
+     * <p>
+     * tags:: dfs, island
+     */
+    public int numEnclaves(int[][] grid) {
+        int enclaves = 0;
+        int rows = grid.length, cols = grid[0].length;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i == 0 || j == 0 || i == rows - 1 || j == cols - 1) {
+                    numEnclavesFill(i, j, grid);
+                }
+            }
+        }
+
+        for (int[] ints : grid) {
+            for (int j = 0; j < cols; j++) {
+                enclaves += ints[j];
+            }
+        }
+
+        return enclaves;
+    }
+
+    private void numEnclavesFill(int i, int j, int[][] grid) {
+        if (i < 0 || j < 0 || i == grid.length || j == grid[0].length || grid[i][j] == 0)
+            return;
+
+        grid[i][j] = 0;
+
+        numEnclavesFill(i - 1, j, grid);
+        numEnclavesFill(i + 1, j, grid);
+        numEnclavesFill(i, j - 1, grid);
+        numEnclavesFill(i, j + 1, grid);
+    }
 }
