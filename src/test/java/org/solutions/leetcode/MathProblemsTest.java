@@ -165,6 +165,17 @@ class MathProblemsTest {
                 assertArrayEquals(expected, mathProblems.kClosest(input.getLeft(), input.getRight())));
     }
 
+    @Test
+    void testMaximumSwap() {
+        Map<Integer, Integer> scenarios = new HashMap<>();
+        scenarios.put(2736, 7236);
+        scenarios.put(7236, 7632);
+        scenarios.put(9973, 9973);
+        scenarios.put(7, 7);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.maximumSwap(input)));
+    }
+
     private boolean containsInAnyOrder(List<Integer> expected, List<Integer> input) {
         if (expected.size() != input.size())
             return false;

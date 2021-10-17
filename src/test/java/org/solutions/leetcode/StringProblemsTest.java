@@ -679,4 +679,21 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.isRobotBounded(input)));
     }
+
+    @Test
+    void testSimplifyPath() {
+        Map<String, String> scenarios = new HashMap<>();
+        scenarios.put("/home/", "/home");
+        scenarios.put("/home//foo/", "/home/foo");
+        scenarios.put("/a/./b/../../c/", "/c");
+        scenarios.put("/../", "/");
+        scenarios.put("/home", "/home");
+        scenarios.put("/home//foo", "/home/foo");
+        scenarios.put("/a/./b/../../c", "/c");
+        scenarios.put("/..", "/");
+        scenarios.put("/", "/");
+        scenarios.put("/.", "/");
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.simplifyPath(input)));
+    }
 }

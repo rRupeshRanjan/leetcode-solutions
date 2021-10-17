@@ -301,4 +301,33 @@ public class MathProblems {
 
         return answer;
     }
+
+    /**
+     * Q. 670 Maximum Swap
+     * You are given an integer num. You can swap two digits at most once to get the maximum valued number.
+     * Return the maximum valued number you can get.
+     * <p>
+     * tags::array, math, greedy
+     */
+    public int maximumSwap(int num) {
+        char[] numArray = Integer.toString(num).toCharArray();
+        int[] buckets = new int[10];
+
+        for (int i = 0; i < numArray.length; i++)
+            buckets[numArray[i] - '0'] = i;
+
+        for (int i = 0; i < numArray.length; i++) {
+            for (int j = 9; j > numArray[i] - '0'; j--) {
+                if (buckets[j] > i) {
+                    char temp = numArray[i];
+                    numArray[i] = numArray[buckets[j]];
+                    numArray[buckets[j]] = temp;
+
+                    return Integer.parseInt(new String(numArray));
+                }
+            }
+        }
+
+        return num;
+    }
 }

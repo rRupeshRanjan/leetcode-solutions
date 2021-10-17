@@ -867,6 +867,38 @@ public class BinaryTreeProblems {
         return new ArrayList<>(map.values());
     }
 
+    /**
+     * Q. 437 Path Sum III
+     * <p>
+     * Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values
+     * along the path equals targetSum. The path does not need to start or end at the root or a leaf, but it must go
+     * downwards (i.e., traveling only from parent nodes to child nodes).
+     * <p>
+     * tags:: dfs, preorder, prefixSum
+     */
+    public int pathSumIII(TreeNode root, int targetSum) {
+        int[] count = new int[1];
+        Map<Integer, Integer> map = new HashMap<>();
+
+        map.put(0, 1);
+        preorderPathSumIII(root, 0, targetSum, count, map);
+        return count[0];
+    }
+
+    private void preorderPathSumIII(TreeNode root, int currSum, int targetSum, int[] count, Map<Integer, Integer> map) {
+        if (root == null)
+            return;
+
+        currSum += root.getVal();
+
+        count[0] += map.getOrDefault(currSum - targetSum, 0);
+        map.put(currSum, map.getOrDefault(currSum, 0) + 1);
+        preorderPathSumIII(root.getLeft(), currSum, targetSum, count, map);
+        preorderPathSumIII(root.getRight(), currSum, targetSum, count, map);
+
+        map.put(currSum, map.get(currSum) - 1);
+    }
+
     private enum CameraType {
         LEAF, PARENT, COVERED
     }

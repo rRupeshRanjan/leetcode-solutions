@@ -401,4 +401,18 @@ class BinaryTreeProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.verticalOrder(input)));
     }
+
+    @Test
+    void testPathSumIII() {
+        Map<Pair<TreeNode, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new TreeNode(10,
+                new TreeNode(5, new TreeNode(3, 3, -2), new TreeNode(2, null, 1)),
+                new TreeNode(-3, null, 11)), 8), 3);
+        scenarios.put(Pair.of(new TreeNode(5,
+                new TreeNode(4, new TreeNode(11, 7, 2), null),
+                new TreeNode(8, 13, new TreeNode(4, 5, 1))), 22), 3);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, binaryTreeProblems.pathSumIII(input.getLeft(), input.getRight())));
+    }
 }

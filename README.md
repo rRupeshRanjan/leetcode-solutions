@@ -42,6 +42,7 @@ Solutions available for below questions:
 		62. Unique Paths <br>
 		63. Unique Paths II <br>
 		66. Plus One <br>
+        71. Simplify Path <br>
 		73. Set Matrix Zeroes <br>
 		74. Search a 2D Matrix <br>
 		75. Sort Colors <br>
@@ -161,6 +162,7 @@ Solutions available for below questions:
 		418. Sentence Screen Fitting <br>
 		419. Battleships in a Board <br>
 		429. N-ary Tree Level Order Traversal <br>
+        437. Path Sum III <br>
 		453. Minimum Moves to Equal Array Elements <br>
 		456. 132 Pattern <br>
 		462. Minimum Moves to Equal Array Elements II <br>
@@ -209,6 +211,7 @@ Solutions available for below questions:
 		665. Non-decreasing Array <br>
 		668. Kth Smallest Number in Multiplication Table <br>
 		669. Trim a Binary Search Tree <br>
+        670. Maximum Swap <br>
         678. Valid Parenthesis String <br>
         680. Valid Palindrome II <br>
 		684. Redundant Connection <br>
