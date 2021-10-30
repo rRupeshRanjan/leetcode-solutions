@@ -1626,4 +1626,55 @@ public class GridProblems {
         numEnclavesFill(i, j - 1, grid);
         numEnclavesFill(i, j + 1, grid);
     }
+
+    /**
+     * Q. 994 Rotting Oranges
+     * <p>
+     * You are given an m x n grid where each cell can have one of three values:
+     * 0 representing an empty cell,
+     * 1 representing a fresh orange, or
+     * 2 representing a rotten orange.
+     * Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+     * <p>
+     * Return the minimum number of minutes that must elapse until no cell has a fresh orange.
+     * If this is impossible, return -1
+     * <p>
+     * tags::bfs
+     */
+    public int orangesRotting(int[][] grid) {
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+        Queue<int[]> q = new LinkedList<>();
+        int days = 0, freshCount = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1)
+                    freshCount++;
+                else if (grid[i][j] == 2)
+                    q.add(new int[]{i, j});
+            }
+        }
+
+        while (!q.isEmpty() && freshCount > 0) {
+            days++;
+            for (int i = q.size() - 1; i >= 0; i--) {
+                int[] poll = q.poll();
+
+                for (int[] dir : dirs) {
+                    int nextI = poll[0] + dir[0];
+                    int nextJ = poll[1] + dir[1];
+
+                    if (nextI < 0 || nextJ < 0 || nextI == grid.length || nextJ == grid[0].length ||
+                            grid[nextI][nextJ] != 1)
+                        continue;
+
+                    freshCount--;
+                    grid[nextI][nextJ] = 2;
+                    q.add(new int[]{nextI, nextJ});
+                }
+            }
+        }
+
+        return freshCount == 0 ? days : -1;
+    }
 }

@@ -1611,4 +1611,40 @@ public class StringProblems {
         else
             deque.addFirst(sb.toString());
     }
+
+    /**
+     * Q. 451 Sort Characters By Frequency
+     * <p>
+     * Given a string s, sort it in decreasing order based on the frequency of the characters.
+     * The frequency of a character is the number of times it appears in the string.
+     * Return the sorted string. If there are multiple answers, return any of them.
+     * <p>
+     * tags::string, hashmap, bucket-sort
+     */
+    public String frequencySort(String s) {
+        List<Character>[] chars = new ArrayList[s.length() + 1];
+        Map<Character, Integer> count = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (char ch : s.toCharArray())
+            count.put(ch, count.getOrDefault(ch, 0) + 1);
+
+        for (char ch : count.keySet()) {
+            int index = count.get(ch);
+            if (chars[index] == null)
+                chars[index] = new ArrayList<>();
+            chars[index].add(ch);
+        }
+
+        for (int i = s.length(); i >= 0; i--) {
+            if (chars[i] != null) {
+                for (char ch : chars[i]) {
+                    for (int j = 0; j < i; j++)
+                        sb.append(ch);
+                }
+            }
+        }
+
+        return sb.toString();
+    }
 }

@@ -989,4 +989,14 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.canThreePartsEqualSum(input)));
     }
+
+    @Test
+    void testNextGreaterElement() {
+        Map<Pair<int[], int[]>, int[]> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2}), new int[]{-1, 3, -1});
+        scenarios.put(Pair.of(new int[]{2, 4}, new int[]{1, 2, 3, 4}), new int[]{3, -1});
+
+        scenarios.forEach((input, expected) ->
+                assertArrayEquals(expected, arrayProblems.nextGreaterElement(input.getLeft(), input.getRight())));
+    }
 }

@@ -696,4 +696,15 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.simplifyPath(input)));
     }
+
+    @Test
+    void testFrequencySort() {
+        Map<String, List<String>> scenarios = new HashMap<>();
+        scenarios.put("tree", List.of("eert", "eetr"));
+        scenarios.put("cccaaa", List.of("cccaaa", "aaaccc"));
+        scenarios.put("eee", List.of("eee"));
+        scenarios.put("Aabb", List.of("bbAa", "bbaA"));
+
+        scenarios.forEach((input, expected) -> assertTrue(expected.contains(stringProblems.frequencySort(input))));
+    }
 }

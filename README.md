@@ -107,6 +107,8 @@ Solutions available for below questions:
 		210. Course schedule II <br>
 		213. House Robber II <br>
 		215. Kth Largest Element in an Array <br>
+        222. Count Complete Tree Nodes <br>
+        226. Invert Binary Tree <br>
 		234. Palindrome Linked List <br>
 		235. Lowest Common Ancestor of a Binary Search Tree <br>
 		236. Lowest Common Ancestor of a Binary Tree <br>
@@ -163,6 +165,7 @@ Solutions available for below questions:
 		419. Battleships in a Board <br>
 		429. N-ary Tree Level Order Traversal <br>
         437. Path Sum III <br>
+        451. Sort Characters By Frequency <br>
 		453. Minimum Moves to Equal Array Elements <br>
 		456. 132 Pattern <br>
 		462. Minimum Moves to Equal Array Elements II <br>
@@ -171,6 +174,7 @@ Solutions available for below questions:
 		474. Ones and Zeroes <br>
 		482. License Key Formatting <br>
 		487. Max Consecutive Ones II <br>
+        496. Next Greater Element I <br>
 		</p>
 </details>
 
@@ -277,6 +281,8 @@ Solutions available for below questions:
         973. K Closest Points to Origin <br>
 		974. Subarray Sums Divisible by K <br>
 		975. Odd Even Jump <br>
+        993. Cousins in Binary Tree <br>
+        994. Rotting Oranges <br>
 		</p>
 </details>
 

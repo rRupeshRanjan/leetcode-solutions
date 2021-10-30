@@ -899,6 +899,93 @@ public class BinaryTreeProblems {
         map.put(currSum, map.get(currSum) - 1);
     }
 
+    /**
+     * Q. 993 Cousins in Binary Tree
+     * <p>
+     * Given the root of a binary tree with unique values and the values of two different nodes of the tree x and y,
+     * return true if the nodes corresponding to the values x and y in the tree are cousins, or false otherwise.
+     * Two nodes of a binary tree are cousins if they have the same depth with different parents.
+     * <p>
+     * Note that in a binary tree, root node is at the depth 0, and children of each depth k node are at the depth k + 1.
+     * <p>
+     * tags::dfs, binaryTree
+     */
+    public boolean isCousins(TreeNode root, int x, int y) {
+        Pair<TreeNode, Integer> node1 = isCousinsHelper(root, null, x, 0);
+        Pair<TreeNode, Integer> node2 = isCousinsHelper(root, null, y, 0);
+
+        return node1.getLeft() != node2.getLeft() && Objects.equals(node1.getRight(), node2.getRight());
+    }
+
+    public Pair<TreeNode, Integer> isCousinsHelper(TreeNode root, TreeNode parent, int val, int depth) {
+        if (root == null)
+            return null;
+
+        if (root.getVal() == val)
+            return Pair.of(parent, depth);
+
+        Pair<TreeNode, Integer> leftPair = isCousinsHelper(root.getLeft(), root, val, depth + 1);
+        Pair<TreeNode, Integer> rightPair = isCousinsHelper(root.getRight(), root, val, depth + 1);
+
+        return leftPair != null ? leftPair : rightPair;
+    }
+
+    /**
+     * Q. 222 Count Complete Tree Nodes
+     * <p>
+     * Given the root of a complete binary tree, return the number of the nodes in the tree.
+     * According to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree,
+     * and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the
+     * last level h.
+     * <p>
+     * tags::dfs, binaryTree
+     */
+    public int countNodes(TreeNode root) {
+        if (root == null)
+            return 0;
+
+        int leftHeight = getHeight(root, "left");
+        int rightHeight = getHeight(root, "right");
+
+        if (rightHeight == leftHeight)
+            return ((2 << leftHeight) - 1);
+
+        return countNodes(root.getLeft()) + countNodes(root.getRight()) + 1;
+    }
+
+    private int getHeight(TreeNode root, String dir) {
+        int count = 0;
+        if (Objects.equals(dir, "left")) {
+            while (root.getLeft() != null) {
+                count++;
+                root = root.getLeft();
+            }
+        } else {
+            while (root.getRight() != null) {
+                count++;
+                root = root.getRight();
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * Q. 226. Invert Binary Tree
+     * Given the root of a binary tree, invert the tree, and return its root.
+     * <p>
+     * tags:: dfs, binaryTree
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root != null) {
+            TreeNode left = invertTree(root.getRight());
+            root.setRight(invertTree(root.getLeft()));
+            root.setLeft(left);
+        }
+
+        return root;
+    }
+
     private enum CameraType {
         LEAF, PARENT, COVERED
     }

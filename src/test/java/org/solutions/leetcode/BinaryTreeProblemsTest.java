@@ -415,4 +415,43 @@ class BinaryTreeProblemsTest {
         scenarios.forEach((input, expected) ->
                 assertEquals(expected, binaryTreeProblems.pathSumIII(input.getLeft(), input.getRight())));
     }
+
+    @Test
+    void testIsCousins() {
+        Map<Triple<TreeNode, Integer, Integer>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(new TreeNode(1, new TreeNode(2, 4, null), 3), 3, 4), false);
+        scenarios.put(Triple.of(new TreeNode(1, new TreeNode(2, 4, null), 3), 4, 3), false);
+        scenarios.put(Triple.of(new TreeNode(1, new TreeNode(2, 4, null), 3), 2, 3), false);
+        scenarios.put(Triple.of(new TreeNode(1, new TreeNode(2, 4, null), 3), 1, 3), false);
+        scenarios.put(Triple.of(new TreeNode(1, new TreeNode(2, 4, 6),
+                new TreeNode(3, 5, 7)), 4, 5), true);
+        scenarios.put(Triple.of(new TreeNode(1, new TreeNode(2, 4, 5),
+                new TreeNode(3, 6, 7)), 4, 6), true);
+        scenarios.put(Triple.of(new TreeNode(1, new TreeNode(2, 4, 5),
+                new TreeNode(3, 6, 7)), 4, 5), false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                binaryTreeProblems.isCousins(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
+    @Test
+    void testCountNodes() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3, 6, null)), 6);
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3, 6, 7)), 7);
+        scenarios.put(null, 0);
+        scenarios.put(new TreeNode(1), 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.countNodes(input)));
+    }
+
+    @Test
+    void testInvertTree() {
+        Map<TreeNode, TreeNode> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(2, new TreeNode(2, 1, 3), new TreeNode(7, 6, 9)),
+                new TreeNode(2, new TreeNode(7, 9, 6), new TreeNode(2, 3, 1)));
+        scenarios.put(new TreeNode(2, 3, 1), new TreeNode(2, 1, 3));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.invertTree(input)));
+    }
 }

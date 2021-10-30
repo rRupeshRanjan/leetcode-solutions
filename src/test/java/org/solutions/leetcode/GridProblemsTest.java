@@ -559,6 +559,16 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.numEnclaves(input)));
     }
 
+    @Test
+    void testOrangesRotting() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{2, 1, 1}, {1, 1, 0}, {0, 1, 1}}, 4);
+        scenarios.put(new int[][]{{2, 1, 1}, {0, 1, 1}, {1, 0, 1}}, -1);
+        scenarios.put(new int[][]{{0, 2}}, 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.orangesRotting(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))
