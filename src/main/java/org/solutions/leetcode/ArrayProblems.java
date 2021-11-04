@@ -2461,4 +2461,36 @@ public class ArrayProblems {
 
         return nums1;
     }
+
+    /**
+     * Q. 1762 Buildings With an Ocean View
+     * <p>
+     * There are n buildings in a line. You are given an integer array heights of size n that represents the heights
+     * of the buildings in the line. The ocean is to the right of the buildings. A building has an ocean view if the
+     * building can see the ocean without obstructions. Formally, a building has an ocean view if all the buildings to
+     * its right have a smaller height.
+     * <p>
+     * Return a list of indices (0-indexed) of buildings that have an ocean view, sorted in increasing order.
+     * <p>
+     * tags::array
+     */
+    public int[] findBuildings(int[] heights) {
+        int currMax = -1;
+        List<Integer> indexList = new ArrayList<>();
+
+        for (int i = heights.length - 1; i >= 0; i--) {
+            if (heights[i] > currMax) {
+                indexList.add(i);
+                currMax = heights[i];
+            }
+        }
+
+        int[] answer = new int[indexList.size()];
+        int index = 0;
+        for (int i = indexList.size() - 1; i >= 0; i--) {
+            answer[index++] = indexList.get(i);
+        }
+
+        return answer;
+    }
 }

@@ -3,9 +3,12 @@ package org.solutions.leetcode;
 import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.solutions.leetcode.dataStructures.ListNode;
 import org.solutions.leetcode.dataStructures.TreeNode;
 import org.solutions.leetcode.utils.TestUtils;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,5 +111,29 @@ class BinarySearchTreeProblemsTest {
         scenarios.put(new TreeNode(3), true);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, bst.isValidBST(input)));
+    }
+
+    @Test
+    void testSortedListToBST() {
+        Map<ListNode, TreeNode> scenarios = new HashMap<>();
+        scenarios.put(testUtils.getLinkedList(Arrays.asList(-10, -3, 0, 5, 9)),
+                new TreeNode(0, new TreeNode(-3, -10, null), new TreeNode(9, 5, null)));
+        scenarios.put(null, null);
+        scenarios.put(testUtils.getLinkedList(Collections.singletonList(0)), new TreeNode(0));
+        scenarios.put(testUtils.getLinkedList(Arrays.asList(1, 3)), new TreeNode(3, 1, null));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, bst.sortedListToBST(input)));
+    }
+
+    @Test
+    void testSortedArrayToBST() {
+        Map<int[], TreeNode> scenarios = new HashMap<>();
+        scenarios.put(new int[]{-10, -3, 0, 5, 9},
+                new TreeNode(0, new TreeNode(-10, null, -3), new TreeNode(5, null, 9)));
+        scenarios.put(null, null);
+        scenarios.put(new int[]{0}, new TreeNode(0));
+        scenarios.put(new int[]{1, 3}, new TreeNode(1, null, 3));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, bst.sortedArrayToBST(input)));
     }
 }

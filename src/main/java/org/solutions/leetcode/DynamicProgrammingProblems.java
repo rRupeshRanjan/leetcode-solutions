@@ -823,4 +823,39 @@ public class DynamicProgrammingProblems {
 
         return dp[s.length()];
     }
+
+    /**
+     * Q. 983 Minimum Cost For Tickets
+     * <p>
+     * You have planned some train traveling one year in advance. The days of the year in which you will travel are
+     * given as an integer array days. Each day is an integer from 1 to 365.
+     * Train tickets are sold in three different ways:
+     * a 1-day pass is sold for costs[0] dollars,
+     * a 7-day pass is sold for costs[1] dollars, and
+     * a 30-day pass is sold for costs[2] dollars.
+     * The passes allow that many days of consecutive travel.
+     * <p>
+     * For example, if we get a 7-day pass on day 2, then we can travel for 7 days: 2, 3, 4, 5, 6, 7, and 8.
+     * Return the minimum number of dollars you need to travel every day in the given list of days.
+     * <p>
+     * Tags::array, dynamicProgramming
+     */
+    public int minCostTickets(int[] days, int[] costs) {
+        int period = days[days.length - 1] - days[0] + 1;
+        int[] dp = new int[period + 1];
+        int current = 0;
+
+        for (int i = 1; i <= period; i++) {
+            if (days[current] != i + days[0] - 1) {
+                dp[i] = dp[i - 1];
+            } else {
+                dp[i] = Math.min(costs[0] + dp[Math.max(i - 1, 0)],
+                        Math.min(costs[1] + dp[Math.max(i - 7, 0)],
+                                costs[2] + dp[Math.max(i - 30, 0)]));
+                current++;
+            }
+        }
+
+        return dp[dp.length - 1];
+    }
 }

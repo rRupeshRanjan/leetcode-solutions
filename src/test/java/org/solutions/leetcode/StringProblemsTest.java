@@ -707,4 +707,15 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertTrue(expected.contains(stringProblems.frequencySort(input))));
     }
+
+    @Test
+    void testMinAddToMakeValid() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("())", 1);
+        scenarios.put("(((", 3);
+        scenarios.put("()", 0);
+        scenarios.put("()))((", 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minAddToMakeValid(input)));
+    }
 }

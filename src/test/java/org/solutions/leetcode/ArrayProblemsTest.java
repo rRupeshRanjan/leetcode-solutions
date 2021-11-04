@@ -999,4 +999,15 @@ class ArrayProblemsTest {
         scenarios.forEach((input, expected) ->
                 assertArrayEquals(expected, arrayProblems.nextGreaterElement(input.getLeft(), input.getRight())));
     }
+
+    @Test
+    void testFindBuildings() {
+        Map<int[], int[]> scenarios = new HashMap<>();
+        scenarios.put(new int[]{4, 2, 3, 1}, new int[]{0, 2, 3});
+        scenarios.put(new int[]{4, 3, 2, 1}, new int[]{0, 1, 2, 3});
+        scenarios.put(new int[]{1, 3, 2, 4}, new int[]{3});
+        scenarios.put(new int[]{2, 2, 2, 2}, new int[]{3});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, arrayProblems.findBuildings(input)));
+    }
 }

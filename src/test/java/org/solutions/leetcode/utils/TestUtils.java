@@ -18,18 +18,6 @@ public class TestUtils {
         );
     }
 
-    public boolean areLinkedListsEqualByValue(ListNode a, ListNode b) {
-        while (a != null && b != null) {
-            if (a.getVal() != b.getVal()) {
-                return false;
-            }
-            a = a.getNext();
-            b = b.getNext();
-        }
-
-        return a == null && b == null;
-    }
-
     public ListNode getLinkedListWithCycle(List<Integer> entries, int pos) {
         List<ListNode> nodesList = entries.stream()
                 .map(ListNode::new)
@@ -52,5 +40,28 @@ public class TestUtils {
         if (entries.size() == 0)
             return null;
         return getLinkedListWithCycle(entries, -1);
+    }
+
+    public ListNode getDoubleLinkedList(List<Integer> list) {
+        ListNode head = new ListNode(0), curr = head;
+
+        for (Integer integer : list) {
+            ListNode node = new ListNode(integer);
+            curr.setNext(node);
+            curr.getNext().setPrev(curr);
+
+            curr = curr.getNext();
+        }
+
+        head = head.getNext();
+        head.setPrev(null);
+        return head;
+    }
+
+    public void connectMultiLevelLinkedList(ListNode list1, ListNode list2, int index) {
+        for (int i = 0; i < index; i++)
+            list1 = list1.getNext();
+
+        list1.setChild(list2);
     }
 }

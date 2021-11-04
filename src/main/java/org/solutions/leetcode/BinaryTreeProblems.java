@@ -986,6 +986,144 @@ public class BinaryTreeProblems {
         return root;
     }
 
+    /**
+     * Q. 129 Sum Root to Leaf Numbers
+     * <p>
+     * You are given the root of a binary tree containing digits from 0 to 9 only.
+     * Each root-to-leaf path in the tree represents a number.
+     * For example, the root-to-leaf path 1 -> 2 -> 3 represents the number 123.
+     * Return the total sum of all root-to-leaf numbers.
+     * Test cases are generated so that the answer will fit in a 32-bit integer.
+     * A leaf node is a node with no children.
+     * <p>
+     * Tags:: dfs, binaryTree
+     */
+    public int sumNumbers(TreeNode root) {
+        int[] sum = new int[1];
+        dfsSumNumbers(root, 0, sum);
+        return sum[0];
+    }
+
+    /**
+     * Helper method for running DFS for sumNumbers
+     */
+    private void dfsSumNumbers(TreeNode node, int curr, int[] sum) {
+        if (node == null)
+            return;
+
+        curr = curr * 10 + node.getVal();
+        if (node.getLeft() == null && node.getRight() == null) {
+            sum[0] += curr;
+            return;
+        }
+
+        dfsSumNumbers(node.getLeft(), curr, sum);
+        dfsSumNumbers(node.getRight(), curr, sum);
+    }
+
+    /**
+     * Q. 404 Sum of Left Leaves
+     * <p>
+     * Given the root of a binary tree, return the sum of all left leaves.
+     * <p>
+     * Tags::dfs, binaryTree
+     */
+    public int sumOfLeftLeaves(TreeNode root) {
+        int[] sum = new int[1];
+        dfsSumOfLeftLeaves(root, false, sum);
+        return sum[0];
+    }
+
+    private void dfsSumOfLeftLeaves(TreeNode root, boolean left, int[] sum) {
+        if (root == null)
+            return;
+
+        if (root.getLeft() == null && root.getRight() == null && left) {
+            sum[0] += root.getVal();
+            return;
+        }
+
+        dfsSumOfLeftLeaves(root.getLeft(), true, sum);
+        dfsSumOfLeftLeaves(root.getRight(), false, sum);
+    }
+
+    /**
+     * Q. 663 Equal Tree Partition
+     * <p>
+     * Given the root of a binary tree, return true if you can partition the tree into two trees with equal
+     * sums of values after removing exactly one edge on the original tree.
+     * <p>
+     * Tags::dfs, binaryTree
+     */
+    public boolean checkEqualTree(TreeNode root) {
+        Map<Integer, Integer> seenSum = new HashMap<>();
+        int sum = dfsCheckEqualTree(root, seenSum);
+
+        if (sum % 2 != 0)
+            return false;
+        else if (sum == 0)
+            return seenSum.get(0) > 1;
+        else
+            return seenSum.containsKey(sum / 2);
+    }
+
+    private int dfsCheckEqualTree(TreeNode node, Map<Integer, Integer> seenSum) {
+        if (node == null)
+            return 0;
+
+        int sum = node.getVal() + dfsCheckEqualTree(node.getLeft(), seenSum) +
+                dfsCheckEqualTree(node.getRight(), seenSum);
+        node.setVal(sum);
+        seenSum.put(sum, seenSum.getOrDefault(sum, 0) + 1);
+        return sum;
+    }
+
+    /**
+     * Q. 987 Vertical Order Traversal of a Binary Tree
+     * <p>
+     * Given the root of a binary tree, calculate the vertical order traversal of the binary tree.
+     * For each node at position (row, col), its left and right children will be at positions (row + 1, col - 1) and
+     * (row + 1, col + 1) respectively. The root of the tree is at (0, 0).
+     * The vertical order traversal of a binary tree is a list of top-to-bottom orderings for each column index
+     * starting from the leftmost column and ending on the rightmost column. There may be multiple nodes in the same
+     * row and same column. In such a case, sort these nodes by their values.
+     * <p>
+     * Return the vertical order traversal of the binary tree.
+     * <p>
+     * Tags::dfs, verticalTraversal
+     */
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        TreeMap<Integer, List<Integer>> map = new TreeMap<>();
+        PriorityQueue<Pair<TreeNode, Integer>> pq = new PriorityQueue<>((e1, e2) -> {
+            if (Objects.equals(e1.getRight(), e2.getRight()))
+                return e1.getLeft().getVal() - e2.getLeft().getVal();
+            else return e1.getRight() - e2.getRight();
+        });
+
+        pq.offer(Pair.of(root, 0));
+        while (!pq.isEmpty()) {
+            PriorityQueue<Pair<TreeNode, Integer>> pqCurr = new PriorityQueue<>((e1, e2) -> {
+                if (Objects.equals(e1.getRight(), e2.getRight()))
+                    return e1.getLeft().getVal() - e2.getLeft().getVal();
+                else return e1.getRight() - e2.getRight();
+            });
+
+            for (int i = pq.size(); i > 0; i--) {
+                Pair<TreeNode, Integer> curr = pq.poll();
+                map.computeIfAbsent(curr.getRight(), x -> new ArrayList<>()).add(curr.getLeft().getVal());
+
+                if (curr.getLeft().getLeft() != null)
+                    pqCurr.offer(Pair.of(curr.getLeft().getLeft(), curr.getRight() - 1));
+
+                if (curr.getLeft().getRight() != null)
+                    pqCurr.offer(Pair.of(curr.getLeft().getRight(), curr.getRight() + 1));
+            }
+            pq = pqCurr;
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
     private enum CameraType {
         LEAF, PARENT, COVERED
     }

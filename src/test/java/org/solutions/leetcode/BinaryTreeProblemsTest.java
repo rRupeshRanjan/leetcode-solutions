@@ -454,4 +454,54 @@ class BinaryTreeProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.invertTree(input)));
     }
+
+    @Test
+    void testSumNumbers() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, 2, 3), 25);
+        scenarios.put(new TreeNode(4, new TreeNode(9, 5, 1), 0), 1026);
+        scenarios.put(new TreeNode(1), 1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.sumNumbers(input)));
+    }
+
+    @Test
+    void testSumOfLeftLeaves() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(3, 9, new TreeNode(20, 15, 7)), 24);
+        scenarios.put(new TreeNode(1), 0);
+        scenarios.put(new TreeNode(1, null, 2), 0);
+        scenarios.put(new TreeNode(1, new TreeNode(2, null, 3), 4), 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.sumOfLeftLeaves(input)));
+    }
+
+    @Test
+    void testCheckEqualTree() {
+        Map<TreeNode, Boolean> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(5, 10, new TreeNode(10, 2, 3)), true);
+        scenarios.put(new TreeNode(1, 2, new TreeNode(10, 2, 20)), false);
+        scenarios.put(new TreeNode(0, -1, 1), false);
+        scenarios.put(new TreeNode(1, 1, null), true);
+        scenarios.put(new TreeNode(0, null, 0), true);
+        scenarios.put((new TreeNode(0, new TreeNode(0, null, 0), new TreeNode(0, 0, 0))), true);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.checkEqualTree(input)));
+    }
+
+    @Test
+    void testVerticalTraversal() {
+        Map<TreeNode, List<List<Integer>>> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(3, 9, new TreeNode(20, 15, 7)),
+                List.of(List.of(9), List.of(3, 15), List.of(20), List.of(7)));
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 5), new TreeNode(3, 6, 7)),
+                List.of(List.of(4), List.of(2), List.of(1, 5, 6), List.of(3), List.of(7)));
+        scenarios.put(new TreeNode(1, new TreeNode(2, 4, 6), new TreeNode(3, 5, 7)),
+                List.of(List.of(4), List.of(2), List.of(1, 5, 6), List.of(3), List.of(7)));
+        scenarios.put(new TreeNode(0, new TreeNode(5, 7, null),
+                        new TreeNode(1, null, new TreeNode(2, 3, new TreeNode(4, 6, null)))),
+                List.of(List.of(7), List.of(5), List.of(0), List.of(1, 3), List.of(2, 6), List.of(4)));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.verticalTraversal(input)));
+    }
 }

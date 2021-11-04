@@ -72,6 +72,7 @@ Solutions available for below questions:
 		123. Best Time to Buy and Sell Stock III <br>
         125. Valid Palindrome <br>
 		128. Longest Consecutive Sequence <br>
+        129. Sum Root to Leaf Numbers <br>
 		130. Surrounded Regions <br>
 		134. Gas Station <br>
 		138. Copy List with Random Pointer <br>
@@ -158,12 +159,14 @@ Solutions available for below questions:
 <details>
 	<summary>401-500</summary>
 		<p>
+        404. Sum of Left Leaves <br>
 		410. Split Array Largest Sum <br>
 		413. Arithmetic Slices <br>
 		417. Pacific Atlantic Water Flow <br>
 		418. Sentence Screen Fitting <br>
 		419. Battleships in a Board <br>
 		429. N-ary Tree Level Order Traversal <br>
+        430. Flatten a Multilevel Doubly Linked List <br>
         437. Path Sum III <br>
         451. Sort Characters By Frequency <br>
 		453. Minimum Moves to Equal Array Elements <br>
@@ -212,6 +215,7 @@ Solutions available for below questions:
 		645. Set Mismatch <br>
 		647. Palindromic Substrings <br>
 		652. Find Duplicate Subtrees <br>
+        663. Equal Tree Partition <br>
 		665. Non-decreasing Array <br>
 		668. Kth Smallest Number in Multiplication Table <br>
 		669. Trim a Binary Search Tree <br>
@@ -269,6 +273,7 @@ Solutions available for below questions:
         <p>
 		904. Fruit Into Baskets <br>
 		916. Word Subsets <br>
+        921. Minimum Add to Make Parentheses Valid <br>
 		923. 3Sum With Multiplicity <br>
         926. Flip String to Monotone Increasing <br>
 		929. Unique Email Addresses <br>
@@ -279,8 +284,10 @@ Solutions available for below questions:
 		970. Powerful Integers <br>
 		971. Flip Binary Tree To Match Preorder Traversal <br>
         973. K Closest Points to Origin <br>
+        983. Minimum Cost For Tickets <br>
 		974. Subarray Sums Divisible by K <br>
 		975. Odd Even Jump <br>
+        987. Vertical Order Traversal of a Binary Tree <br>
         993. Cousins in Binary Tree <br>
         994. Rotting Oranges <br>
 		</p>
@@ -390,6 +397,7 @@ Solutions available for below questions:
 		1721. Swapping Nodes in a Linked List <br>
 		1730. Shortest Path to Get Food <br>
 		1749. Maximum Absolute Sum of Any Subarray <br>
+        1762. Buildings With an Ocean View <br>
         </p>
 </details>
 

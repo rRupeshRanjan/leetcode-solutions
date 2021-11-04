@@ -1,13 +1,15 @@
 package org.solutions.leetcode;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.solutions.leetcode.dataStructures.ListNode;
 import org.solutions.leetcode.utils.TestUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,30 +51,21 @@ class LinkedListProblemsTest {
 
     @Test
     void testSwapNodes() {
-        // Triple of expectation, input head, input position
-        List<Triple<ListNode, ListNode, Integer>> inputs = new ArrayList<>() {{
-            add(
-                    Triple.of(testUtils.getLinkedList(Arrays.asList(1, 2, 3, 4, 5)),
-                            testUtils.getLinkedList(Arrays.asList(1, 4, 3, 2, 5)), 2));
-            add(
-                    Triple.of(testUtils.getLinkedList(Arrays.asList(7, 9, 6, 6, 8, 7, 3, 0, 9, 5)),
-                            testUtils.getLinkedList(Arrays.asList(7, 9, 6, 6, 7, 8, 3, 0, 9, 5)), 5));
-            add(
-                    Triple.of(testUtils.getLinkedList(Collections.singletonList(1)),
-                            testUtils.getLinkedList(Collections.singletonList(1)), 1));
-            add(
-                    Triple.of(testUtils.getLinkedList(Arrays.asList(2, 1)),
-                            testUtils.getLinkedList(Arrays.asList(1, 2)), 2));
-            add(
-                    Triple.of(testUtils.getLinkedList(Arrays.asList(1, 2, 3)),
-                            testUtils.getLinkedList(Arrays.asList(1, 2, 3)), 2));
-        }};
+        Map<Pair<ListNode, Integer>, ListNode> scenarios = new HashMap<>();
 
-        inputs.forEach(scenario ->
-                assertTrue(testUtils.areLinkedListsEqualByValue(
-                        scenario.getLeft(), linkedListProblems.swapNodes(scenario.getMiddle(), scenario.getRight()))
-                )
-        );
+        scenarios.put(Pair.of(testUtils.getLinkedList(Arrays.asList(1, 4, 3, 2, 5)), 2),
+                testUtils.getLinkedList(Arrays.asList(1, 2, 3, 4, 5)));
+        scenarios.put(Pair.of(testUtils.getLinkedList(Arrays.asList(7, 9, 6, 6, 7, 8, 3, 0, 9, 5)), 5),
+                testUtils.getLinkedList(Arrays.asList(7, 9, 6, 6, 8, 7, 3, 0, 9, 5)));
+        scenarios.put(Pair.of(testUtils.getLinkedList(Collections.singletonList(1)), 1),
+                testUtils.getLinkedList(Collections.singletonList(1)));
+        scenarios.put(Pair.of(testUtils.getLinkedList(Arrays.asList(1, 2)), 2),
+                testUtils.getLinkedList(Arrays.asList(2, 1)));
+        scenarios.put(Pair.of(testUtils.getLinkedList(Arrays.asList(1, 2, 3)), 2),
+                testUtils.getLinkedList(Arrays.asList(1, 2, 3)));
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, linkedListProblems.swapNodes(input.getLeft(), input.getRight())));
     }
 
     @Test
@@ -95,8 +88,7 @@ class LinkedListProblemsTest {
                 testUtils.getLinkedList(Arrays.asList(1, 2, 2, 4, 3, 5)));
 
         scenarios.forEach((input, expected) ->
-                assertTrue(testUtils.areLinkedListsEqualByValue(
-                        expected, linkedListProblems.partitionList(input.getLeft(), input.getRight()))));
+                assertEquals(expected, linkedListProblems.partitionList(input.getLeft(), input.getRight())));
     }
 
     @Test
@@ -109,8 +101,7 @@ class LinkedListProblemsTest {
                 testUtils.getLinkedList(Collections.singletonList(2)));
 
         scenarios.forEach((input, expected) ->
-                assertTrue(testUtils.areLinkedListsEqualByValue(
-                        expected, linkedListProblems.removeNthFromEnd(input.getLeft(), input.getRight()))));
+                assertEquals(expected, linkedListProblems.removeNthFromEnd(input.getLeft(), input.getRight())));
     }
 
     @Test
@@ -123,9 +114,9 @@ class LinkedListProblemsTest {
         }, testUtils.getLinkedList(Arrays.asList(1, 1, 2, 3, 4, 4, 5, 6)));
         scenarios.put(new ListNode[]{}, null);
         scenarios.put(new ListNode[]{null}, null);
+        scenarios.put(null, null);
 
-        scenarios.forEach((input, expected) -> assertTrue(
-                testUtils.areLinkedListsEqualByValue(expected, linkedListProblems.mergeKLists(input))));
+        scenarios.forEach((input, expected) -> assertEquals(expected, linkedListProblems.mergeKLists(input)));
     }
 
     @Test
@@ -141,9 +132,8 @@ class LinkedListProblemsTest {
                         testUtils.getLinkedList(Arrays.asList(1, 3, 4))),
                 testUtils.getLinkedList(Arrays.asList(1, 3, 4)));
 
-        scenarios.forEach((input, expected) -> assertTrue(testUtils.areLinkedListsEqualByValue(
-                expected, linkedListProblems.mergeTwoLists(input.getLeft(), input.getRight())))
-        );
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, linkedListProblems.mergeTwoLists(input.getLeft(), input.getRight())));
     }
 
     @Test
@@ -165,8 +155,45 @@ class LinkedListProblemsTest {
                         testUtils.getLinkedList(Arrays.asList(9, 9, 9, 9, 9, 9, 9)),
                         testUtils.getLinkedList(Arrays.asList(9, 9, 9, 9))),
                 testUtils.getLinkedList(Arrays.asList(8, 9, 9, 9, 0, 0, 0, 1)));
+        scenarios.put(Pair.of(
+                        testUtils.getLinkedList(Arrays.asList(9, 9, 9, 9)),
+                        testUtils.getLinkedList(Arrays.asList(9, 9, 9, 9, 9, 9, 9))),
+                testUtils.getLinkedList(Arrays.asList(8, 9, 9, 9, 0, 0, 0, 1)));
 
-        scenarios.forEach((input, expected) -> assertTrue(testUtils.areLinkedListsEqualByValue(expected,
-                linkedListProblems.addTwoNumbers(input.getLeft(), input.getRight()))));
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, linkedListProblems.addTwoNumbers(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testFlattenLinkedList() {
+        Map<ListNode, ListNode> scenarios = new HashMap<>();
+        ListNode row1Head = testUtils.getDoubleLinkedList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        ListNode row1Layer2 = testUtils.getDoubleLinkedList(Arrays.asList(7, 8, 9, 10));
+        ListNode row1Layer3 = testUtils.getDoubleLinkedList(Arrays.asList(11, 12));
+        testUtils.connectMultiLevelLinkedList(row1Head, row1Layer2, 2);
+        testUtils.connectMultiLevelLinkedList(row1Layer2, row1Layer3, 1);
+
+        ListNode row2Head = testUtils.getDoubleLinkedList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        ListNode row2Layer2 = testUtils.getDoubleLinkedList(Arrays.asList(7, 8));
+        ListNode row2Layer3 = testUtils.getDoubleLinkedList(Arrays.asList(11, 12));
+        testUtils.connectMultiLevelLinkedList(row2Head, row2Layer2, 2);
+        testUtils.connectMultiLevelLinkedList(row2Layer2, row2Layer3, 1);
+
+        ListNode row3Head = testUtils.getDoubleLinkedList(Arrays.asList(1, 2));
+        ListNode row3Layer2 = testUtils.getDoubleLinkedList(Collections.singletonList(3));
+        testUtils.connectMultiLevelLinkedList(row3Head, row3Layer2, 0);
+
+        ListNode row4Head = new ListNode(1);
+        row4Head.setChild(new ListNode(2));
+
+        scenarios.put(row1Head, testUtils.getDoubleLinkedList(Arrays.asList(1, 2, 3, 7, 8, 11, 12, 9, 10, 4, 5, 6)));
+        scenarios.put(row2Head, testUtils.getDoubleLinkedList(Arrays.asList(1, 2, 3, 7, 8, 11, 12, 4, 5, 6)));
+        scenarios.put(row3Head, testUtils.getDoubleLinkedList(Arrays.asList(1, 3, 2)));
+        scenarios.put(row4Head, testUtils.getDoubleLinkedList(Arrays.asList(1, 2)));
+        scenarios.put(null, null);
+        scenarios.put(testUtils.getDoubleLinkedList(Arrays.asList(1, 2, 3)),
+                testUtils.getDoubleLinkedList(Arrays.asList(1, 2, 3)));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, linkedListProblems.flattenLinkedList(input)));
     }
 }
