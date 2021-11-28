@@ -14,6 +14,7 @@ Solutions available for below questions:
 		2. Add Two Numbers <br>
 		3. Longest Substring Without Repeating Characters <br>
 		5. Longest Palindromic Substring <br>
+        9. Palindrome Number <br>
 		11. Container With Most Water <br>
 		15. 3Sum <br>
 		16. 3Sum Closest <br>
@@ -32,6 +33,7 @@ Solutions available for below questions:
 		45. Jump Game II <br>
 		48. Rotate Image <br>
 		49. Group Anagrams <br>
+        50. Pow(x,n) <br>
 		51. N-Queens <br>
 		52. N-Queens II <br>
 		53. Maximum Subarray <br>
@@ -42,6 +44,7 @@ Solutions available for below questions:
 		62. Unique Paths <br>
 		63. Unique Paths II <br>
 		66. Plus One <br>
+        70. Climbing Stairs <br>
         71. Simplify Path <br>
 		73. Set Matrix Zeroes <br>
 		74. Search a 2D Matrix <br>
@@ -75,6 +78,7 @@ Solutions available for below questions:
         129. Sum Root to Leaf Numbers <br>
 		130. Surrounded Regions <br>
 		134. Gas Station <br>
+        137. Single Number II <br>
 		138. Copy List with Random Pointer <br>
 		139. Word Break <br>
         140. Word Break II <br>
@@ -93,7 +97,7 @@ Solutions available for below questions:
 		164. Maximum Gap <br>
 		186. Reverse Words in a String II <br>
 		188. Best Time to Buy and Sell Stock IV <br>
-		191. Write a function that takes an unsigned integer and returns the number of '1' bits it has <br>
+		191. Number of 1 bits <br>
 		198. House Robber <br>
 		199. Binary Tree Right Side View <br>
 		200. Number of Islands <br>
@@ -110,6 +114,7 @@ Solutions available for below questions:
 		215. Kth Largest Element in an Array <br>
         222. Count Complete Tree Nodes <br>
         226. Invert Binary Tree <br>
+        227. Basic Calculator II <br>
 		234. Palindrome Linked List <br>
 		235. Lowest Common Ancestor of a Binary Search Tree <br>
 		236. Lowest Common Ancestor of a Binary Tree <br>
@@ -136,6 +141,7 @@ Solutions available for below questions:
 		309. Best time to by and sell stock with cooldown <br>
         314. Binary Tree Vertical Order Traversal <br>
 		315. Count of Smaller Numbers After Self <br>
+        317. Shortest Distance from All Buildings <br>
 		318. Maximum Product of Word Lengths <br>
 		319. Bulb Switcher <br>
 		322. Coin Change <br>
@@ -162,6 +168,7 @@ Solutions available for below questions:
         404. Sum of Left Leaves <br>
 		410. Split Array Largest Sum <br>
 		413. Arithmetic Slices <br>
+        415. Add Strings <br>
 		417. Pacific Atlantic Water Flow <br>
 		418. Sentence Screen Fitting <br>
 		419. Battleships in a Board <br>
@@ -211,6 +218,7 @@ Solutions available for below questions:
 		622. Design Circular Queue <br>
 		623. Add One Row to Tree <br>
 		630. Course schedule III <br>
+        636. Exclusive Time of Functions <br>
 		637. Average of Levels in Binary Tree <br>
 		645. Set Mismatch <br>
 		647. Palindromic Substrings <br>

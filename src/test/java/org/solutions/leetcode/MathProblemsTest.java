@@ -2,7 +2,7 @@ package org.solutions.leetcode;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -13,8 +13,8 @@ class MathProblemsTest {
 
     static MathProblems mathProblems;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         mathProblems = new MathProblems();
     }
 
@@ -174,6 +174,61 @@ class MathProblemsTest {
         scenarios.put(7, 7);
 
         scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.maximumSwap(input)));
+    }
+
+    @Test
+    void testIsPalindrome() {
+        Map<Integer, Boolean> scenarios = new HashMap<>();
+        scenarios.put(121, true);
+        scenarios.put(10, false);
+        scenarios.put(0, true);
+        scenarios.put(-121, false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.isPalindrome(input)));
+    }
+
+    @Test
+    void testClimbStairs() {
+        Map<Integer, Integer> scenarios = new HashMap<>();
+        scenarios.put(1, 1);
+        scenarios.put(2, 2);
+        scenarios.put(5, 8);
+        scenarios.put(10, 89);
+        scenarios.put(20, 10946);
+        scenarios.put(45, 1836311903);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.climbStairs(input)));
+    }
+
+    @Test
+    void testMyPow() {
+        Map<Pair<Double, Integer>, Double> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(2d, 10), 1024d);
+        scenarios.put(Pair.of(2.1, 3), 9.261000000000001);
+        scenarios.put(Pair.of(2d, -2), 0.25);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                mathProblems.myPow(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testBasicCalculatorII() {
+        Map<String, Integer> scenarios = new HashMap<>();
+        scenarios.put("3+2*2", 7);
+        scenarios.put(" 3/2 ", 1);
+        scenarios.put("3 / 4 ", 0);
+        scenarios.put("3 + 5 / 2", 5);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.basicCalculatorII(input)));
+    }
+
+    @Test
+    void testSingleNumberII() {
+        Map<int[], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[]{2, 2, 3, 2}, 3);
+        scenarios.put(new int[]{0, 1, 0, 1, 0, 1, 99}, 99);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.singleNumberII(input)));
     }
 
     private boolean containsInAnyOrder(List<Integer> expected, List<Integer> input) {

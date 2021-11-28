@@ -718,4 +718,16 @@ class StringProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.minAddToMakeValid(input)));
     }
+
+    @Test
+    void testAddStrings() {
+        Map<Pair<String, String>, String> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("11", "123"), "134");
+        scenarios.put(Pair.of("456", "77"), "533");
+        scenarios.put(Pair.of("0", "0"), "0");
+        scenarios.put(Pair.of("1", "9"), "10");
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                stringProblems.addStrings(input.getLeft(), input.getRight())));
+    }
 }

@@ -5,6 +5,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1009,5 +1010,18 @@ class ArrayProblemsTest {
         scenarios.put(new int[]{2, 2, 2, 2}, new int[]{3});
 
         scenarios.forEach((input, expected) -> assertArrayEquals(expected, arrayProblems.findBuildings(input)));
+    }
+
+    @Test
+    void testExclusiveTime() {
+        Map<Pair<Integer, List<String>>, int[]> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(2, Arrays.asList("0:start:0", "1:start:2", "1:end:5", "0:end:6")), new int[]{3, 4});
+        scenarios.put(Pair.of(1, Arrays.asList("0:start:0", "0:start:2", "0:end:5", "0:start:6", "0:end:6", "0:end:7")),
+                new int[]{8});
+        scenarios.put(Pair.of(2, Arrays.asList("0:start:0", "0:start:2", "0:end:5", "1:start:6", "1:end:6", "0:end:7")),
+                new int[]{7, 1});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected,
+                arrayProblems.exclusiveTime(input.getLeft(), input.getRight())));
     }
 }

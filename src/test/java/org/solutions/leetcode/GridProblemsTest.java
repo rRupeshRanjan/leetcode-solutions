@@ -569,6 +569,16 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.orangesRotting(input)));
     }
 
+    @Test
+    void testShortestDistance() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{1, 0, 2, 0, 1}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0}}, 7);
+        scenarios.put(new int[][]{{1, 0}}, 1);
+        scenarios.put(new int[][]{{1}}, -1);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.shortestDistance(input)));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

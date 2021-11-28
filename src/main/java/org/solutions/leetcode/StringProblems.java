@@ -1674,4 +1674,38 @@ public class StringProblems {
 
         return count + score;
     }
+
+    /**
+     * Q. 415 Add Strings
+     * <p>
+     * Given two non-negative integers, num1 and num2 represented as string, return the sum of num1 and num2 as a string.
+     * <p>
+     * You must solve the problem without using any built-in library for handling large integers (such as BigInteger).
+     * You must also not convert the inputs to integers directly.
+     * <p>
+     * tags:: string, addition
+     */
+    public String addStrings(String num1, String num2) {
+        int carry = 0;
+        int l1 = num1.length() - 1, l2 = num2.length() - 1;
+        StringBuilder sb = new StringBuilder();
+
+        while (l1 >= 0 || l2 >= 0) {
+            int sum = carry;
+            if (l1 >= 0)
+                sum += (num1.charAt(l1--) - '0');
+
+            if (l2 >= 0)
+                sum += (num2.charAt(l2--) - '0');
+
+            carry = sum / 10;
+            sum = sum % 10;
+            sb.append(sum);
+        }
+
+        if (carry != 0)
+            sb.append(carry);
+
+        return sb.reverse().toString();
+    }
 }

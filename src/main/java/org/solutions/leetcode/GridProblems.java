@@ -23,6 +23,36 @@ public class GridProblems {
         this.arrayUtils = new ArrayUtils();
     }
 
+    private int find(int[] arr, int x) {
+        if (x == arr[x])
+            return x;
+        return arr[x] = find(arr, arr[x]);
+    }
+
+    private void union(int[] arr, int x, int y) {
+        int xParent = find(arr, x);
+        int yParent = find(arr, y);
+
+        if (xParent != yParent)
+            arr[xParent] = yParent;
+    }
+
+    private void unionByRank(int x, int y, int[] parents, int[] rank) {
+        int p1 = find(parents, x);
+        int p2 = find(parents, y);
+
+        if (p1 == p2)
+            return;
+
+        if (rank[p1] < rank[p2]) {
+            parents[p1] = p2;
+            rank[p2]++;
+        } else {
+            parents[p2] = p1;
+            rank[p1]++;
+        }
+    }
+
     /**
      * Q. 1091 Shortest Path in Binary Matrix
      * <p>
@@ -717,20 +747,6 @@ public class GridProblems {
         return new int[]{};
     }
 
-    private int find(int[] arr, int x) {
-        if (x == arr[x])
-            return x;
-        return arr[x] = find(arr, arr[x]);
-    }
-
-    private void union(int[] arr, int x, int y) {
-        int xParent = find(arr, x);
-        int yParent = find(arr, y);
-
-        if (xParent != yParent)
-            arr[xParent] = yParent;
-    }
-
     /**
      * Q. 695 Max Area of Island
      * <p>
@@ -846,41 +862,42 @@ public class GridProblems {
      * tags:: dfs, graph
      */
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
-        Map<String, List<String>> graph = new HashMap<>();
-        Map<String, String> emailToName = new HashMap<>();
-        Set<String> seen = new HashSet<>();
+        int n = accounts.size();
+        int[] parents = new int[n];
+        int[] rank = new int[n];
+        Map<String, Integer> owners = new HashMap<>();
+        Map<Integer, TreeSet<String>> emails = new HashMap<>();
         List<List<String>> answer = new ArrayList<>();
 
-        for (List<String> account : accounts) {
-            String email = account.get(0);
-            for (int i = 1; i < account.size(); i++) {
-                graph.computeIfAbsent(account.get(i), x -> new ArrayList<>()).add(account.get(1));
-                graph.computeIfAbsent(account.get(1), x -> new ArrayList<>()).add(account.get(i));
-                emailToName.put(account.get(i), email);
+        for (int i = 0; i < n; i++)
+            parents[i] = i;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < accounts.get(i).size(); j++) {
+                String email = accounts.get(i).get(j);
+                if (owners.containsKey(email)) {
+                    int owner = owners.get(email);
+                    int p1 = find(parents, i);
+                    int p2 = find(parents, owner);
+                    unionByRank(p1, p2, parents, rank);
+                } else {
+                    owners.put(email, i);
+                }
             }
         }
 
-        for (String email : graph.keySet()) {
-            if (!seen.contains(email)) {
-                Stack<String> stack = new Stack<>();
-                List<String> component = new ArrayList<>();
-                seen.add(email);
-                stack.push(email);
-                while (!stack.isEmpty()) {
-                    String node = stack.pop();
-                    component.add(node);
-                    for (String neighbour : graph.get(node)) {
-                        if (!seen.contains(neighbour)) {
-                            seen.add(neighbour);
-                            stack.add(neighbour);
-                        }
-                    }
-                }
+        for (int i = 0; i < n; i++) {
+            int parent = find(parents, i);
+            List<String> email = accounts.get(i);
+            emails.computeIfAbsent(parent, x -> new TreeSet<>())
+                    .addAll(email.subList(1, email.size()));
+        }
 
-                Collections.sort(component);
-                component.add(0, emailToName.get(component.get(0)));
-                answer.add(component);
-            }
+        for (int key : emails.keySet()) {
+            String name = accounts.get(key).get(0);
+            List<String> email = new LinkedList<>(emails.get(key));
+            email.add(0, name);
+            answer.add(email);
         }
 
         return answer;
@@ -1676,5 +1693,85 @@ public class GridProblems {
         }
 
         return freshCount == 0 ? days : -1;
+    }
+
+    /**
+     * Q. 317 Shortest Distance from All Buildings
+     * <p>
+     * You are given an m x n grid grid of values 0, 1, or 2, where:
+     * each 0 marks an empty land that you can pass by freely,
+     * each 1 marks a building that you cannot pass through, and
+     * each 2 marks an obstacle that you cannot pass through.
+     * You want to build a house on an empty land that reaches all buildings in the shortest total travel distance.
+     * You can only move up, down, left, and right.
+     * <p>
+     * Return the shortest travel distance for such a house. If it is not possible to build such a house according to
+     * the above rules, return -1. The total travel distance is the sum of the distances between the houses of the
+     * friends and the meeting point. The distance is calculated using Manhattan Distance,
+     * where distance(p1, p2) = |p2.x - p1.x| + |p2.y - p1.y|.
+     * <p>
+     * tags:: bfs, grid
+     */
+    public int shortestDistance(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int totalHouses = 0;
+        int minDistance = Integer.MAX_VALUE;
+        int[][][] distances = new int[m][n][2];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    totalHouses++;
+                    bfsShortestDistance(grid, distances, i, j);
+                }
+            }
+        }
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (distances[i][j][1] == totalHouses) {
+                    minDistance = Math.min(minDistance, distances[i][j][0]);
+                }
+            }
+        }
+
+        return minDistance == Integer.MAX_VALUE ? -1 : minDistance;
+    }
+
+    private void bfsShortestDistance(int[][] grid, int[][][] distances, int row, int col) {
+        int[][] dirs = new int[][]{{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int steps = 0;
+        Queue<int[]> q = new LinkedList<>();
+        boolean[][] visited = new boolean[rows][cols];
+
+        q.offer(new int[]{row, col});
+        visited[row][col] = true;
+
+        while (!q.isEmpty()) {
+            for (int i = q.size(); i > 0; i--) {
+                int[] curr = q.poll();
+                row = curr[0];
+                col = curr[1];
+
+                if (grid[row][col] == 0) {
+                    distances[row][col][0] += steps;
+                    distances[row][col][1] += 1;
+                }
+
+                for (int[] dir : dirs) {
+                    int nextRow = row + dir[0];
+                    int nextCol = col + dir[1];
+
+                    if (nextRow < 0 || nextCol < 0 || nextRow >= rows || nextCol >= cols || visited[nextRow][nextCol] || grid[nextRow][nextCol] != 0)
+                        continue;
+
+                    visited[nextRow][nextCol] = true;
+                    q.offer(new int[]{nextRow, nextCol});
+                }
+            }
+            steps++;
+        }
     }
 }

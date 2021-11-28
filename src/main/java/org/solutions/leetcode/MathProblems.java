@@ -8,6 +8,7 @@ public class MathProblems {
 
     /**
      * Q. 1342 Number of steps to reduce a number to zero
+     * <p>
      * Given a non-negative integer num, return the number of steps to reduce it to zero.
      * If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
      * <p>
@@ -27,6 +28,7 @@ public class MathProblems {
 
     /**
      * Q. 575 Distribute Candies
+     * <p>
      * Alice has n candies, where the ith candy is of type candyType[i]. Alice noticed that she started to gain weight,
      * so she visited a doctor.The doctor advised Alice to only eat n / 2 of the candies she has (n is always even).
      * Alice likes her candies very much, and she wants to eat the maximum number of different types of candies while
@@ -55,6 +57,7 @@ public class MathProblems {
 
     /**
      * Q. 645 Set Mismatch
+     * <p>
      * You have a set of integers s, which originally contains all the numbers from 1 to n.
      * Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set,
      * which results in repetition of one number and loss of another number.
@@ -80,6 +83,7 @@ public class MathProblems {
 
     /**
      * Q. 268 Missing Number
+     * <p>
      * Given an array nums containing n distinct numbers in the range [0, n],
      * return the only number in the range that is missing from the array.
      * <p>
@@ -228,7 +232,9 @@ public class MathProblems {
     }
 
     /**
-     * Q. 191 Write a function that takes an unsigned integer and returns the number of '1' bits it has
+     * Q. 191 Number of 1 bits
+     * <p>
+     * Write a function that takes an unsigned integer and returns the number of '1' bits it has
      * (also known as the Hamming weight).
      * <p>
      * Tags:: math
@@ -329,5 +335,141 @@ public class MathProblems {
         }
 
         return num;
+    }
+
+    /**
+     * Q. 9 Palindrome Number
+     * <p>
+     * Given an integer x, return true if x is palindrome integer.
+     * An integer is a palindrome when it reads the same backward as forward.
+     * For example, 121 is palindrome while 123 is not.
+     * <p>
+     * tags::math, reverse, palindrome
+     */
+    public boolean isPalindrome(int x) {
+        if (x < 0)
+            return false;
+
+        int reversed = 0, remainder, original = x;
+
+        while (x != 0) {
+            remainder = x % 10;
+            reversed = reversed * 10 + remainder;
+            x /= 10;
+        }
+
+
+        return original == reversed;
+    }
+
+    /**
+     * Q. 70 Climbing Stairs
+     * <p>
+     * You are climbing a staircase. It takes n steps to reach the top.
+     * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+     * <p>
+     * tags:: math, fibonacci
+     */
+    public int climbStairs(int n) {
+        if (n <= 2)
+            return n;
+
+        int n1 = 1, n2 = 2;
+        for (int i = 3; i <= n; i++) {
+            int temp = n2;
+            n2 = n1 + n2;
+            n1 = temp;
+        }
+
+        return n2;
+    }
+
+    /**
+     * Q. 50 Pow(x, n)
+     * <p>
+     * Implement pow(x, n), which calculates x raised to the power n (i.e., x^n).
+     * <p>
+     * tags:: math
+     */
+    public double myPow(double x, int n) {
+        if (n == 0) return 1;
+
+        double temp = myPow(x, n / 2);
+        double factor = 1;
+
+        if (n % 2 != 0) {
+            factor = (n > 0) ? x : (1 / x);
+        }
+
+        return temp * temp * factor;
+    }
+
+    /**
+     * Q. 227 Basic Calculator II
+     * <p>
+     * Given a string s which represents an expression, evaluate this expression and return its value.
+     * The integer division should truncate toward zero.
+     * You may assume that the given expression is always valid.
+     * All intermediate results will be in the range of [-2^31, 2^31 - 1].
+     * <p>
+     * Note: You are not allowed to use any built-in function which evaluates strings
+     * as mathematical expressions, such as eval().
+     * <p>
+     * tags::math, calculator
+     */
+    public int basicCalculatorII(String s) {
+        Stack<Integer> stack = new Stack<>();
+        int currNumber = 0, answer = 0;
+        char op = '+';
+
+        s = s.replaceAll(" ", "");
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (Character.isDigit(ch)) {
+                currNumber = currNumber * 10 + (ch - '0');
+            }
+
+            if (!Character.isDigit(ch) || i == s.length() - 1) {
+                if (op == '-')
+                    stack.push(-currNumber);
+                else if (op == '+')
+                    stack.push(currNumber);
+                else if (op == '*')
+                    stack.push(stack.pop() * currNumber);
+                else if (op == '/')
+                    stack.push(stack.pop() / currNumber);
+
+                op = ch;
+                currNumber = 0;
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            answer += stack.pop();
+        }
+
+        return answer;
+    }
+
+    /**
+     * Q. 137 Single Number II
+     * <p>
+     * Given an integer array nums where every element appears three times except for one, which appears exactly once.
+     * Find the single element and return it.
+     * <p>
+     * You must implement a solution with a linear runtime complexity and use only constant extra space.
+     * <p>
+     * tags:: math, bitManipulation
+     */
+    public int singleNumberII(int[] nums) {
+        int seenOnce = 0, seenTwice = 0;
+
+        for (int num : nums) {
+            seenOnce = ~seenTwice & (seenOnce ^ num);
+            seenTwice = ~seenOnce & (seenTwice ^ num);
+        }
+
+        return seenOnce;
     }
 }
