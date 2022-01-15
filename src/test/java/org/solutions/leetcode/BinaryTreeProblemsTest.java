@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryTreeProblemsTest {
 
@@ -503,5 +502,15 @@ class BinaryTreeProblemsTest {
                 List.of(List.of(7), List.of(5), List.of(0), List.of(1, 3), List.of(2, 6), List.of(4)));
 
         scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.verticalTraversal(input)));
+    }
+
+    @Test
+    void testFindFrequentTreeSum() {
+        Map<TreeNode, int[]> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(5, 2, -3), new int[]{2, -3, 4});
+        scenarios.put(new TreeNode(5, 2, -5), new int[]{2});
+        scenarios.put(new TreeNode(5, -5, -5), new int[]{-5});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected, binaryTreeProblems.findFrequentTreeSum(input)));
     }
 }

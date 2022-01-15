@@ -8,7 +8,9 @@ import org.solutions.leetcode.utils.ListUtils;
 import org.solutions.leetcode.utils.TreeUtils;
 
 import java.util.*;
+import java.util.function.Function;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TreeProblemsTest {
@@ -49,5 +51,14 @@ class TreeProblemsTest {
                 treeUtils.createTreeFromList(Arrays.asList(1, null, 3, 2, 4, null, 5, 6)),
                 Arrays.asList(5, 6, 3, 2, 4, 1));
         scenarios.forEach((input, expected) -> Assertions.assertEquals(expected, treeProblems.naryPostorder(input)));
+    }
+
+    @Test
+    void testTreeDiameter() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0,1},{0,2}}, 2);
+        scenarios.put(new int[][]{{0,1},{1,2},{2,3},{1,4},{4,5}}, 4);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, treeProblems.treeDiameter(input)));
     }
 }

@@ -1024,4 +1024,16 @@ class ArrayProblemsTest {
         scenarios.forEach((input, expected) -> assertArrayEquals(expected,
                 arrayProblems.exclusiveTime(input.getLeft(), input.getRight())));
     }
+
+    @Test
+    void testFindMinArrowShots() {
+        Map<int[][], Integer> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{10, 16}, {2, 8}, {1, 6}, {7, 12}}, 2);
+        scenarios.put(new int[][]{{1, 2}, {3, 4}, {5, 6}, {7, 8}}, 4);
+        scenarios.put(new int[][]{{1, 2}, {2, 3}, {3, 4}, {4, 5}}, 2);
+        scenarios.put(new int[][]{{-2147483646, -2147483645}, {2147483646, 2147483647}}, 2);
+        scenarios.put(new int[][]{{7, 15}, {6, 14}, {8, 12}, {3, 4}, {4, 13}, {6, 14}, {9, 11}, {6, 12}, {4, 13}}, 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.findMinArrowShots(input)));
+    }
 }

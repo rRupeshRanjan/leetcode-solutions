@@ -579,6 +579,17 @@ class GridProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, gridProblems.shortestDistance(input)));
     }
 
+    @Test
+    void testMatrixReshape() {
+        Map<Triple<int[][], Integer, Integer>, int[][]> scenarios = new HashMap<>();
+        scenarios.put(Triple.of(new int[][]{{1, 2}, {3, 4}}, 1, 4), new int[][]{{1, 2, 3, 4}});
+        scenarios.put(Triple.of(new int[][]{{1, 2}, {3, 4}}, 2, 4), new int[][]{{1, 2}, {3, 4}});
+        scenarios.put(Triple.of(new int[][]{{1, 2, 3}, {4, 5, 6}}, 3, 2), new int[][]{{1, 2}, {3, 4}, {5, 6}});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected,
+                gridProblems.matrixReshape(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

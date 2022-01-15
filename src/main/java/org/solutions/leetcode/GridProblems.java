@@ -1738,6 +1738,36 @@ public class GridProblems {
         return minDistance == Integer.MAX_VALUE ? -1 : minDistance;
     }
 
+    /**
+     * Q. 566 Reshape the Matrix
+     *
+     * In MATLAB, there is a handy function called reshape which can reshape an m x n matrix into a new one with a
+     * different size r x c keeping its original data. You are given an m x n matrix mat and two integers r and c
+     * representing the number of rows and the number of columns of the wanted reshaped matrix. The reshaped matrix
+     * should be filled with all the elements of the original matrix in the same row-traversing order as they were.
+     * If the reshape operation with given parameters is possible and legal, output the new reshaped matrix;
+     * Otherwise, output the original matrix.
+     *
+     * tags:: matrix, grid
+     * */
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        int rows = mat.length, cols = mat[0].length;
+
+        if(r*c != rows*cols)
+            return mat;
+
+        int currRow = 0, currCol = 0;
+        int[][] ans = new int[r][c];
+
+        for (int[] row : mat) {
+            for(int data: row) {
+                ans[currRow + currCol / c][currCol++ % c] = data;
+            }
+        }
+
+        return ans;
+    }
+
     private void bfsShortestDistance(int[][] grid, int[][][] distances, int row, int col) {
         int[][] dirs = new int[][]{{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
         int rows = grid.length;

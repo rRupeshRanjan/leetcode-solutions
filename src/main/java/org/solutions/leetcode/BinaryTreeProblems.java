@@ -8,7 +8,6 @@ import java.util.*;
 public class BinaryTreeProblems {
 
     private static final int MOD = (int) (1e9 + 7);
-    private int cameraCoverCount;
     private int buildTreePreOrderInorderRootIndex;
 
     /**
@@ -294,22 +293,22 @@ public class BinaryTreeProblems {
      * tags:: dfs, binaryTree
      */
     public int minCameraCover(TreeNode root) {
-        cameraCoverCount = 0;
-        if (cameraCoverDfs(root) == CameraType.LEAF)
-            cameraCoverCount++;
+        int[] cameraCoverCount = new int[]{0};
+        if (cameraCoverDfs(root, cameraCoverCount) == CameraType.LEAF)
+            cameraCoverCount[0]++;
 
-        return cameraCoverCount;
+        return cameraCoverCount[0];
     }
 
-    private CameraType cameraCoverDfs(TreeNode node) {
+    private CameraType cameraCoverDfs(TreeNode node, int[] cameraCoverCount) {
         if (node == null)
             return CameraType.COVERED;
 
-        CameraType left = cameraCoverDfs(node.getLeft());
-        CameraType right = cameraCoverDfs(node.getRight());
+        CameraType left = cameraCoverDfs(node.getLeft(), cameraCoverCount);
+        CameraType right = cameraCoverDfs(node.getRight(), cameraCoverCount);
 
         if (left == CameraType.LEAF || right == CameraType.LEAF) {
-            cameraCoverCount++;
+            cameraCoverCount[0]++;
             return CameraType.PARENT;
         }
 
@@ -1122,6 +1121,42 @@ public class BinaryTreeProblems {
         }
 
         return new ArrayList<>(map.values());
+    }
+
+    /**
+     * Q. 508 Most Frequent Subtree Sum
+     * <p>
+     * Given the root of a binary tree, return the most frequent subtree sum. If there is a tie, return all the values
+     * with the highest frequency in any order. The subtree sum of a node is defined as the sum of all the node values
+     * formed by the subtree rooted at that node (including the node itself).
+     * <p>
+     * tags:: binaryTree, dfs, hashTable
+     */
+    public int[] findFrequentTreeSum(TreeNode root) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        int[] maxCount = new int[1];
+        List<Integer> answer = new ArrayList<>();
+
+        dfsTreeSum(root, freq, maxCount);
+        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
+            if (entry.getValue() == maxCount[0])
+                answer.add(entry.getKey());
+        }
+
+        return answer.stream().mapToInt(i -> i).toArray();
+    }
+
+    private int dfsTreeSum(TreeNode root, Map<Integer, Integer> freq, int[] maxCount) {
+        if (root == null)
+            return 0;
+
+        int currSum = dfsTreeSum(root.getLeft(), freq, maxCount) + dfsTreeSum(root.getRight(), freq, maxCount) + root.getVal();
+        int currCount = freq.getOrDefault(currSum, 0) + 1;
+
+        maxCount[0] = Math.max(maxCount[0], currCount);
+        freq.put(currSum, currCount);
+
+        return currSum;
     }
 
     private enum CameraType {

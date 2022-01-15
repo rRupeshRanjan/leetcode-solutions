@@ -176,6 +176,7 @@ Solutions available for below questions:
         430. Flatten a Multilevel Doubly Linked List <br>
         437. Path Sum III <br>
         451. Sort Characters By Frequency <br>
+        452. Minimum Number of Arrows to Burst Balloons <br>
 		453. Minimum Moves to Equal Array Elements <br>
 		456. 132 Pattern <br>
 		462. Minimum Moves to Equal Array Elements II <br>
@@ -191,6 +192,7 @@ Solutions available for below questions:
 <details>
 	<summary>501-600</summary>
 		<p>
+        508. Most Frequent Subtree Sum <br>
 		515. Find Largest Value in Each Tree Row <br>
 		518. Coin Change 2 <br>
         523. Continuous Subarray Sum <br>
@@ -202,6 +204,7 @@ Solutions available for below questions:
 		547. Number of Provinces <br>
 		554. Brick Wall <br>
 		560. Subarray Sum Equals K <br>
+        566. Reshape the matrix <br>
 		562. Longest Line of Consecutive One in Matrix <br>
 		575. Distribute Candies <br>
 		583. Delete Operation for Two Strings <br>
@@ -334,6 +337,7 @@ Solutions available for below questions:
 		<p>
 		1209. Remove All Adjacent Duplicates in String II <br>
 		1233. Remove Sub-Folders from the Filesystem <br>
+        1245. Tree Diameter <br>
         1249. Minimum Remove to Make Valid Parentheses <br>
         1254. Number of Closed Islands <br>
 		1257. Smallest Common Region <br>
