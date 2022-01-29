@@ -590,6 +590,22 @@ class GridProblemsTest {
                 gridProblems.matrixReshape(input.getLeft(), input.getMiddle(), input.getRight())));
     }
 
+    @Test
+    void testCountSubIslands() {
+        Map<Pair<int[][], int[][]>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(
+                new int[][]{{1, 1, 1, 0, 0}, {0, 1, 1, 1, 1}, {0, 0, 0, 0, 0}, {1, 0, 0, 0, 0}, {1, 1, 0, 1, 1}},
+                new int[][]{{1, 1, 1, 0, 0}, {0, 0, 1, 1, 1}, {0, 1, 0, 0, 0}, {1, 0, 1, 1, 0}, {0, 1, 0, 1, 0}}
+        ), 3);
+        scenarios.put(Pair.of(
+                new int[][]{{1, 0, 1, 0, 1}, {1, 1, 1, 1, 1}, {0, 0, 0, 0, 0}, {1, 1, 1, 1, 1}, {1, 0, 1, 0, 1}},
+                new int[][]{{0, 0, 0, 0, 0}, {1, 1, 1, 1, 1}, {0, 1, 0, 1, 0}, {0, 1, 0, 1, 0}, {1, 0, 0, 0, 1}}
+        ), 2);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected,
+                gridProblems.countSubIslands(input.getLeft(), input.getRight())));
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

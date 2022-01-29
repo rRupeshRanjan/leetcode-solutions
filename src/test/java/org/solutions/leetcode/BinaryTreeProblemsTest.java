@@ -513,4 +513,15 @@ class BinaryTreeProblemsTest {
 
         scenarios.forEach((input, expected) -> assertArrayEquals(expected, binaryTreeProblems.findFrequentTreeSum(input)));
     }
+
+    @Test
+    void testSumRootToLeaf() {
+        Map<TreeNode, Integer> scenarios = new HashMap<>();
+        scenarios.put(new TreeNode(1, new TreeNode(0, 0, 1), new TreeNode(1, 0, 1)), 22);
+        scenarios.put(new TreeNode(1, new TreeNode(1, 0, 1), new TreeNode(1, 0, 1)), 26);
+        scenarios.put(new TreeNode(1, new TreeNode(0, 0, null), new TreeNode(1, 0, 1)), 17);
+        scenarios.put(new TreeNode(0), 0);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, binaryTreeProblems.sumRootToLeaf(input)));
+    }
 }

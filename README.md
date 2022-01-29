@@ -312,6 +312,7 @@ Solutions available for below questions:
 		1011. Capacity To Ship Packages Within D Days <br>
         1013. Partition Array Into Three Parts With Equal Sum <br>
         1020. Number of Enclaves <br>
+        1022. Sum of Root To Leaf Binary Numbers <br>
 		1038. Binary Search Tree to Greater Sum Tree <br>
         1041. Robot Bounded In Circle <br>
 		1047. Remove All Adjacent Duplicates In String <br>
@@ -419,5 +420,12 @@ Solutions available for below questions:
 		1856. Maximum Subarray Min-Product <br>
 		1863. Sum of All Subset XOR Totals <br>
 		1871. Jump Game VII <br>
+		</p>
+</details>
+
+<details>
+	<summary>1901-2000</summary>
+		<p>
+		1905. Count Sub Islands <br>
 		</p>
 </details>
