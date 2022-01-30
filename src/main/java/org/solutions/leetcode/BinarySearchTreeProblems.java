@@ -3,6 +3,8 @@ package org.solutions.leetcode;
 import org.solutions.leetcode.dataStructures.ListNode;
 import org.solutions.leetcode.dataStructures.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class BinarySearchTreeProblems {
@@ -133,6 +135,29 @@ public class BinarySearchTreeProblems {
     }
 
     /**
+     * Q. 701 Insert into a Binary Search Tree
+     * <p>
+     * You are given the root node of a binary search tree (BST) and a value to insert into the tree. Return the root
+     * node of the BST after the insertion. It is guaranteed that the new value does not exist in the original BST.
+     * Notice that there may exist multiple valid ways for the insertion, as long as the tree remains a BST after
+     * insertion. You can return any of them.
+     * <p>
+     * tags::bst, recursion
+     */
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if (root == null)
+            return new TreeNode(val);
+
+        if (val > root.getVal()) { // go right
+            root.setRight(insertIntoBST(root.getRight(), val));
+        } else { // go left
+            root.setLeft(insertIntoBST(root.getLeft(), val));
+        }
+
+        return root;
+    }
+
+    /**
      * Q. 1008 Construct Binary Search Tree from Preorder Traversal
      * Given an array of integers representing preorder traversal of a BST, construct the tree and return its root.
      * <p>
@@ -181,6 +206,19 @@ public class BinarySearchTreeProblems {
         return root;
     }
 
+    /**
+     * Q. 1305 All Elements in Two Binary Search Trees
+     * <p>
+     * Given two binary search trees root1 and root2, return a list containing all the integers from
+     * both trees sorted in ascending order.
+     * <p>
+     * tags:: inorder, array-merge, binary-tree
+     */
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        BinaryTreeProblems btp = new BinaryTreeProblems();
+        return mergeSortedList(btp.inorderTraversal(root1), btp.inorderTraversal(root2));
+    }
+
     private TreeNode bstFromArray(int[] nums, int left, int right) {
         if (left < 0 || right < 0 || left == nums.length || right == nums.length || left > right)
             return null;
@@ -201,6 +239,24 @@ public class BinarySearchTreeProblems {
         root.setLeft(recurseBuildBstPreorder(preorder, root.getVal(), rootIndex));
         root.setRight(recurseBuildBstPreorder(preorder, bound, rootIndex));
         return root;
+    }
+
+    private List<Integer> mergeSortedList(List<Integer> list1, List<Integer> list2) {
+        List<Integer> list = new ArrayList<>();
+        int i = 0, j = 0;
+        while (i < list1.size() && j < list2.size()) {
+            if (list1.get(i) > list2.get(j))
+                list.add(list2.get(j++));
+            else
+                list.add(list1.get(i++));
+        }
+
+        while (i < list1.size())
+            list.add(list1.get(i++));
+        while (j < list2.size())
+            list.add(list2.get(j++));
+
+        return (list);
     }
 
 }

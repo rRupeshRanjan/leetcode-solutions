@@ -445,6 +445,29 @@ public class MathProblems {
         return (n * n) >> 2;
     }
 
+    /**
+     * Q. 2139 Minimum Moves to Reach Target Score
+     * <p>
+     * You are playing a game with integers. You start with the integer 1 and you want to reach the integer target.
+     * In one move, you can either:
+     * Increment the current integer by one (i.e., x = x + 1).
+     * Double the current integer (i.e., x = 2 * x).
+     * You can use the increment operation any number of times, however, you can only use the double operation at most
+     * maxDoubles times. Given the two integers target and maxDoubles, return the minimum number of moves needed to
+     * reach target starting with 1.
+     * <p>
+     * tags::math
+     */
+    public int minMoves(int target, int maxDoubles) {
+        int count = 0;
+        while (target > 1 && maxDoubles-- > 0) {
+            count += 1 + (target % 2);
+            target >>= 1;
+        }
+
+        return count + target - 1;
+    }
+
     private void backtrackCountArrangement(boolean[] used, int n, int pos) {
         if (pos > n) {
             countArrangement++;

@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -7,10 +8,7 @@ import org.solutions.leetcode.dataStructures.ListNode;
 import org.solutions.leetcode.dataStructures.TreeNode;
 import org.solutions.leetcode.utils.TestUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -135,5 +133,28 @@ class BinarySearchTreeProblemsTest {
         scenarios.put(new int[]{1, 3}, new TreeNode(1, null, 3));
 
         scenarios.forEach((input, expected) -> assertEquals(expected, bst.sortedArrayToBST(input)));
+    }
+
+    @Test
+    void testGetAllElements() {
+        Map<Pair<TreeNode, TreeNode>, List<Integer>> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new TreeNode(2, 1, 4), new TreeNode(1, 0, 3)),
+                Arrays.asList(0, 1, 1, 2, 3, 4));
+        scenarios.put(Pair.of(new TreeNode(1, null, 8), new TreeNode(8, 1, null)),
+                Arrays.asList(1, 1, 8, 8));
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, bst.getAllElements(input.getLeft(), input.getRight())));
+    }
+
+    @Test
+    void testInsertIntoBST() {
+        Map<Pair<TreeNode, Integer>, TreeNode> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new TreeNode(4, new TreeNode(2, 1, 3), 7), 5),
+                new TreeNode(4, new TreeNode(2, 1, 3), new TreeNode(7, 5, null)));
+        scenarios.put(Pair.of(new TreeNode(40, new TreeNode(20, 10, 30), new TreeNode(60, 50, 70)), 25),
+                new TreeNode(40, new TreeNode(20, 10, new TreeNode(30, 25, null)), new TreeNode(60, 50, 70)));
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, bst.insertIntoBST(input.getLeft(), input.getRight())));
     }
 }

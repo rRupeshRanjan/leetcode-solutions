@@ -156,4 +156,15 @@ class HashTableProblemsTest {
                 assertEquals(expected, htProblems.checkSubArraySum(input.getLeft(), input.getRight())));
     }
 
+    @Test
+    void testWordPattern() {
+        Map<Pair<String, String>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of("abba", "dog cat cat dog"), true);
+        scenarios.put(Pair.of("abba", "dog cat cat fish"), false);
+        scenarios.put(Pair.of("aaaa", "dog cat cat fish"), false);
+        scenarios.put(Pair.of("abba", "dog dog dog dog"), false);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, htProblems.wordPattern(input.getLeft(), input.getRight())));
+    }
 }

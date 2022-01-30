@@ -49,6 +49,35 @@ public class HashTableProblems {
     }
 
     /**
+     * Q. 290 Word Pattern
+     * <p>
+     * Given a pattern and a string s, find if s follows the same pattern.
+     * Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.
+     * <p>
+     * tags:: string, hashmap
+     */
+    public boolean wordPattern(String pattern, String str) {
+        Map<Object, Integer> map = new HashMap<>();
+        String[] strs = str.split(" ");
+
+
+        if (pattern.length() != strs.length)
+            return false;
+
+        for (int i = 0; i < strs.length; i++) {
+            char ch = pattern.charAt(i);
+
+            map.putIfAbsent(ch, i);
+            map.putIfAbsent(strs[i], i);
+
+            if (!map.get(ch).equals(map.get(strs[i])))
+                return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Q. 347 Top K Frequent Elements
      * <p>
      * Given an integer array nums and an integer k, return the k most frequent elements.

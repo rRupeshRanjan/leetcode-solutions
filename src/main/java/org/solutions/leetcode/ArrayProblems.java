@@ -1,5 +1,6 @@
 package org.solutions.leetcode;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.solutions.leetcode.dataStructures.Log;
 
 import java.util.*;
@@ -702,6 +703,19 @@ public class ArrayProblems {
     }
 
     /**
+     * Q. 189 Rotate Array
+     * Given an array, rotate the array to the right by k steps, where k is non-negative
+     * <p>
+     * tags::array, in-space
+     */
+    public void rotateArray(int[] nums, int k) {
+        k = k % nums.length;
+        ArrayUtils.reverse(nums, 0, nums.length);
+        ArrayUtils.reverse(nums, 0, k);
+        ArrayUtils.reverse(nums, k, nums.length);
+    }
+
+    /**
      * Q. 215 Kth Largest Element in an Array
      * <p>
      * Given an integer array nums and an integer k, return the kth largest element in the array.
@@ -1162,6 +1176,34 @@ public class ArrayProblems {
             default:
                 return -1;
         }
+    }
+
+    /**
+     * Q. 605 Can Place Flowers
+     * <p>
+     * You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be
+     * planted in adjacent plots. Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1
+     * means not empty, and an integer n, return if n new flowers can be planted in the flowerbed without violating
+     * the no-adjacent-flowers rule.
+     * <p>
+     * tags::array
+     */
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int spotCount = 1, flowerCount = 0;
+
+        for (int j : flowerbed) {
+            if (j == 0) {
+                spotCount++;
+            } else {
+                flowerCount += (spotCount - 1) / 2;
+                spotCount = 0;
+            }
+        }
+
+        if (spotCount != 0)
+            flowerCount += spotCount / 2;
+
+        return (flowerCount >= n);
     }
 
     /**
@@ -1650,6 +1692,33 @@ public class ArrayProblems {
         }
 
         return (int) result;
+    }
+
+    /**
+     * Q. 941 Valid Mountain Array
+     * <p>
+     * Given an array of integers arr, return true if and only if it is a valid mountain array.
+     * Recall that arr is a mountain array if and only if:
+     * arr.length >= 3
+     * There exists some i with 0 < i < arr.length - 1 such that:
+     * arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+     * arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+     * <p>
+     * tags:: array, mountain
+     */
+    public boolean validMountainArray(int[] arr) {
+        if (arr == null || arr.length < 3)
+            return false;
+
+        int i = 0, j = arr.length - 1;
+        while (i < arr.length - 1 && arr[i] < arr[i + 1]) {
+            i++;
+        }
+        while (j > i && arr[j - 1] > arr[j]) {
+            j--;
+        }
+
+        return (i == j && i > 0 && j < arr.length - 1);
     }
 
     /**

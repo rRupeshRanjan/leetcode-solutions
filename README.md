@@ -97,6 +97,7 @@ Solutions available for below questions:
 		164. Maximum Gap <br>
 		186. Reverse Words in a String II <br>
 		188. Best Time to Buy and Sell Stock IV <br>
+        189. Rotate Array <br>
 		191. Number of 1 bits <br>
 		198. House Robber <br>
 		199. Binary Tree Right Side View <br>
@@ -129,6 +130,7 @@ Solutions available for below questions:
 		268. Missing Number <br>
         283. Move Zeroes <br>
 		284. Peeking Iterator <br>
+        290. Word Pattern <br>A
 		298. Binary Tree Longest Consecutive Sequence <br>
 		299. Bulls and Cows <br>
 		300. Longest Increasing Subsequence <br>
@@ -195,6 +197,7 @@ Solutions available for below questions:
         508. Most Frequent Subtree Sum <br>
 		515. Find Largest Value in Each Tree Row <br>
 		518. Coin Change 2 <br>
+        520. Detect Capital <br>
         523. Continuous Subarray Sum <br>
 		526. Beautiful Arrangement <br>
 		535. Encode and Decode TinyURL <br>
@@ -217,6 +220,7 @@ Solutions available for below questions:
 <details>
 	<summary>601-700</summary>
 		<p>
+        605. Can Place Flowers <br>
 		609. Find Duplicate File in System <br>
 		622. Design Circular Queue <br>
 		623. Add One Row to Tree <br>
@@ -243,6 +247,7 @@ Solutions available for below questions:
 <details>
 	<summary>701-800</summary>
 		<p>
+        701. Insert into a Binary Search Tree <br>
 		714. Best Time to Buy and Sell Stock with Transaction Fee <br>
 		719. Find K-th Smallest Pair Distance <br>
 		721. Accounts Merge <br>
@@ -288,6 +293,7 @@ Solutions available for below questions:
 		923. 3Sum With Multiplicity <br>
         926. Flip String to Monotone Increasing <br>
 		929. Unique Email Addresses <br>
+        941. Valid Mountain Array <br>
 		947. Most Stones Removed with Same Row or Column <br>
 		948. Bag of Tokens <br>
         954. Array of Doubled Pairs <br>
@@ -415,17 +421,13 @@ Solutions available for below questions:
 </details>
 
 <details>
-	<summary>1801-1900</summary>
+	<summary>1801-2500</summary>
 		<p>
 		1856. Maximum Subarray Min-Product <br>
 		1863. Sum of All Subset XOR Totals <br>
 		1871. Jump Game VII <br>
-		</p>
-</details>
-
-<details>
-	<summary>1901-2000</summary>
-		<p>
 		1905. Count Sub Islands <br>
+        2138. Divide a String Into Groups of Size k <br>
+        2139. Minimum Moves to Reach Target Score <br>
 		</p>
 </details>

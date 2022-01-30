@@ -1036,4 +1036,43 @@ class ArrayProblemsTest {
 
         scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.findMinArrowShots(input)));
     }
+
+    @Test
+    void testRotateArray() {
+        Map<Pair<int[], Integer>, int[]> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 2, 3, 4, 5, 6, 7}, 3), new int[]{5, 6, 7, 1, 2, 3, 4});
+        scenarios.put(Pair.of(new int[]{-1, -100, 3, 99}, 2), new int[]{3, 99, -1, -100});
+        scenarios.put(Pair.of(new int[]{-1}, 2), new int[]{-1});
+        scenarios.put(Pair.of(new int[]{1, 2}, 3), new int[]{2, 1});
+
+        scenarios.forEach((input, expected) -> {
+            arrayProblems.rotateArray(input.getLeft(), input.getRight());
+            assertArrayEquals(expected, input.getLeft());
+        });
+    }
+
+    @Test
+    void testValidMountainArray() {
+        Map<int[], Boolean> scenarios = new HashMap<>();
+        scenarios.put(new int[]{0, 1, 2, 3, 2, 1}, true);
+        scenarios.put(new int[]{0, 1, 2, 3, 4}, false);
+        scenarios.put(new int[]{3, 2, 1, 0}, false);
+        scenarios.put(new int[]{1}, false);
+        scenarios.put(null, false);
+        scenarios.put(new int[]{0, 1, 2, 3, 4, 3, 2, 3, 1}, false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, arrayProblems.validMountainArray(input)));
+    }
+
+    @Test
+    void testCanPlaceFlowers() {
+        Map<Pair<int[], Integer>, Boolean> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(new int[]{1, 0, 0, 0, 1}, 1), true);
+        scenarios.put(Pair.of(new int[]{1, 0, 0, 0, 1}, 2), false);
+        scenarios.put(Pair.of(new int[]{1, 0, 0, 0, 0, 1}, 2), false);
+        scenarios.put(Pair.of(new int[]{0}, 1), true);
+
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, arrayProblems.canPlaceFlowers(input.getLeft(), input.getRight())));
+    }
 }

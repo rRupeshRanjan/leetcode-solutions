@@ -730,4 +730,25 @@ class StringProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected,
                 stringProblems.addStrings(input.getLeft(), input.getRight())));
     }
+
+    @Test
+    void testDetectCapitalUse() {
+        Map<String, Boolean> scenarios = new HashMap<>();
+        scenarios.put("USA", true);
+        scenarios.put("Google", true);
+        scenarios.put("google", true);
+        scenarios.put("GooGle", false);
+
+        scenarios.forEach((input, expected) -> assertEquals(expected, stringProblems.detectCapitalUse(input)));
+    }
+
+    @Test
+    void testDivideString() {
+        Map<Triple<String, Integer, Character>, String[]> scenarios = new HashMap<>();
+        scenarios.put(Triple.of("abcdefghi", 3, 'x'), new String[]{"abc", "def", "ghi"});
+        scenarios.put(Triple.of("abcdefghij", 3, 'x'), new String[]{"abc", "def", "ghi", "jxx"});
+
+        scenarios.forEach((input, expected) -> assertArrayEquals(expected,
+                stringProblems.divideString(input.getLeft(), input.getMiddle(), input.getRight())));
+    }
 }

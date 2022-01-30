@@ -109,9 +109,8 @@ class MathProblemsTest {
         scenarios.put(Triple.of(3, 5, 15), Arrays.asList(2, 4, 6, 8, 10, 14));
         scenarios.put(Triple.of(1, 1, 15), Collections.singletonList(2));
 
-        scenarios.forEach((input, expected) ->
-                assertTrue(containsInAnyOrder(expected,
-                        mathProblems.powerfulIntegers(input.getLeft(), input.getMiddle(), input.getRight()))));
+        scenarios.forEach((input, expected) -> assertTrue(expected.containsAll(
+                mathProblems.powerfulIntegers(input.getLeft(), input.getMiddle(), input.getRight()))));
     }
 
     @Test
@@ -231,14 +230,14 @@ class MathProblemsTest {
         scenarios.forEach((input, expected) -> assertEquals(expected, mathProblems.singleNumberII(input)));
     }
 
-    private boolean containsInAnyOrder(List<Integer> expected, List<Integer> input) {
-        if (expected.size() != input.size())
-            return false;
+    @Test
+    void testMinMoves() {
+        Map<Pair<Integer, Integer>, Integer> scenarios = new HashMap<>();
+        scenarios.put(Pair.of(5, 0), 4);
+        scenarios.put(Pair.of(19, 2), 7);
+        scenarios.put(Pair.of(10, 4), 4);
 
-        for (int i : input) {
-            if (!expected.contains(i)) return false;
-        }
-
-        return true;
+        scenarios.forEach((input, expected) ->
+                assertEquals(expected, mathProblems.minMoves(input.getLeft(), input.getRight())));
     }
 }

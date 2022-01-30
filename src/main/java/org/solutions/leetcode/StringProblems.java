@@ -796,6 +796,30 @@ public class StringProblems {
     }
 
     /**
+     * Q. 520 Detect Capital
+     * <p>
+     * We define the usage of capitals in a word to be right when one of the following cases holds:
+     * <p>
+     * All letters in this word are capitals, like "USA".
+     * All letters in this word are not capitals, like "leetcode".
+     * Only the first letter in this word is capital, like "Google".
+     * Given a string word, return true if the usage of capitals in it is right.
+     * <p>
+     * tags:: string
+     */
+    public boolean detectCapitalUse(String word) {
+        int count = 0;
+        for (char ch : word.toCharArray()) {
+            if ((int) ch >= 65 && (int) ch <= 90)
+                count++;
+        }
+
+        if (count == word.length() || count == 0)
+            return true;
+        else return count == 1 && (int) word.charAt(0) >= 65 && (int) word.charAt(0) <= 90;
+    }
+
+    /**
      * Q. 609 Find Duplicate File in System
      * Given a list paths of directory info, including the directory path, and all the files with contents in this
      * directory, return all the duplicate files in the file system in terms of their paths. You may return the answer
@@ -1605,6 +1629,46 @@ public class StringProblems {
         }
 
         return count == 0;
+    }
+
+    /**
+     * Q. 2138. Divide a String Into Groups of Size k
+     * <p>
+     * A string s can be partitioned into groups of size k using the following procedure:
+     * <p>
+     * The first group consists of the first k characters of the string, the second group consists of the next k
+     * characters of the string, and so on. Each character can be a part of exactly one group. For the last group, if
+     * the string does not have k characters remaining, a character fill is used to complete the group.
+     * Note that the partition is done so that after removing the fill character from the last group (if it exists) and
+     * concatenating all the groups in order, the resultant string should be s.
+     * <p>
+     * Given the string s, the size of each group k and the character fill, return a string array denoting the
+     * composition of every group s has been divided into, using the above procedure.
+     * <p>
+     * tags::string
+     */
+    public String[] divideString(String s, int k, char fill) {
+        int len = (int) Math.ceil(s.length() / (float) k);
+        String[] answer = new String[len];
+        int currIndex = 0;
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            if (sb.length() == k) {
+                answer[currIndex++] = sb.toString();
+                sb = new StringBuilder();
+            }
+            sb.append(s.charAt(i));
+        }
+
+        while (sb.length() < k) {
+            sb.append(fill);
+        }
+
+        if (sb.length() > 0)
+            answer[currIndex++] = sb.toString();
+
+        return answer;
     }
 
     private int longestPalindromeHelper(String s, int start, int end) {
