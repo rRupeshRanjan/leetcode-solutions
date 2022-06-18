@@ -606,6 +606,19 @@ class GridProblemsTest {
                 gridProblems.countSubIslands(input.getLeft(), input.getRight())));
     }
 
+    @Test
+    void testGameOfLife() {
+        Map<int[][], int[][]> scenarios = new HashMap<>();
+        scenarios.put(new int[][]{{0, 1, 0}, {0, 0, 1}, {1, 1, 1}, {0, 0, 0}},
+                new int[][]{{0, 0, 0}, {1, 0, 1}, {0, 1, 1}, {0, 1, 0}});
+        scenarios.put(new int[][]{{1, 1}, {1, 0}}, new int[][]{{1, 1}, {1, 1}});
+
+        scenarios.forEach((input, expected) -> {
+            gridProblems.gameOfLife(input);
+            assertArrayEquals(input, expected);
+        });
+    }
+
     private boolean listContainsArray(List<int[]> list, int[] array) {
         for (int[] l : list) {
             if (Arrays.equals(array, l))

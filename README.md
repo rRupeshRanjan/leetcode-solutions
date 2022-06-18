@@ -130,6 +130,7 @@ Solutions available for below questions:
 		268. Missing Number <br>
         283. Move Zeroes <br>
 		284. Peeking Iterator <br>
+        289. Game of Life <br>
         290. Word Pattern <br>A
 		298. Binary Tree Longest Consecutive Sequence <br>
 		299. Bulls and Cows <br>
